@@ -1,0 +1,2087 @@
+supervisor: error trying to setuid to 506 (Can't drop privilege as nonroot user)
+2012-02-13 17:00:16 [30018] [INFO] Starting gunicorn 0.13.4
+2012-02-13 17:00:16 [30018] [INFO] Listening at: http://0.0.0.0:9000 (30018)
+2012-02-13 17:00:16 [30018] [INFO] Using worker: sync
+2012-02-13 17:00:16 [30023] [INFO] Booting worker with pid: 30023
+2012-02-13 17:00:16 [30024] [INFO] Booting worker with pid: 30024
+2012-02-13 17:00:16 [30025] [INFO] Booting worker with pid: 30025
+2012-02-13 17:02:54 [30018] [INFO] Handling signal: term
+2012-02-13 16:02:55 [30025] [INFO] Worker exiting (pid: 30025)
+2012-02-13 16:02:55 [30023] [INFO] Worker exiting (pid: 30023)
+2012-02-13 16:02:55 [30024] [INFO] Worker exiting (pid: 30024)
+2012-02-13 17:02:55 [30018] [INFO] Shutting down: Master
+2012-02-13 17:07:11 [30127] [INFO] Starting gunicorn 0.13.4
+2012-02-13 17:07:11 [30127] [INFO] Listening at: http://0.0.0.0:9000 (30127)
+2012-02-13 17:07:11 [30127] [INFO] Using worker: sync
+2012-02-13 17:07:11 [30132] [INFO] Booting worker with pid: 30132
+2012-02-13 17:07:11 [30134] [INFO] Booting worker with pid: 30134
+2012-02-13 17:07:11 [30133] [INFO] Booting worker with pid: 30133
+2012-02-13 17:07:32 [30153] [INFO] Starting gunicorn 0.13.4
+2012-02-13 17:07:32 [30153] [ERROR] Connection in use: ('0.0.0.0', 9000)
+2012-02-13 17:07:32 [30153] [ERROR] Retrying in 1 second.
+2012-02-13 17:07:33 [30153] [INFO] Listening at: http://0.0.0.0:9000 (30153)
+2012-02-13 17:07:33 [30153] [INFO] Using worker: sync
+2012-02-13 17:07:33 [30158] [INFO] Booting worker with pid: 30158
+2012-02-13 17:07:33 [30159] [INFO] Booting worker with pid: 30159
+2012-02-13 17:07:33 [30160] [INFO] Booting worker with pid: 30160
+supervisor: error trying to setuid to 506 (Can't drop privilege as nonroot user)
+2012-02-13 17:07:55 [30182] [INFO] Starting gunicorn 0.13.4
+2012-02-13 17:07:55 [30182] [ERROR] Connection in use: ('0.0.0.0', 9000)
+2012-02-13 17:07:55 [30182] [ERROR] Retrying in 1 second.
+2012-02-13 17:07:56 [30182] [INFO] Listening at: http://0.0.0.0:9000 (30182)
+2012-02-13 17:07:56 [30182] [INFO] Using worker: sync
+2012-02-13 17:07:56 [30187] [INFO] Booting worker with pid: 30187
+2012-02-13 17:07:56 [30188] [INFO] Booting worker with pid: 30188
+2012-02-13 17:07:56 [30189] [INFO] Booting worker with pid: 30189
+2012-02-13 17:09:53 [30182] [INFO] Handling signal: term
+2012-02-13 16:09:53 [30189] [INFO] Worker exiting (pid: 30189)
+2012-02-13 16:09:53 [30188] [INFO] Worker exiting (pid: 30188)
+2012-02-13 16:09:53 [30187] [INFO] Worker exiting (pid: 30187)
+2012-02-13 17:09:54 [30182] [INFO] Shutting down: Master
+2012-02-13 17:10:45 [30245] [INFO] Starting gunicorn 0.13.4
+2012-02-13 17:10:45 [30245] [INFO] Listening at: http://0.0.0.0:9000 (30245)
+2012-02-13 17:10:45 [30245] [INFO] Using worker: sync
+2012-02-13 17:10:45 [30250] [INFO] Booting worker with pid: 30250
+2012-02-13 17:10:45 [30251] [INFO] Booting worker with pid: 30251
+2012-02-13 17:10:45 [30252] [INFO] Booting worker with pid: 30252
+2012-02-13 17:11:05 [30267] [INFO] Starting gunicorn 0.13.4
+2012-02-13 17:11:05 [30267] [INFO] Listening at: http://0.0.0.0:9000 (30267)
+2012-02-13 17:11:05 [30267] [INFO] Using worker: sync
+2012-02-13 17:11:05 [30272] [INFO] Booting worker with pid: 30272
+2012-02-13 17:11:05 [30273] [INFO] Booting worker with pid: 30273
+2012-02-13 17:11:05 [30274] [INFO] Booting worker with pid: 30274
+2012-02-13 17:11:26 [30286] [INFO] Starting gunicorn 0.13.4
+2012-02-13 17:11:26 [30286] [INFO] Listening at: http://0.0.0.0:9000 (30286)
+2012-02-13 17:11:26 [30286] [INFO] Using worker: sync
+2012-02-13 17:11:26 [30291] [INFO] Booting worker with pid: 30291
+2012-02-13 17:11:26 [30292] [INFO] Booting worker with pid: 30292
+2012-02-13 17:11:26 [30293] [INFO] Booting worker with pid: 30293
+2012-02-13 17:11:46 [30321] [INFO] Starting gunicorn 0.13.4
+2012-02-13 17:11:46 [30321] [INFO] Listening at: http://0.0.0.0:9000 (30321)
+2012-02-13 17:11:46 [30321] [INFO] Using worker: sync
+2012-02-13 17:11:46 [30326] [INFO] Booting worker with pid: 30326
+2012-02-13 17:11:46 [30327] [INFO] Booting worker with pid: 30327
+2012-02-13 17:11:46 [30328] [INFO] Booting worker with pid: 30328
+supervisor: error trying to setuid to 506 (Can't drop privilege as nonroot user)
+2012-02-13 17:11:58 [30339] [INFO] Starting gunicorn 0.13.4
+2012-02-13 17:11:58 [30339] [ERROR] Connection in use: ('0.0.0.0', 9000)
+2012-02-13 17:11:58 [30339] [ERROR] Retrying in 1 second.
+2012-02-13 17:11:59 [30339] [ERROR] Connection in use: ('0.0.0.0', 9000)
+2012-02-13 17:11:59 [30339] [ERROR] Retrying in 1 second.
+2012-02-13 17:12:00 [30339] [ERROR] Connection in use: ('0.0.0.0', 9000)
+2012-02-13 17:12:00 [30339] [ERROR] Retrying in 1 second.
+2012-02-13 17:12:01 [30339] [ERROR] Connection in use: ('0.0.0.0', 9000)
+2012-02-13 17:12:01 [30339] [ERROR] Retrying in 1 second.
+2012-02-13 17:12:02 [30339] [ERROR] Connection in use: ('0.0.0.0', 9000)
+2012-02-13 17:12:02 [30339] [ERROR] Retrying in 1 second.
+2012-02-13 17:12:03 [30339] [ERROR] Can't connect to ('0.0.0.0', 9000)
+supervisor: error trying to setuid to 506 (Can't drop privilege as nonroot user)
+2012-02-13 17:12:04 [30345] [INFO] Starting gunicorn 0.13.4
+2012-02-13 17:12:04 [30345] [INFO] Listening at: http://0.0.0.0:9000 (30345)
+2012-02-13 17:12:04 [30345] [INFO] Using worker: sync
+2012-02-13 17:12:04 [30350] [INFO] Booting worker with pid: 30350
+2012-02-13 17:12:04 [30352] [INFO] Booting worker with pid: 30352
+2012-02-13 17:12:04 [30351] [INFO] Booting worker with pid: 30351
+2012-02-13 17:12:20 [30345] [INFO] Handling signal: term
+2012-02-13 16:12:20 [30351] [INFO] Worker exiting (pid: 30351)
+2012-02-13 16:12:20 [30350] [INFO] Worker exiting (pid: 30350)
+2012-02-13 16:12:20 [30352] [INFO] Worker exiting (pid: 30352)
+2012-02-13 17:12:21 [30345] [INFO] Shutting down: Master
+2012-02-13 17:12:27 [30378] [INFO] Starting gunicorn 0.13.4
+2012-02-13 17:12:27 [30378] [INFO] Listening at: http://0.0.0.0:9000 (30378)
+2012-02-13 17:12:27 [30378] [INFO] Using worker: sync
+2012-02-13 17:12:27 [30383] [INFO] Booting worker with pid: 30383
+2012-02-13 17:12:27 [30384] [INFO] Booting worker with pid: 30384
+2012-02-13 17:12:27 [30385] [INFO] Booting worker with pid: 30385
+2012-02-13 17:12:47 [30400] [INFO] Starting gunicorn 0.13.4
+2012-02-13 17:12:47 [30400] [INFO] Listening at: http://0.0.0.0:9000 (30400)
+2012-02-13 17:12:47 [30400] [INFO] Using worker: sync
+2012-02-13 17:12:47 [30405] [INFO] Booting worker with pid: 30405
+2012-02-13 17:12:47 [30406] [INFO] Booting worker with pid: 30406
+2012-02-13 17:12:47 [30407] [INFO] Booting worker with pid: 30407
+2012-02-13 17:13:08 [30419] [INFO] Starting gunicorn 0.13.4
+2012-02-13 17:13:08 [30419] [INFO] Listening at: http://0.0.0.0:9000 (30419)
+2012-02-13 17:13:08 [30419] [INFO] Using worker: sync
+2012-02-13 17:13:08 [30424] [INFO] Booting worker with pid: 30424
+2012-02-13 17:13:08 [30426] [INFO] Booting worker with pid: 30426
+2012-02-13 17:13:08 [30425] [INFO] Booting worker with pid: 30425
+2012-02-13 17:13:28 [30439] [INFO] Starting gunicorn 0.13.4
+2012-02-13 17:13:28 [30439] [INFO] Listening at: http://0.0.0.0:9000 (30439)
+2012-02-13 17:13:28 [30439] [INFO] Using worker: sync
+2012-02-13 17:13:28 [30444] [INFO] Booting worker with pid: 30444
+2012-02-13 17:13:28 [30445] [INFO] Booting worker with pid: 30445
+2012-02-13 17:13:28 [30446] [INFO] Booting worker with pid: 30446
+2012-02-13 17:13:48 [30459] [INFO] Starting gunicorn 0.13.4
+2012-02-13 17:13:48 [30459] [INFO] Listening at: http://0.0.0.0:9000 (30459)
+2012-02-13 17:13:48 [30459] [INFO] Using worker: sync
+2012-02-13 17:13:48 [30464] [INFO] Booting worker with pid: 30464
+2012-02-13 17:13:48 [30466] [INFO] Booting worker with pid: 30466
+2012-02-13 17:13:48 [30465] [INFO] Booting worker with pid: 30465
+2012-02-13 18:37:05 [30459] [INFO] Handling signal: term
+2012-02-13 17:37:05 [30464] [INFO] Worker exiting (pid: 30464)
+2012-02-13 17:37:05 [30466] [INFO] Worker exiting (pid: 30466)
+2012-02-13 17:37:05 [30465] [INFO] Worker exiting (pid: 30465)
+2012-02-13 18:37:05 [30459] [INFO] Shutting down: Master
+2012-02-13 18:37:10 [32477] [INFO] Starting gunicorn 0.13.4
+2012-02-13 18:37:10 [32477] [INFO] Listening at: http://0.0.0.0:9000 (32477)
+2012-02-13 18:37:10 [32477] [INFO] Using worker: sync
+2012-02-13 18:37:10 [32482] [INFO] Booting worker with pid: 32482
+2012-02-13 18:37:10 [32483] [INFO] Booting worker with pid: 32483
+2012-02-13 18:37:10 [32484] [INFO] Booting worker with pid: 32484
+2012-02-13 18:55:33 [32477] [INFO] Handling signal: term
+2012-02-13 17:55:33 [32483] [INFO] Worker exiting (pid: 32483)
+2012-02-13 17:55:33 [32482] [INFO] Worker exiting (pid: 32482)
+2012-02-13 17:55:33 [32484] [INFO] Worker exiting (pid: 32484)
+2012-02-13 18:55:33 [32477] [INFO] Shutting down: Master
+2012-02-13 18:55:38 [32951] [INFO] Starting gunicorn 0.13.4
+2012-02-13 18:55:38 [32951] [INFO] Listening at: http://0.0.0.0:9000 (32951)
+2012-02-13 18:55:38 [32951] [INFO] Using worker: sync
+2012-02-13 18:55:38 [32956] [INFO] Booting worker with pid: 32956
+2012-02-13 18:55:38 [32958] [INFO] Booting worker with pid: 32958
+2012-02-13 18:55:38 [32957] [INFO] Booting worker with pid: 32957
+2012-02-13 19:20:54 [32951] [INFO] Handling signal: term
+2012-02-13 18:20:54 [32957] [INFO] Worker exiting (pid: 32957)
+2012-02-13 18:20:54 [32958] [INFO] Worker exiting (pid: 32958)
+2012-02-13 18:20:54 [32956] [INFO] Worker exiting (pid: 32956)
+2012-02-13 19:20:54 [32951] [INFO] Shutting down: Master
+2012-02-13 19:20:59 [33674] [INFO] Starting gunicorn 0.13.4
+2012-02-13 19:20:59 [33674] [INFO] Listening at: http://0.0.0.0:9000 (33674)
+2012-02-13 19:20:59 [33674] [INFO] Using worker: sync
+2012-02-13 19:20:59 [33679] [INFO] Booting worker with pid: 33679
+2012-02-13 19:20:59 [33680] [INFO] Booting worker with pid: 33680
+2012-02-13 19:20:59 [33681] [INFO] Booting worker with pid: 33681
+2012-02-13 18:26:58 [33681] [INFO] Worker exiting (pid: 33681)
+2012-02-13 18:26:58 [33679] [INFO] Worker exiting (pid: 33679)
+2012-02-13 18:26:58 [33680] [INFO] Worker exiting (pid: 33680)
+2012-02-13 19:26:58 [33674] [INFO] Handling signal: term
+2012-02-13 19:26:58 [33674] [INFO] Shutting down: Master
+2012-02-13 19:27:46 [180] [INFO] Starting gunicorn 0.13.4
+2012-02-13 19:27:46 [180] [INFO] Listening at: http://0.0.0.0:9000 (180)
+2012-02-13 19:27:46 [180] [INFO] Using worker: sync
+2012-02-13 19:27:46 [188] [INFO] Booting worker with pid: 188
+2012-02-13 19:27:46 [189] [INFO] Booting worker with pid: 189
+2012-02-13 19:27:46 [190] [INFO] Booting worker with pid: 190
+2012-02-14 14:53:44 [180] [INFO] Handling signal: term
+2012-02-14 13:53:44 [190] [INFO] Worker exiting (pid: 190)
+2012-02-14 13:53:44 [189] [INFO] Worker exiting (pid: 189)
+2012-02-14 13:53:44 [188] [INFO] Worker exiting (pid: 188)
+2012-02-14 14:53:44 [180] [INFO] Shutting down: Master
+2012-02-14 14:53:52 [7007] [INFO] Starting gunicorn 0.13.4
+2012-02-14 14:53:52 [7007] [INFO] Listening at: http://0.0.0.0:9000 (7007)
+2012-02-14 14:53:52 [7007] [INFO] Using worker: sync
+2012-02-14 14:53:52 [7012] [INFO] Booting worker with pid: 7012
+2012-02-14 14:53:52 [7013] [INFO] Booting worker with pid: 7013
+2012-02-14 14:53:52 [7014] [INFO] Booting worker with pid: 7014
+2012-02-14 14:54:28 [7007] [INFO] Handling signal: term
+2012-02-14 13:54:28 [7014] [INFO] Worker exiting (pid: 7014)
+2012-02-14 13:54:28 [7013] [INFO] Worker exiting (pid: 7013)
+2012-02-14 13:54:28 [7012] [INFO] Worker exiting (pid: 7012)
+2012-02-14 14:54:28 [7007] [INFO] Shutting down: Master
+2012-02-14 14:54:30 [7027] [INFO] Starting gunicorn 0.13.4
+2012-02-14 14:54:30 [7027] [INFO] Listening at: http://0.0.0.0:9000 (7027)
+2012-02-14 14:54:30 [7027] [INFO] Using worker: sync
+2012-02-14 14:54:30 [7032] [INFO] Booting worker with pid: 7032
+2012-02-14 14:54:30 [7034] [INFO] Booting worker with pid: 7034
+2012-02-14 14:54:30 [7033] [INFO] Booting worker with pid: 7033
+2012-02-14 14:54:43 [7027] [INFO] Handling signal: term
+2012-02-14 13:54:43 [7032] [INFO] Worker exiting (pid: 7032)
+2012-02-14 13:54:43 [7033] [INFO] Worker exiting (pid: 7033)
+2012-02-14 13:54:43 [7034] [INFO] Worker exiting (pid: 7034)
+2012-02-14 14:54:44 [7027] [INFO] Shutting down: Master
+2012-02-14 14:54:46 [7051] [INFO] Starting gunicorn 0.13.4
+2012-02-14 14:54:46 [7051] [INFO] Listening at: http://0.0.0.0:9000 (7051)
+2012-02-14 14:54:46 [7051] [INFO] Using worker: sync
+2012-02-14 14:54:46 [7061] [INFO] Booting worker with pid: 7061
+2012-02-14 14:54:46 [7063] [INFO] Booting worker with pid: 7063
+2012-02-14 14:54:46 [7066] [INFO] Booting worker with pid: 7066
+2012-02-17 23:17:47 [7051] [INFO] Handling signal: term
+2012-02-17 22:17:47 [7066] [INFO] Worker exiting (pid: 7066)
+2012-02-17 22:17:47 [7061] [INFO] Worker exiting (pid: 7061)
+2012-02-17 22:17:47 [7063] [INFO] Worker exiting (pid: 7063)
+2012-02-17 23:17:47 [7051] [INFO] Shutting down: Master
+2012-02-17 23:17:59 [34802] [INFO] Starting gunicorn 0.13.4
+2012-02-17 23:17:59 [34802] [INFO] Listening at: http://0.0.0.0:9000 (34802)
+2012-02-17 23:17:59 [34802] [INFO] Using worker: sync
+2012-02-17 23:17:59 [34813] [INFO] Booting worker with pid: 34813
+2012-02-17 23:17:59 [34814] [INFO] Booting worker with pid: 34814
+2012-02-17 23:17:59 [34816] [INFO] Booting worker with pid: 34816
+2012-02-17 23:24:43 [34802] [INFO] Handling signal: term
+2012-02-17 22:24:43 [34816] [INFO] Worker exiting (pid: 34816)
+2012-02-17 22:24:43 [34813] [INFO] Worker exiting (pid: 34813)
+2012-02-17 22:24:43 [34814] [INFO] Worker exiting (pid: 34814)
+2012-02-17 23:24:43 [34802] [INFO] Shutting down: Master
+2012-02-17 23:24:47 [34925] [INFO] Starting gunicorn 0.13.4
+2012-02-17 23:24:47 [34925] [INFO] Listening at: http://0.0.0.0:9000 (34925)
+2012-02-17 23:24:47 [34925] [INFO] Using worker: sync
+2012-02-17 23:24:47 [34935] [INFO] Booting worker with pid: 34935
+2012-02-17 23:24:47 [34936] [INFO] Booting worker with pid: 34936
+2012-02-17 23:24:47 [34937] [INFO] Booting worker with pid: 34937
+2012-02-17 23:33:48 [34925] [INFO] Handling signal: term
+2012-02-17 22:33:49 [34935] [INFO] Worker exiting (pid: 34935)
+2012-02-17 22:33:49 [34937] [INFO] Worker exiting (pid: 34937)
+2012-02-17 22:33:49 [34936] [INFO] Worker exiting (pid: 34936)
+2012-02-17 23:33:49 [34925] [INFO] Shutting down: Master
+2012-02-17 23:33:52 [35031] [INFO] Starting gunicorn 0.13.4
+2012-02-17 23:33:52 [35031] [INFO] Listening at: http://0.0.0.0:9000 (35031)
+2012-02-17 23:33:52 [35031] [INFO] Using worker: sync
+2012-02-17 23:33:52 [35041] [INFO] Booting worker with pid: 35041
+2012-02-17 23:33:52 [35043] [INFO] Booting worker with pid: 35043
+2012-02-17 23:33:52 [35042] [INFO] Booting worker with pid: 35042
+2012-03-09 09:27:39 [171] [INFO] Starting gunicorn 0.13.4
+2012-03-09 09:27:39 [171] [INFO] Listening at: http://0.0.0.0:9000 (171)
+2012-03-09 09:27:39 [171] [INFO] Using worker: sync
+2012-03-09 09:27:39 [209] [INFO] Booting worker with pid: 209
+2012-03-09 09:27:39 [212] [INFO] Booting worker with pid: 212
+2012-03-09 09:27:39 [213] [INFO] Booting worker with pid: 213
+2012-04-13 21:22:06 [171] [INFO] Handling signal: term
+2012-04-13 20:22:06 [209] [INFO] Worker exiting (pid: 209)
+2012-04-13 20:22:06 [213] [INFO] Worker exiting (pid: 213)
+2012-04-13 20:22:06 [212] [INFO] Worker exiting (pid: 212)
+2012-04-13 21:22:07 [171] [INFO] Shutting down: Master
+2012-04-13 21:35:04 [137] [INFO] Starting gunicorn 0.13.4
+2012-04-13 21:35:04 [137] [INFO] Listening at: http://0.0.0.0:9000 (137)
+2012-04-13 21:35:04 [137] [INFO] Using worker: sync
+2012-04-13 21:35:04 [172] [INFO] Booting worker with pid: 172
+2012-04-13 21:35:04 [171] [INFO] Booting worker with pid: 171
+2012-04-13 21:35:04 [173] [INFO] Booting worker with pid: 173
+2012-05-02 19:27:08 [137] [ERROR] WORKER TIMEOUT (pid:171)
+None
+2012-05-02 19:27:08 [137] [ERROR] WORKER TIMEOUT (pid:172)
+None
+2012-05-02 19:27:08 [137] [ERROR] WORKER TIMEOUT (pid:173)
+None
+2012-05-02 19:27:14 [2273] [INFO] Booting worker with pid: 2273
+2012-05-02 19:27:14 [2274] [INFO] Booting worker with pid: 2274
+2012-05-02 19:27:14 [2272] [INFO] Booting worker with pid: 2272
+2012-05-14 16:52:16 [133] [INFO] Starting gunicorn 0.13.4
+2012-05-14 16:52:16 [133] [INFO] Listening at: http://0.0.0.0:9000 (133)
+2012-05-14 16:52:16 [133] [INFO] Using worker: sync
+2012-05-14 16:52:17 [150] [INFO] Booting worker with pid: 150
+2012-05-14 16:52:17 [152] [INFO] Booting worker with pid: 152
+2012-05-14 16:52:17 [154] [INFO] Booting worker with pid: 154
+2012-05-14 16:52:47 [133] [ERROR] WORKER TIMEOUT (pid:152)
+None
+2012-05-14 16:52:47 [133] [ERROR] WORKER TIMEOUT (pid:154)
+None
+2012-05-14 16:52:47 [216] [INFO] Booting worker with pid: 216
+2012-05-14 16:52:47 [217] [INFO] Booting worker with pid: 217
+2012-05-15 15:01:43 [145] [INFO] Starting gunicorn 0.13.4
+2012-05-15 15:01:43 [145] [INFO] Listening at: http://0.0.0.0:9000 (145)
+2012-05-15 15:01:43 [145] [INFO] Using worker: sync
+2012-05-15 15:01:43 [193] [INFO] Booting worker with pid: 193
+2012-05-15 15:01:43 [194] [INFO] Booting worker with pid: 194
+2012-05-15 15:01:43 [196] [INFO] Booting worker with pid: 196
+2012-06-14 10:49:11 [145] [INFO] Handling signal: term
+2012-06-14 10:49:12 [145] [INFO] Shutting down: Master
+2012-06-18 13:47:25 [130] [INFO] Starting gunicorn 0.13.4
+2012-06-18 13:47:25 [130] [INFO] Listening at: http://0.0.0.0:9000 (130)
+2012-06-18 13:47:25 [130] [INFO] Using worker: sync
+2012-06-18 13:47:26 [142] [INFO] Booting worker with pid: 142
+2012-06-18 13:47:26 [143] [INFO] Booting worker with pid: 143
+2012-06-18 13:47:26 [144] [INFO] Booting worker with pid: 144
+2012-06-18 12:47:30 [144] [ERROR] Exception in worker process:
+Traceback (most recent call last):
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/arbiter.py", line 456, in spawn_worker
+    worker.init_process()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/workers/base.py", line 100, in init_process
+    self.wsgi = self.app.wsgi()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/app/base.py", line 101, in wsgi
+    self.callable = self.load()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/app/djangoapp.py", line 128, in load
+    self.validate()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/app/djangoapp.py", line 116, in validate
+    if get_validation_errors(s):
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/core/management/validation.py", line 28, in get_validation_errors
+    from django.db import models, connection
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/db/__init__.py", line 78, in <module>
+    connection = connections[DEFAULT_DB_ALIAS]
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/db/utils.py", line 94, in __getitem__
+    conn = backend.DatabaseWrapper(db, alias)
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/base.py", line 11, in __init__
+    self.ops = PostGISOperations(self)
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 91, in __init__
+    vtup = self.postgis_version_tuple()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 445, in postgis_version_tuple
+    version = self.postgis_lib_version()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 425, in postgis_lib_version
+    return self._get_postgis_func('postgis_lib_version')
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 406, in _get_postgis_func
+    cursor = self.connection._cursor()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/db/backends/postgresql_psycopg2/base.py", line 140, in _cursor
+    self.connection = Database.connect(**conn_params)
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/psycopg2/__init__.py", line 179, in connect
+    connection_factory=connection_factory, async=async)
+OperationalError: could not connect to server: Connection refused
+	Is the server running on host "127.0.0.1" and accepting
+	TCP/IP connections on port 5432?
+
+2012-06-18 12:47:55 [144] [INFO] Worker exiting (pid: 144)
+2012-06-18 12:47:30 [143] [ERROR] Exception in worker process:
+Traceback (most recent call last):
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/arbiter.py", line 456, in spawn_worker
+    worker.init_process()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/workers/base.py", line 100, in init_process
+    self.wsgi = self.app.wsgi()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/app/base.py", line 101, in wsgi
+    self.callable = self.load()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/app/djangoapp.py", line 128, in load
+    self.validate()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/app/djangoapp.py", line 116, in validate
+    if get_validation_errors(s):
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/core/management/validation.py", line 28, in get_validation_errors
+    from django.db import models, connection
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/db/__init__.py", line 78, in <module>
+    connection = connections[DEFAULT_DB_ALIAS]
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/db/utils.py", line 94, in __getitem__
+    conn = backend.DatabaseWrapper(db, alias)
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/base.py", line 11, in __init__
+    self.ops = PostGISOperations(self)
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 91, in __init__
+    vtup = self.postgis_version_tuple()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 445, in postgis_version_tuple
+    version = self.postgis_lib_version()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 425, in postgis_lib_version
+    return self._get_postgis_func('postgis_lib_version')
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 406, in _get_postgis_func
+    cursor = self.connection._cursor()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/db/backends/postgresql_psycopg2/base.py", line 140, in _cursor
+    self.connection = Database.connect(**conn_params)
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/psycopg2/__init__.py", line 179, in connect
+    connection_factory=connection_factory, async=async)
+OperationalError: could not connect to server: Connection refused
+	Is the server running on host "127.0.0.1" and accepting
+	TCP/IP connections on port 5432?
+
+2012-06-18 12:47:55 [143] [INFO] Worker exiting (pid: 143)
+2012-06-18 13:47:56 [130] [ERROR] WORKER TIMEOUT (pid:144)
+None
+2012-06-18 13:47:56 [130] [ERROR] WORKER TIMEOUT (pid:142)
+None
+2012-06-18 13:47:56 [130] [ERROR] WORKER TIMEOUT (pid:143)
+None
+2012-06-18 13:47:56 [130] [ERROR] WORKER TIMEOUT (pid:144)
+None
+2012-06-18 13:47:56 [130] [ERROR] WORKER TIMEOUT (pid:142)
+None
+2012-06-18 13:47:56 [130] [ERROR] WORKER TIMEOUT (pid:144)
+None
+2012-06-18 13:47:56 [130] [ERROR] WORKER TIMEOUT (pid:142)
+None
+2012-06-18 13:47:56 [149] [INFO] Booting worker with pid: 149
+2012-06-18 13:47:56 [130] [ERROR] WORKER TIMEOUT (pid:144)
+None
+2012-06-18 13:47:56 [130] [ERROR] WORKER TIMEOUT (pid:144)
+None
+2012-06-18 13:47:56 [150] [INFO] Booting worker with pid: 150
+2012-06-18 13:47:56 [151] [INFO] Booting worker with pid: 151
+2012-06-18 12:47:56 [149] [ERROR] Exception in worker process:
+Traceback (most recent call last):
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/arbiter.py", line 456, in spawn_worker
+    worker.init_process()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/workers/base.py", line 100, in init_process
+    self.wsgi = self.app.wsgi()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/app/base.py", line 101, in wsgi
+    self.callable = self.load()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/app/djangoapp.py", line 128, in load
+    self.validate()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/app/djangoapp.py", line 116, in validate
+    if get_validation_errors(s):
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/core/management/validation.py", line 28, in get_validation_errors
+    from django.db import models, connection
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/db/__init__.py", line 78, in <module>
+    connection = connections[DEFAULT_DB_ALIAS]
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/db/utils.py", line 94, in __getitem__
+    conn = backend.DatabaseWrapper(db, alias)
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/base.py", line 11, in __init__
+    self.ops = PostGISOperations(self)
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 91, in __init__
+    vtup = self.postgis_version_tuple()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 445, in postgis_version_tuple
+    version = self.postgis_lib_version()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 425, in postgis_lib_version
+    return self._get_postgis_func('postgis_lib_version')
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 406, in _get_postgis_func
+    cursor = self.connection._cursor()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/db/backends/postgresql_psycopg2/base.py", line 140, in _cursor
+    self.connection = Database.connect(**conn_params)
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/psycopg2/__init__.py", line 179, in connect
+    connection_factory=connection_factory, async=async)
+OperationalError: could not connect to server: Connection refused
+	Is the server running on host "127.0.0.1" and accepting
+	TCP/IP connections on port 5432?
+
+2012-06-18 12:47:56 [149] [INFO] Worker exiting (pid: 149)
+2012-06-18 12:47:56 [150] [ERROR] Exception in worker process:
+Traceback (most recent call last):
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/arbiter.py", line 456, in spawn_worker
+    worker.init_process()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/workers/base.py", line 100, in init_process
+    self.wsgi = self.app.wsgi()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/app/base.py", line 101, in wsgi
+    self.callable = self.load()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/app/djangoapp.py", line 128, in load
+    self.validate()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/app/djangoapp.py", line 116, in validate
+    if get_validation_errors(s):
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/core/management/validation.py", line 28, in get_validation_errors
+    from django.db import models, connection
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/db/__init__.py", line 78, in <module>
+    connection = connections[DEFAULT_DB_ALIAS]
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/db/utils.py", line 94, in __getitem__
+    conn = backend.DatabaseWrapper(db, alias)
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/base.py", line 11, in __init__
+    self.ops = PostGISOperations(self)
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 91, in __init__
+    vtup = self.postgis_version_tuple()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 445, in postgis_version_tuple
+    version = self.postgis_lib_version()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 425, in postgis_lib_version
+    return self._get_postgis_func('postgis_lib_version')
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 406, in _get_postgis_func
+    cursor = self.connection._cursor()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/db/backends/postgresql_psycopg2/base.py", line 140, in _cursor
+    self.connection = Database.connect(**conn_params)
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/psycopg2/__init__.py", line 179, in connect
+    connection_factory=connection_factory, async=async)
+OperationalError: could not connect to server: Connection refused
+	Is the server running on host "127.0.0.1" and accepting
+	TCP/IP connections on port 5432?
+
+2012-06-18 12:47:56 [150] [INFO] Worker exiting (pid: 150)
+2012-06-18 12:47:56 [151] [ERROR] Exception in worker process:
+Traceback (most recent call last):
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/arbiter.py", line 456, in spawn_worker
+    worker.init_process()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/workers/base.py", line 100, in init_process
+    self.wsgi = self.app.wsgi()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/app/base.py", line 101, in wsgi
+    self.callable = self.load()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/app/djangoapp.py", line 128, in load
+    self.validate()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/app/djangoapp.py", line 116, in validate
+    if get_validation_errors(s):
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/core/management/validation.py", line 28, in get_validation_errors
+    from django.db import models, connection
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/db/__init__.py", line 78, in <module>
+    connection = connections[DEFAULT_DB_ALIAS]
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/db/utils.py", line 94, in __getitem__
+    conn = backend.DatabaseWrapper(db, alias)
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/base.py", line 11, in __init__
+    self.ops = PostGISOperations(self)
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 91, in __init__
+    vtup = self.postgis_version_tuple()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 445, in postgis_version_tuple
+    version = self.postgis_lib_version()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 425, in postgis_lib_version
+    return self._get_postgis_func('postgis_lib_version')
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 406, in _get_postgis_func
+    cursor = self.connection._cursor()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/db/backends/postgresql_psycopg2/base.py", line 140, in _cursor
+    self.connection = Database.connect(**conn_params)
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/psycopg2/__init__.py", line 179, in connect
+    connection_factory=connection_factory, async=async)
+OperationalError: could not connect to server: Connection refused
+	Is the server running on host "127.0.0.1" and accepting
+	TCP/IP connections on port 5432?
+
+2012-06-18 12:47:56 [151] [INFO] Worker exiting (pid: 151)
+Traceback (most recent call last):
+  File "/Users/spatial/.virtualenvs/geodeliberator/bin/gunicorn_django", line 8, in <module>
+    load_entry_point('gunicorn==0.13.4', 'console_scripts', 'gunicorn_django')()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/app/djangoapp.py", line 318, in run
+    DjangoApplication("%prog [OPTIONS] [SETTINGS_PATH]").run()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/app/base.py", line 116, in run
+    Arbiter(self).run()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/arbiter.py", line 186, in run
+    self.halt(reason=inst.reason, exit_status=inst.exit_status)
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/arbiter.py", line 282, in halt
+    self.stop()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/arbiter.py", line 329, in stop
+    time.sleep(0.1)
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/arbiter.py", line 200, in handle_chld
+    self.reap_workers()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/arbiter.py", line 416, in reap_workers
+    raise HaltServer(reason, self.WORKER_BOOT_ERROR)
+gunicorn.errors.HaltServer: <HaltServer 'Worker failed to boot.' 3>
+2012-06-18 13:47:59 [153] [INFO] Starting gunicorn 0.13.4
+2012-06-18 13:47:59 [153] [INFO] Listening at: http://0.0.0.0:9000 (153)
+2012-06-18 13:47:59 [153] [INFO] Using worker: sync
+2012-06-18 13:48:00 [160] [INFO] Booting worker with pid: 160
+2012-06-18 13:48:00 [162] [INFO] Booting worker with pid: 162
+2012-06-18 13:48:00 [161] [INFO] Booting worker with pid: 161
+2012-06-18 12:48:00 [160] [ERROR] Exception in worker process:
+Traceback (most recent call last):
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/arbiter.py", line 456, in spawn_worker
+    worker.init_process()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/workers/base.py", line 100, in init_process
+    self.wsgi = self.app.wsgi()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/app/base.py", line 101, in wsgi
+    self.callable = self.load()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/app/djangoapp.py", line 128, in load
+    self.validate()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/app/djangoapp.py", line 116, in validate
+    if get_validation_errors(s):
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/core/management/validation.py", line 28, in get_validation_errors
+    from django.db import models, connection
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/db/__init__.py", line 78, in <module>
+    connection = connections[DEFAULT_DB_ALIAS]
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/db/utils.py", line 94, in __getitem__
+    conn = backend.DatabaseWrapper(db, alias)
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/base.py", line 11, in __init__
+    self.ops = PostGISOperations(self)
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 91, in __init__
+    vtup = self.postgis_version_tuple()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 445, in postgis_version_tuple
+    version = self.postgis_lib_version()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 425, in postgis_lib_version
+    return self._get_postgis_func('postgis_lib_version')
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 406, in _get_postgis_func
+    cursor = self.connection._cursor()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/db/backends/postgresql_psycopg2/base.py", line 140, in _cursor
+    self.connection = Database.connect(**conn_params)
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/psycopg2/__init__.py", line 179, in connect
+    connection_factory=connection_factory, async=async)
+OperationalError: could not connect to server: Connection refused
+	Is the server running on host "127.0.0.1" and accepting
+	TCP/IP connections on port 5432?
+
+2012-06-18 12:48:00 [160] [INFO] Worker exiting (pid: 160)
+2012-06-18 12:48:00 [162] [ERROR] Exception in worker process:
+Traceback (most recent call last):
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/arbiter.py", line 456, in spawn_worker
+    worker.init_process()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/workers/base.py", line 100, in init_process
+    self.wsgi = self.app.wsgi()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/app/base.py", line 101, in wsgi
+    self.callable = self.load()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/app/djangoapp.py", line 128, in load
+    self.validate()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/app/djangoapp.py", line 116, in validate
+    if get_validation_errors(s):
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/core/management/validation.py", line 28, in get_validation_errors
+    from django.db import models, connection
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/db/__init__.py", line 78, in <module>
+    connection = connections[DEFAULT_DB_ALIAS]
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/db/utils.py", line 94, in __getitem__
+    conn = backend.DatabaseWrapper(db, alias)
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/base.py", line 11, in __init__
+    self.ops = PostGISOperations(self)
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 91, in __init__
+    vtup = self.postgis_version_tuple()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 445, in postgis_version_tuple
+    version = self.postgis_lib_version()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 425, in postgis_lib_version
+    return self._get_postgis_func('postgis_lib_version')
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 406, in _get_postgis_func
+    cursor = self.connection._cursor()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/db/backends/postgresql_psycopg2/base.py", line 140, in _cursor
+    self.connection = Database.connect(**conn_params)
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/psycopg2/__init__.py", line 179, in connect
+    connection_factory=connection_factory, async=async)
+OperationalError: could not connect to server: Connection refused
+	Is the server running on host "127.0.0.1" and accepting
+	TCP/IP connections on port 5432?
+
+2012-06-18 12:48:00 [162] [INFO] Worker exiting (pid: 162)
+2012-06-18 12:48:00 [161] [ERROR] Exception in worker process:
+Traceback (most recent call last):
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/arbiter.py", line 456, in spawn_worker
+    worker.init_process()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/workers/base.py", line 100, in init_process
+    self.wsgi = self.app.wsgi()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/app/base.py", line 101, in wsgi
+    self.callable = self.load()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/app/djangoapp.py", line 128, in load
+    self.validate()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/app/djangoapp.py", line 116, in validate
+    if get_validation_errors(s):
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/core/management/validation.py", line 28, in get_validation_errors
+    from django.db import models, connection
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/db/__init__.py", line 78, in <module>
+    connection = connections[DEFAULT_DB_ALIAS]
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/db/utils.py", line 94, in __getitem__
+    conn = backend.DatabaseWrapper(db, alias)
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/base.py", line 11, in __init__
+    self.ops = PostGISOperations(self)
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 91, in __init__
+    vtup = self.postgis_version_tuple()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 445, in postgis_version_tuple
+    version = self.postgis_lib_version()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 425, in postgis_lib_version
+    return self._get_postgis_func('postgis_lib_version')
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 406, in _get_postgis_func
+    cursor = self.connection._cursor()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/db/backends/postgresql_psycopg2/base.py", line 140, in _cursor
+    self.connection = Database.connect(**conn_params)
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/psycopg2/__init__.py", line 179, in connect
+    connection_factory=connection_factory, async=async)
+OperationalError: could not connect to server: Connection refused
+	Is the server running on host "127.0.0.1" and accepting
+	TCP/IP connections on port 5432?
+
+2012-06-18 12:48:00 [161] [INFO] Worker exiting (pid: 161)
+Traceback (most recent call last):
+  File "/Users/spatial/.virtualenvs/geodeliberator/bin/gunicorn_django", line 8, in <module>
+    load_entry_point('gunicorn==0.13.4', 'console_scripts', 'gunicorn_django')()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/app/djangoapp.py", line 318, in run
+    DjangoApplication("%prog [OPTIONS] [SETTINGS_PATH]").run()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/app/base.py", line 116, in run
+    Arbiter(self).run()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/arbiter.py", line 186, in run
+    self.halt(reason=inst.reason, exit_status=inst.exit_status)
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/arbiter.py", line 282, in halt
+    self.stop()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/arbiter.py", line 330, in stop
+    self.reap_workers()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/arbiter.py", line 416, in reap_workers
+    raise HaltServer(reason, self.WORKER_BOOT_ERROR)
+gunicorn.errors.HaltServer: <HaltServer 'Worker failed to boot.' 3>
+2012-06-18 13:48:02 [164] [INFO] Starting gunicorn 0.13.4
+2012-06-18 13:48:02 [164] [INFO] Listening at: http://0.0.0.0:9000 (164)
+2012-06-18 13:48:02 [164] [INFO] Using worker: sync
+2012-06-18 13:48:03 [170] [INFO] Booting worker with pid: 170
+2012-06-18 13:48:03 [169] [INFO] Booting worker with pid: 169
+2012-06-18 13:48:04 [171] [INFO] Booting worker with pid: 171
+2012-06-18 12:48:04 [170] [ERROR] Exception in worker process:
+Traceback (most recent call last):
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/arbiter.py", line 456, in spawn_worker
+    worker.init_process()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/workers/base.py", line 100, in init_process
+    self.wsgi = self.app.wsgi()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/app/base.py", line 101, in wsgi
+    self.callable = self.load()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/app/djangoapp.py", line 128, in load
+    self.validate()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/app/djangoapp.py", line 116, in validate
+    if get_validation_errors(s):
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/core/management/validation.py", line 28, in get_validation_errors
+    from django.db import models, connection
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/db/__init__.py", line 78, in <module>
+    connection = connections[DEFAULT_DB_ALIAS]
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/db/utils.py", line 94, in __getitem__
+    conn = backend.DatabaseWrapper(db, alias)
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/base.py", line 11, in __init__
+    self.ops = PostGISOperations(self)
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 91, in __init__
+    vtup = self.postgis_version_tuple()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 445, in postgis_version_tuple
+    version = self.postgis_lib_version()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 425, in postgis_lib_version
+    return self._get_postgis_func('postgis_lib_version')
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 406, in _get_postgis_func
+    cursor = self.connection._cursor()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/db/backends/postgresql_psycopg2/base.py", line 140, in _cursor
+    self.connection = Database.connect(**conn_params)
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/psycopg2/__init__.py", line 179, in connect
+    connection_factory=connection_factory, async=async)
+OperationalError: could not connect to server: Connection refused
+	Is the server running on host "127.0.0.1" and accepting
+	TCP/IP connections on port 5432?
+
+2012-06-18 12:48:04 [170] [INFO] Worker exiting (pid: 170)
+2012-06-18 12:48:04 [169] [ERROR] Exception in worker process:
+Traceback (most recent call last):
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/arbiter.py", line 456, in spawn_worker
+    worker.init_process()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/workers/base.py", line 100, in init_process
+    self.wsgi = self.app.wsgi()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/app/base.py", line 101, in wsgi
+    self.callable = self.load()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/app/djangoapp.py", line 128, in load
+    self.validate()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/app/djangoapp.py", line 116, in validate
+    if get_validation_errors(s):
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/core/management/validation.py", line 28, in get_validation_errors
+    from django.db import models, connection
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/db/__init__.py", line 78, in <module>
+    connection = connections[DEFAULT_DB_ALIAS]
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/db/utils.py", line 94, in __getitem__
+    conn = backend.DatabaseWrapper(db, alias)
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/base.py", line 11, in __init__
+    self.ops = PostGISOperations(self)
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 91, in __init__
+    vtup = self.postgis_version_tuple()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 445, in postgis_version_tuple
+    version = self.postgis_lib_version()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 425, in postgis_lib_version
+    return self._get_postgis_func('postgis_lib_version')
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 406, in _get_postgis_func
+    cursor = self.connection._cursor()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/db/backends/postgresql_psycopg2/base.py", line 140, in _cursor
+    self.connection = Database.connect(**conn_params)
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/psycopg2/__init__.py", line 179, in connect
+    connection_factory=connection_factory, async=async)
+OperationalError: could not connect to server: Connection refused
+	Is the server running on host "127.0.0.1" and accepting
+	TCP/IP connections on port 5432?
+
+2012-06-18 12:48:04 [169] [INFO] Worker exiting (pid: 169)
+2012-06-18 12:48:04 [171] [ERROR] Exception in worker process:
+Traceback (most recent call last):
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/arbiter.py", line 456, in spawn_worker
+    worker.init_process()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/workers/base.py", line 100, in init_process
+    self.wsgi = self.app.wsgi()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/app/base.py", line 101, in wsgi
+    self.callable = self.load()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/app/djangoapp.py", line 128, in load
+    self.validate()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/app/djangoapp.py", line 116, in validate
+    if get_validation_errors(s):
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/core/management/validation.py", line 28, in get_validation_errors
+    from django.db import models, connection
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/db/__init__.py", line 78, in <module>
+    connection = connections[DEFAULT_DB_ALIAS]
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/db/utils.py", line 94, in __getitem__
+    conn = backend.DatabaseWrapper(db, alias)
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/base.py", line 11, in __init__
+    self.ops = PostGISOperations(self)
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 91, in __init__
+    vtup = self.postgis_version_tuple()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 445, in postgis_version_tuple
+    version = self.postgis_lib_version()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 425, in postgis_lib_version
+    return self._get_postgis_func('postgis_lib_version')
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 406, in _get_postgis_func
+    cursor = self.connection._cursor()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/db/backends/postgresql_psycopg2/base.py", line 140, in _cursor
+    self.connection = Database.connect(**conn_params)
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/psycopg2/__init__.py", line 179, in connect
+    connection_factory=connection_factory, async=async)
+OperationalError: could not connect to server: Connection refused
+	Is the server running on host "127.0.0.1" and accepting
+	TCP/IP connections on port 5432?
+
+2012-06-18 12:48:04 [171] [INFO] Worker exiting (pid: 171)
+Traceback (most recent call last):
+  File "/Users/spatial/.virtualenvs/geodeliberator/bin/gunicorn_django", line 8, in <module>
+    load_entry_point('gunicorn==0.13.4', 'console_scripts', 'gunicorn_django')()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/app/djangoapp.py", line 318, in run
+    DjangoApplication("%prog [OPTIONS] [SETTINGS_PATH]").run()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/app/base.py", line 116, in run
+    Arbiter(self).run()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/arbiter.py", line 186, in run
+    self.halt(reason=inst.reason, exit_status=inst.exit_status)
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/arbiter.py", line 282, in halt
+    self.stop()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/arbiter.py", line 329, in stop
+    time.sleep(0.1)
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/arbiter.py", line 200, in handle_chld
+    self.reap_workers()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/arbiter.py", line 416, in reap_workers
+    raise HaltServer(reason, self.WORKER_BOOT_ERROR)
+gunicorn.errors.HaltServer: <HaltServer 'Worker failed to boot.' 3>
+2012-06-18 13:48:10 [174] [INFO] Starting gunicorn 0.13.4
+2012-06-18 13:48:10 [174] [INFO] Listening at: http://0.0.0.0:9000 (174)
+2012-06-18 13:48:10 [174] [INFO] Using worker: sync
+2012-06-18 13:48:14 [191] [INFO] Booting worker with pid: 191
+2012-06-18 13:48:14 [192] [INFO] Booting worker with pid: 192
+2012-06-18 13:48:14 [193] [INFO] Booting worker with pid: 193
+2012-06-18 12:48:14 [193] [ERROR] Exception in worker process:
+Traceback (most recent call last):
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/arbiter.py", line 456, in spawn_worker
+    worker.init_process()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/workers/base.py", line 100, in init_process
+    self.wsgi = self.app.wsgi()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/app/base.py", line 101, in wsgi
+    self.callable = self.load()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/app/djangoapp.py", line 128, in load
+    self.validate()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/app/djangoapp.py", line 116, in validate
+    if get_validation_errors(s):
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/core/management/validation.py", line 28, in get_validation_errors
+    from django.db import models, connection
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/db/__init__.py", line 78, in <module>
+    connection = connections[DEFAULT_DB_ALIAS]
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/db/utils.py", line 94, in __getitem__
+    conn = backend.DatabaseWrapper(db, alias)
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/base.py", line 11, in __init__
+    self.ops = PostGISOperations(self)
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 91, in __init__
+    vtup = self.postgis_version_tuple()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 445, in postgis_version_tuple
+    version = self.postgis_lib_version()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 425, in postgis_lib_version
+    return self._get_postgis_func('postgis_lib_version')
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 406, in _get_postgis_func
+    cursor = self.connection._cursor()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/db/backends/postgresql_psycopg2/base.py", line 140, in _cursor
+    self.connection = Database.connect(**conn_params)
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/psycopg2/__init__.py", line 179, in connect
+    connection_factory=connection_factory, async=async)
+OperationalError: could not connect to server: Connection refused
+	Is the server running on host "127.0.0.1" and accepting
+	TCP/IP connections on port 5432?
+
+2012-06-18 12:48:14 [193] [INFO] Worker exiting (pid: 193)
+2012-06-18 12:48:14 [192] [ERROR] Exception in worker process:
+Traceback (most recent call last):
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/arbiter.py", line 456, in spawn_worker
+    worker.init_process()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/workers/base.py", line 100, in init_process
+    self.wsgi = self.app.wsgi()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/app/base.py", line 101, in wsgi
+    self.callable = self.load()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/app/djangoapp.py", line 128, in load
+    self.validate()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/app/djangoapp.py", line 116, in validate
+    if get_validation_errors(s):
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/core/management/validation.py", line 28, in get_validation_errors
+    from django.db import models, connection
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/db/__init__.py", line 78, in <module>
+    connection = connections[DEFAULT_DB_ALIAS]
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/db/utils.py", line 94, in __getitem__
+    conn = backend.DatabaseWrapper(db, alias)
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/base.py", line 11, in __init__
+    self.ops = PostGISOperations(self)
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 91, in __init__
+    vtup = self.postgis_version_tuple()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 445, in postgis_version_tuple
+    version = self.postgis_lib_version()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 425, in postgis_lib_version
+    return self._get_postgis_func('postgis_lib_version')
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 406, in _get_postgis_func
+    cursor = self.connection._cursor()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/db/backends/postgresql_psycopg2/base.py", line 140, in _cursor
+    self.connection = Database.connect(**conn_params)
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/psycopg2/__init__.py", line 179, in connect
+    connection_factory=connection_factory, async=async)
+OperationalError: could not connect to server: Connection refused
+	Is the server running on host "127.0.0.1" and accepting
+	TCP/IP connections on port 5432?
+
+2012-06-18 12:48:14 [192] [INFO] Worker exiting (pid: 192)
+2012-06-18 12:48:14 [191] [ERROR] Exception in worker process:
+Traceback (most recent call last):
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/arbiter.py", line 456, in spawn_worker
+    worker.init_process()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/workers/base.py", line 100, in init_process
+    self.wsgi = self.app.wsgi()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/app/base.py", line 101, in wsgi
+    self.callable = self.load()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/app/djangoapp.py", line 128, in load
+    self.validate()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/app/djangoapp.py", line 116, in validate
+    if get_validation_errors(s):
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/core/management/validation.py", line 28, in get_validation_errors
+    from django.db import models, connection
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/db/__init__.py", line 78, in <module>
+    connection = connections[DEFAULT_DB_ALIAS]
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/db/utils.py", line 94, in __getitem__
+    conn = backend.DatabaseWrapper(db, alias)
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/base.py", line 11, in __init__
+    self.ops = PostGISOperations(self)
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 91, in __init__
+    vtup = self.postgis_version_tuple()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 445, in postgis_version_tuple
+    version = self.postgis_lib_version()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 425, in postgis_lib_version
+    return self._get_postgis_func('postgis_lib_version')
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 406, in _get_postgis_func
+    cursor = self.connection._cursor()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/db/backends/postgresql_psycopg2/base.py", line 140, in _cursor
+    self.connection = Database.connect(**conn_params)
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/psycopg2/__init__.py", line 179, in connect
+    connection_factory=connection_factory, async=async)
+OperationalError: could not connect to server: Connection refused
+	Is the server running on host "127.0.0.1" and accepting
+	TCP/IP connections on port 5432?
+
+2012-06-18 12:48:14 [191] [INFO] Worker exiting (pid: 191)
+Traceback (most recent call last):
+  File "/Users/spatial/.virtualenvs/geodeliberator/bin/gunicorn_django", line 8, in <module>
+    load_entry_point('gunicorn==0.13.4', 'console_scripts', 'gunicorn_django')()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/app/djangoapp.py", line 318, in run
+    DjangoApplication("%prog [OPTIONS] [SETTINGS_PATH]").run()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/app/base.py", line 116, in run
+    Arbiter(self).run()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/arbiter.py", line 186, in run
+    self.halt(reason=inst.reason, exit_status=inst.exit_status)
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/arbiter.py", line 282, in halt
+    self.stop()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/arbiter.py", line 329, in stop
+    time.sleep(0.1)
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/arbiter.py", line 200, in handle_chld
+    self.reap_workers()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/arbiter.py", line 416, in reap_workers
+    raise HaltServer(reason, self.WORKER_BOOT_ERROR)
+gunicorn.errors.HaltServer: <HaltServer 'Worker failed to boot.' 3>
+2012-06-18 13:48:30 [194] [INFO] Starting gunicorn 0.13.4
+2012-06-18 13:48:30 [194] [INFO] Listening at: http://0.0.0.0:9000 (194)
+2012-06-18 13:48:30 [194] [INFO] Using worker: sync
+2012-06-18 13:48:40 [208] [INFO] Booting worker with pid: 208
+2012-06-18 13:48:40 [209] [INFO] Booting worker with pid: 209
+2012-06-18 13:48:40 [210] [INFO] Booting worker with pid: 210
+2012-06-18 12:48:40 [210] [ERROR] Exception in worker process:
+Traceback (most recent call last):
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/arbiter.py", line 456, in spawn_worker
+    worker.init_process()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/workers/base.py", line 100, in init_process
+    self.wsgi = self.app.wsgi()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/app/base.py", line 101, in wsgi
+    self.callable = self.load()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/app/djangoapp.py", line 128, in load
+    self.validate()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/app/djangoapp.py", line 116, in validate
+    if get_validation_errors(s):
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/core/management/validation.py", line 28, in get_validation_errors
+    from django.db import models, connection
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/db/__init__.py", line 78, in <module>
+    connection = connections[DEFAULT_DB_ALIAS]
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/db/utils.py", line 94, in __getitem__
+    conn = backend.DatabaseWrapper(db, alias)
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/base.py", line 11, in __init__
+    self.ops = PostGISOperations(self)
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 91, in __init__
+    vtup = self.postgis_version_tuple()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 445, in postgis_version_tuple
+    version = self.postgis_lib_version()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 425, in postgis_lib_version
+    return self._get_postgis_func('postgis_lib_version')
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 406, in _get_postgis_func
+    cursor = self.connection._cursor()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/db/backends/postgresql_psycopg2/base.py", line 140, in _cursor
+    self.connection = Database.connect(**conn_params)
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/psycopg2/__init__.py", line 179, in connect
+    connection_factory=connection_factory, async=async)
+OperationalError: could not connect to server: Connection refused
+	Is the server running on host "127.0.0.1" and accepting
+	TCP/IP connections on port 5432?
+
+2012-06-18 12:48:40 [210] [INFO] Worker exiting (pid: 210)
+2012-06-18 12:48:40 [208] [ERROR] Exception in worker process:
+Traceback (most recent call last):
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/arbiter.py", line 456, in spawn_worker
+    worker.init_process()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/workers/base.py", line 100, in init_process
+    self.wsgi = self.app.wsgi()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/app/base.py", line 101, in wsgi
+    self.callable = self.load()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/app/djangoapp.py", line 128, in load
+    self.validate()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/app/djangoapp.py", line 116, in validate
+    if get_validation_errors(s):
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/core/management/validation.py", line 28, in get_validation_errors
+    from django.db import models, connection
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/db/__init__.py", line 78, in <module>
+    connection = connections[DEFAULT_DB_ALIAS]
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/db/utils.py", line 94, in __getitem__
+    conn = backend.DatabaseWrapper(db, alias)
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/base.py", line 11, in __init__
+    self.ops = PostGISOperations(self)
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 91, in __init__
+    vtup = self.postgis_version_tuple()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 445, in postgis_version_tuple
+    version = self.postgis_lib_version()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 425, in postgis_lib_version
+    return self._get_postgis_func('postgis_lib_version')
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 406, in _get_postgis_func
+    cursor = self.connection._cursor()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/db/backends/postgresql_psycopg2/base.py", line 140, in _cursor
+    self.connection = Database.connect(**conn_params)
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/psycopg2/__init__.py", line 179, in connect
+    connection_factory=connection_factory, async=async)
+OperationalError: could not connect to server: Connection refused
+	Is the server running on host "127.0.0.1" and accepting
+	TCP/IP connections on port 5432?
+
+2012-06-18 12:48:40 [208] [INFO] Worker exiting (pid: 208)
+2012-06-18 12:48:40 [209] [ERROR] Exception in worker process:
+Traceback (most recent call last):
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/arbiter.py", line 456, in spawn_worker
+    worker.init_process()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/workers/base.py", line 100, in init_process
+    self.wsgi = self.app.wsgi()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/app/base.py", line 101, in wsgi
+    self.callable = self.load()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/app/djangoapp.py", line 128, in load
+    self.validate()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/app/djangoapp.py", line 116, in validate
+    if get_validation_errors(s):
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/core/management/validation.py", line 28, in get_validation_errors
+    from django.db import models, connection
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/db/__init__.py", line 78, in <module>
+    connection = connections[DEFAULT_DB_ALIAS]
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/db/utils.py", line 94, in __getitem__
+    conn = backend.DatabaseWrapper(db, alias)
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/base.py", line 11, in __init__
+    self.ops = PostGISOperations(self)
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 91, in __init__
+    vtup = self.postgis_version_tuple()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 445, in postgis_version_tuple
+    version = self.postgis_lib_version()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 425, in postgis_lib_version
+    return self._get_postgis_func('postgis_lib_version')
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 406, in _get_postgis_func
+    cursor = self.connection._cursor()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/db/backends/postgresql_psycopg2/base.py", line 140, in _cursor
+    self.connection = Database.connect(**conn_params)
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/psycopg2/__init__.py", line 179, in connect
+    connection_factory=connection_factory, async=async)
+OperationalError: could not connect to server: Connection refused
+	Is the server running on host "127.0.0.1" and accepting
+	TCP/IP connections on port 5432?
+
+2012-06-18 12:48:40 [209] [INFO] Worker exiting (pid: 209)
+2012-06-18 13:49:10 [194] [INFO] Shutting down: Master
+2012-06-18 13:49:10 [194] [INFO] Reason: Worker failed to boot.
+2012-06-18 13:49:11 [256] [INFO] Starting gunicorn 0.13.4
+2012-06-18 13:49:11 [256] [ERROR] Connection in use: ('0.0.0.0', 9000)
+2012-06-18 13:49:11 [256] [ERROR] Retrying in 1 second.
+2012-06-18 13:49:12 [256] [ERROR] Connection in use: ('0.0.0.0', 9000)
+2012-06-18 13:49:12 [256] [ERROR] Retrying in 1 second.
+2012-06-18 13:49:13 [256] [ERROR] Connection in use: ('0.0.0.0', 9000)
+2012-06-18 13:49:13 [256] [ERROR] Retrying in 1 second.
+2012-06-18 13:49:14 [256] [ERROR] Connection in use: ('0.0.0.0', 9000)
+2012-06-18 13:49:14 [256] [ERROR] Retrying in 1 second.
+2012-06-18 13:49:15 [256] [ERROR] Connection in use: ('0.0.0.0', 9000)
+2012-06-18 13:49:15 [256] [ERROR] Retrying in 1 second.
+2012-06-18 13:49:16 [256] [ERROR] Can't connect to ('0.0.0.0', 9000)
+2012-06-18 13:49:18 [269] [INFO] Starting gunicorn 0.13.4
+2012-06-18 13:49:18 [269] [ERROR] Connection in use: ('0.0.0.0', 9000)
+2012-06-18 13:49:18 [269] [ERROR] Retrying in 1 second.
+2012-06-18 13:49:19 [269] [ERROR] Connection in use: ('0.0.0.0', 9000)
+2012-06-18 13:49:19 [269] [ERROR] Retrying in 1 second.
+2012-06-18 13:49:20 [269] [ERROR] Connection in use: ('0.0.0.0', 9000)
+2012-06-18 13:49:20 [269] [ERROR] Retrying in 1 second.
+2012-06-18 13:49:21 [269] [ERROR] Connection in use: ('0.0.0.0', 9000)
+2012-06-18 13:49:21 [269] [ERROR] Retrying in 1 second.
+2012-06-18 13:49:22 [269] [INFO] Listening at: http://0.0.0.0:9000 (269)
+2012-06-18 13:49:22 [269] [INFO] Using worker: sync
+2012-06-18 13:49:22 [275] [INFO] Booting worker with pid: 275
+2012-06-18 13:49:22 [274] [INFO] Booting worker with pid: 274
+2012-06-18 13:49:22 [276] [INFO] Booting worker with pid: 276
+2012-06-22 11:55:13 [269] [ERROR] WORKER TIMEOUT (pid:274)
+None
+2012-06-22 11:55:13 [269] [ERROR] WORKER TIMEOUT (pid:275)
+None
+2012-06-22 11:55:13 [269] [ERROR] WORKER TIMEOUT (pid:276)
+None
+2012-06-22 11:55:19 [60752] [INFO] Booting worker with pid: 60752
+2012-06-22 11:55:19 [60754] [INFO] Booting worker with pid: 60754
+2012-06-22 11:55:19 [60753] [INFO] Booting worker with pid: 60753
+2012-06-26 11:00:57 [137] [INFO] Starting gunicorn 0.13.4
+2012-06-26 11:00:57 [137] [INFO] Listening at: http://0.0.0.0:9000 (137)
+2012-06-26 11:00:57 [137] [INFO] Using worker: sync
+2012-06-26 11:00:57 [195] [INFO] Booting worker with pid: 195
+2012-06-26 11:00:57 [196] [INFO] Booting worker with pid: 196
+2012-06-26 11:00:57 [197] [INFO] Booting worker with pid: 197
+2012-07-03 11:02:17 [133] [INFO] Starting gunicorn 0.13.4
+2012-07-03 11:02:17 [133] [INFO] Listening at: http://0.0.0.0:9000 (133)
+2012-07-03 11:02:17 [133] [INFO] Using worker: sync
+2012-07-03 11:02:20 [145] [INFO] Booting worker with pid: 145
+2012-07-03 11:02:20 [146] [INFO] Booting worker with pid: 146
+2012-07-03 11:02:20 [147] [INFO] Booting worker with pid: 147
+2012-07-03 10:02:22 [146] [ERROR] Exception in worker process:
+Traceback (most recent call last):
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/arbiter.py", line 456, in spawn_worker
+    worker.init_process()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/workers/base.py", line 100, in init_process
+    self.wsgi = self.app.wsgi()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/app/base.py", line 101, in wsgi
+    self.callable = self.load()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/app/djangoapp.py", line 128, in load
+    self.validate()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/app/djangoapp.py", line 116, in validate
+    if get_validation_errors(s):
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/core/management/validation.py", line 28, in get_validation_errors
+    from django.db import models, connection
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/db/__init__.py", line 78, in <module>
+    connection = connections[DEFAULT_DB_ALIAS]
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/db/utils.py", line 94, in __getitem__
+    conn = backend.DatabaseWrapper(db, alias)
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/base.py", line 11, in __init__
+    self.ops = PostGISOperations(self)
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 91, in __init__
+    vtup = self.postgis_version_tuple()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 445, in postgis_version_tuple
+    version = self.postgis_lib_version()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 425, in postgis_lib_version
+    return self._get_postgis_func('postgis_lib_version')
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 406, in _get_postgis_func
+    cursor = self.connection._cursor()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/db/backends/postgresql_psycopg2/base.py", line 140, in _cursor
+    self.connection = Database.connect(**conn_params)
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/psycopg2/__init__.py", line 179, in connect
+    connection_factory=connection_factory, async=async)
+OperationalError: FATAL:  the database system is starting up
+
+2012-07-03 10:02:22 [147] [ERROR] Exception in worker process:
+Traceback (most recent call last):
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/arbiter.py", line 456, in spawn_worker
+    worker.init_process()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/workers/base.py", line 100, in init_process
+    self.wsgi = self.app.wsgi()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/app/base.py", line 101, in wsgi
+    self.callable = self.load()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/app/djangoapp.py", line 128, in load
+    self.validate()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/app/djangoapp.py", line 116, in validate
+    if get_validation_errors(s):
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/core/management/validation.py", line 28, in get_validation_errors
+    from django.db import models, connection
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/db/__init__.py", line 78, in <module>
+    connection = connections[DEFAULT_DB_ALIAS]
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/db/utils.py", line 94, in __getitem__
+    conn = backend.DatabaseWrapper(db, alias)
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/base.py", line 11, in __init__
+    self.ops = PostGISOperations(self)
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 91, in __init__
+    vtup = self.postgis_version_tuple()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 445, in postgis_version_tuple
+    version = self.postgis_lib_version()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 425, in postgis_lib_version
+    return self._get_postgis_func('postgis_lib_version')
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 406, in _get_postgis_func
+    cursor = self.connection._cursor()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/db/backends/postgresql_psycopg2/base.py", line 140, in _cursor
+    self.connection = Database.connect(**conn_params)
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/psycopg2/__init__.py", line 179, in connect
+    connection_factory=connection_factory, async=async)
+OperationalError: FATAL:  the database system is starting up
+
+2012-07-03 10:02:22 [146] [INFO] Worker exiting (pid: 146)
+2012-07-03 10:02:22 [147] [INFO] Worker exiting (pid: 147)
+2012-07-03 10:02:22 [145] [ERROR] Exception in worker process:
+Traceback (most recent call last):
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/arbiter.py", line 456, in spawn_worker
+    worker.init_process()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/workers/base.py", line 100, in init_process
+    self.wsgi = self.app.wsgi()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/app/base.py", line 101, in wsgi
+    self.callable = self.load()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/app/djangoapp.py", line 128, in load
+    self.validate()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/app/djangoapp.py", line 116, in validate
+    if get_validation_errors(s):
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/core/management/validation.py", line 28, in get_validation_errors
+    from django.db import models, connection
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/db/__init__.py", line 78, in <module>
+    connection = connections[DEFAULT_DB_ALIAS]
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/db/utils.py", line 94, in __getitem__
+    conn = backend.DatabaseWrapper(db, alias)
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/base.py", line 11, in __init__
+    self.ops = PostGISOperations(self)
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 91, in __init__
+    vtup = self.postgis_version_tuple()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 445, in postgis_version_tuple
+    version = self.postgis_lib_version()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 425, in postgis_lib_version
+    return self._get_postgis_func('postgis_lib_version')
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 406, in _get_postgis_func
+    cursor = self.connection._cursor()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/db/backends/postgresql_psycopg2/base.py", line 140, in _cursor
+    self.connection = Database.connect(**conn_params)
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/psycopg2/__init__.py", line 179, in connect
+    connection_factory=connection_factory, async=async)
+OperationalError: FATAL:  the database system is starting up
+
+2012-07-03 10:02:22 [145] [INFO] Worker exiting (pid: 145)
+Traceback (most recent call last):
+  File "/Users/spatial/.virtualenvs/geodeliberator/bin/gunicorn_django", line 8, in <module>
+    load_entry_point('gunicorn==0.13.4', 'console_scripts', 'gunicorn_django')()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/app/djangoapp.py", line 318, in run
+    DjangoApplication("%prog [OPTIONS] [SETTINGS_PATH]").run()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/app/base.py", line 116, in run
+    Arbiter(self).run()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/arbiter.py", line 186, in run
+    self.halt(reason=inst.reason, exit_status=inst.exit_status)
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/arbiter.py", line 282, in halt
+    self.stop()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/arbiter.py", line 329, in stop
+    time.sleep(0.1)
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/arbiter.py", line 200, in handle_chld
+    self.reap_workers()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/arbiter.py", line 416, in reap_workers
+    raise HaltServer(reason, self.WORKER_BOOT_ERROR)
+gunicorn.errors.HaltServer: <HaltServer 'Worker failed to boot.' 3>
+2012-07-03 11:02:24 [198] [INFO] Starting gunicorn 0.13.4
+2012-07-03 11:02:24 [198] [INFO] Listening at: http://0.0.0.0:9000 (198)
+2012-07-03 11:02:24 [198] [INFO] Using worker: sync
+2012-07-03 11:02:24 [204] [INFO] Booting worker with pid: 204
+2012-07-03 11:02:24 [205] [INFO] Booting worker with pid: 205
+2012-07-03 11:02:24 [203] [INFO] Booting worker with pid: 203
+2012-08-27 19:18:25 [112] [INFO] Starting gunicorn 0.13.4
+2012-08-27 19:18:25 [112] [INFO] Listening at: http://0.0.0.0:9000 (112)
+2012-08-27 19:18:25 [112] [INFO] Using worker: sync
+2012-08-27 19:18:28 [148] [INFO] Booting worker with pid: 148
+2012-08-27 19:18:28 [149] [INFO] Booting worker with pid: 149
+2012-08-27 19:18:28 [150] [INFO] Booting worker with pid: 150
+2012-08-29 19:28:59 [135] [INFO] Starting gunicorn 0.13.4
+2012-08-29 19:28:59 [135] [INFO] Listening at: http://0.0.0.0:9000 (135)
+2012-08-29 19:28:59 [135] [INFO] Using worker: sync
+2012-08-29 19:29:02 [149] [INFO] Booting worker with pid: 149
+2012-08-29 19:29:02 [151] [INFO] Booting worker with pid: 151
+2012-08-29 19:29:02 [152] [INFO] Booting worker with pid: 152
+2012-08-29 18:29:07 [152] [ERROR] Exception in worker process:
+Traceback (most recent call last):
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/arbiter.py", line 456, in spawn_worker
+    worker.init_process()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/workers/base.py", line 100, in init_process
+    self.wsgi = self.app.wsgi()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/app/base.py", line 101, in wsgi
+    self.callable = self.load()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/app/djangoapp.py", line 128, in load
+    self.validate()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/app/djangoapp.py", line 116, in validate
+    if get_validation_errors(s):
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/core/management/validation.py", line 28, in get_validation_errors
+    from django.db import models, connection
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/db/__init__.py", line 78, in <module>
+    connection = connections[DEFAULT_DB_ALIAS]
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/db/utils.py", line 94, in __getitem__
+    conn = backend.DatabaseWrapper(db, alias)
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/base.py", line 11, in __init__
+    self.ops = PostGISOperations(self)
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 91, in __init__
+    vtup = self.postgis_version_tuple()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 445, in postgis_version_tuple
+    version = self.postgis_lib_version()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 425, in postgis_lib_version
+    return self._get_postgis_func('postgis_lib_version')
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 406, in _get_postgis_func
+    cursor = self.connection._cursor()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/db/backends/postgresql_psycopg2/base.py", line 140, in _cursor
+    self.connection = Database.connect(**conn_params)
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/psycopg2/__init__.py", line 179, in connect
+    connection_factory=connection_factory, async=async)
+OperationalError: FATAL:  the database system is starting up
+
+2012-08-29 18:29:07 [149] [ERROR] Exception in worker process:
+Traceback (most recent call last):
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/arbiter.py", line 456, in spawn_worker
+    worker.init_process()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/workers/base.py", line 100, in init_process
+    self.wsgi = self.app.wsgi()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/app/base.py", line 101, in wsgi
+    self.callable = self.load()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/app/djangoapp.py", line 128, in load
+    self.validate()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/app/djangoapp.py", line 116, in validate
+    if get_validation_errors(s):
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/core/management/validation.py", line 28, in get_validation_errors
+    from django.db import models, connection
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/db/__init__.py", line 78, in <module>
+    connection = connections[DEFAULT_DB_ALIAS]
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/db/utils.py", line 94, in __getitem__
+    conn = backend.DatabaseWrapper(db, alias)
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/base.py", line 11, in __init__
+    self.ops = PostGISOperations(self)
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 91, in __init__
+    vtup = self.postgis_version_tuple()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 445, in postgis_version_tuple
+    version = self.postgis_lib_version()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 425, in postgis_lib_version
+    return self._get_postgis_func('postgis_lib_version')
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 406, in _get_postgis_func
+    cursor = self.connection._cursor()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/db/backends/postgresql_psycopg2/base.py", line 140, in _cursor
+    self.connection = Database.connect(**conn_params)
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/psycopg2/__init__.py", line 179, in connect
+    connection_factory=connection_factory, async=async)
+OperationalError: FATAL:  the database system is starting up
+
+2012-08-29 18:29:27 [152] [INFO] Worker exiting (pid: 152)
+2012-08-29 18:29:27 [149] [INFO] Worker exiting (pid: 149)
+2012-08-29 18:29:07 [151] [ERROR] Exception in worker process:
+Traceback (most recent call last):
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/arbiter.py", line 456, in spawn_worker
+    worker.init_process()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/workers/base.py", line 100, in init_process
+    self.wsgi = self.app.wsgi()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/app/base.py", line 101, in wsgi
+    self.callable = self.load()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/app/djangoapp.py", line 128, in load
+    self.validate()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/app/djangoapp.py", line 116, in validate
+    if get_validation_errors(s):
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/core/management/validation.py", line 28, in get_validation_errors
+    from django.db import models, connection
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/db/__init__.py", line 78, in <module>
+    connection = connections[DEFAULT_DB_ALIAS]
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/db/utils.py", line 94, in __getitem__
+    conn = backend.DatabaseWrapper(db, alias)
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/base.py", line 11, in __init__
+    self.ops = PostGISOperations(self)
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 91, in __init__
+    vtup = self.postgis_version_tuple()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 445, in postgis_version_tuple
+    version = self.postgis_lib_version()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 425, in postgis_lib_version
+    return self._get_postgis_func('postgis_lib_version')
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 406, in _get_postgis_func
+    cursor = self.connection._cursor()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/db/backends/postgresql_psycopg2/base.py", line 140, in _cursor
+    self.connection = Database.connect(**conn_params)
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/psycopg2/__init__.py", line 179, in connect
+    connection_factory=connection_factory, async=async)
+OperationalError: FATAL:  the database system is starting up
+
+2012-08-29 18:29:27 [151] [INFO] Worker exiting (pid: 151)
+Traceback (most recent call last):
+  File "/Users/spatial/.virtualenvs/geodeliberator/bin/gunicorn_django", line 8, in <module>
+    load_entry_point('gunicorn==0.13.4', 'console_scripts', 'gunicorn_django')()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/app/djangoapp.py", line 318, in run
+    DjangoApplication("%prog [OPTIONS] [SETTINGS_PATH]").run()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/app/base.py", line 116, in run
+    Arbiter(self).run()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/arbiter.py", line 186, in run
+    self.halt(reason=inst.reason, exit_status=inst.exit_status)
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/arbiter.py", line 282, in halt
+    self.stop()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/arbiter.py", line 330, in stop
+    self.reap_workers()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/arbiter.py", line 416, in reap_workers
+    raise HaltServer(reason, self.WORKER_BOOT_ERROR)
+gunicorn.errors.HaltServer: <HaltServer 'Worker failed to boot.' 3>
+2012-08-29 19:29:32 [185] [INFO] Starting gunicorn 0.13.4
+2012-08-29 19:29:32 [185] [INFO] Listening at: http://0.0.0.0:9000 (185)
+2012-08-29 19:29:32 [185] [INFO] Using worker: sync
+2012-08-29 19:29:34 [204] [INFO] Booting worker with pid: 204
+2012-08-29 19:29:34 [205] [INFO] Booting worker with pid: 205
+2012-08-29 19:29:34 [206] [INFO] Booting worker with pid: 206
+2012-09-12 15:41:14 [127] [INFO] Starting gunicorn 0.13.4
+2012-09-12 15:41:14 [127] [INFO] Listening at: http://0.0.0.0:9000 (127)
+2012-09-12 15:41:14 [127] [INFO] Using worker: sync
+2012-09-12 15:41:17 [143] [INFO] Booting worker with pid: 143
+2012-09-12 15:41:17 [144] [INFO] Booting worker with pid: 144
+2012-09-12 15:41:17 [145] [INFO] Booting worker with pid: 145
+2012-09-12 14:41:17 [145] [ERROR] Exception in worker process:
+Traceback (most recent call last):
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/arbiter.py", line 456, in spawn_worker
+    worker.init_process()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/workers/base.py", line 100, in init_process
+    self.wsgi = self.app.wsgi()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/app/base.py", line 101, in wsgi
+    self.callable = self.load()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/app/djangoapp.py", line 128, in load
+    self.validate()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/app/djangoapp.py", line 116, in validate
+    if get_validation_errors(s):
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/core/management/validation.py", line 28, in get_validation_errors
+    from django.db import models, connection
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/db/__init__.py", line 78, in <module>
+    connection = connections[DEFAULT_DB_ALIAS]
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/db/utils.py", line 94, in __getitem__
+    conn = backend.DatabaseWrapper(db, alias)
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/base.py", line 11, in __init__
+    self.ops = PostGISOperations(self)
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 91, in __init__
+    vtup = self.postgis_version_tuple()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 445, in postgis_version_tuple
+    version = self.postgis_lib_version()
+  File "/Users/spatial/.virtualenvs/geodeli2012-09-12 14:41:17 [144] [ERROR] Exception in worker process:
+Traceback (most recent call last):
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/arbiter.py", line 456, in spawn_worker
+    worker.init_process()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/workers/base.py", line 100, in init_process
+    self.wsgi = self.app.wsgi()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/app/base.py", line 101, in wsgi
+    self.callable = self.load()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/app/djangoapp.py", line 128, in load
+    self.validate()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/app/djangoapp.py", line 116, in validate
+    if get_validation_errors(s):
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/core/management/validation.py", line 28, in get_validation_errors
+    from django.db import models, connection
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/db/__init__.py", line 78, in <module>
+    connection = connections[DEFAULT_DB_ALIAS]
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/db/utils.py", line 94, in __getitem__
+    conn = backend.DatabaseWrapper(db, alias)
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/base.py", line 11, in __init__
+    self.ops = PostGISOperations(self)
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 91, in __init__
+    vtup = self.postgis_version_tuple()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 445, in postgis_version_tuple
+    version = self.postgis_lib_version()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 425, in postgis_lib_version
+    return self._get_postgis_func('postgis_lib_version')
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 406, in _get_postgis_func
+    cursor = self.connection._cursor()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/db/backends/postgresql_psycopg2/base.py", line 140, in _cursor
+    self.connection = Database.connect(**conn_params)
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/psycopg2/__init__.py", line 179, in connect
+    connection_factory=connection_factory, async=async)
+OperationalError: could not connect to server: Connection refused
+	Is the server running on host "127.0.0.1" and accepting
+	TCP/IP connections on port 5432?
+
+berator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 425, in postgis_lib_version
+    return self._get_postgis_func('postgis_lib_version')
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 406, in _get_postgis_func
+    cursor = self.connection._cursor()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/db/backends/postgresql_psycopg2/base.py", line 140, in _cursor
+    self.connection = Database.connect(**conn_params)
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/psycopg2/__init__.py", line 179, in connect
+    connection_factory=connection_factory, async=async)
+OperationalError: could not connect to server: Connection refused
+	Is the server running on host "127.0.0.1" and accepting
+	TCP/IP connections on port 5432?
+
+2012-09-12 14:41:17 [145] [INFO] Worker exiting (pid: 145)
+2012-09-12 14:41:17 [144] [INFO] Worker exiting (pid: 144)
+2012-09-12 14:41:20 [143] [ERROR] Exception in worker process:
+Traceback (most recent call last):
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/arbiter.py", line 456, in spawn_worker
+    worker.init_process()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/workers/base.py", line 100, in init_process
+    self.wsgi = self.app.wsgi()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/app/base.py", line 101, in wsgi
+    self.callable = self.load()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/app/djangoapp.py", line 128, in load
+    self.validate()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/app/djangoapp.py", line 116, in validate
+    if get_validation_errors(s):
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/core/management/validation.py", line 28, in get_validation_errors
+    from django.db import models, connection
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/db/__init__.py", line 78, in <module>
+    connection = connections[DEFAULT_DB_ALIAS]
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/db/utils.py", line 94, in __getitem__
+    conn = backend.DatabaseWrapper(db, alias)
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/base.py", line 11, in __init__
+    self.ops = PostGISOperations(self)
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 91, in __init__
+    vtup = self.postgis_version_tuple()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 445, in postgis_version_tuple
+    version = self.postgis_lib_version()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 425, in postgis_lib_version
+    return self._get_postgis_func('postgis_lib_version')
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 406, in _get_postgis_func
+    cursor = self.connection._cursor()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/db/backends/postgresql_psycopg2/base.py", line 140, in _cursor
+    self.connection = Database.connect(**conn_params)
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/psycopg2/__init__.py", line 179, in connect
+    connection_factory=connection_factory, async=async)
+OperationalError: could not connect to server: Connection refused
+	Is the server running on host "127.0.0.1" and accepting
+	TCP/IP connections on port 5432?
+
+2012-09-12 14:41:20 [143] [INFO] Worker exiting (pid: 143)
+2012-09-12 15:41:47 [127] [INFO] Shutting down: Master
+2012-09-12 15:41:47 [127] [INFO] Reason: Worker failed to boot.
+2012-09-12 15:41:49 [187] [INFO] Starting gunicorn 0.13.4
+2012-09-12 15:41:49 [187] [INFO] Listening at: http://0.0.0.0:9000 (187)
+2012-09-12 15:41:49 [187] [INFO] Using worker: sync
+2012-09-12 15:41:50 [196] [INFO] Booting worker with pid: 196
+2012-09-12 15:41:50 [197] [INFO] Booting worker with pid: 197
+2012-09-12 15:41:50 [198] [INFO] Booting worker with pid: 198
+2012-09-12 14:41:51 [196] [ERROR] Exception in worker process:
+Traceback (most recent call last):
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/arbiter.py", line 456, in spawn_worker
+    worker.init_process()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/workers/base.py", line 100, in init_process
+    self.wsgi = self.app.wsgi()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/app/base.py", line 101, in wsgi
+    self.callable = self.load()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/app/djangoapp.py", line 128, in load
+    self.validate()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/app/djangoapp.py", line 116, in validate
+    if get_validation_errors(s):
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/core/management/validation.py", line 28, in get_validation_errors
+    from django.db import models, connection
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/db/__init__.py", line 78, in <module>
+    connection = connections[DEFAULT_DB_ALIAS]
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/db/utils.py", line 94, in __getitem__
+    conn = backend.DatabaseWrapper(db, alias)
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/base.py", line 11, in __init__
+    self.ops = PostGISOperations(self)
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 91, in __init__
+    vtup = self.postgis_version_tuple()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 445, in postgis_version_tuple
+    version = self.postgis_lib_version()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 425, in postgis_lib_version
+    return self._get_postgis_func('postgis_lib_version')
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 406, in _get_postgis_func
+    cursor = self.connection._cursor()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/db/backends/postgresql_psycopg2/base.py", line 140, in _cursor
+    self.connection = Database.connect(**conn_params)
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/psycopg2/__init__.py", line 179, in connect
+    connection_factory=connection_factory, async=async)
+OperationalError: FATAL:  the database system is starting up
+
+2012-09-12 14:41:51 [196] [INFO] Worker exiting (pid: 196)
+2012-09-12 14:41:51 [197] [ERROR] Exception in worker process:
+Traceback (most recent call last):
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/arbiter.py", line 456, in spawn_worker
+    worker.init_process()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/workers/base.py", line 100, in init_process
+    self.wsgi = self.app.wsgi()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/app/base.py", line 101, in wsgi
+    self.callable = self.load()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/app/djangoapp.py", line 128, in load
+    self.validate()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/app/djangoapp.py", line 116, in validate
+    if get_validation_errors(s):
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/core/management/validation.py", line 28, in get_validation_errors
+    from django.db import models, connection
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/db/__init__.py", line 78, in <module>
+    connection = connections[DEFAULT_DB_ALIAS]
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/db/utils.py", line 94, in __getitem__
+    conn = backend.DatabaseWrapper(db, alias)
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/base.py", line 11, in __init__
+    self.ops = PostGISOperations(self)
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 91, in __init__
+    vtup = self.postgis_version_tuple()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 445, in postgis_version_tuple
+    version = self.postgis_lib_version()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 425, in postgis_lib_version
+    return self._get_postgis_func('postgis_lib_version')
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 406, in _get_postgis_func
+    cursor = self.connection._cursor()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/db/backends/postgresql_psycopg2/base.py", line 140, in _cursor
+    self.connection = Database.connect(**conn_params)
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/psycopg2/__init__.py", line 179, in connect
+    connection_factory=connection_factory, async=async)
+OperationalError: FATAL:  the database system is starting up
+
+2012-09-12 14:41:51 [197] [INFO] Worker exiting (pid: 197)
+2012-09-12 14:41:51 [198] [ERROR] Exception in worker process:
+Traceback (most recent call last):
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/arbiter.py", line 456, in spawn_worker
+    worker.init_process()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/workers/base.py", line 100, in init_process
+    self.wsgi = self.app.wsgi()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/app/base.py", line 101, in wsgi
+    self.callable = self.load()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/app/djangoapp.py", line 128, in load
+    self.validate()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/app/djangoapp.py", line 116, in validate
+    if get_validation_errors(s):
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/core/management/validation.py", line 28, in get_validation_errors
+    from django.db import models, connection
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/db/__init__.py", line 78, in <module>
+    connection = connections[DEFAULT_DB_ALIAS]
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/db/utils.py", line 94, in __getitem__
+    conn = backend.DatabaseWrapper(db, alias)
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/base.py", line 11, in __init__
+    self.ops = PostGISOperations(self)
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 91, in __init__
+    vtup = self.postgis_version_tuple()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 445, in postgis_version_tuple
+    version = self.postgis_lib_version()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 425, in postgis_lib_version
+    return self._get_postgis_func('postgis_lib_version')
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 406, in _get_postgis_func
+    cursor = self.connection._cursor()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/db/backends/postgresql_psycopg2/base.py", line 140, in _cursor
+    self.connection = Database.connect(**conn_params)
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/psycopg2/__init__.py", line 179, in connect
+    connection_factory=connection_factory, async=async)
+OperationalError: FATAL:  the database system is starting up
+
+2012-09-12 14:41:51 [198] [INFO] Worker exiting (pid: 198)
+2012-09-12 15:42:21 [187] [INFO] Shutting down: Master
+2012-09-12 15:42:21 [187] [INFO] Reason: Worker failed to boot.
+2012-09-12 15:42:22 [225] [INFO] Starting gunicorn 0.13.4
+2012-09-12 15:42:22 [225] [INFO] Listening at: http://0.0.0.0:9000 (225)
+2012-09-12 15:42:22 [225] [INFO] Using worker: sync
+2012-09-12 15:42:22 [232] [INFO] Booting worker with pid: 232
+2012-09-12 15:42:22 [234] [INFO] Booting worker with pid: 234
+2012-09-12 15:42:22 [233] [INFO] Booting worker with pid: 233
+2012-10-19 17:30:41 [225] [INFO] Handling signal: term
+2012-10-19 17:30:42 [225] [INFO] Shutting down: Master
+2012-10-19 17:36:53 [125] [INFO] Starting gunicorn 0.13.4
+2012-10-19 17:36:53 [125] [INFO] Listening at: http://0.0.0.0:9000 (125)
+2012-10-19 17:36:53 [125] [INFO] Using worker: sync
+2012-10-19 17:36:56 [139] [INFO] Booting worker with pid: 139
+2012-10-19 17:36:56 [140] [INFO] Booting worker with pid: 140
+2012-10-19 17:36:56 [141] [INFO] Booting worker with pid: 141
+2012-10-19 16:36:38 [140] [ERROR] Exception in worker process:
+Traceback (most recent call last):
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/arbiter.py", line 456, in spawn_worker
+    worker.init_process()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/workers/base.py", line 100, in init_process
+    self.wsgi = self.app.wsgi()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/app/base.py", line 101, in wsgi
+    self.callable = self.load()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/app/djangoapp.py", line 128, in load
+    self.validate()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/app/djangoapp.py", line 116, in validate
+    if get_validation_errors(s):
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/core/management/validation.py", line 28, in get_validation_errors
+    from django.db import models, connection
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/db/__init__.py", line 78, in <module>
+    connection = connections[DEFAULT_DB_ALIAS]
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/db/utils.py", line 94, in __getitem__
+    conn = backend.DatabaseWrapper(db, alias)
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/base.py", line 11, in __init__
+    self.ops = PostGISOperations(self)
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 91, in __init__
+    vtup = self.postgis_version_tuple()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 445, in postgis_version_tuple
+    version = self.postgis_lib_version()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 425, in postgis_lib_version
+    return self._get_postgis_func('postgis_lib_version')
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 406, in _get_postgis_func
+    cursor = self.connection._cursor()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/db/backends/postgresql_psycopg2/base.py", line 140, in _cursor
+    self.connection = Database.connect(**conn_params)
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/psycopg2/__init__.py", line 179, in connect
+    connection_factory=connection_factory, async=async)
+OperationalError: FATAL:  the database system is starting up
+
+2012-10-19 16:36:38 [140] [INFO] Worker exiting (pid: 140)
+2012-10-19 16:36:38 [139] [ERROR] Exception in worker process:
+Traceback (most recent call last):
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/arbiter.py", line 456, in spawn_worker
+    worker.init_process()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/workers/base.py", line 100, in init_process
+    self.wsgi = self.app.wsgi()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/app/base.py", line 101, in wsgi
+    self.callable = self.load()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/app/djangoapp.py", line 128, in load
+    self.validate()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/app/djangoapp.py", line 116, in validate
+    if get_validation_errors(s):
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/core/management/validation.py", line 28, in get_validation_errors
+    from django.db import models, connection
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/db/__init__.py", line 78, in <module>
+    connection = connections[DEFAULT_DB_ALIAS]
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/db/utils.py", line 94, in __getitem__
+    conn = backend.DatabaseWrapper(db, alias)
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/base.py", line 11, in __init__
+    self.ops = PostGISOperations(self)
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 91, in __init__
+    vtup = self.postgis_version_tuple()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 445, in postgis_version_tuple
+    version = self.postgis_lib_version()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 425, in postgis_lib_version
+    return self._get_postgis_func('postgis_lib_version')
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 406, in _get_postgis_func
+    cursor = self.connection._cursor()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/db/backends/postgresql_psycopg2/base.py", line 140, in _cursor
+    self.connection = Database.connect(**conn_params)
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/psycopg2/__init__.py", line 179, in connect
+    connection_factory=connection_factory, async=async)
+OperationalError: FATAL:  the database system is starting up
+
+2012-10-19 16:36:38 [139] [INFO] Worker exiting (pid: 139)
+2012-10-19 16:36:38 [141] [ERROR] Exception in worker process:
+Traceback (most recent call last):
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/arbiter.py", line 456, in spawn_worker
+    worker.init_process()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/workers/base.py", line 100, in init_process
+    self.wsgi = self.app.wsgi()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/app/base.py", line 101, in wsgi
+    self.callable = self.load()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/app/djangoapp.py", line 128, in load
+    self.validate()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/app/djangoapp.py", line 116, in validate
+    if get_validation_errors(s):
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/core/management/validation.py", line 28, in get_validation_errors
+    from django.db import models, connection
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/db/__init__.py", line 78, in <module>
+    connection = connections[DEFAULT_DB_ALIAS]
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/db/utils.py", line 94, in __getitem__
+    conn = backend.DatabaseWrapper(db, alias)
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/base.py", line 11, in __init__
+    self.ops = PostGISOperations(self)
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 91, in __init__
+    vtup = self.postgis_version_tuple()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 445, in postgis_version_tuple
+    version = self.postgis_lib_version()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 425, in postgis_lib_version
+    return self._get_postgis_func('postgis_lib_version')
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 406, in _get_postgis_func
+    cursor = self.connection._cursor()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/db/backends/postgresql_psycopg2/base.py", line 140, in _cursor
+    self.connection = Database.connect(**conn_params)
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/psycopg2/__init__.py", line 179, in connect
+    connection_factory=connection_factory, async=async)
+OperationalError: FATAL:  the database system is starting up
+
+2012-10-19 16:36:38 [141] [INFO] Worker exiting (pid: 141)
+2012-10-19 17:36:43 [125] [INFO] Shutting down: Master
+2012-10-19 17:36:43 [125] [INFO] Reason: Worker failed to boot.
+2012-10-19 17:36:45 [212] [INFO] Starting gunicorn 0.13.4
+2012-10-19 17:36:45 [212] [INFO] Listening at: http://0.0.0.0:9000 (212)
+2012-10-19 17:36:45 [212] [INFO] Using worker: sync
+2012-10-19 17:36:45 [222] [INFO] Booting worker with pid: 222
+2012-10-19 17:36:45 [223] [INFO] Booting worker with pid: 223
+2012-10-19 17:36:45 [224] [INFO] Booting worker with pid: 224
+2012-11-07 21:22:56 [212] [INFO] Handling signal: term
+2012-11-07 20:22:57 [223] [INFO] Worker exiting (pid: 223)
+2012-11-07 20:22:57 [224] [INFO] Worker exiting (pid: 224)
+2012-11-07 20:22:57 [222] [INFO] Worker exiting (pid: 222)
+2012-11-07 21:22:57 [212] [INFO] Shutting down: Master
+2012-11-07 21:27:43 [149] [INFO] Starting gunicorn 0.13.4
+2012-11-07 21:27:43 [149] [INFO] Listening at: http://0.0.0.0:9000 (149)
+2012-11-07 21:27:43 [149] [INFO] Using worker: sync
+2012-11-07 21:27:43 [163] [INFO] Booting worker with pid: 163
+2012-11-07 21:27:43 [165] [INFO] Booting worker with pid: 165
+2012-11-07 21:27:43 [166] [INFO] Booting worker with pid: 166
+/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/conf/__init__.py:75: DeprecationWarning: The ADMIN_MEDIA_PREFIX setting has been removed; use STATIC_URL instead.
+  "use STATIC_URL instead.", DeprecationWarning)
+/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/conf/__init__.py:75: DeprecationWarning: The ADMIN_MEDIA_PREFIX setting has been removed; use STATIC_URL instead.
+  "use STATIC_URL instead.", DeprecationWarning)
+/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/conf/__init__.py:75: DeprecationWarning: The ADMIN_MEDIA_PREFIX setting has been removed; use STATIC_URL instead.
+  "use STATIC_URL instead.", DeprecationWarning)
+/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/views/generic/simple.py:8: DeprecationWarning: Function-based generic views have been deprecated; use class-based views instead.
+  DeprecationWarning
+/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/views/generic/simple.py:8: DeprecationWarning: Function-based generic views have been deprecated; use class-based views instead.
+  DeprecationWarning
+/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/views/generic/simple.py:8: DeprecationWarning: Function-based generic views have been deprecated; use class-based views instead.
+  DeprecationWarning
+2012-12-24 10:51:55 [149] [INFO] Handling signal: term
+2012-12-24 09:51:56 [166] [INFO] Worker exiting (pid: 166)
+2012-12-24 09:51:56 [165] [INFO] Worker exiting (pid: 165)
+Exception SystemExit: 0 in <module 'threading' from '/opt/local/Library/Frameworks/Python.framework/Versions/2.6/lib/python2.6/threading.pyc'> ignored
+Exception SystemExit: 0 in <module 'threading' from '/opt/local/Library/Frameworks/Python.framework/Versions/2.6/lib/python2.6/threading.pyc'> ignored
+Exception SystemExit: 0 in <module 'threading' from '/opt/local/Library/Frameworks/Python.framework/Versions/2.6/lib/python2.6/threading.pyc'> ignored
+2012-12-24 10:51:56 [149] [INFO] Shutting down: Master
+2012-12-24 10:53:56 [147] [INFO] Starting gunicorn 0.13.4
+2012-12-24 10:53:56 [147] [INFO] Listening at: http://0.0.0.0:9000 (147)
+2012-12-24 10:53:56 [147] [INFO] Using worker: sync
+2012-12-24 10:53:56 [209] [INFO] Booting worker with pid: 209
+2012-12-24 10:53:56 [212] [INFO] Booting worker with pid: 212
+2012-12-24 10:53:56 [211] [INFO] Booting worker with pid: 211
+/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/conf/__init__.py:75: DeprecationWarning: The ADMIN_MEDIA_PREFIX setting has been removed; use STATIC_URL instead.
+  "use STATIC_URL instead.", DeprecationWarning)
+/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/conf/__init__.py:75: DeprecationWarning: The ADMIN_MEDIA_PREFIX setting has been removed; use STATIC_URL instead.
+  "use STATIC_URL instead.", DeprecationWarning)
+/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/conf/__init__.py:75: DeprecationWarning: The ADMIN_MEDIA_PREFIX setting has been removed; use STATIC_URL instead.
+  "use STATIC_URL instead.", DeprecationWarning)
+2012-12-24 11:03:41 [147] [INFO] Handling signal: term
+2012-12-24 10:03:41 [211] [INFO] Worker exiting (pid: 211)
+2012-12-24 10:03:41 [209] [INFO] Worker exiting (pid: 209)
+2012-12-24 10:03:41 [212] [INFO] Worker exiting (pid: 212)
+2012-12-24 11:03:42 [147] [INFO] Shutting down: Master
+2012-12-24 11:11:25 [119] [INFO] Starting gunicorn 0.13.4
+2012-12-24 11:11:25 [119] [INFO] Listening at: http://0.0.0.0:9000 (119)
+2012-12-24 11:11:25 [119] [INFO] Using worker: sync
+2012-12-24 11:11:25 [157] [INFO] Booting worker with pid: 157
+2012-12-24 11:11:25 [158] [INFO] Booting worker with pid: 158
+2012-12-24 11:11:25 [159] [INFO] Booting worker with pid: 159
+/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/conf/__init__.py:75: DeprecationWarning: The ADMIN_MEDIA_PREFIX setting has been removed; use STATIC_URL instead.
+  "use STATIC_URL instead.", DeprecationWarning)
+/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/conf/__init__.py:75: DeprecationWarning: The ADMIN_MEDIA_PREFIX setting has been removed; use STATIC_URL instead.
+  "use STATIC_URL instead.", DeprecationWarning)
+/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/conf/__init__.py:75: DeprecationWarning: The ADMIN_MEDIA_PREFIX setting has been removed; use STATIC_URL instead.
+  "use STATIC_URL instead.", DeprecationWarning)
+2012-12-24 11:12:12 [119] [INFO] Handling signal: term
+2012-12-24 10:12:13 [157] [INFO] Worker exiting (pid: 157)
+2012-12-24 10:12:13 [158] [INFO] Worker exiting (pid: 158)
+2012-12-24 10:12:13 [159] [INFO] Worker exiting (pid: 159)
+2012-12-24 11:12:13 [119] [INFO] Shutting down: Master
+2012-12-24 11:14:20 [131] [INFO] Starting gunicorn 0.13.4
+2012-12-24 11:14:20 [131] [INFO] Listening at: http://0.0.0.0:9000 (131)
+2012-12-24 11:14:20 [131] [INFO] Using worker: sync
+2012-12-24 11:14:23 [147] [INFO] Booting worker with pid: 147
+2012-12-24 11:14:23 [148] [INFO] Booting worker with pid: 148
+2012-12-24 11:14:23 [149] [INFO] Booting worker with pid: 149
+/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/conf/__init__.py:75: DeprecationWarning: The ADMIN_MEDIA_PREFIX setting has been removed; use STATIC_URL instead.
+  "use STATIC_URL instead.", DeprecationWarning)
+/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/conf/__init__.py:75: DeprecationWarning: The ADMIN_MEDIA_PREFIX setting has been removed; use STATIC_URL instead.
+  "use STATIC_URL instead.", DeprecationWarning)
+/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/conf/__init__.py:75: DeprecationWarning: The ADMIN_MEDIA_PREFIX setting has been removed; use STATIC_URL instead.
+  "use STATIC_URL instead.", DeprecationWarning)
+2012-12-24 10:14:29 [149] [ERROR] Exception in worker process:
+Traceback (most recent call last):
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/arbiter.py", line 456, in spawn_worker
+    worker.init_process()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/workers/base.py", line 100, in init_process
+    self.wsgi = self.app.wsgi()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/app/base.py", line 101, in wsgi
+    self.callable = self.load()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/app/djangoapp.py", line 128, in load
+    self.validate()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/app/djangoapp.py", line 116, in validate
+    if get_validation_errors(s):
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/core/management/validation.py", line 23, in get_validation_errors
+    from django.db import models, connection
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/db/__init__.py", line 40, in <module>
+    backend = load_backend(connection.settings_dict['ENGINE'])
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/db/__init__.py", line 34, in __getattr__
+    return getattr(connections[DEFAULT_DB_ALIAS], item)
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/db/utils.py", line 93, in __getitem__
+    conn = backend.DatabaseWrapper(db, alias)
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/base.py", line 11, in __init__
+    self.ops = PostGISOperations(self)
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 91, in __init__
+    vtup = self.postgis_version_tuple()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 445, in postgis_version_tuple
+    version = self.postgis_lib_version()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 425, in postgis_lib_version
+    return self._get_postgis_func('postgis_lib_version')
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 406, in _get_postgis_func
+    cursor = self.connection._cursor()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/db/backends/postgresql_psycopg2/base.py", line 177, in _cursor
+    self.connection = Database.connect(**conn_params)
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/psycopg2/__init__.py", line 179, in connect
+    connection_factory=connection_factory, async=async)
+OperationalError: FATAL:  the database system is starting up
+
+2012-12-24 10:14:40 [149] [INFO] Worker exiting (pid: 149)
+2012-12-24 10:14:29 [147] [ERROR] Exception in worker process:
+Traceback (most recent call last):
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/arbiter.py", line 456, in spawn_worker
+    worker.init_process()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/workers/base.py", line 100, in init_process
+    self.wsgi = self.app.wsgi()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/app/base.py", line 101, in wsgi
+    self.callable = self.load()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/app/djangoapp.py", line 128, in load
+    self.validate()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/app/djangoapp.py", line 116, in validate
+    if get_validation_errors(s):
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/core/management/validation.py", line 23, in get_validation_errors
+    from django.db import models, connection
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/db/__init__.py", line 40, in <module>
+    backend = load_backend(connection.settings_dict['ENGINE'])
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/db/__init__.py", line 34, in __getattr__
+    return getattr(connections[DEFAULT_DB_ALIAS], item)
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/db/utils.py", line 93, in __getitem__
+    conn = backend.DatabaseWrapper(db, alias)
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/base.py", line 11, in __init__
+    self.ops = PostGISOperations(self)
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 91, in __init__
+    vtup = self.postgis_version_tuple()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 445, in postgis_version_tuple
+    version = self.postgis_lib_version()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 425, in postgis_lib_version
+    return self._get_postgis_func('postgis_lib_version')
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 406, in _get_postgis_func
+    cursor = self.connection._cursor()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/db/backends/postgresql_psycopg2/base.py", line 177, in _cursor
+    self.connection = Database.connect(**conn_params)
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/psycopg2/__init__.py", line 179, in connect
+    connection_factory=connection_factory, async=async)
+OperationalError: FATAL:  the database system is starting up
+
+2012-12-24 10:14:41 [147] [INFO] Worker exiting (pid: 147)
+2012-12-24 10:14:29 [148] [ERROR] Exception in worker process:
+Traceback (most recent call last):
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/arbiter.py", line 456, in spawn_worker
+    worker.init_process()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/workers/base.py", line 100, in init_process
+    self.wsgi = self.app.wsgi()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/app/base.py", line 101, in wsgi
+    self.callable = self.load()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/app/djangoapp.py", line 128, in load
+    self.validate()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/app/djangoapp.py", line 116, in validate
+    if get_validation_errors(s):
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/core/management/validation.py", line 23, in get_validation_errors
+    from django.db import models, connection
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/db/__init__.py", line 40, in <module>
+    backend = load_backend(connection.settings_dict['ENGINE'])
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/db/__init__.py", line 34, in __getattr__
+    return getattr(connections[DEFAULT_DB_ALIAS], item)
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/db/utils.py", line 93, in __getitem__
+    conn = backend.DatabaseWrapper(db, alias)
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/base.py", line 11, in __init__
+    self.ops = PostGISOperations(self)
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 91, in __init__
+    vtup = self.postgis_version_tuple()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 445, in postgis_version_tuple
+    version = self.postgis_lib_version()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 425, in postgis_lib_version
+    return self._get_postgis_func('postgis_lib_version')
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 406, in _get_postgis_func
+    cursor = self.connection._cursor()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/db/backends/postgresql_psycopg2/base.py", line 177, in _cursor
+    self.connection = Database.connect(**conn_params)
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/psycopg2/__init__.py", line 179, in connect
+    connection_factory=connection_factory, async=async)
+OperationalError: FATAL:  the database system is starting up
+
+2012-12-24 10:14:41 [148] [INFO] Worker exiting (pid: 148)
+2012-12-24 11:14:46 [131] [INFO] Shutting down: Master
+2012-12-24 11:14:46 [131] [INFO] Reason: Worker failed to boot.
+2012-12-24 11:14:48 [209] [INFO] Starting gunicorn 0.13.4
+2012-12-24 11:14:48 [209] [INFO] Listening at: http://0.0.0.0:9000 (209)
+2012-12-24 11:14:48 [209] [INFO] Using worker: sync
+2012-12-24 11:14:48 [214] [INFO] Booting worker with pid: 214
+2012-12-24 11:14:48 [215] [INFO] Booting worker with pid: 215
+2012-12-24 11:14:48 [216] [INFO] Booting worker with pid: 216
+/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/conf/__init__.py:75: DeprecationWarning: The ADMIN_MEDIA_PREFIX setting has been removed; use STATIC_URL instead.
+  "use STATIC_URL instead.", DeprecationWarning)
+/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/conf/__init__.py:75: DeprecationWarning: The ADMIN_MEDIA_PREFIX setting has been removed; use STATIC_URL instead.
+  "use STATIC_URL instead.", DeprecationWarning)
+/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/conf/__init__.py:75: DeprecationWarning: The ADMIN_MEDIA_PREFIX setting has been removed; use STATIC_URL instead.
+  "use STATIC_URL instead.", DeprecationWarning)
+2012-12-24 11:27:07 [209] [INFO] Handling signal: term
+2012-12-24 10:27:07 [214] [INFO] Worker exiting (pid: 214)
+2012-12-24 10:27:07 [216] [INFO] Worker exiting (pid: 216)
+2012-12-24 10:27:07 [215] [INFO] Worker exiting (pid: 215)
+2012-12-24 11:27:07 [209] [INFO] Shutting down: Master
+2012-12-24 11:28:18 [165] [INFO] Starting gunicorn 0.13.4
+2012-12-24 11:28:18 [165] [INFO] Listening at: http://0.0.0.0:9000 (165)
+2012-12-24 11:28:18 [165] [INFO] Using worker: sync
+2012-12-24 11:28:18 [183] [INFO] Booting worker with pid: 183
+2012-12-24 11:28:18 [182] [INFO] Booting worker with pid: 182
+2012-12-24 11:28:18 [184] [INFO] Booting worker with pid: 184
+/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/conf/__init__.py:75: DeprecationWarning: The ADMIN_MEDIA_PREFIX setting has been removed; use STATIC_URL instead.
+  "use STATIC_URL instead.", DeprecationWarning)
+/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/conf/__init__.py:75: DeprecationWarning: The ADMIN_MEDIA_PREFIX setting has been removed; use STATIC_URL instead.
+  "use STATIC_URL instead.", DeprecationWarning)
+/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/conf/__init__.py:75: DeprecationWarning: The ADMIN_MEDIA_PREFIX setting has been removed; use STATIC_URL instead.
+  "use STATIC_URL instead.", DeprecationWarning)
+/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/views/generic/simple.py:8: DeprecationWarning: Function-based generic views have been deprecated; use class-based views instead.
+  DeprecationWarning
+/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/views/generic/simple.py:8: DeprecationWarning: Function-based generic views have been deprecated; use class-based views instead.
+  DeprecationWarning
+/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/views/generic/simple.py:8: DeprecationWarning: Function-based generic views have been deprecated; use class-based views instead.
+  DeprecationWarning
+2012-12-24 11:39:17 [165] [INFO] Handling signal: term
+2012-12-24 10:39:17 [183] [INFO] Worker exiting (pid: 183)
+2012-12-24 10:39:17 [182] [INFO] Worker exiting (pid: 182)
+2012-12-24 10:39:17 [184] [INFO] Worker exiting (pid: 184)
+2012-12-24 11:39:17 [165] [INFO] Shutting down: Master
+2013-03-01 11:59:51 [137] [INFO] Starting gunicorn 0.13.4
+2013-03-01 11:59:51 [137] [INFO] Listening at: http://0.0.0.0:9000 (137)
+2013-03-01 11:59:51 [137] [INFO] Using worker: sync
+2013-03-01 11:59:54 [149] [INFO] Booting worker with pid: 149
+2013-03-01 11:59:54 [150] [INFO] Booting worker with pid: 150
+2013-03-01 11:59:54 [151] [INFO] Booting worker with pid: 151
+/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/conf/__init__.py:75: DeprecationWarning: The ADMIN_MEDIA_PREFIX setting has been removed; use STATIC_URL instead.
+  "use STATIC_URL instead.", DeprecationWarning)
+/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/conf/__init__.py:75: DeprecationWarning: The ADMIN_MEDIA_PREFIX setting has been removed; use STATIC_URL instead.
+  "use STATIC_URL instead.", DeprecationWarning)
+/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/conf/__init__.py:75: DeprecationWarning: The ADMIN_MEDIA_PREFIX setting has been removed; use STATIC_URL instead.
+  "use STATIC_URL instead.", DeprecationWarning)
+2013-03-01 10:56:45 [151] [ERROR] Exception in worker process:
+Traceback (most recent call last):
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/arbiter.py", line 456, in spawn_worker
+    worker.init_process()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/workers/base.py", line 100, in init_process
+    self.wsgi = self.app.wsgi()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/app/base.py", line 101, in wsgi
+    self.callable = self.load()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/app/djangoapp.py", line 128, in load
+    self.validate()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/app/djangoapp.py", line 116, in validate
+    if get_validation_errors(s):
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/core/management/validation.py", line 23, in get_validation_errors
+    from django.db import models, connection
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/db/__init__.py", line 40, in <module>
+    backend = load_backend(connection.settings_dict['ENGINE'])
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/db/__init__.py", line 34, in __getattr__
+    return getattr(connections[DEFAULT_DB_ALIAS], item)
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/db/utils.py", line 93, in __getitem__
+    conn = backend.DatabaseWrapper(db, alias)
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/base.py", line 11, in __init__
+    self.ops = PostGISOperations(self)
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 91, in __init__
+    vtup = self.postgis_version_tuple()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib2013-03-01 10:56:45 [150] [ERROR] Exception in worker process:
+Traceback (most recent call last):
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/arbiter.py", line 456, in spawn_worker
+    worker.init_process()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/workers/base.py", line 100, in init_process
+    self.wsgi = self.app.wsgi()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/app/base.py", line 101, in wsgi
+    self.callable = self.load()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/app/djangoapp.py", line 128, in load
+    self.validate()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/app/djangoapp.py", line 116, in validate
+    if get_validation_errors(s):
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/core/management/validation.py", line 23, in get_validation_errors
+    from django.db import models, connection
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/db/__init__.py", line 40, in <module>
+    backend = load_backend(connection.settings_dict['ENGINE'])
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/db/__init__.py", line 34, in __getattr__
+    return getattr(connections[DEFAULT_DB_ALIAS], item)
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/db/utils.py", line 93, in __getitem__
+    conn = backend.DatabaseWrapper(db, alias)
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/base.py", line 11, in __init__
+    self.ops = PostGISOperations(self)
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 91, in __init__
+    vtup = self.postgis_version_tuple()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 445, in postgis_version_tuple
+    version = self.postgis_lib_version()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 425, in postgis_lib_version
+    return self._get_postgis_func('postgis_lib_version')
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 406, in _get_postgis_func
+    cursor = self.connection._cursor()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/db/backends/postgresql_psycopg2/base.py", line 177, in _cursor
+    self.connection = Database.connect(**conn_params)
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/psycopg2/__init__.py", line 179, in connect
+    connection_factory=connection_factory, async=async)
+OperationalError: FATAL:  the database system is starting up
+
+2013-03-01 10:56:54 [150] [INFO] Worker exiting (pid: 150)
+/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 445, in postgis_version_tuple
+    version = self.postgis_lib_version()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 425, in postgis_lib_version
+    return self._get_postgis_func('postgis_lib_version')
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 406, in _get_postgis_func
+    cursor = self.connection._cursor()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/db/backends/postgresql_psycopg2/base.py", line 177, in _cursor
+    self.connection = Database.connect(**conn_params)
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/psycopg2/__init__.py", line 179, in connect
+    connection_factory=connection_factory, async=async)
+OperationalError: FATAL:  the database system is starting up
+
+2013-03-01 10:56:54 [151] [INFO] Worker exiting (pid: 151)
+2013-03-01 10:56:45 [149] [ERROR] Exception in worker process:
+Traceback (most recent call last):
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/arbiter.py", line 456, in spawn_worker
+    worker.init_process()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/workers/base.py", line 100, in init_process
+    self.wsgi = self.app.wsgi()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/app/base.py", line 101, in wsgi
+    self.callable = self.load()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/app/djangoapp.py", line 128, in load
+    self.validate()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/app/djangoapp.py", line 116, in validate
+    if get_validation_errors(s):
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/core/management/validation.py", line 23, in get_validation_errors
+    from django.db import models, connection
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/db/__init__.py", line 40, in <module>
+    backend = load_backend(connection.settings_dict['ENGINE'])
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/db/__init__.py", line 34, in __getattr__
+    return getattr(connections[DEFAULT_DB_ALIAS], item)
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/db/utils.py", line 93, in __getitem__
+    conn = backend.DatabaseWrapper(db, alias)
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/base.py", line 11, in __init__
+    self.ops = PostGISOperations(self)
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 91, in __init__
+    vtup = self.postgis_version_tuple()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 445, in postgis_version_tuple
+    version = self.postgis_lib_version()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 425, in postgis_lib_version
+    return self._get_postgis_func('postgis_lib_version')
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/contrib/gis/db/backends/postgis/operations.py", line 406, in _get_postgis_func
+    cursor = self.connection._cursor()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/db/backends/postgresql_psycopg2/base.py", line 177, in _cursor
+    self.connection = Database.connect(**conn_params)
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/psycopg2/__init__.py", line 179, in connect
+    connection_factory=connection_factory, async=async)
+OperationalError: FATAL:  the database system is starting up
+
+2013-03-01 10:56:54 [149] [INFO] Worker exiting (pid: 149)
+Traceback (most recent call last):
+  File "/Users/spatial/.virtualenvs/geodeliberator/bin/gunicorn_django", line 8, in <module>
+    load_entry_point('gunicorn==0.13.4', 'console_scripts', 'gunicorn_django')()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/app/djangoapp.py", line 318, in run
+    DjangoApplication("%prog [OPTIONS] [SETTINGS_PATH]").run()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/app/base.py", line 116, in run
+    Arbiter(self).run()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/arbiter.py", line 186, in run
+    self.halt(reason=inst.reason, exit_status=inst.exit_status)
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/arbiter.py", line 282, in halt
+    self.stop()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/arbiter.py", line 330, in stop
+    self.reap_workers()
+  File "/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/gunicorn/arbiter.py", line 416, in reap_workers
+    raise HaltServer(reason, self.WORKER_BOOT_ERROR)
+gunicorn.errors.HaltServer: <HaltServer 'Worker failed to boot.' 3>
+2013-03-01 11:56:56 [187] [INFO] Starting gunicorn 0.13.4
+2013-03-01 11:56:56 [187] [INFO] Listening at: http://0.0.0.0:9000 (187)
+2013-03-01 11:56:56 [187] [INFO] Using worker: sync
+2013-03-01 11:56:56 [200] [INFO] Booting worker with pid: 200
+2013-03-01 11:56:56 [201] [INFO] Booting worker with pid: 201
+2013-03-01 11:56:56 [204] [INFO] Booting worker with pid: 204
+/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/conf/__init__.py:75: DeprecationWarning: The ADMIN_MEDIA_PREFIX setting has been removed; use STATIC_URL instead.
+  "use STATIC_URL instead.", DeprecationWarning)
+/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/conf/__init__.py:75: DeprecationWarning: The ADMIN_MEDIA_PREFIX setting has been removed; use STATIC_URL instead.
+  "use STATIC_URL instead.", DeprecationWarning)
+/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/conf/__init__.py:75: DeprecationWarning: The ADMIN_MEDIA_PREFIX setting has been removed; use STATIC_URL instead.
+  "use STATIC_URL instead.", DeprecationWarning)
+/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/views/generic/simple.py:8: DeprecationWarning: Function-based generic views have been deprecated; use class-based views instead.
+  DeprecationWarning
+/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/views/generic/simple.py:8: DeprecationWarning: Function-based generic views have been deprecated; use class-based views instead.
+  DeprecationWarning
+/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/views/generic/simple.py:8: DeprecationWarning: Function-based generic views have been deprecated; use class-based views instead.
+  DeprecationWarning

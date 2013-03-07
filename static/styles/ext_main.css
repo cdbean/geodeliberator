@@ -1,0 +1,478 @@
+/*
+ * GeoAnnotator 2.0
+ */
+
+/*===================================
+/*   Basic page styles
+/*===================================*/
+body {
+    font-family:'lucida grande',tahoma,arial,sans-serif;
+    font-size:12px;
+}
+a {
+    color:#15428B;
+}
+a:link, a:visited {
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: underline;
+}
+#header {
+    background: #B35841; /*url(../images/header-bg.gif) repeat-x center;*/
+    padding: 5px;
+}
+#header h1 {
+    font-size: 16px;
+    color: #fff;
+    font-weight: normal;
+    padding: 5px 10px;
+}
+
+#footer {
+    padding : 3px;    
+    text-align :center
+}
+
+.default-info {
+    margin:15px;
+    padding:15px;
+    border:1px dotted #999;
+    color:#555;
+    background: #f9f9f9;
+}
+
+#userActions {
+	padding: 0 10px 10px 0;
+}
+.right {
+	text-align: right;
+}
+
+#forumGeneralInfo {
+	margin:10px;
+    padding:10px;
+    border:1px dotted #999;
+    color:#555;
+    background: #f9f9f9;
+}
+
+#forumGeneralInfo p {margin-bottom: 5px;}
+
+#annotationInfoContent {
+	margin:10px;
+    padding:10px;
+    border:1px dotted #999;
+    color:#555;
+    background: #f9f9f9;
+}
+#annotationInfoHeader {
+	margin:5px;
+}
+.customMyGroupsIcon {
+	background-image: url('../images/customMyGroupsIcon.png') !important; 
+}
+
+.customPublicGroupsIcon {
+	background-image: url('../images/customPublicGroupsIcon.png')!important;  /* mail icons sprite image */
+}
+
+.customGroupNodeIcon {
+	background-image: url('../images/customGroupNodeIcon.png')!important; /* mail icons sprite image */
+}
+
+#mapDiv
+{
+	width: 100%;
+	height: 100%;
+	padding: 0;
+	margin:0;
+	
+}
+
+#timeline {height: 100%; border: 1px solid #aaa;}
+
+
+.list-item {
+    font:normal 11px tahoma, arial, helvetica, sans-serif;
+    padding:3px 10px 3px 10px;
+    border:1px solid #fff;
+    border-bottom:1px solid #dddddd;
+    white-space:normal;
+    color:#555;
+}
+.list-item h3 {
+    display:block;
+    font:inherit;
+    font-weight:bold;
+    color:#222;
+}
+
+.list-item h3 span {
+    float: right;
+    font-weight:normal;
+    margin:0 0 5px 5px;
+    width:50px;
+    display:block;
+    clear:none;
+}
+
+.list-item img {
+    float: left;
+	padding-right: 5px;
+	width: 15px;
+}
+
+.list-item-selected {
+  background-color: #E1EAF7;
+}
+
+.list-item-over {
+	background-color: #DDDDDD;
+}
+
+.issue-list-item {
+    font:normal 11px tahoma, arial, helvetica, sans-serif;
+    padding:3px 10px 3px 10px;
+    border:1px solid #fff;
+    border-bottom:1px solid #dddddd;
+    white-space:normal;
+    color:#555;
+	min-height: 35px;
+}
+
+.issue-list-item .content {
+    font:inherit;
+    font-weight:normal;
+    color:#222;
+	width: 75%;
+	padding: 3px 0px 3px 0px;
+}
+
+.issue-list-item .date {
+    font-weight:normal;
+    padding: 3px 10px 3px 10px;
+    width: 50px;
+	display:block;
+    float: right;
+    clear:none;
+}
+
+.issue-list-item-selected {
+  background-color: #E1EAF7;
+}
+
+.issue-list-item-over {
+	background-color: #DDDDDD;
+}
+/* space tree*/
+.node {
+	display:block;
+	background-color:transparent;
+	z-index:10;
+	font-weight:normal;
+	font-size: 11px;
+	overflow:hidden;
+	text-decoration:none;
+	position:absolute;
+	text-align:center;
+	padding:4px 0 0 0;
+}
+
+
+.node:hover {
+	color:#191414;
+	text-decoration:none;
+}
+
+.selected {
+	color: #dddddd;
+}
+
+.selected:hover {
+	color: #efefef;	
+	text-decoration:none;
+}
+
+.hidden{
+	display:none;
+}
+
+.text {
+	margin:5px 0;
+}
+
+/* menu icons */
+.annotation-rpl-btn {
+	background-image: url(../images/comment.png) !important;
+}
+
+.annotation-bkm-btn {
+	background-image: url(../images/bookmark.png) !important;
+}
+
+.reference-display-forward {
+	background-image: url(../images/forward.png) !important;
+}
+
+.reference-display-backward {
+	background-image: url(../images/backward.png) !important;
+}
+
+.reference-display-menu .x-menu-item-checked {
+   border:1px dotted #a3bae9 !important;
+    background:#DFE8F6;
+	padding:0;
+}
+
+.annotation-bookmark-tab{
+	background-image: url(../images/bookmarks.gif) !important;
+}
+
+.annotation-history-tab{
+	background-image: url(../images/history.png) !important;
+}
+
+.annotation-search-tab{
+	background-image: url(../images/search.png) !important;
+}
+
+.group-info-tab{
+	background-image: url(../images/info.png) !important;
+}
+
+.group-issues-tab{
+	background-image: url(../images/issues.png) !important;
+}
+.contribute-btn{
+	background-image: url(../images/contribute.png) !important;
+}
+.manage-btn{
+	background-image: url(../images/manage.png) !important;
+}
+
+.create-issue-btn {
+	background-image: url(../images/contribute.png) !important;
+}
+
+.issue-treemap-btn {
+	background-image: url(../images/treemap.gif) !important;
+}
+
+.timeline-icon {
+    background-image: url(../images/timeline.png) !important;
+}
+
+.detail-icon {
+    background-image: url(../images/detail.png) !important;
+}
+
+.overview-btn-icon {
+    background-image: url(../images/overview.png) !important;
+}
+
+.singlepage-btn-icon {
+    background-image: url(../images/single.png) !important;
+}
+
+.facingpages-btn-icon {
+    background-image: url(../images/facing.png) !important;
+}
+
+.prevpage-btn-icon {
+    background-image: url(../images/prev-page.png) !important;
+}
+.nextpage-btn-icon {
+    background-image: url(../images/next-page.png) !important;
+}
+
+
+.navigation-btn-icon {
+    background-image: url(../images/navigation.png) !important;
+}
+
+.drawfootprint-btn-icon {
+    background-image: url(../images/drawfootprint.png) !important;
+}
+
+.pageinfo-btn-icon {
+    background-image: url(../images/pageinfo.png) !important;
+}
+
+.modifyfootprint-btn-icon {
+    background-image: url(../images/modify.png) !important;
+}
+
+.remove-footprint-icon {
+    background-image: url(../images/remove.png) !important;
+}
+
+.add-footprint-icon {
+    background-image: url(../images/add.png) !important;
+}
+
+.delete-footprint-icon {
+    background-image: url(../images/delete.png) !important;
+}
+
+.modify-footprint-icon {
+    background-image: url(../images/modify.png) !important;
+}
+
+.draw-footprint-icon {
+    background-image: url(../images/drawfootprint.png) !important;    
+}
+
+.annotation-edit-icon {
+    background-image: url(../images/edit.png) !important;    
+}
+
+.annotation-delete-icon {
+    background-image: url(../images/delete.png) !important;    
+}
+
+.annotation-ref-btn {
+    background-image: url(../images/add.png) !important;
+}
+
+.reference-display-icon {
+    background-image: url(../images/threads.png) !important;
+}
+
+.timeline-previous-icon {
+    background-image: url(../images/timeline-prev.png) !important;    
+}
+.timeline-next-icon {
+    background-image: url(../images/timeline-next.png) !important;
+}
+
+.timeline-earliest-icon {
+    background-image: url(../images/timeline-first.png) !important;    
+}
+.timeline-latest-icon {
+    background-image: url(../images/timeline-last.png) !important;
+}
+
+
+/* treemap */
+#issues-treemap {
+	position:relative;
+	/*width:450px;
+	height:450px;*/
+	margin:auto;
+	background-color:white;
+}
+
+#issues-treemap div {
+	position:absolute;
+	overflow:hidden;
+}
+
+#issues-treemap .content {
+	background-color:#333;
+	border:0px solid #111;
+}
+
+#issues-treemap .head {
+	height:12px;
+	color:white;
+	background-color:#444;
+}
+
+#issues-treemap .head.in-path {
+	background-color:#655;
+}
+
+#issues-treemap .body {
+	background-color:black;
+}
+
+#issues-treemap .leaf {
+	color:#88837D;
+	background-color:#111;
+	display:table-cell;
+	vertical-align:middle;
+}
+
+#issues-treemap .over-leaf {
+	border:1px solid #9FD4FF;
+}
+
+#issues-treemap .over-content {
+	background-color: #9FD4FF;
+}
+
+#issues-treemap .over-head { /* ...boy i'm funny */
+	background-color:#A4D9FF;
+	color:black;
+}
+
+.tool-tip {
+	color: #fff;
+	width: 139px;
+	z-index: 13000;
+	background-color: black;
+	opacity:0.9;
+	filter:alpha(opacity=90);
+}
+ 
+.tip-title {
+	font-weight: bold;
+	font-size: 11px;
+	margin: 0;
+	color: #9FD4FF;
+	padding: 8px 8px 4px;
+	background-color: black;
+	
+}
+ 
+.tip-text {
+	font-size: 11px;
+	padding: 4px 8px 8px;
+	background-color: black;
+}
+
+/* inherits for openlayer controls*/
+
+/*
+.olControlEditingToolbar 
+.olControlNavigationItemInactive
+.olControlNavigationItemActive
+.olControlDrawFeaturePathItemInactive
+.olControlDrawFeaturePathItemActive
+.olControlDrawFeaturePolygonItemInactive
+.olControlDrawFeaturePolygonItemActive
+.olControlModifyFeatureItemInactive
+.olControlModifyFeatureItemActive 
+
+.map-navigation-btn
+.map-edit-btn
+.map-query-btn
+.foorprint-refer-btn
+
+ */
+.map-navigation-btn {
+	background-image: url(../images/browse.gif) !important;
+}
+.map-edit-btn {
+	background-image: url(../images/edit.png) !important;
+}
+.map-query-btn {
+	background-image: url(../images/query.gif) !important;
+}
+.olControlEditingToolbar .olControlModifyFeatureItemInactive { 
+  background-position: 0px 0px; 
+}
+.olControlEditingToolbar .olControlModifyFeatureItemActive { 
+  background-position: 0px -23px ;                                                                   
+}
+
+.olControlDrawBoxBox {
+	border: 2px dotted #D02E32 !important;
+	background-color: #FFBC8F !important;
+	opacity: 0.5 !important;
+}
+
+.olControlAttribution {
+    bottom: 0.5em !important;
+}
