@@ -17,3 +17,6 @@ geodeliberator_client/lib/
 ehthumbs.db
 Icon?
 Thumbs.db
+
+# swp file by vim
+.swp
