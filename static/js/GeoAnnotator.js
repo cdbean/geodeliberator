@@ -1644,6 +1644,111 @@ GeoAnnotator.MapPanelCtrl = {
 		            }
 	        	}]
 			});
+		    // tools for questionnaire only, display group of buttons of marks
+		    tbar.add({
+			xtype: 'buttongroup',
+			id: 'Marks-group',
+			title: 'Marks',
+			//columns: 3,
+			defaults: {
+			    scale: 'medium'
+			},
+			items: [{
+			    id: 'noise-btn',
+			    iconcls: 'noise-btn',
+			    pressed: false,
+			    enabletoggle: true,
+			    togglehandler: function(button, pressed){
+						    if(pressed){
+							// do something
+						    }
+						    else{
+							// do something
+						    }
+					    },
+			    text: 'noise',
+			    tooltip: {
+				    // title: '',
+				    text: 'label the place as noisy'
+			    }
+			},
+			{
+			    id: 'stop-btn',
+			    iconcls: 'stop-btn',
+			    pressed: false,
+			    enabletoggle: true,
+			    togglehandler: function(button, pressed){
+						    if(pressed){
+							// do something
+						    }
+						    else{
+							// do something
+						    }
+					    },
+			    text: 'stop',
+			    tooltip: {
+				    // title: '',
+				    text: 'label the place as a stop'
+			    }
+			},
+			{
+			    id: 'landscape-btn',
+			    iconcls: 'landscape-btn',
+			    pressed: false,
+			    enabletoggle: true,
+			    togglehandler: function(button, pressed){
+						    if(pressed){
+							// do something
+						    }
+						    else{
+							// do something
+						    }
+					    },
+			    text: 'landscape',
+			    tooltip: {
+				    // title: '',
+				    text: 'label the place as beautiful landscape'
+			    }
+			},
+			{
+			    id: 'question-btn',
+			    iconcls: 'question-btn',
+			    pressed: false,
+			    enabletoggle: true,
+			    togglehandler: function(button, pressed){
+						    if(pressed){
+							// do something
+						    }
+						    else{
+							// do something
+						    }
+					    },
+			    text: 'question',
+			    tooltip: {
+				    // title: '',
+				    text: 'label the place as questionable'
+			    }
+			},
+			{
+			    id: 'smell-btn',
+			    iconcls: 'smell-btn',
+			    pressed: false,
+			    enabletoggle: true,
+			    togglehandler: function(button, pressed){
+						    if(pressed){
+							// do something
+						    }
+						    else{
+							// do something
+						    }
+					    },
+			    text: 'smell',
+			    tooltip: {
+				    // title: '',
+				    text: 'label the place as smell'
+			    }
+			} ]
+		    });
 		}; 
 
 

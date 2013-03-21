@@ -245,10 +245,13 @@ a:hover {
 	background-image: url(../images/issues.png) !important;
 }
 .contribute-btn{
-	background-image: url(../images/contribute.png) !important;
+	background-image: url(../images/noise.jpg) !important; 
 }
 .manage-btn{
 	background-image: url(../images/manage.png) !important;
+}
+.noise-btn{
+	background-image: url(../images/noise.jpg) !important; 
 }
 
 .create-issue-btn {

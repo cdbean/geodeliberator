@@ -19,4 +19,4 @@ Icon?
 Thumbs.db
 
 # swp file by vim
-.swp
+*.swp
