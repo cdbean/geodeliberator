@@ -1007,12 +1007,14 @@ GeoAnnotator.MapPanelCtrl = {
 	navigationControl : null,
 	modifyNewFootprintControl : null,
 	selectFootprintControl: null,
-	drawFootprintControl : null,
+	drawFootprintControls : null,
 	
 	// feature when hovering
 	hoverFeature : null,
 	// context menu
 	contextMenu : null,
+	// popup, for removal use
+	lastPopup : null,
 	// annotation list window
 	annotationListWindow : null,
 	annotationListStore : null,
@@ -1135,16 +1137,27 @@ GeoAnnotator.MapPanelCtrl = {
 				
 				}
 				else {
-					thisCtrl.contextMenu.add({
-	                  	id:'draw-footprint-ctx',
-	                  	iconCls:'draw-footprint-icon',
-	                  	text:'Draw a footprint',
-	                  	scope: thisCtrl,
-	                  	handler:function(){
-							var thisCtrl = GeoAnnotator.MapPanelCtrl;
-							thisCtrl.setDrawMode();
-	                  	}
-	               	});
+				    thisCtrl.contextMenu.add({
+					id:'draw-footprint-ctx',
+					iconCls:'draw-footprint-icon',
+					text:'Draw a footprint',
+					scope: thisCtrl,
+					handler:function(){
+					    var thisCtrl = GeoAnnotator.MapPanelCtrl;
+					    thisCtrl.setDrawMode('polygon');
+					}
+				    });
+				    thisCtrl.contextMenu.add({
+					id:'draw-route-ctx',
+					iconCls:'draw-route-icon',
+					text:'Draw a route',
+					scope: thisCtrl,
+					handler:function(){
+					    var thisCtrl = GeoAnnotator.MapPanelCtrl;
+					    thisCtrl.setDrawMode('line');
+					}
+				    });
+
 				}
 				if (thisCtrl.contextMenu.items.length > 0) {
 					thisCtrl.contextMenu.showAt(evt.getXY());
@@ -1530,8 +1543,9 @@ GeoAnnotator.MapPanelCtrl = {
 		thisCtrl.newFootprintVectors = new OpenLayers.Layer.Vector('New Footprints', {styleMap: thisCtrl.newfootprintStyle, displayInLayerSwitcher: false});
 		thisCtrl.newFootprintVectors.addFeatures(GeoAnnotator.ContributePanelCtrl.newFootprints);
 		thisCtrl.map.addLayer (this.newFootprintVectors);
-		
-		
+
+		thisCtrl.markerLayer = new OpenLayers.Layer.Markers('Markers', {styleMap: thisCtrl.newfootprintStyle, displayInLayerSwitcher: true});
+		thisCtrl.map.addLayer(this.markerLayer);
 	},
 	
 	loadControls : function() {
@@ -1566,7 +1580,11 @@ GeoAnnotator.MapPanelCtrl = {
 		//thisCtrl.modifyNewFootprintControl.onDeletingStart = thisCtrl.onFeatureDeleted;
 		thisCtrl.map.addControl(thisCtrl.modifyNewFootprintControl);
 				
-		thisCtrl.drawFootprintControl = new OpenLayers.Control.DrawFeature(
+		// originally there is only polygon tool
+		// I would like to add line and point tool
+		// by CD
+		thisCtrl.drawFootprintControls = {
+		    polygon: new OpenLayers.Control.DrawFeature(
 			thisCtrl.newFootprintVectors, 
 			OpenLayers.Handler.Polygon, 
 			{
@@ -1575,8 +1593,31 @@ GeoAnnotator.MapPanelCtrl = {
 					thisCtrl.onFeatureAdded(feature);
 				}
 			}
-		);
-		thisCtrl.map.addControl(thisCtrl.drawFootprintControl);    	
+		    ),
+		    line: new OpenLayers.Control.DrawFeature(
+			thisCtrl.newFootprintVectors, 
+			OpenLayers.Handler.Path, 
+			{
+				featureAdded:function(feature) { 
+					feature.state = OpenLayers.State.INSERT; 
+					thisCtrl.onFeatureAdded(feature);
+				}
+			}
+		    ),
+		    point: new OpenLayers.Control.DrawFeature(
+			thisCtrl.newFootprintVectors, 
+			OpenLayers.Handler.Point, 
+			{
+				featureAdded:function(feature) { 
+					feature.state = OpenLayers.State.INSERT; 
+					//thisCtrl.onFeatureAdded(feature);
+				}
+			}
+		    ),
+		};
+		for (var key in thisCtrl.drawFootprintControls) {
+		    thisCtrl.map.addControl(thisCtrl.drawFootprintControls[key]);    	
+		}
 		
 
 		// set the default behavoirs
@@ -1585,7 +1626,6 @@ GeoAnnotator.MapPanelCtrl = {
 	
 	loadToolbar : function () {
 		// add top toolbar 
-		//alert(thisCtrl.containerPanel.getTopToolbar());
 		var thisCtrl = GeoAnnotator.MapPanelCtrl;
 		var tbar = thisCtrl.containerPanel.getTopToolbar();
 		tbar.items.each(function (item, index, length) {
@@ -1647,8 +1687,8 @@ GeoAnnotator.MapPanelCtrl = {
 		    // tools for questionnaire only, display group of buttons of marks
 		    tbar.add({
 			xtype: 'buttongroup',
-			id: 'Marks-group',
-			title: 'Marks',
+			id: 'Markers-group',
+			title: 'Markers',
 			//columns: 3,
 			defaults: {
 			    scale: 'medium'
@@ -1657,10 +1697,13 @@ GeoAnnotator.MapPanelCtrl = {
 			    id: 'noise-btn',
 			    iconcls: 'noise-btn',
 			    pressed: false,
-			    enabletoggle: true,
-			    togglehandler: function(button, pressed){
+			    enableToggle: true,
+			    toggleGroup: 'marks',
+			    toggleHandler: function(button, pressed){
 						    if(pressed){
-							// do something
+							var thisCtrl = GeoAnnotator.MapPanelCtrl;
+							thisCtrl.setMarkerMode();
+							// thisCtrl.setDrawMode('point');
 						    }
 						    else{
 							// do something
@@ -1676,10 +1719,14 @@ GeoAnnotator.MapPanelCtrl = {
 			    id: 'stop-btn',
 			    iconcls: 'stop-btn',
 			    pressed: false,
-			    enabletoggle: true,
-			    togglehandler: function(button, pressed){
+			    enableToggle: true,
+			    toggleGroup: 'marks',
+			    toggleHandler: function(button, pressed){
 						    if(pressed){
 							// do something
+							
+							var thisCtrl = GeoAnnotator.MapPanelCtrl;
+							thisCtrl.setDrawMode('point');
 						    }
 						    else{
 							// do something
@@ -1695,10 +1742,13 @@ GeoAnnotator.MapPanelCtrl = {
 			    id: 'landscape-btn',
 			    iconcls: 'landscape-btn',
 			    pressed: false,
-			    enabletoggle: true,
-			    togglehandler: function(button, pressed){
+			    enableToggle: true,
+			    toggleGroup: 'marks',
+			    toggleHandler: function(button, pressed){
 						    if(pressed){
 							// do something
+							var thisCtrl = GeoAnnotator.MapPanelCtrl;
+							thisCtrl.setDrawMode('point');
 						    }
 						    else{
 							// do something
@@ -1714,10 +1764,13 @@ GeoAnnotator.MapPanelCtrl = {
 			    id: 'question-btn',
 			    iconcls: 'question-btn',
 			    pressed: false,
-			    enabletoggle: true,
-			    togglehandler: function(button, pressed){
+			    enableToggle: true,
+			    toggleGroup: 'marks',
+			    toggleHandler: function(button, pressed){
 						    if(pressed){
 							// do something
+							var thisCtrl = GeoAnnotator.MapPanelCtrl;
+							thisCtrl.setDrawMode('point');
 						    }
 						    else{
 							// do something
@@ -1733,10 +1786,13 @@ GeoAnnotator.MapPanelCtrl = {
 			    id: 'smell-btn',
 			    iconcls: 'smell-btn',
 			    pressed: false,
-			    enabletoggle: true,
-			    togglehandler: function(button, pressed){
+			    enableToggle: true,
+			    toggleGroup: 'marks',
+			    toggleHandler: function(button, pressed){
 						    if(pressed){
 							// do something
+							var thisCtrl = GeoAnnotator.MapPanelCtrl;
+							thisCtrl.setDrawMode('point');
 						    }
 						    else{
 							// do something
@@ -1797,15 +1853,70 @@ GeoAnnotator.MapPanelCtrl = {
 		if (thisCtrl.selectFootprintControl) {
 			thisCtrl.selectFootprintControl.activate();
 		}
-		if (thisCtrl.drawFootprintControl) {
-			thisCtrl.drawFootprintControl.deactivate();
+		if (thisCtrl.drawFootprintControls) {
+		    for (var key in thisCtrl.drawFootprintControls) {
+			thisCtrl.drawFootprintControls[key].deactivate();
+		    }
 		}
 		if (thisCtrl.modifyNewFootprintControl) {
 			thisCtrl.modifyNewFootprintControl.deactivate();					
 		}
+		// todo: unregister click event for marker
+		thisCtrl.map.events.unregister("click", thisCtrl.map, thisCtrl.onAddMarker);
 	},
 
-	setDrawMode : function() {
+	setMarkerMode : function() {
+	    var thisCtrl = GeoAnnotator.MapPanelCtrl;
+	    var map = thisCtrl.map;
+
+	    map.events.register("click", map, thisCtrl.onAddMarker);
+	},
+
+	onAddMarker : function(e) {
+	    var thisCtrl = GeoAnnotator.MapPanelCtrl;
+	    var map = thisCtrl.map;
+
+	    if (thisCtrl.lastPopup) {
+		    map.removePopup(thisCtrl.lastPopup);
+		}
+		//var position = this.events.getMousePosition(e);
+		var position = map.getLonLatFromPixel(e.xy);
+		var size = new OpenLayers.Size(21,25);
+		var offset = new OpenLayers.Pixel(-(size.w/2), -size.h);
+		// select different icons for different markers
+		// get the current pressed item in toolbar, maybe there's another method?
+		var tbar = GeoAnnotator.MapPanelCtrl.containerPanel.getTopToolbar();
+		var marker = null;
+		tbar.items.get('Markers-group').items.each(function(item) {
+		    if (item.pressed) {
+			marker = item.id;
+		    }
+		});
+		// change url to {{ STATIC_URL }}
+		var icon = new OpenLayers.Icon('/static/images/' + marker + '.png', size, offset);   
+
+		thisCtrl.markerLayer.addMarker(new OpenLayers.Marker(position,icon));
+
+		// popup for annotation input
+		var content = "<span>Input your comment:</span><br/><textarea></textarea><button>Confirm</button>"; // popup content
+		thisCtrl.lastPopup = new OpenLayers.Popup.FramedCloud("MarkAnnotation-popup",
+			position,
+			new OpenLayers.Size(200,200),
+			content,
+			icon,
+			true, // display close
+			thisCtrl.onPopupClosed); 
+
+		map.addPopup(thisCtrl.lastPopup);
+	},
+
+	// submit marker to server when popup closed
+	onPopupClosed : function(e) {
+	    var thisCtrl = GeoAnnotator.MapPanelCtrl;
+	    thisCtrl.map.removePopup(thisCtrl.lastPopup);
+	},
+
+	setDrawMode : function(mode) {
 		var thisCtrl = GeoAnnotator.MapPanelCtrl;
 		if (thisCtrl.navigationControl) {
 			thisCtrl.navigationControl.deactivate();	
@@ -1813,8 +1924,12 @@ GeoAnnotator.MapPanelCtrl = {
 		if (thisCtrl.selectFootprintControl) {
 			thisCtrl.selectFootprintControl.deactivate();
 		}
-		if (thisCtrl.drawFootprintControl) {
-			thisCtrl.drawFootprintControl.activate();
+		if (thisCtrl.drawFootprintControls) {
+		    for (var key in thisCtrl.drawFootprintControls) {
+			if (mode == key) {
+			    thisCtrl.drawFootprintControls[key].activate();
+			}
+		    }
 		}
 		if (thisCtrl.modifyNewFootprintControl) {
 			thisCtrl.modifyNewFootprintControl.deactivate();					
@@ -1829,8 +1944,10 @@ GeoAnnotator.MapPanelCtrl = {
 		if (thisCtrl.selectFootprintControl) {
 			thisCtrl.selectFootprintControl.deactivate();
 		}
-		if (thisCtrl.drawFootprintControl) {
-			thisCtrl.drawFootprintControl.deactivate();
+		if (thisCtrl.drawFootprintControls) {
+		    for (var key in thisCtrl.drawFootprintControls) {
+			thisCtrl.drawFootprintControls[key].deactivate();
+		    }
 		}
 		if (thisCtrl.modifyNewFootprintControl) {
 			thisCtrl.modifyNewFootprintControl.activate();					
@@ -1984,7 +2101,9 @@ GeoAnnotator.MapPanelCtrl = {
 	},
 	
 	onFeatureAdded : function (feature){
-		var thisCtrl = GeoAnnotator.MapPanelCtrl;
+	    var thisCtrl = GeoAnnotator.MapPanelCtrl;
+
+	    if (feature.goemetry instanceof OpenLayers.Geometry.Polygon) {
 		// use minus to distinguish new footprints with existing ones
 		feature.attributes.id = '-'+GeoAnnotator.ContributePanelCtrl.newFootprints.length;
 		feature.attributes.alias = 'new footprint';
@@ -1997,6 +2116,41 @@ GeoAnnotator.MapPanelCtrl = {
 		tbar.items.get('contribute-toolbox-group').items.get('drawFootprint-btn').toggle(false);
 		*/
 		thisCtrl.setNavigationMode();		
+	    }
+	    if (feature.geometry instanceof OpenLayers.Geometry.LineString) {
+		// create popup
+		// remove existing popup first
+		if (thisCtrl.lastPopup) {
+		    thisCtrl.map.removePopup(thisCtrl.lastPopup);
+		}
+		// todo: refine pupup anchor position
+		var position = new OpenLayers.LonLat(feature.geometry.components[0].x, feature.geometry.components[0].y);
+		var content = "<script>alert('hello');</script> \
+		    <span>Rate the route:</span><br/><button onclick='GeoAnnotator.MapPanelCtrl.onRatingBtnClicked()' class='ratingbtn' style='background-color:#0F4DA8'>1</button> \
+				<button class='ratingbtn' style='margin-left:0px;background-color:#00AB6F'>2</button> \
+				<button class='ratingbtn' style='margin-left:0px;background-color:#F0FC00'>3</button> \
+				<button class='ratingbtn' style='margin-left:0px;background-color:#FFA700'>4</button> \
+				<button class='ratingbtn' style='margin-left:0px;background-color:#FF4500'>5</button>";
+		thisCtrl.lastPopup = new OpenLayers.Popup("RouteRate-popup",
+			position,
+			new OpenLayers.Size(150,50),
+			content,
+			null,
+			false); // display close
+		thisCtrl.map.addPopup(thisCtrl.lastPopup);
+		thisCtrl.setNavigationMode();
+
+	    }
+	    if (feature.goemetry instanceof OpenLayers.Geometry.Point) {
+	    }
+	},
+
+	onRatingBtnClicked : function () {
+	    // close rating popup
+	    var thisCtrl = GeoAnnotator.MapPanelCtrl;
+	    thisCtrl.map.removePopup(thisCtrl.lastPopup);
+	    // change route line style
+	    // submit route info to server
 	},
 					
 	onClickFeature : function (feature){

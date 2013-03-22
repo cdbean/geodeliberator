@@ -26,7 +26,7 @@
                 var lineLayer = new OpenLayers.Layer.Vector("Line Layer");
                 var polygonLayer = new OpenLayers.Layer.Vector("Polygon Layer");
 
-                map.addLayers([wmsLayer, pointLayer, lineLayer, polygonLayer]);
+                map.addLayers([wmsLayer, pointLayer]);
                 map.addControl(new OpenLayers.Control.LayerSwitcher());
                 map.addControl(new OpenLayers.Control.MousePosition());
 
