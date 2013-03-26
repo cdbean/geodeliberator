@@ -181,43 +181,4 @@ var containerPanel = new Ext.Panel({
 	tbar: containerTB,
 	items: [centerPanels, rightPanels]
 });
-//
-// This is the main layout definition.
-//
 
-Ext.onReady(function(){
-	
-	Ext.QuickTips.init();
-		
-	var viewport = new Ext.Viewport({
-		layout: 'border',
-		items: [headerPanel, containerPanel, footerPanel],
-        //renderTo: Ext.getBody()
-    });
-
-	// register the components
-	registerComponents();
-	
-	// initialize cookies
-	Ext.state.Manager.setProvider(new Ext.state.CookieProvider());
-	// example: set some cookies
-	//Ext.state.Manager.set('userId','9');
-	//Ext.state.Manager.clear('userId');
-	Ext.state.Manager.clear('groupId');
-	GeoAnnotator.init();
-	//relevantAnnotationsTabsPanel.activate(0);
-	//relevantAnnotationsTabsPanel.setActiveTab(0);
-});
-
-function registerComponents () {
-	//GeoAnnotator.UserInfoPanelCtrl.register(userInfoPanel);
-	//GeoAnnotator.GroupInfoPanelCtrl.register(groupInfoPanel);
-	GeoAnnotator.ContainerTBCtrl.register(containerTB);
-	GeoAnnotator.MapPanelCtrl.register(mapPanel);
-	GeoAnnotator.TimelinePanelCtrl.register(timelinePanel);
-	GeoAnnotator.AnnotationInfoPanelCtrl.register(annotationInfoPanel);
-	GeoAnnotator.AnnotationHistoryWindowCtrl.register(annotationHistoryWindow);
-	GeoAnnotator.AnnotationBookmarkWindowCtrl.register(annotationBookmarkWindow);
-	GeoAnnotator.ContributePanelCtrl.register(contributePanel);
-	GeoAnnotator.ManageWindowCtrl.register(manageWindow);
-};
