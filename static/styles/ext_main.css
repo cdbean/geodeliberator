@@ -245,7 +245,7 @@ a:hover {
 	background-image: url(../images/issues.png) !important;
 }
 .contribute-btn{
-	background-image: url(../images/noise.jpg) !important; 
+	background-image: url(../images/contribute.png) !important; 
 }
 .manage-btn{
 	background-image: url(../images/manage.png) !important;
@@ -479,3 +479,8 @@ a:hover {
 .olControlAttribution {
     bottom: 0.5em !important;
 }
+
+#frame_viewport {
+/*    height: 100px; */
+}
+

@@ -332,6 +332,7 @@ def api_map(request):
                 footprint_info['type'] = footprint.shape.geom_type
                 footprint_info['refCount'] = footprint.referred_annotations.count()
                 response['footprints'].append(footprint_info)            
+
         except Forum.DoesNotExist:
             pass
         

@@ -77,7 +77,6 @@ var annotationInfoPanel = new Ext.Panel({
 	title: 'Annotation Info',
 	region: 'center',
 	//height : 500,
-	autoHeight: true,
 	layout: 'fit',
 	//border: false,
 	//split:true,

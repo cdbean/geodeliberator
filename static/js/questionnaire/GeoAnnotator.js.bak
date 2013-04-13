@@ -21,14 +21,14 @@ var GeoAnnotator = {
 		GeoAnnotator.ContainerTBCtrl.init();
 		
 		GeoAnnotator.MapPanelCtrl.init();
-		GeoAnnotator.TimelinePanelCtrl.init();
+	//	GeoAnnotator.TimelinePanelCtrl.init();
 	
 		GeoAnnotator.AnnotationInfoPanelCtrl.init();
-		GeoAnnotator.ContributePanelCtrl.init();
-		GeoAnnotator.ManageWindowCtrl.init();
+	//	GeoAnnotator.ContributePanelCtrl.init();
+	//	GeoAnnotator.ManageWindowCtrl.init();
 		
-		GeoAnnotator.AnnotationBookmarkWindowCtrl.init();
-		GeoAnnotator.AnnotationHistoryWindowCtrl.init();
+	//	GeoAnnotator.AnnotationBookmarkWindowCtrl.init();
+	//	GeoAnnotator.AnnotationHistoryWindowCtrl.init();
 		
 		
 		// check whether the user is stored in cookie
@@ -41,16 +41,16 @@ var GeoAnnotator = {
 		this.currForumId = params['forumId'] || this.currForumId;
 		GeoAnnotator.ContainerTBCtrl.update();
 		if (this.currUserId !== '0') {
-			GeoAnnotator.ManageWindowCtrl.update();
+		//	GeoAnnotator.ManageWindowCtrl.update();
 		}
 		if (this.currForumId !== '0') {
 			this.currAnnotationId = params['annotationId'] || this.currAnnotationId;
 			if (this.currAnnotationId !== '0') {
 				GeoAnnotator.AnnotationInfoPanelCtrl.update();	
 			};
-			GeoAnnotator.TimelinePanelCtrl.update();
+		//	GeoAnnotator.TimelinePanelCtrl.update();
 			GeoAnnotator.MapPanelCtrl.update();
-			GeoAnnotator.ManageWindowCtrl.update();
+		//	GeoAnnotator.ManageWindowCtrl.update();
 		};
 		
 		
@@ -260,13 +260,13 @@ GeoAnnotator.ContainerTBCtrl = {
 		
 								GeoAnnotator.ContainerTBCtrl.init();
 								GeoAnnotator.MapPanelCtrl.init();
-								GeoAnnotator.TimelinePanelCtrl.init();
+//								GeoAnnotator.TimelinePanelCtrl.init();
 			
 								GeoAnnotator.AnnotationInfoPanelCtrl.init();
-								GeoAnnotator.ContributePanelCtrl.init();
-								GeoAnnotator.ManageWindowCtrl.init();
-								GeoAnnotator.AnnotationHistoryWindowCtrl.init();
-								GeoAnnotator.AnnotationBookmarkWindowCtrl.init();
+//								GeoAnnotator.ContributePanelCtrl.init();
+//								GeoAnnotator.ManageWindowCtrl.init();
+//								GeoAnnotator.AnnotationHistoryWindowCtrl.init();
+//								GeoAnnotator.AnnotationBookmarkWindowCtrl.init();
 				
 								// set the user in cookie
 								GeoAnnotator.currUserId = obj.data.userId;
@@ -362,8 +362,8 @@ GeoAnnotator.ContainerTBCtrl = {
 			currParams.forumId = GeoAnnotator.currForumId;
 		}
 		GeoAnnotator.MapPanelCtrl.update(currParams);
-		GeoAnnotator.TimelinePanelCtrl.update();
-		GeoAnnotator.ManageWindowCtrl.update();
+//		GeoAnnotator.TimelinePanelCtrl.update();
+//		GeoAnnotator.ManageWindowCtrl.update();
 
 	},
 	
@@ -451,7 +451,7 @@ GeoAnnotator.ContributePanelCtrl = {
     },
 
     update: function() {
-		var thisCtrl = GeoAnnotator.ContributePanelCtrl;
+	var thisCtrl = GeoAnnotator.ContributePanelCtrl;
         thisCtrl.onContributeReset();
     },
 
@@ -871,7 +871,6 @@ GeoAnnotator.ContributePanelCtrl = {
 									var projWords = GeoAnnotator.MapPanelCtrl.map.projection.getCode().split(":");
 									footprint.srid = projWords[projWords.length - 1];
                         			footprint.shape = new OpenLayers.Format.WKT().write(feature);
-						alert (footprint.srid);
 									newAnnotation.footprints.push(footprint);
                         			break;
                     			}
@@ -974,7 +973,7 @@ GeoAnnotator.ContributePanelCtrl = {
 			}
 			GeoAnnotator.MapPanelCtrl.update(currParams);     
 			//GeoAnnotator.MapPanelCtrl.update();
-			GeoAnnotator.ManageWindowCtrl.update();
+//			GeoAnnotator.ManageWindowCtrl.update();
 
 			thisCtrl.containerPanel.collapse(false);
         }
@@ -1001,6 +1000,9 @@ GeoAnnotator.MapPanelCtrl = {
 	annotationVectors : null,
 	newFootprintVectors : null,
 	annotationDistVectors : null,
+	markerLayer : null, // layer for marker
+	routeLayer  : null, // layer for route
+	newRouteLayer	: null, // layer for new drawn route
 	// styles
 	footprintStyle : null,
 	newfootprintStyle: null,
@@ -1008,12 +1010,14 @@ GeoAnnotator.MapPanelCtrl = {
 	navigationControl : null,
 	modifyNewFootprintControl : null,
 	selectFootprintControl: null,
-	drawFootprintControl : null,
+	drawFootprintControls : null,
 	
 	// feature when hovering
 	hoverFeature : null,
 	// context menu
 	contextMenu : null,
+	// popup, for removal use
+	lastPopup : null,
 	// annotation list window
 	annotationListWindow : null,
 	annotationListStore : null,
@@ -1064,7 +1068,7 @@ GeoAnnotator.MapPanelCtrl = {
 		};
 		thisCtrl.buildMap(thisCtrl.mapDiv, mapOptions);            
 
-	    thisCtrl.baseLayer = new OpenLayers.Layer.Image("GeoDeliberation", 
+		thisCtrl.baseLayer = new OpenLayers.Layer.Image("GeoDeliberation", 
 			'http://1.bp.blogspot.com/_HgqZlW4QMjY/SAvFVYcK-uI/AAAAAAAAAF0/6hkIIK4WqC8/s320/It%27s%2BUp%2BTo%2BAll%2BOf%2BUs.JPG',
 			new OpenLayers.Bounds(-180, -88.759, 180, 88.759),
 			new OpenLayers.Size(250, 307),
@@ -1089,63 +1093,74 @@ GeoAnnotator.MapPanelCtrl = {
 			
 			if (GeoAnnotator.currUserId !== '0' && GeoAnnotator.currForumId !== '0') {
 				if (thisCtrl.hoverFeature !== null) {
-					var id = thisCtrl.hoverFeature.attributes.id;
-					if (GeoAnnotator.ContributePanelCtrl.containerPanel.collapsed === false) {
-						thisCtrl.contextMenu.add({
-		               		id:'add-footprint-ctx',
-		               		iconCls:'add-footprint-icon',
-		               		text:'Add to reference',
-		               		scope: thisCtrl,
-		               		handler:function(){
-								var thisCtrl = GeoAnnotator.MapPanelCtrl;
-								if (thisCtrl.hoverFeature !== null) {
-									thisCtrl.addFeatureToReference(thisCtrl.hoverFeature);
-								}
-		               		}
-	               		});
-					}
-					if (thisCtrl.hoverFeature.attributes.id.indexOf('-') === 0) {
-						thisCtrl.contextMenu.add({
-	                   		id:'delete-footprint-ctx',
-	                   		iconCls:'delete-footprint-icon',
-	                   		text:'Delete',
-	                   		scope: thisCtrl,
-	                   		handler:function(){
-								var thisCtrl = GeoAnnotator.MapPanelCtrl;
-								if (thisCtrl.hoverFeature !== null) {
-									var feature = thisCtrl.hoverFeature;																	
-									thisCtrl.setNavigationMode();
-									thisCtrl.deleteFeature(feature);
-								}
-	                   		}
-	               		});
-						thisCtrl.contextMenu.add({
-	                   		id:'modify-footprint-ctx',
-	                   		iconCls:'modify-footprint-icon',
-	                   		text:'Modify',
-	                   		scope: thisCtrl,
-	                   		handler:function(){
-								var thisCtrl = GeoAnnotator.MapPanelCtrl;
-								if (thisCtrl.hoverFeature !== null) {
-									thisCtrl.setModifyMode();
-									thisCtrl.modifyNewFootprintControl.selectControl.select(thisCtrl.hoverFeature);
-								}
-	                   		}
-	               		});
-					}; 
-				
+//					var id = thisCtrl.hoverFeature.attributes.id;
+//					if (GeoAnnotator.ContributePanelCtrl.containerPanel.collapsed === false) {
+//						thisCtrl.contextMenu.add({
+//		               		id:'add-footprint-ctx',
+//		               		iconCls:'add-footprint-icon',
+//		               		text:'Add to reference',
+//		               		scope: thisCtrl,
+//		               		handler:function(){
+//								var thisCtrl = GeoAnnotator.MapPanelCtrl;
+//								if (thisCtrl.hoverFeature !== null) {
+//									thisCtrl.addFeatureToReference(thisCtrl.hoverFeature);
+//								}
+//		               		}
+//	               		});
+//					}
+//					if (thisCtrl.hoverFeature.attributes.id.indexOf('-') === 0) {
+//						thisCtrl.contextMenu.add({
+//	                   		id:'delete-footprint-ctx',
+//	                   		iconCls:'delete-footprint-icon',
+//	                   		text:'Delete',
+//	                   		scope: thisCtrl,
+//	                   		handler:function(){
+//								var thisCtrl = GeoAnnotator.MapPanelCtrl;
+//								if (thisCtrl.hoverFeature !== null) {
+//									var feature = thisCtrl.hoverFeature;																	
+//									thisCtrl.setNavigationMode();
+//									thisCtrl.deleteFeature(feature);
+//								}
+//	                   		}
+//	               		});
+//						thisCtrl.contextMenu.add({
+//	                   		id:'modify-footprint-ctx',
+//	                   		iconCls:'modify-footprint-icon',
+//	                   		text:'Modify',
+//	                   		scope: thisCtrl,
+//	                   		handler:function(){
+//								var thisCtrl = GeoAnnotator.MapPanelCtrl;
+//								if (thisCtrl.hoverFeature !== null) {
+//									thisCtrl.setModifyMode();
+//									thisCtrl.modifyNewFootprintControl.selectControl.select(thisCtrl.hoverFeature);
+//								}
+//	                   		}
+//	               		});
+//					}; 
+//				
 				}
 				else {
-					thisCtrl.contextMenu.add({
-	                  	id:'draw-footprint-ctx',
-	                  	iconCls:'draw-footprint-icon',
-	                  	text:'Draw a footprint',
-	                  	scope: thisCtrl,
-	                  	handler:function(){
-							var thisCtrl = GeoAnnotator.MapPanelCtrl;
-							thisCtrl.setDrawMode();
-	                  	}
-	               	});
+//				    thisCtrl.contextMenu.add({
+//					id:'draw-footprint-ctx',
+//					iconCls:'draw-footprint-icon',
+//					text:'Draw a footprint',
+//					scope: thisCtrl,
+//					handler:function(){
+//					    var thisCtrl = GeoAnnotator.MapPanelCtrl;
+//					    thisCtrl.setDrawMode('polygon');
+//					}
+//				    });
+				    thisCtrl.contextMenu.add({
+					id:'draw-route-ctx',
+					iconCls:'draw-route-icon',
+					text:'Draw a route',
+					scope: thisCtrl,
+					handler:function(){
+					    var thisCtrl = GeoAnnotator.MapPanelCtrl;
+					    thisCtrl.setDrawMode('line');
+					}
+				    });
+
 				}
 				if (thisCtrl.contextMenu.items.length > 0) {
 					thisCtrl.contextMenu.showAt(evt.getXY());
@@ -1531,21 +1546,30 @@ GeoAnnotator.MapPanelCtrl = {
 		thisCtrl.newFootprintVectors = new OpenLayers.Layer.Vector('New Footprints', {styleMap: thisCtrl.newfootprintStyle, displayInLayerSwitcher: false});
 		thisCtrl.newFootprintVectors.addFeatures(GeoAnnotator.ContributePanelCtrl.newFootprints);
 		thisCtrl.map.addLayer (this.newFootprintVectors);
-		
-		
+
+		thisCtrl.markerLayer = new OpenLayers.Layer.Markers('Markers', {styleMap: thisCtrl.newfootprintStyle, displayInLayerSwitcher: true});
+		thisCtrl.map.addLayer(this.markerLayer);
+
+		thisCtrl.routeLayer	= new OpenLayers.Layer.Vector('Route', {displayInLayerSwitcher: true});
+		thisCtrl.map.addLayer(this.routeLayer);
+		thisCtrl.newRouteLayer	= new OpenLayers.Layer.Vector('New Route', {displayInLayerSwitcher: false});
+		thisCtrl.map.addLayer(this.newRouteLayer);
 	},
 	
 	loadControls : function() {
 		var thisCtrl = GeoAnnotator.MapPanelCtrl;
 		thisCtrl.map.addControl(new OpenLayers.Control.PanZoomBar());
-    	thisCtrl.map.addControl(new OpenLayers.Control.LayerSwitcher());
+		thisCtrl.map.addControl(new OpenLayers.Control.LayerSwitcher());
 		thisCtrl.map.addControl(new OpenLayers.Control.Attribution());
     	
-	    thisCtrl.navigationControl = new OpenLayers.Control.Navigation();
+		thisCtrl.navigationControl = new OpenLayers.Control.Navigation();
 		thisCtrl.map.addControl(thisCtrl.navigationControl);
 
 		thisCtrl.selectFootprintControl = new OpenLayers.Control.SelectFeature(
-			[thisCtrl.annotationVectors,thisCtrl.newFootprintVectors],
+			[thisCtrl.annotationVectors, thisCtrl.newFootprintVectors], 
+			// thisCtrl.markerLayer,
+		       	// thisCtrl.routeLayer,
+		       	// thisCtrl.newRouteLayer],
 	 		{
 	        	clickout: true, toggle: false,
 			multiple: false, hover: false,
@@ -1559,7 +1583,11 @@ GeoAnnotator.MapPanelCtrl = {
 		);
 		thisCtrl.map.addControl(thisCtrl.selectFootprintControl);
 		
-		thisCtrl.modifyNewFootprintControl = new OpenLayers.Control.ModifyFeature(thisCtrl.newFootprintVectors);
+		thisCtrl.modifyNewFootprintControl = new OpenLayers.Control.ModifyFeature(
+			thisCtrl.newFootprintVectors
+			// thisCtrl.markerLayer,
+			// thisCtrl.newRouteLayer
+			);
 		thisCtrl.newFootprintVectors.events.register("afterfeaturemodified", 
 			thisCtrl.newFootprintVectors, 
 			thisCtrl.onModificationEnd
@@ -1567,7 +1595,11 @@ GeoAnnotator.MapPanelCtrl = {
 		//thisCtrl.modifyNewFootprintControl.onDeletingStart = thisCtrl.onFeatureDeleted;
 		thisCtrl.map.addControl(thisCtrl.modifyNewFootprintControl);
 				
-		thisCtrl.drawFootprintControl = new OpenLayers.Control.DrawFeature(
+		// originally there is only polygon tool
+		// I would like to add line and point tool
+		// by CD
+		thisCtrl.drawFootprintControls = {
+		    polygon: new OpenLayers.Control.DrawFeature(
 			thisCtrl.newFootprintVectors, 
 			OpenLayers.Handler.Polygon, 
 			{
@@ -1576,8 +1608,31 @@ GeoAnnotator.MapPanelCtrl = {
 					thisCtrl.onFeatureAdded(feature);
 				}
 			}
-		);
-		thisCtrl.map.addControl(thisCtrl.drawFootprintControl);    	
+		    ),
+		    line: new OpenLayers.Control.DrawFeature(
+			thisCtrl.newRouteLayer, 
+			OpenLayers.Handler.Path, 
+			{
+				featureAdded:function(feature) { 
+					feature.state = OpenLayers.State.INSERT; 
+					thisCtrl.onFeatureAdded(feature);
+				}
+			}
+		    ),
+		    point: new OpenLayers.Control.DrawFeature(
+			thisCtrl.newRouteLayer, 
+			OpenLayers.Handler.Point, 
+			{
+				featureAdded:function(feature) { 
+					feature.state = OpenLayers.State.INSERT; 
+					//thisCtrl.onFeatureAdded(feature);
+				}
+			}
+		    ),
+		};
+		for (var key in thisCtrl.drawFootprintControls) {
+		    thisCtrl.map.addControl(thisCtrl.drawFootprintControls[key]);    	
+		}
 		
 
 		// set the default behavoirs
@@ -1586,7 +1641,6 @@ GeoAnnotator.MapPanelCtrl = {
 	
 	loadToolbar : function () {
 		// add top toolbar 
-		//alert(thisCtrl.containerPanel.getTopToolbar());
 		var thisCtrl = GeoAnnotator.MapPanelCtrl;
 		var tbar = thisCtrl.containerPanel.getTopToolbar();
 		tbar.items.each(function (item, index, length) {
@@ -1597,54 +1651,56 @@ GeoAnnotator.MapPanelCtrl = {
 		}; 
 		
 		if (GeoAnnotator.currUserId !== '0') {
-			tbar.add({
-				xtype: 'buttongroup',
-				id: 'toolbox-group',
-	            title: 'Annotation',
-	            //columns: 3,
-	            defaults: {
-	                scale: 'medium'
-	            },
-	            items: [
-				{
-	            	id: 'contribute-btn',
-	            	iconCls: 'contribute-btn',
-	            	pressed: false,
-	            	enableToggle: true,
-	            	toggleHandler: function(button, pressed){
-						if(pressed){
-							GeoAnnotator.ContributePanelCtrl.containerPanel.expand(false);
-						}
-						else{
-							GeoAnnotator.ContributePanelCtrl.containerPanel.collapse(false);
-						}
-					},
-	            	text: 'Contribute',
-	            	tooltip: {
-	                	title: 'Contribute',
-	                	text: 'Contribute to the current forum'
-	            	}
-	        	},
-				{
-		            id: 'manage-btn',
-		            iconCls: 'manage-btn',
-		            pressed: false,
-		            enableToggle: true,
-		            toggleHandler: function(button, pressed){
-						if(pressed){
-							GeoAnnotator.ManageWindowCtrl.containerWindow.show();
-						}
-						else{
-							GeoAnnotator.ManageWindowCtrl.containerWindow.hide();
-						}
-					},
-		            text: 'Manage',
-		            tooltip: {
-		                title: 'Manage',
-		                text: 'Manage the annotations'
-		            }
-	        	}]
-			});
+//			tbar.add({
+//				xtype: 'buttongroup',
+//				id: 'toolbox-group',
+//	            title: 'Annotation',
+//	            //columns: 3,
+//	            defaults: {
+//	                scale: 'medium'
+//	            },
+//	            items: [
+//				{
+//	            	id: 'contribute-btn',
+//	            	iconCls: 'contribute-btn',
+//	            	pressed: false,
+//	            	enableToggle: true,
+//	            	toggleHandler: function(button, pressed){
+//						if(pressed){
+//							GeoAnnotator.ContributePanelCtrl.containerPanel.expand(false);
+//						}
+//						else{
+//							GeoAnnotator.ContributePanelCtrl.containerPanel.collapse(false);
+//						}
+//					},
+//	            	text: 'Contribute',
+//	            	tooltip: {
+//	                	title: 'Contribute',
+//	                	text: 'Contribute to the current forum'
+//	            	}
+//	        	},
+//				{
+//		            id: 'manage-btn',
+//		            iconCls: 'manage-btn',
+//		            pressed: false,
+//		            enableToggle: true,
+//		            toggleHandler: function(button, pressed){
+//						if(pressed){
+//							GeoAnnotator.ManageWindowCtrl.containerWindow.show();
+//						}
+//						else{
+//							GeoAnnotator.ManageWindowCtrl.containerWindow.hide();
+//						}
+//					},
+//		            text: 'Manage',
+//		            tooltip: {
+//		                title: 'Manage',
+//		                text: 'Manage the annotations'
+//		            }
+//	        	}]
+//			});
+		    // tools for questionnaire only, display group of buttons of marks
+		    
 		}; 
 
 
@@ -1693,15 +1749,105 @@ GeoAnnotator.MapPanelCtrl = {
 		if (thisCtrl.selectFootprintControl) {
 			thisCtrl.selectFootprintControl.activate();
 		}
-		if (thisCtrl.drawFootprintControl) {
-			thisCtrl.drawFootprintControl.deactivate();
+		if (thisCtrl.drawFootprintControls) {
+		    for (var key in thisCtrl.drawFootprintControls) {
+			thisCtrl.drawFootprintControls[key].deactivate();
+		    }
 		}
 		if (thisCtrl.modifyNewFootprintControl) {
 			thisCtrl.modifyNewFootprintControl.deactivate();					
 		}
+		// todo: unregister click event for marker
+		thisCtrl.map.events.unregister("click", thisCtrl.map, thisCtrl.onMarkerAdded);
 	},
 
-	setDrawMode : function() {
+	setMarkerMode : function() {
+	    var thisCtrl = GeoAnnotator.MapPanelCtrl;
+	    var map = thisCtrl.map;
+
+	    map.events.register("click", map, thisCtrl.onMarkerAdded);
+	},
+
+	onMarkerAdded : function(e) {
+	    var thisCtrl = GeoAnnotator.MapPanelCtrl;
+	    var map = thisCtrl.map;
+
+	    if (thisCtrl.lastPopup) {
+		    map.removePopup(thisCtrl.lastPopup);
+		}
+		//var position = this.events.getMousePosition(e);
+		var position = map.getLonLatFromPixel(e.xy);
+		var size = new OpenLayers.Size(21,25);
+		var offset = new OpenLayers.Pixel(-(size.w/2), -size.h);
+		// select different icons for different markers
+		// get the current pressed item in toolbar, maybe there's another method?
+		var tbar = GeoAnnotator.MapPanelCtrl.containerPanel.getTopToolbar();
+		var marker = null;
+		tbar.items.get('Markers-group').items.each(function(item) {
+		    if (item.pressed) {
+			marker = item.id;
+		    }
+		});
+		// change url to {{ STATIC_URL }}
+		var icon = new OpenLayers.Icon('../static/images/' + marker + '.png', size, offset);   
+
+		thisCtrl.markerLayer.addMarker(new OpenLayers.Marker(position,icon));
+
+		// popup for annotation input
+		var content = "<span>Input your comment:</span><br/><textarea id='comment_text'></textarea><button>Confirm</button>"; // popup content
+		
+		thisCtrl.lastPopup = new OpenLayers.Popup("MarkAnnotation-popup",
+			position,
+			new OpenLayers.Size(200,200),
+			content,
+		//	icon,
+			true, // display close
+			thisCtrl.onPopupClosed(position, marker)); 
+
+		map.addPopup(thisCtrl.lastPopup);
+	},
+
+	// submit marker to server when popup closed
+	onPopupClosed : function(pos, marker) {
+////	    $('#comment_text').value;
+//	    var thisCtrl = GeoAnnotator.MapPanelCtrl;
+//	    if (thisCtrl.lastPopup) {
+//		thisCtrl.map.removePopup(thisCtrl.lastPopup);
+//	    }
+//
+//	    // build annotation
+//	    var markannotation = {};
+//	    markannotation.annotation = {};
+//	    markannotation.annotation.footprints = [];
+//	    markannotation.annotation.references = [];
+//
+//	    // footprint
+//	    var footprint = {};
+//	    // var feature   = new OpenLayers.Feature.Vector(new OpenLayers.Geometry.Point(pos.lon, pos.lat), null, null);
+//	    var projWords = GeoAnnotator.MapPanelCtrl.map.projection.getCode().split(":");
+//	    footprint.srid = projWords[projWords.length - 1];
+//	    footprint.shape = new OpenLayers.Format.WKT().write(feature);
+//	    markannotation.annotation.footprints.push(footprint);
+//
+//	    // annotation
+//	    var annotation = {};
+//	    annotation.userId = GeoAnnotator.currUserId;
+//	    annotation.forumId = GeoAnnotator.currForumId;
+//	    annotation.shareLevel = 'everyone';
+//	    annotation.timeCreated = new Date().toGMTString();
+////	    annotation.contextMap = GeoAnnotator.ContributePanelCtrl.getContextMap();
+//
+//	    
+////	    Ext.Ajax.request({
+////		url: 'questionnaire/marker/',
+////		success: thisCtrl.onSubmitMarkerSuccess,
+////		failure: thisCtrl.onSubmitMarkerFailure,
+////		params: {'marker': marker} // todo: params to be determined
+////	    });
+
+	},
+
+	setDrawMode : function(mode) {
 		var thisCtrl = GeoAnnotator.MapPanelCtrl;
 		if (thisCtrl.navigationControl) {
 			thisCtrl.navigationControl.deactivate();	
@@ -1709,8 +1855,12 @@ GeoAnnotator.MapPanelCtrl = {
 		if (thisCtrl.selectFootprintControl) {
 			thisCtrl.selectFootprintControl.deactivate();
 		}
-		if (thisCtrl.drawFootprintControl) {
-			thisCtrl.drawFootprintControl.activate();
+		if (thisCtrl.drawFootprintControls) {
+		    for (var key in thisCtrl.drawFootprintControls) {
+			if (mode == key) {
+			    thisCtrl.drawFootprintControls[key].activate();
+			}
+		    }
 		}
 		if (thisCtrl.modifyNewFootprintControl) {
 			thisCtrl.modifyNewFootprintControl.deactivate();					
@@ -1725,8 +1875,10 @@ GeoAnnotator.MapPanelCtrl = {
 		if (thisCtrl.selectFootprintControl) {
 			thisCtrl.selectFootprintControl.deactivate();
 		}
-		if (thisCtrl.drawFootprintControl) {
-			thisCtrl.drawFootprintControl.deactivate();
+		if (thisCtrl.drawFootprintControls) {
+		    for (var key in thisCtrl.drawFootprintControls) {
+			thisCtrl.drawFootprintControls[key].deactivate();
+		    }
 		}
 		if (thisCtrl.modifyNewFootprintControl) {
 			thisCtrl.modifyNewFootprintControl.activate();					
@@ -1750,9 +1902,9 @@ GeoAnnotator.MapPanelCtrl = {
 			name = feature.attributes.alias;
 		}
 		*/
-		var name = '[FP' + feature.attributes.id + ']'
-		var id = feature.attributes.id;		
-		GeoAnnotator.ContributePanelCtrl.addFootprintToReference(id, name);
+//		var name = '[FP' + feature.attributes.id + ']'
+//		var id = feature.attributes.id;		
+//		GeoAnnotator.ContributePanelCtrl.addFootprintToReference(id, name);
 				
 		/*
 		var records = GeoAnnotator.ContributePanelCtrl.footprintStore.query('id',id);
@@ -1771,20 +1923,20 @@ GeoAnnotator.MapPanelCtrl = {
 			GeoAnnotator.ContributePanelCtrl.footprintStore.remove(records.get(i));
 		}
 		*/
-		GeoAnnotator.ContributePanelCtrl.removeFootprintFromReference(feature.attributes.id);
+//		GeoAnnotator.ContributePanelCtrl.removeFootprintFromReference(feature.attributes.id);
 	},
 	
 	deleteFeature : function (feature){
-		var thisCtrl = GeoAnnotator.MapPanelCtrl;
-		for (var i = 0; i < GeoAnnotator.ContributePanelCtrl.newFootprints.length; i++){
-			if (GeoAnnotator.ContributePanelCtrl.newFootprints[i].attributes.id == feature.attributes.id){
-				GeoAnnotator.ContributePanelCtrl.removeFootprintFromReference(feature.attributes.id);
-				GeoAnnotator.ContributePanelCtrl.newFootprints.splice(i,1);
-				thisCtrl.newFootprintVectors.destroyFeatures([feature], {silent: true});
-				thisCtrl.hoverFeature = null;
-				return;
-			}
-		}
+//		var thisCtrl = GeoAnnotator.MapPanelCtrl;
+//		for (var i = 0; i < GeoAnnotator.ContributePanelCtrl.newFootprints.length; i++){
+//			if (GeoAnnotator.ContributePanelCtrl.newFootprints[i].attributes.id == feature.attributes.id){
+//				GeoAnnotator.ContributePanelCtrl.removeFootprintFromReference(feature.attributes.id);
+//				GeoAnnotator.ContributePanelCtrl.newFootprints.splice(i,1);
+//				thisCtrl.newFootprintVectors.destroyFeatures([feature], {silent: true});
+//				thisCtrl.hoverFeature = null;
+//				return;
+//			}
+//		}
 	},
 	
 	onModificationEnd: function(feature, modified) {
@@ -1880,19 +2032,73 @@ GeoAnnotator.MapPanelCtrl = {
 	},
 	
 	onFeatureAdded : function (feature){
-		var thisCtrl = GeoAnnotator.MapPanelCtrl;
+	    var thisCtrl = GeoAnnotator.MapPanelCtrl;
+
+	    if (feature.goemetry instanceof OpenLayers.Geometry.Polygon) {
 		// use minus to distinguish new footprints with existing ones
-		feature.attributes.id = '-'+GeoAnnotator.ContributePanelCtrl.newFootprints.length;
-		feature.attributes.alias = 'new footprint';
-		GeoAnnotator.ContributePanelCtrl.newFootprints.push(feature);
-		if (GeoAnnotator.ContributePanelCtrl.containerPanel.collapsed === false) {
-			thisCtrl.addFeatureToReference(feature);
-		}
+//		feature.attributes.id = '-'+GeoAnnotator.ContributePanelCtrl.newFootprints.length;
+//		feature.attributes.alias = 'new footprint';
+//		GeoAnnotator.ContributePanelCtrl.newFootprints.push(feature);
+//		if (GeoAnnotator.ContributePanelCtrl.containerPanel.collapsed === false) {
+//			thisCtrl.addFeatureToReference(feature);
+//		}
 		/*
 		var tbar = GeoAnnotator.ContributePanelCtrl.containerPanel.getTopToolbar();
 		tbar.items.get('contribute-toolbox-group').items.get('drawFootprint-btn').toggle(false);
 		*/
 		thisCtrl.setNavigationMode();		
+	    }
+	    if (feature.geometry instanceof OpenLayers.Geometry.LineString) {
+		// request for questionnaire
+	//	Ext.Ajax.request({
+	//		url: 'questionnaire/questions/',
+   	//		success: thisCtrl.onLoadQuestionsSuccess,
+   	//		failure: thisCtrl.onLoadQuestionsFailure,
+   	//		params: {'annotationId':GeoAnnotator.currAnnotationId, 'userId':GeoAnnotator.currUserId, 'forumId': GeoAnnotator.currForumId} // todo: params to be determined
+	//	});
+		this.onLoadQuestionsSuccess();
+		// create popup
+		// remove existing popup first
+		if (thisCtrl.lastPopup) {
+		    thisCtrl.map.removePopup(thisCtrl.lastPopup);
+		}
+		// todo: refine pupup anchor position
+		var position = new OpenLayers.LonLat(feature.geometry.components[0].x, feature.geometry.components[0].y);
+		var content = " <span>Rate the route:</span><br/><button onclick='GeoAnnotator.MapPanelCtrl.onRatingBtnClicked()' class='ratingbtn' style='background-color:#0F4DA8'>1</button> \
+				<button class='ratingbtn' style='margin-left:0px;background-color:#00AB6F'>2</button> \
+				<button class='ratingbtn' style='margin-left:0px;background-color:#F0FC00'>3</button> \
+				<button class='ratingbtn' style='margin-left:0px;background-color:#FFA700'>4</button> \
+				<button class='ratingbtn' style='margin-left:0px;background-color:#FF4500'>5</button>";
+		thisCtrl.lastPopup = new OpenLayers.Popup("RouteRate-popup",
+			position,
+			new OpenLayers.Size(150,50),
+			content,
+			null,
+			false); // display close
+		thisCtrl.map.addPopup(thisCtrl.lastPopup);
+		thisCtrl.setNavigationMode();
+
+	    }
+	    if (feature.goemetry instanceof OpenLayers.Geometry.Point) {
+	    }
+	},
+
+	onLoadQuestionsSuccess : function (xhr) {
+	    var thisCtrl    = GeoAnnotator.AnnotationInfoPanelCtrl;
+	    // var questionJson	= Ext.util.JSON.decode(xhr.responseText);
+	    // thisCtrl.displayQuestions(questionJson);
+	    thisCtrl.displayQuestions();
+	},
+
+	onLoadQuestionsFailure : function () {
+	},
+
+	onRatingBtnClicked : function () {
+	    // close rating popup
+	    var thisCtrl = GeoAnnotator.MapPanelCtrl;
+	    thisCtrl.map.removePopup(thisCtrl.lastPopup);
+	    // change route line style
+	    // submit route info to server
 	},
 					
 	onClickFeature : function (feature){
@@ -1972,7 +2178,7 @@ GeoAnnotator.MapPanelCtrl = {
 									
 		// update controls		
 		//GeoAnnotator.TimelinePanelCtrl.update();
-		GeoAnnotator.AnnotationInfoPanelCtrl.update();
+//		GeoAnnotator.AnnotationInfoPanelCtrl.update();
 		
 		//GeoAnnotator.MapPanelCtrl.update();
 	},
@@ -2104,7 +2310,7 @@ GeoAnnotator.TimelinePanelCtrl = {
             	xtype: 'columnchart',
             	store: thisCtrl.timelineData,
             	yField: 'count',
-	    		url: './static/lib/ext-3.2.1/resources/charts.swf',
+	    		url: '../static/lib/ext-3.2.1/resources/charts.swf',
             	xField: 'label',
             	xAxis: new Ext.chart.CategoryAxis({
                 	title: 'Time'
@@ -2841,6 +3047,30 @@ GeoAnnotator.AnnotationInfoPanelCtrl = {
    			failure: thisCtrl.onLoadAnnotationInfoFailure,
    			params: {'annotationId':GeoAnnotator.currAnnotationId, 'userId':GeoAnnotator.currUserId, 'forumId': GeoAnnotator.currForumId}
 		});
+	},
+
+	// for questionnaire, display all questions
+	displayQuestions : function (questions) {
+	    var thisCtrl = GeoAnnotator.AnnotationInfoPanelCtrl;
+	    // todo: build html from questions in json format
+	    var html = "<p>1. Do you usually walk or bike on the route you just drew?</p> \
+		       <input type='radio' name='q1' value='walk'> Walk<br> \
+		       <input type='radio' name='q1' value='bike'> Bike<br> \
+		       <input type='button' value='Back'>&nbsp;&nbsp;&nbsp;<input type='button' value='Next'>";
+
+	    // use extjs to set up form
+	   // var form = new Ext.form.FormPanel({
+	   //     title:	'Questions',
+	   //     items: [{
+	   //         fieldLabel: 'Rate the scale',
+	   //         name:   'Q1'
+	   //     },{
+	   //         xtype: 'radio',
+	   //         inputValue: 'page'
+	   //     }]
+	   // });
+	    // thisCtrl.annotationInfoDisplayPanel.items.push(form);
+	    thisCtrl.annotationInfoDisplayPanel.body.update(html);
 	},
 	
 	updateAnnotationInfoDisplayPanel : function(){
@@ -3883,5 +4113,4 @@ GeoAnnotator.Util = {
 			}
 	}
 };
-
 
