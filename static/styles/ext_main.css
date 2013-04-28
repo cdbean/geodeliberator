@@ -250,8 +250,38 @@ a:hover {
 .manage-btn{
 	background-image: url(../images/manage.png) !important;
 }
-.noise-btn{
-	background-image: url(../images/noise.jpg) !important; 
+.noise{
+	background-image: url(../images/noise.png) !important; 
+}
+.stop{
+	background-image: url(../images/stop.png) !important; 
+}
+.landscape{
+	background-image: url(../images/landscape.png) !important; 
+}
+.question{
+	background-image: url(../images/question.png) !important; 
+}
+.traffic{
+	background-image: url(../images/traffic.png) !important; 
+}
+.litter{
+	background-image: url(../images/litter.png) !important; 
+}
+.disturbing{
+	background-image: url(../images/disturbing.png) !important; 
+}
+.safety{
+	background-image: url(../images/safety.png) !important; 
+}
+.lighting{
+	background-image: url(../images/lighting.png) !important; 
+}
+.smell{
+	background-image: url(../images/smell.png) !important; 
+}
+.exclamation{
+	background-image: url(../images/exclamation.png) !important; 
 }
 
 .create-issue-btn {
@@ -481,6 +511,6 @@ a:hover {
 }
 
 #frame_viewport {
-/*    height: 100px; */
+    height: 500px; 
 }
 

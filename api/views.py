@@ -314,6 +314,7 @@ def api_map(request):
             pass
     elif forumId > 0:
         try:
+	    print "forum id received", forumId
             forum = Forum.objects.get(id=forumId)
             response["mapString"] = forum.contextmap
             response["type"] = 'group'

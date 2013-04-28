@@ -4,8 +4,15 @@ from api.models import Annotation
 
 # Create your models here.
 class Route(models.Model):
+    VISIBILITY_CHOICES = (
+	('everyone', 'everyone'),
+	('group', 'group members'),
+	('registered', 'registered users'),
+	('self', 'myself'),
+    )
     user    = models.ForeignKey(User)
     shape   = models.LineStringField()
+    visibility = models.CharField(max_length=10, choices=VISIBILITY_CHOICES, default='everyone')
     objects = models.GeoManager()
 
     # about the questionnaire
@@ -53,15 +60,19 @@ class MarkAnnotation(models.Model):
 	('question', 'question'),
 	('exclamation', 'other categories')
     ) # etc
+    PROCON_CHOICES = (
+	('pro', 'pro'),
+	('con', 'con')
+    )
 #    user	= models.ForeignKey(User)
     annotation	= models.OneToOneField(Annotation) # extend from Annotation
-    markType	= models.CharField(max_length=10, choices=TYPE_CHOICES)
+    markType	= models.CharField(max_length=10)
     route	= models.ForeignKey(Route)
     route_seg	= models.ForeignKey(RouteSegment, default=route)
+    procon	= models.CharField(max_length=3, choices=PROCON_CHOICES, default='con')
    # comment	= models.TextField(null=True, blank=True)
    # user	= models.ForeignKey(User)
    # created_at	= models.DateTimeField(verbose_name='date created')
-   # footprint	= 
 
 
     class Meta:

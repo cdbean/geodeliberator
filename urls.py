@@ -18,6 +18,7 @@ urlpatterns += patterns('',
     # (r'^geodeliberator/', include('geodeliberator.foo.urls')),
     (r'^api/', include('api.urls')),
     (r'^questionnaire/', include('questionnaire.urls')),
+    (r'^user/', include('users.urls')),
     url(r'^$', views.index, name='index'),
 
     # Uncomment the admin/doc line below and add 'django.contrib.admindocs' 

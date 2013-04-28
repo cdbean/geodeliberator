@@ -9,6 +9,8 @@ urlpatterns = patterns('',
     url(r'^markers$', loadMarkers),
     url(r'^routes$', loadRoutes),
     url(r'^questions/(\d+)/(\d{1})$', loadQuestions),
+    url(r'^(\d+)/visibility$', setVisibility),
+    url(r'^(\d+)/delete$', deleteRoute),
 )
 
  
