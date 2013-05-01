@@ -19,7 +19,12 @@ import json
 import geoutil
 
 def index(request):
-    return render(request, 'questionnaire.html')
+    response = {}
+    if request.user.is_authenticated():
+	response['userId'] = request.user.id
+	return render(request, 'questionnaire.html', response)
+    else:
+	return redirect('/user/login')
 
 def saveMarker(request):
     print 'hello'

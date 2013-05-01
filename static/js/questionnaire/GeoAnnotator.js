@@ -9,7 +9,7 @@ var GeoAnnotator = {
 	baseUrl : "/api/",
 	
 	init : function (){
-		this.currUserId = '0';
+		this.currUserId = $('#userId').val();
 		this.currForumId = '0';
 		this.currAnnotationId = '0';
 		this.currFootprintId = '0';
@@ -29,12 +29,12 @@ var GeoAnnotator = {
 		
 		// check whether the user is stored in cookie
 		//var userId = Ext.state.Manager.get('userId', '0');
-		this.currUserId = Ext.state.Manager.get('userId', '0'); 
+//		this.currUserId = Ext.state.Manager.get('userId', '0'); 
 		
 		// check the url params
-		var params = Ext.urlDecode(location.search.substring(1));
-		this.currUserId = params['userId'] || this.currUserId;
-		this.currForumId = params['forumId'] || this.currForumId;
+//		var params = Ext.urlDecode(location.search.substring(1));
+//		this.currUserId = params['userId'] || this.currUserId;
+//		this.currForumId = params['forumId'] || this.currForumId;
 		GeoAnnotator.ContainerTBCtrl.update();
 		if (this.currUserId !== '0') {
 			GeoAnnotator.ManageWindowCtrl.update();
@@ -305,8 +305,13 @@ GeoAnnotator.ContainerTBCtrl = {
 	},
 	
 	onLogOutClick : function() {
-		Ext.state.Manager.clear('userId');
-		GeoAnnotator.init();
+//		Ext.state.Manager.clear('userId');
+
+	    $.ajax ({
+		url: '/user/logout',
+		async: false
+	    });
+//	    GeoAnnotator.init();
 	},
 	
 	onLoadUserInfoSuccess : function (xhr) {

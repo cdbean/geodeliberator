@@ -111,4 +111,5 @@ INSTALLED_APPS = (
     'django.contrib.gis',
     'api',
     'questionnaire',
+    'users',
 )
