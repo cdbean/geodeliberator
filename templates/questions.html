@@ -25,11 +25,11 @@
 			<span class='QuestionAnswers'> 
 			    <table id='' class='QuestionText' border='0'> 
 				<tbody><tr> 
-				    <td><input type='checkbox' name='reason' value='work'>&nbsp;This is my route to work, class, or daily errands</td> 
+				    <td><input type='checkbox' name='reasons' value='work'>&nbsp;This is my route to work, class, or daily errands</td> 
 				    </tr><tr> 
-				    <td><input type='checkbox' name='reason' value='child'>&nbsp;This is the route to my child's school</td> 
+				    <td><input type='checkbox' name='reasons' value='child'>&nbsp;This is the route to my child's school</td> 
 				    </tr><tr> 
-				    <td><input type='checkbox' name='reason' value='child'>&nbsp;This is the route to a destination I would like to visit</td> 
+				    <td><input type='checkbox' name='reasons' value='destination'>&nbsp;This is the route to a destination I would like to visit</td> 
 				    </tr><tr> 
 				    <td><label for='reasonText'>Other: </label><input type='text' name='reasonText' id='reasonText'></td> 
 				</tr> </tbody> 
@@ -44,7 +44,7 @@
 		    <td class='QuestionBackground' valign='middle' align='left' height='75'> &nbsp;</td> 
 		    <td colspan='6' valign='middle' class='QuestionBackground'> 
 			<div> 
-			    <span class='QuestionTitle'>1. Do you usually walk or bike on the route you just drew? </span> 
+			    <span class='QuestionTitle'>2. Do you usually walk or bike on the route you just drew? </span> 
 			</div> 
 			<span class='QuestionAnswers'> 
 			    <table id='' class='QuestionText' border='0'> 
@@ -94,7 +94,7 @@
 				    </tr><tr> 
 				    <td><input type='radio' name='pathType' value='Street'>&nbsp;Street</td> 
 				    </tr><tr> 
-				    <td><input type='radio' name='pathType' value='Own'>&nbsp;I had to make my own path</td> 
+				    <td><input type='radio' name='pathType' value='Own path'>&nbsp;I had to make my own path</td> 
 				</tr> </tbody> 
 			    </table> 
 			    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
@@ -259,17 +259,17 @@
 			<span class='QuestionAnswers'> 
 			    <table id='' class='QuestionText' border='0'> 
 				<tbody><tr> 
-				    <td><input type='checkbox' name='driverBehavior' value='Fine'>&nbsp;Just Fine</td> 
+				    <td><input type='checkbox' name='driverBehaviors' value='fine'>&nbsp;Just Fine</td> 
+				    </tr><tr>                                      
+				    <td><input type='checkbox' name='driverBehaviors' value='yield'>&nbsp;Drivers didn't yield to pedestrians</td> 
+				    </tr><tr>                                      
+				    <td><input type='checkbox' name='driverBehaviors' value='speed'>&nbsp;Drivers didnt obey speed limit</td> 
+				    </tr><tr>                                      
+				    <td><input type='checkbox' name='driverBehaviors' value='cutoff'>&nbsp;I was cut off by a motorist</td> 
+				    </tr><tr>                                      
+				    <td><input type='checkbox' name='driverBehaviors' value='aware'>&nbsp;Drivers weren't aware of me</td> 
 				    </tr><tr> 
-				    <td><input type='checkbox' name='driverBehavior' value='yield'>&nbsp;Drivers didn't yield to pedestrians</td> 
-				    </tr><tr> 
-				    <td><input type='checkbox' name='driverBehavior' value='speed'>&nbsp;Drivers didnt obey speed limit</td> 
-				    </tr><tr> 
-				    <td><input type='checkbox' name='driverBehavior' value='cutoff'>&nbsp;I was cut off by a motorist</td> 
-				    </tr><tr> 
-				    <td><input type='checkbox' name='driverBehavior' value='aware'>&nbsp;Drivers weren't aware of me</td> 
-				    </tr><tr> 
-				    <td><label for='driverBehaviorText'>Other: </label><input type='text' name='driverBehaviorText' id='driverBehaviorText'></td> 
+				    <td><label for='driverBehaviorText'>Other: </label><input type='text' name='driverBehaviorText' id='driverBehaviorsText'></td> 
 				</tr> </tbody> 
 			    </table> 
 			    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
@@ -297,7 +297,7 @@
 		    <td class='QuestionBackground' valign='middle' align='left' height='75'> &nbsp;</td> 
 		    <td colspan='6' valign='middle' class='QuestionBackground'> 
 			<div> 
-			    <span class='QuestionTitle'>8. How often do you walk for the following reasons? </span> 
+			    <span class='QuestionTitle'>8. How often do you {{ WalkOrBike|lower }} for the following reasons? </span> 
 			</div> 
 			<span class='QuestionAnswers'> 
 			    <table>

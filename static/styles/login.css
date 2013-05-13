@@ -9,14 +9,22 @@ table {
     font-size:20px;
 }
 
+.message {
+    font-size:16px;
+    color:#FF0000;
+    margin-left:auto;
+    margin-right:auto;
+    width:30%;
+}
+
 form {
     background-color:#DBDBDB;
     margin-left:auto;
     margin-right:auto;
-    width:35%
+    width:35%;
 }
 .separator {
-    height:10px;
+    height:20px;
 }
 
 html {

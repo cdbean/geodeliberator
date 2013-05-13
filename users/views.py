@@ -14,17 +14,18 @@ def login_user(request):
     if request.method == 'POST':
 	username	= request.POST.get('username', '')
 	pwd		= request.POST.get('pwd', '')
+	response['username'] = username
 	user = authenticate(username=username, password=pwd)
 	if user is not None:
 	    response["success"] = True
 	    response["userId"] = user.id
 	    response['userName'] = user.username
-	    print 'about to log'
 	    login(request, user)
-	    print 'user logged in'
 	else:
 	    response["success"] = False
-	    response["errors"] = {"reason": "Your username and password were incorrect."}
+	    response["error"] = "Username and password don't match!"
+	    print response
+	    return render(request, 'login.html', response)
 	return redirect('/questionnaire')
 
 def register(request):
@@ -34,6 +35,8 @@ def register(request):
 	pwd		= request.POST.get('registerPwd', None)
 	email	= request.POST.get('email', None)
 	forumList	= request.POST.getlist('forumList', [])
+	response['registerName'] = username
+	response['email'] = email
 
 	forums	= []
 	for fo in forumList:
@@ -45,33 +48,30 @@ def register(request):
 	if username and pwd and email and len(forums) != 0:
 	    try:
 		user = User.objects.create_user(username=username, password=pwd)
-		if True:
-		    for forum in forums:
-			Membership.objects.create(user=user, forum=forum, role='member')
-			response["data"] = {"userId": user.id, "userName": user.username}
-		    response['success'] = True
-		    user.is_active = True
-		    user.save()
-		    print 'is anonymous: ', user.is_anonymous()
-		    print username, pwd
-		    user = authenticate(username=username, password=pwd)
-		    if user is not None:
-			login(request, user)
-		    else:
-			print 'User not authenticated'
-		    print 'User created!'
+		for forum in forums:
+		    Membership.objects.create(user=user, forum=forum, role='member')
+		    response["data"] = {"userId": user.id, "userName": user.username}
+		response['success'] = True
+		user.is_active = True
+		user.save()
+		print 'is anonymous: ', user.is_anonymous()
+		print username, pwd
+		user = authenticate(username=username, password=pwd)
+		if user is not None:
+		    login(request, user)
 		    return redirect('/questionnaire')
 		else:
 		    response['success'] = False
-		    response["error"] = {"User existed"}
+		    response['error'] = 'User authentication failed!'
 	    except Exception as e:
-		print 'Failure in creating user'
-		print e
+		response['success'] = False
+		response['error'] = 'User existed!'
 	else:
 	    response['success'] = False
 	    response['error'] = 'Required information missing'
 
-    return redirect('./login')
+    print response
+    return render(request, "login.html", response)
 
 def logout_user(request):
     try:

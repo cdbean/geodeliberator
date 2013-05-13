@@ -5,6 +5,9 @@
 		<title>GeoDeliberator</title>
 		<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script> 
 		<script src="http://code.jquery.com/jquery-migrate-1.1.1.min.js"></script> 
+		<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+		<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+
 		<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}lib/ext-3.2.1/resources/css/ext-all.css">
 		<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}lib/ext-3.2.1/resources/css/xtheme-gray.css">
 		<script type="text/javascript" src="{{ STATIC_URL }}lib/ext-3.2.1/adapter/ext/ext-base.js"></script>
@@ -33,7 +36,13 @@
 <!--	    <script type="text/javascript" src="js/GeoAnnotator.min.js"></script>
 
 -->	     
-        <script src="http://maps.google.com/maps?file=api&amp;v=2&amp;sensor=true&amp;key=ABQIAAAAYtdeaf8I3MU_0Hkv4cr1_xSCwEGung5EHhxRtlSoEmDbQaDD-BT_PzzcOpCOGgLx_xpJF5nUU-ijHw" type="text/javascript"></script>
+        <script type="text/javascript" src="{{ STATIC_URL }}lib/jquery.msgbox.7.1/jquery.msgbox.js"></script>
+        <script type="text/javascript" src="{{ STATIC_URL }}lib/jquery.msgbox.7.1/jquery.dragndrop.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}lib/jquery.msgbox.7.1/jquery.msgbox.css">
+<!--	<script type='text/javascript' src='{{ STATIC_URL }}lib/jquery.msgbox/scripts/jquery.msgBox.js'></script>
+<link rel="stylesheet" href="{{ STATIC_URL }}lib/jquery.msgbox/styles/msgBoxLight.css" />	-->
+
+        <script src="http://maps.google.com/maps?file=api&amp;v=2&amp;sensor=true&amp;key=AIzaSyCPWMaP2464g2fgX0hyKJm39BiYmIu-hwo" type="text/javascript"></script>
         <script type="text/javascript" src="{{ STATIC_URL }}js/questionnaire/GeoAnnotator.js"></script>
 	<script type="text/javascript" src="{{ STATIC_URL }}js/questionnaire/ext_layout.js"></script>
         <script type="text/javascript" src="{{ STATIC_URL }}js/questionnaire/displayQuestions.js"></script>
@@ -47,5 +56,8 @@
 		<input type='hidden' id='userId' value='{{ userId }}'>
 		<input type='hidden' id='userName' value='{{ userName }}'>
 		<div id="footer">© 2010 The Pennsylvania State University.</div>
+		<div id="dialog-confirm" title="Delete your route?">
+		    <p><span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>The route will be permanently deleted and cannot be recovered. Are you sure?</p>
+		</div>
 	</body>
 </html>

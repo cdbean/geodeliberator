@@ -141,6 +141,7 @@ def saveRoute(request):
 	response['id'] = '0'
     return HttpResponse(json.dumps(response), mimetype='application/json')
 
+# todo: query routes by bounding box
 def loadRoutes(request):
     response = {}
     response['route_segs'] = []
@@ -159,8 +160,29 @@ def loadRoutes(request):
 	    route_info['shape'] = route.shape.wkt
 	    route_info['srid'] = route.shape.srid
 	    route_info['visibility'] = route.visibility
+	    route_info['owner'] = {}
+	    route_info['owner']['id'] = route.user.id
+	    route_info['owner']['name'] = route.user.username
+	    route_info['rate'] = route.pathCondition
 	    response['routes'].append(route_info)
 	
+	    route_info['markers'] = []
+	    markannotations = MarkAnnotation.objects.filter(route=route)
+	    for ma in markannotations:
+		ma_info = {}
+		ma_info['id'] = str(ma.id)
+		ma_info['type'] = str(ma.markType)
+		ma_info['route'] = str(ma.route.id)
+		ma_info['seg'] = str(ma.route_seg.id)
+		annotation = ma.annotation
+		ma_info['footprints'] = []
+		for fp in annotation.footprints.all():
+		    fp_info = {}
+		    fp_info['shape'] = fp.shape.wkt
+		    fp_info['srid'] = fp.shape.srid
+		    ma_info['footprints'].append(fp_info)
+		route_info['markers'].append(ma_info)
+
 	    route_segs = RouteSegment.objects.filter(route=route)
 	    for seg in route_segs:
 		route_seg_info = {}
@@ -215,9 +237,11 @@ def loadQuestions(request, route_id, step):
 	if request.method == 'GET':
 	    return render(request, 'questions.html', {'step': step, 'WalkOrBike': route.transport})
 	if request.method == 'POST':
+	    print request.POST
 	    nextStep = str(int(step) + 1)
 	    if step == '0':
 		route.transport = request.POST.get('WalkOrBike', 'Walk')
+		route.reasons    = '@'.join(request.POST.getlist('reasons'))
 		route.save()
 		return redirect('/questionnaire/questions/{0}/{1}'.format(route_id, nextStep))
 	    elif step == '1':
@@ -225,23 +249,25 @@ def loadQuestions(request, route_id, step):
 		route.pathCondition	= request.POST.get('pathCondition', 0)
 		route.easeGoing		= request.POST.get('easeGoing', 0)
 		route.easeCrossing	= request.POST.get('easeCrossing', 0)
+		route.detour		= request.POST.get('detour', 'No')
 		route.save()
 		return render(request, 'questions.html', 
 			{'step': nextStep, 'WalkOrBike': route.transport})
 	    elif step == '2':
 		# use special character to split multiple choices
-		safetyChoices		= '@'.join(request.POST.get('safetyChoices', []))
+		safetyChoices		= '@'.join(request.POST.getlist('safetyChoices'))
 		safetyChoices	= safetyChoices + '@' + request.POST.get('safetyChoicesText', '')
-		driverBehavior		= '@'.join(request.POST.get('driverBehavior', []))
-		driverBehavior		= driverBehavior + '@' + request.POST.get('driverBehaviorText', '')
+		driverBehaviors		= '@'.join(request.POST.getlist('driverBehaviors'))
+		driverBehaviors		= driverBehaviors + '@' + request.POST.get('driverBehaviorsText', '')
 		
+
 		route.safetyChoices	= safetyChoices
-		route.driverBehavior	= driverBehavior
+		route.driverBehaviors	= driverBehaviors
 		route.save()
 		return render(request, 'questions.html', 
 			{'step': nextStep, 'WalkOrBike': route.transport})
 	    elif step == '3':
-		encourageMethods	= '@'.join(request.POST.get('encourageMethods', []))
+		encourageMethods	= '@'.join(request.POST.getlist('encourageMethods'))
 		encourageMethods	= encourageMethods + '@' + request.POST.get('encourageMethodsText', '')
 
 		route.groceryFrequency	= request.POST.get('groceryFrequency', 0)
@@ -251,6 +277,31 @@ def loadQuestions(request, route_id, step):
 		route.save()
 		return render(request, 'questions.html', 
 			{'step': nextStep, 'WalkOrBike': route.transport})
+
+def loadRouteSummary(request, routeId):
+    res= {}
+    try:
+	route = Route.objects.get(id=routeId)
+    except Route.DoesNotExist:
+	res= "Error: Route does not exist!"
+    else:
+	res['owner']	  = route.user.username
+	res['visibility'] = route.visibility
+	res['reasons'] = route.reasons.split('@')
+	res['transport'] = route.transport
+	res['pathType']  = route.pathType
+	res['pathCondition']  = route.pathCondition
+	res['easeGoing']  = route.easeGoing
+	res['easeCrossing']  = route.easeCrossing
+	res['detour']  = route.detour
+	res['safetyChoices']  = route.safetyChoices.split('@')
+	res['driverBehaviors']  = route.driverBehaviors.split('@')
+	res['groceryFrequency']  = route.groceryFrequency
+	res['funFrequency']  = route.funFrequency
+	res['exerciseFrequency']  = route.exerciseFrequency
+	res['encourageMethods']  = route.encourageMethods.split('@')
+
+    return render(request, 'routeSummary.html', res)
 		
 
 def setVisibility(request, routeId):

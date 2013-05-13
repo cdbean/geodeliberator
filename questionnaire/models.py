@@ -17,15 +17,17 @@ class Route(models.Model):
 
     # about the questionnaire
     transport	= models.CharField(max_length=10, null=True) # walk or bike
+    reasons	= models.CharField(max_length=300, null=True)
     pathType	= models.CharField(max_length=20, null=True)
-    pathCondition = models.IntegerField(null=True)
+    pathCondition = models.IntegerField(null=True) # overall rating
     easeGoing	= models.IntegerField(null=True)
     easeCrossing    = models.IntegerField(null=True)
+    detour    = models.CharField(max_length=10, null=True)
     safetyChoices = models.CharField(max_length=300, null=True)
-    driverBehavior  = models.CharField(max_length=300, null=True)
+    driverBehaviors  = models.CharField(max_length=300, null=True)
     groceryFrequency	= models.IntegerField(null=True)
     funFrequency    = models.IntegerField(null=True)
-    execiseFrequency	= models.IntegerField(null=True)
+    exerciseFrequency	= models.IntegerField(null=True)
     encourageMethods	= models.CharField(max_length=300, null=True)
 
 
