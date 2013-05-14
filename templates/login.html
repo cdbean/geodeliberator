@@ -1,0 +1,82 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+    <head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    	<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}styles/ext_main.css">
+    	<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}styles/login.css">
+	<title>GeoDeliberator</title>
+    </head>
+    <body>
+	<!-- header-->
+	<div id="header">
+	    <h1>GeoDeliberator</h1>
+	</div>
+	<div class='separator'></div>
+	<div class='message'>
+	    <label> {{ error }} </label>
+	</div>
+	<div class='separator'></div>
+	<form action='login' method='POST'>
+	    <table>
+		<thead><label class='header'>Login</label></thead>
+		<tbody>
+		    <tr> <td>
+			    <label for='username'>User name: </label>
+			</td><td>
+			<input type='text' name='username' id='username' value='{{username}}'><br>
+		    </td> </tr>
+		    <tr> <td>
+			    <label for='pwd'>Password: </label>
+			</td><td>
+			    <input type='password' name='pwd' id='pwd'><br>
+		    </td> </tr>
+		    <tr> <td>
+			</td><td>
+			<input type='submit' value='Sign in'>
+		    </td></tr>
+		</tbody>
+	    </table>
+	</form>
+	<div class='separator'></div>
+	<form action='register' method='POST'>
+	    <table>
+		<thead>
+		    <label class='header'>New to GeoDeliberator? Sign up!</label>
+		</thead>
+		<tbody>
+		    <tr><td>
+			    <label for='registerName'>User name: </label>
+			</td><td>
+			<input type='text' name='registerName' id='registerName' value='{{registerName}}'><br>
+		    </td></tr>
+		    <tr><td>
+			    <label for='registerPwd'>Password: </label>
+			</td><td>
+			    <input type='password' name='registerPwd' id='registerPwd'><br>
+		    </td></tr>
+		    <tr><td>
+			    <label for='email'>Email: </label>
+			</td><td>
+			<input type='email' name='email' id='email' value='{{email}}'><br>
+		    </td></tr>
+		    <tr><td>
+			    <label>Participating Forum(s):</label>
+			</td><td>
+			<input type='checkbox' name='forumList' value='Smoke-Free Campus' checked>&nbsp; Smoke-Free Campus <br>
+			    <input type='checkbox' name='forumList' value='Smoke-Free Project' checked>&nbsp; Smoke-Free Project<br>
+			    <input type='checkbox' name='forumList' value='Downtown Context' checked>&nbsp; Downtown Context<br>
+			    <input type='checkbox' name='forumList' value='Bicycle Facilities' checked>&nbsp; Bicycle Facilities<br>
+			    <input type='checkbox' name='forumList' value='Land Use' checked>&nbsp; Land Use<br>
+			    <input type='checkbox' name='forumList' value='Zoning' checked>&nbsp; Zoning<br>
+			    <input type='checkbox' name='forumList' value='Parking' checked>&nbsp; Parking<br>
+		    </td></tr>
+		    <tr><td>
+			</td><td>
+			    <input type='submit' value='Register!'>
+		    </td></tr>
+		</tbody>
+	    </table>
+	</form>
+	<div id="footer">© 2010 The Pennsylvania State University.</div>
+    </body>
+</html>

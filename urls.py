@@ -1,5 +1,4 @@
 from django.conf.urls.defaults import *
-from django.views.generic.simple import redirect_to
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
@@ -18,6 +17,7 @@ urlpatterns += patterns('',
     # (r'^geodeliberator/', include('geodeliberator.foo.urls')),
     (r'^api/', include('api.urls')),
 	url(r'^$', views.index, name='index'),
+    (r'user/', include('users.urls')),
 
     # Uncomment the admin/doc line below and add 'django.contrib.admindocs' 
     # to INSTALLED_APPS to enable admin documentation:
