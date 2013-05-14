@@ -311,23 +311,23 @@ def setVisibility(request, routeId):
 	user_id  = int(request.POST.get('userId', '0'))
 	
 	try:
-	    user	= User.objects.get(id=userId)
+	    user	= User.objects.get(id=user_id)
 	    route	= Route.objects.filter(user=user).get(id=route_id)
 	    route.visibility = request.POST.get('visibility', 'everyone')
 	    route.save()
 
 	except Exception as e:
 	    response['error'] = ''
-	    print e
+	    print 'Error: set route visibility failed:  ',  e
     return HttpResponse(json.dumps(response), mimetype='application/json')
 
 def deleteRoute(request, routeId):
     response = {}
-    if request.method == 'DELETE':
+    if request.method == 'POST':
 	route_id = int(request.POST.get('routeId', '0'))
 	user_id  = int(request.POST.get('userId', '0'))
 	try:
-	    user	= User.objects.get(id=userId)
+	    user	= User.objects.get(id=user_id)
 	    route	= Route.objects.filter(user=user).get(id=route_id)
 	    markers	= MarkAnnotation.objects.filter(route=route)
 	    route_segs  = RouteSegment.objects.filter(route=route)
@@ -336,9 +336,11 @@ def deleteRoute(request, routeId):
 	    for marker in markers:
 		marker.delete()
 	    route.delete()
+	    response['success'] = True
 
 	except Exception as e:
-	    response['error'] = ''
-	    print e
+	    response['success'] = False
+	    response['error'] = 'Delete route failed, please try later'
+	    print 'Error: delete route failed: ', e
     return HttpResponse(json.dumps(response), mimetype='application/json')
 

@@ -76,8 +76,9 @@ def register(request):
 def logout_user(request):
     try:
 	logout(request)
+	print 'log out user'
     except Exception as e:
 	print e
-    return redirect('./login')
+    return redirect('/user/login')
 
 

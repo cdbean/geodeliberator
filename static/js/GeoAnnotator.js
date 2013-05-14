@@ -197,10 +197,13 @@ GeoAnnotator.ContainerTBCtrl = {
 			thisCtrl.containerTB.add({xtype: 'tbtext', text: 'Welcome, ' + thisCtrl.currUserInfo.userName + '!'});
 			thisCtrl.containerTB.add('-');
 			thisCtrl.containerTB.add({
-				text: 'Log Out',
-				listeners: {
-					'click' : thisCtrl.onLogOutClick 
-				}
+			    itemId: 'logoutLink',
+			    xtype: 'box',
+			    autoEl: {
+				tag: 'a',
+				href: '/user/logout',
+				html: 'Log out'
+			    }
 			});
 		}
 		else {
