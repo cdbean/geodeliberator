@@ -116,19 +116,19 @@
 		<td><label>Driver behaviors: </label></td>
 		<td>
 		    <ul>
-			{% if 'fine' in driverBehaviors%}
+			{% if 'fine' in driverBehaviors %}
 			<li> Just fine </li>
 			{% endif%}
-			{% if 'yield' in driverBehaviors%}
+			{% if 'yield' in driverBehaviors %}
 			<li> Drivers didn't yield to pedestrians </li>
 			{% endif%}
-			{% if 'speed' in driverBehaviors%}
+			{% if 'speed' in driverBehaviors %}
 			<li> Drivers didn't obey speed limit</li>
 			{% endif%}
-			{% if 'cutoff' in driverBehaviors%}
+			{% if 'cutoff' in driverBehaviors %}
 			<li> I was cut off by a motorist</li>
 			{% endif%}
-			{% if 'aware' in driverBehaviors%}
+			{% if 'aware' in driverBehaviors %}
 			<li> Drivers weren't aware of me</li>
 			{% endif%}
 		    </ul>
@@ -180,7 +180,7 @@
 		var ecv = $('#easeCrossingValue').val();
 		$("input[name='easeCrossing']").rating('select', ecv); 
 		var gfv = $('#groceryFrequencyValue').val();
-		$("input[name='groceryFrquency']").rating('select', gfv); 
+		$("input[name='groceryFrequency']").rating('select', gfv); 
 		var ffv = $('#funFrequencyValue').val();
 		$("input[name='funFrequency']").rating('select', ffv); 
 		var efv = $('#exerciseFrequencyValue').val();

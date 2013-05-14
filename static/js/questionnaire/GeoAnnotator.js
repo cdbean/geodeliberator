@@ -1938,8 +1938,9 @@ GeoAnnotator.MapPanelCtrl = {
 		}
 	    );
 	    thisCtrl.map.addControl(thisCtrl.selectFootprintControl);
-	    thisCtrl.myRouteLayer.events.on({
+	    thisCtrl.newRouteLayer.events.on({
 		'featureselected': function(e) {
+		    GeoAnnotator.MapPanelCtrl.currRoute = e.feature;
 		    if (e.feature.attributes.markers) {
 			for (var i = 0; i < e.feature.attributes.markers.length; i++) {
 			    e.feature.attributes.markers[i].display(true);
@@ -1950,15 +1951,40 @@ GeoAnnotator.MapPanelCtrl = {
 		    }
 		},
 		'featureunselected': function(e) {
+		    GeoAnnotator.MapPanelCtrl.currRoute = null;
 		    for (var i = 0; i < e.feature.attributes.markers.length; i++) {
 			e.feature.attributes.markers[i].display(false);
 		    }
 		    var html = "<p>Click on the route to see the detailed information</p>";
+		    html += "<button onclick='GeoAnnotator.MapPanelCtrl.setDrawMode(\"line\")'>Draw another route</button> "
+		    GeoAnnotator.AnnotationInfoPanelCtrl.annotationInfoDisplayPanel.body.update(html);
+		}
+	    });
+	    thisCtrl.myRouteLayer.events.on({
+		'featureselected': function(e) {
+		    GeoAnnotator.MapPanelCtrl.currRoute = e.feature;
+		    if (e.feature.attributes.markers) {
+			for (var i = 0; i < e.feature.attributes.markers.length; i++) {
+			    e.feature.attributes.markers[i].display(true);
+			}
+		    }
+		    if (e.feature.attributes.id) { // to indicate whehter it is a newly drawn route
+			GeoAnnotator.AnnotationInfoPanelCtrl.displayRouteSummary(e.feature);
+		    }
+		},
+		'featureunselected': function(e) {
+		    GeoAnnotator.MapPanelCtrl.currRoute = null;
+		    for (var i = 0; i < e.feature.attributes.markers.length; i++) {
+			e.feature.attributes.markers[i].display(false);
+		    }
+		    var html = "<p>Click on the route to see the detailed information</p>";
+		    html += "<button onclick='GeoAnnotator.MapPanelCtrl.setDrawMode(\"line\")'>Draw another route</button> "
 		    GeoAnnotator.AnnotationInfoPanelCtrl.annotationInfoDisplayPanel.body.update(html);
 		}
 	    });
 	    thisCtrl.otherRouteLayer.events.on({
 		'featureselected': function(e) {
+		    GeoAnnotator.MapPanelCtrl.currRoute = e.feature;
 		    if (e.feature.attributes.markers) {
 			for (var i = 0; i < e.feature.attributes.markers.length; i++) {
 			    e.feature.attributes.markers[i].display(true);
@@ -1967,10 +1993,13 @@ GeoAnnotator.MapPanelCtrl = {
 		    GeoAnnotator.AnnotationInfoPanelCtrl.displayRouteSummary(e.feature);
 		},
 		'featureunselected': function(e) {
+		    GeoAnnotator.MapPanelCtrl.currRoute = null;
 		    for (var i = 0; i < e.feature.attributes.markers.length; i++) {
 			e.feature.attributes.markers[i].display(false);
 		    }
 		    var html = "<p>Click on the route to see the detailed information</p>";
+		    html += "<button onclick='GeoAnnotator.MapPanelCtrl.setDrawMode(\"line\")'>Draw another route</button> "
+		    GeoAnnotator.AnnotationInfoPanelCtrl.annotationInfoDisplayPanel.body.update(html);
 		}
 	    });
 	    
@@ -2010,7 +2039,7 @@ GeoAnnotator.MapPanelCtrl = {
 		    }
 		),
 		line: new OpenLayers.Control.DrawFeature(
-		    thisCtrl.myRouteLayer, 
+		    thisCtrl.newRouteLayer, 
 		    OpenLayers.Handler.Path, 
 		    {
 			featureAdded:function(feature) { 
@@ -2628,7 +2657,6 @@ GeoAnnotator.MapPanelCtrl = {
 	    if (feature.geometry instanceof OpenLayers.Geometry.Polygon) {
 	    }
 	    else if (feature.geometry instanceof OpenLayers.Geometry.LineString) {
-		thisCtrl.setNavigationMode();
 		thisCtrl.currRoute = feature;
 		// build route
 		var route_info = {};
@@ -2644,6 +2672,7 @@ GeoAnnotator.MapPanelCtrl = {
 		    params: {'route_info': Ext.util.JSON.encode(route_info)} 
 		});
 		thisCtrl.selectRouteControl.select(feature);
+		thisCtrl.setNavigationMode();
 	    }
 	    else if (feature.geometry instanceof OpenLayers.Geometry.Point) {
 		var map = thisCtrl.map;
@@ -2825,7 +2854,8 @@ GeoAnnotator.MapPanelCtrl = {
 
 	    var routeInfo = Ext.util.JSON.decode(xhr.responseText);
 	    if (routeInfo.id != '0') {
-		thisCtrl.currRoute.attributes.id = routeInfo.id
+		thisCtrl.currRoute.attributes.id = routeInfo.id;
+		thisCtrl.currRoute.attributes.owner = routeInfo.owner;
 		thisCtrl.currRoute.attributes.visibility = routeInfo.visibility;
 		thisCtrl.currRoute.attributes.markers = [];
 		thisCtrl.routes.push(thisCtrl.currRoute);
@@ -4285,7 +4315,7 @@ GeoAnnotator.AnnotationInfoPanelCtrl = {
 			    </iframe> \
 			</div> ";
 	    if (route.attributes.owner.id == GeoAnnotator.currUserId) {
-		html += "<input type='button' value='Edit' style='margin-left:15px;' onclick='GeoAnnotator.AnnotationInfoPanelCtrl.displayQuestions(route)'>"
+		html += "<input type='button' value='Edit' style='margin-left:15px;' onclick='GeoAnnotator.AnnotationInfoPanelCtrl.displayQuestions(GeoAnnotator.MapPanelCtrl.currRoute)'>"
 	    }
 
 	    thisCtrl.annotationInfoDisplayPanel.body.update(html);

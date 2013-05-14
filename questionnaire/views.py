@@ -27,10 +27,8 @@ def index(request):
 	return redirect('/user/login')
 
 def saveMarker(request):
-    print 'hello'
     response = {}
     markannotations = json.loads(request.REQUEST.get('markannotations', None))
-    print 'Markannotations: ', markannotations
     if markannotations == None:
 	response['id'] = '0'
     else:
@@ -54,11 +52,8 @@ def saveMarker(request):
 		# find the nearest route segment from the marker
 		route_seg   = RouteSegment.objects.filter(route=route).distance(footprint.shape).order_by('distance')[0]
 
-		print 'annotation: ', annotation, ' type: ', marktype
-		print 'route: ', route, 'route_seg: ', route_seg
 		marker = MarkAnnotation(procon=procon, annotation=annotation, markType=marktype,route=route, route_seg=route_seg)
 		marker.save()
-		print 'marker created: ', marker.id
 	    except Exception as e:
 		print e
 	    response['id'] = str(marker.id);
@@ -80,12 +75,9 @@ def saveMarker(request):
 		    footprint.shape.transform(trans) # transform footprint from 900913 to 4326
 		    result = geoutil.line_locate_point(route_seg.shape, shapely.geometry.Point(footprint.shape))
 		    # split original route segment
-		    print 'points on the route: ', (result[1].x, result[1].y), result[2].coords
-		    print 'route is: ', route_seg.shape.coords
 		    index_a = route_seg.shape.coords.index((result[1].x, result[1].y))
 		    index_a = index_a + 1
 		    index_b = route_seg.shape.coords.index((result[2].x, result[2].y))
-		    print 'index of the route: ', index_a, index_b
 
 		    route_seg_a_list = list(route_seg.shape.coords[:index_a])
 		    route_seg_a_list.append((result[0].x, result[0].y))
@@ -115,13 +107,11 @@ def saveMarker(request):
 		    route_seg.delete()
 		except Exception as e:
 		    print e
-    print response
     return HttpResponse(json.dumps(response), mimetype='application/json')
 
 def saveRoute(request):
     response = {}
     route_info = json.loads(request.REQUEST.get('route_info', None))
-    print route_info
     if route_info != None:
 	user    = User.objects.get(id=int(route_info['userId']))
 	# more infor about the route is to be added, i.e. rate, question answers
@@ -132,6 +122,9 @@ def saveRoute(request):
 	    route_seg.save()
 	    response['id']  = str(route.id)
 	    response['shape'] = route.shape.wkt
+	    response['owner'] = {}
+	    response['owner']['id'] = route.user.id
+	    response['owner']['name'] = route.user.username
 	    response['srid'] = route.shape.srid
 	    response['visibility'] = route.visibility
 	except Exception as e:
@@ -229,16 +222,32 @@ def loadMarkers(request):
     return HttpResponse(json.dumps(response), mimetype='application/json')
 
 def loadQuestions(request, route_id, step):
+    res = {}
+    res['step'] = step
     try:
 	route = Route.objects.get(id=route_id)
+	res['WalkOrBike'] = route.transport
+	res['reasons'] = route.reasons.split('@')
+	res['transport'] = route.transport
+	res['pathType']  = route.pathType
+	res['pathCondition']  = route.pathCondition
+	res['easeGoing']  = route.easeGoing
+	res['easeCrossing']  = route.easeCrossing
+	res['detour']  = route.detour
+	res['safetyChoices']  = route.safetyChoices.split('@')
+	res['driverBehaviors']  = route.driverBehaviors.split('@')
+	res['groceryFrequency']  = route.groceryFrequency
+	res['funFrequency']  = route.funFrequency
+	res['exerciseFrequency']  = route.exerciseFrequency
+	res['encourageMethods']  = route.encourageMethods.split('@')
     except Route.DoesNotExist:
 	return HttpResponse('null') 
     else:
 	if request.method == 'GET':
-	    return render(request, 'questions.html', {'step': step, 'WalkOrBike': route.transport})
+	    return render(request, 'questions.html', res)
 	if request.method == 'POST':
-	    print request.POST
 	    nextStep = str(int(step) + 1)
+	    res['step'] = nextStep
 	    if step == '0':
 		route.transport = request.POST.get('WalkOrBike', 'Walk')
 		route.reasons    = '@'.join(request.POST.getlist('reasons'))
@@ -251,8 +260,7 @@ def loadQuestions(request, route_id, step):
 		route.easeCrossing	= request.POST.get('easeCrossing', 0)
 		route.detour		= request.POST.get('detour', 'No')
 		route.save()
-		return render(request, 'questions.html', 
-			{'step': nextStep, 'WalkOrBike': route.transport})
+		return render(request, 'questions.html', res) 
 	    elif step == '2':
 		# use special character to split multiple choices
 		safetyChoices		= '@'.join(request.POST.getlist('safetyChoices'))
@@ -264,8 +272,7 @@ def loadQuestions(request, route_id, step):
 		route.safetyChoices	= safetyChoices
 		route.driverBehaviors	= driverBehaviors
 		route.save()
-		return render(request, 'questions.html', 
-			{'step': nextStep, 'WalkOrBike': route.transport})
+		return render(request, 'questions.html', res) 
 	    elif step == '3':
 		encourageMethods	= '@'.join(request.POST.getlist('encourageMethods'))
 		encourageMethods	= encourageMethods + '@' + request.POST.get('encourageMethodsText', '')
@@ -275,8 +282,7 @@ def loadQuestions(request, route_id, step):
 		route.exerciseFrequency	= request.POST.get('exerciseFrequency', 0)
 		route.encourageMethods	= encourageMethods		
 		route.save()
-		return render(request, 'questions.html', 
-			{'step': nextStep, 'WalkOrBike': route.transport})
+		return render(request, 'questions.html', res) 
 
 def loadRouteSummary(request, routeId):
     res= {}
