@@ -1032,6 +1032,7 @@ GeoAnnotator.MapPanelCtrl = {
 	selectFootprintControl: null,
 	drawFootprintControls : null,
 	selectRouteControl: null,
+	dragMarkerControl: null,
 	
 	// feature when hovering
 	hoverFeature : null,
@@ -1510,9 +1511,7 @@ GeoAnnotator.MapPanelCtrl = {
 //				    alert ('hello!');
 //				}
 //			    });
-			    marker.events.register('mousedown', marker, function (e) {
-				alert('hello');
-			    });
+			    marker.events.register('click', marker, function () { alert('hello'); });
 
 			    markers.push(marker);
 			    // add marker to layer
@@ -1882,6 +1881,12 @@ GeoAnnotator.MapPanelCtrl = {
 		thisCtrl.map.addLayer(thisCtrl.markerLayer);
 		thisCtrl.pointLayer = new OpenLayers.Layer.Vector('Point', {displayInLayerSwitcher: false});
 		thisCtrl.map.addLayer(thisCtrl.pointLayer);
+
+		// set zIndex to listen to events
+//		thisCtrl.markerLayer.setZIndex(999);
+//		thisCtrl.myRouteLayer.setZIndex(1000);
+//		thisCtrl.newRouteLayer.setZIndex(1000);
+//		thisCtrl.otherRouteLayer.setZIndex(1000);
 	},
 	
 	loadControls : function() {
@@ -1907,6 +1912,8 @@ GeoAnnotator.MapPanelCtrl = {
 		}
 	    );
 	    thisCtrl.map.addControl(thisCtrl.selectMarkerControl);
+	    thisCtrl.dragMarkerControl = new OpenLayers.Control.DragFeature(thisCtrl.markerLayer);
+	    thisCtrl.map.addControl(thisCtrl.dragMarkerControl);
 
 	    thisCtrl.selectRouteControl = new OpenLayers.Control.SelectFeature([
 		thisCtrl.myRouteLayer, 
@@ -2316,6 +2323,9 @@ GeoAnnotator.MapPanelCtrl = {
 		if (thisCtrl.selectFootprintControl) {
 			thisCtrl.selectFootprintControl.activate();
 		}
+		if (thisCtrl.dragMarkerControl) {
+			thisCtrl.dragMarkerControl.activate();
+		}
 		if (thisCtrl.selectRouteControl) {
 			thisCtrl.selectRouteControl.activate();
 		}
@@ -2336,6 +2346,9 @@ GeoAnnotator.MapPanelCtrl = {
 		}
 		if (thisCtrl.selectFootprintControl) {
 			thisCtrl.selectFootprintControl.deactivate();
+		}
+		if (thisCtrl.dragMarkerControl) {
+			thisCtrl.dragMarkerControl.deactivate();
 		}
 		if (thisCtrl.selectRouteControl) {
 			thisCtrl.selectRouteControl.deactivate();
@@ -2359,6 +2372,9 @@ GeoAnnotator.MapPanelCtrl = {
 		}
 		if (thisCtrl.selectRouteControl) {
 			thisCtrl.selectRouteControl.deactivate();
+		}
+		if (thisCtrl.dragMarkerControl) {
+			thisCtrl.dragMarkerControl.deactivate();
 		}
 		if (thisCtrl.selectFootprintControl) {
 			thisCtrl.selectFootprintControl.deactivate();
@@ -2693,14 +2709,16 @@ GeoAnnotator.MapPanelCtrl = {
 		// change url to {{ STATIC_URL }}
 		var icon = new OpenLayers.Icon('../static/images/' + markerType + '.png', size, offset);   
 
-		thisCtrl.markerLayer.addMarker(new OpenLayers.Marker(position,icon));
+		var marker = new OpenLayers.Marker(position,icon);
+		thisCtrl.markerLayer.addMarker(marker);
+		marker.events.register('click', marker, function () { alert('hello'); });
 
 		// popup for annotation input
-		var content = "<span>Description about the place and your feelings:<br/></span><br/><textarea style='width:180px;height:100px;' id='marker_comment'></textarea><button style='margin-left:120px;' onclick='GeoAnnotator.MapPanelCtrl.onCommentPosted()'>Confirm</button>"; // popup content
+		var content = "<span>Describe the place and your feelings:<br/></span><br/><textarea rows='4' id='marker_comment'></textarea><button style='margin-left:120px;' onclick='GeoAnnotator.MapPanelCtrl.onCommentPosted()'>Confirm</button>"; // popup content
 		
 		thisCtrl.lastPopup = new OpenLayers.Popup("MarkAnnotation-popup",
 			position,
-			new OpenLayers.Size(200,200),
+			new OpenLayers.Size(200,150),
 			content,
 		//	icon,
 			false); // display close
@@ -2719,7 +2737,7 @@ GeoAnnotator.MapPanelCtrl = {
 	    var markannotations = [];
 
 	    if (thisCtrl.currRoute == null) {
-		alert ("please draw a route first!");
+		alert ("please select/draw a route first!");
 	    } else {
 		if ($(":checkbox[name='problems']:checked").length != 0) {
 		    $(":checkbox[name='problems']:checked").each(function () {
@@ -2974,7 +2992,8 @@ GeoAnnotator.MapPanelCtrl = {
 		    thisCtrl.contextMenu.hide();
 	    }
 	    if (OpenLayers.Util.indexOf(thisCtrl.myRouteLayer.selectedFeatures, feature) == -1 
-		    && OpenLayers.Util.indexOf(thisCtrl.otherRouteLayer.selectedFeatures, feature) == -1){
+		    && OpenLayers.Util.indexOf(thisCtrl.otherRouteLayer.selectedFeatures, feature) == -1
+		    && OpenLayers.Util.indexOf(thisCtrl.newRouteLayer.selectedFeatures, feature) == -1) {
 		    feature.layer.drawFeature (feature, 'default');
 		    for (var i = 0; i < feature.attributes.markers.length; i++) {
 			var marker = feature.attributes.markers[i];
@@ -4314,9 +4333,6 @@ GeoAnnotator.AnnotationInfoPanelCtrl = {
 				    &lt;p&gt;Your browser does not support iframes.&lt;/p&gt; \
 			    </iframe> \
 			</div> ";
-	    if (route.attributes.owner.id == GeoAnnotator.currUserId) {
-		html += "<input type='button' value='Edit' style='margin-left:15px;' onclick='GeoAnnotator.AnnotationInfoPanelCtrl.displayQuestions(GeoAnnotator.MapPanelCtrl.currRoute)'>"
-	    }
 
 	    thisCtrl.annotationInfoDisplayPanel.body.update(html);
 	},

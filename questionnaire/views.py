@@ -282,7 +282,8 @@ def loadQuestions(request, route_id, step):
 		route.exerciseFrequency	= request.POST.get('exerciseFrequency', 0)
 		route.encourageMethods	= encourageMethods		
 		route.save()
-		return render(request, 'questions.html', res) 
+		return redirect('/questionnaire/' + str(route.id) + '/summary')
+#		return render(request, 'questions.html', res) 
 
 def loadRouteSummary(request, routeId):
     res= {}
@@ -293,6 +294,7 @@ def loadRouteSummary(request, routeId):
     else:
 	res['owner']	  = route.user.username
 	res['visibility'] = route.visibility
+	res['routeId']  = str(route.id)
 	res['reasons'] = route.reasons.split('@')
 	res['transport'] = route.transport
 	res['pathType']  = route.pathType
@@ -306,6 +308,10 @@ def loadRouteSummary(request, routeId):
 	res['funFrequency']  = route.funFrequency
 	res['exerciseFrequency']  = route.exerciseFrequency
 	res['encourageMethods']  = route.encourageMethods.split('@')
+	if request.user == route.user: 
+	    res['editable'] = True
+	else:
+	    res['editable'] = False
 
     return render(request, 'routeSummary.html', res)
 		

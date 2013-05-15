@@ -192,7 +192,7 @@
 				    </tr><tr> 
 				    <td><input type='radio' name='detour' value='No' {% if detour == 'No' %} checked {% endif %}>&nbsp;No</td> 
 				    </tr><tr> 
-				    <td><label for='noDetourText'>Where did you run into problems: </label><input type='text' name='noDetourText' id='noDetourText'></td> 
+				    <td><label for='detourText'>Where did you run into problems: </label><textarea name='detourText' id='detourText'></textarea></td> 
 				</tr> </tbody> 
 			    </table> 
 			    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
@@ -240,7 +240,7 @@
 				    </tr><tr> 
 				    <td><input type='checkbox' name='safetyChoices' value='courteous' {% if 'courteous' in safetyChoices %} checked {% endif %}>&nbsp;Was courteous to other travelers</td> 
 				    </tr><tr> 
-				    <td><label for='safetyChoicesText'>Other: </label><input type='text' name='safetyChoicesText' id='safetyChoicesText'></td> 
+				    <td><label for='safetyChoicesText'>Other: </label><textarea name='safetyChoicesText' id='safetyChoicesText'></textarea></td> 
 				</tr> </tbody> 
 			    </table> 
 			    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
@@ -269,7 +269,7 @@
 				    </tr><tr>                                      
 				    <td><input type='checkbox' name='driverBehaviors' value='aware' {% if 'aware' in driverBehaviors %} checked {% endif %}>&nbsp;Drivers weren't aware of me</td> 
 				    </tr><tr> 
-				    <td><label for='driverBehaviorText'>Other: </label><input type='text' name='driverBehaviorText' id='driverBehaviorsText'></td> 
+				    <td><label for='driverBehaviorText'>Other: </label><textarea name='driverBehaviorText' id='driverBehaviorsText'></textarea></td> 
 				</tr> </tbody> 
 			    </table> 
 			    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
@@ -403,7 +403,7 @@
 				    </tr><tr> 
 				    <td><input type='checkbox' name='encourageMethods' value='drivers' {% if 'drivers' in encourageMethods %} checked {% endif %}>&nbsp;If drivers were more considerate</td> 
 				    </tr><tr> 
-				    <td><label for='encourageMethodsText'>Other: </label><input type='text' name='encourageMethodsText' id='encourageMethodsText'></td> 
+				    <td><label for='encourageMethodsText'>Other: </label><textarea name='encourageMethodsText' id='encourageMethodsText'></textarea></td> 
 				</tr> </tbody> 
 			    </table> 
 			    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 

@@ -12,6 +12,9 @@
 	<link href='{{ STATIC_URL }}lib/star-rating/jquery.rating.css' type="text/css" rel="stylesheet"/>
     </head>
     <body>
+	{% if editable %}
+	<a id='editLink' href='../questions/{{routeId}}/0'>Edit</a><br>
+	{% endif %}
 	<table>
 	    <tr>
 		<td><label>Route drawn by: </label></td>
