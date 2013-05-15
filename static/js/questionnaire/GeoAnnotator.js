@@ -1912,13 +1912,14 @@ GeoAnnotator.MapPanelCtrl = {
 		}
 	    );
 	    thisCtrl.map.addControl(thisCtrl.selectMarkerControl);
-	    thisCtrl.dragMarkerControl = new OpenLayers.Control.DragFeature(thisCtrl.markerLayer);
-	    thisCtrl.map.addControl(thisCtrl.dragMarkerControl);
+//	    thisCtrl.dragMarkerControl = new OpenLayers.Control.DragFeature(thisCtrl.markerLayer);
+//	    thisCtrl.map.addControl(thisCtrl.dragMarkerControl);
 
 	    thisCtrl.selectRouteControl = new OpenLayers.Control.SelectFeature([
 		thisCtrl.myRouteLayer, 
 		thisCtrl.otherRouteLayer, 
-		thisCtrl.newRouteLayer
+		thisCtrl.newRouteLayer,
+		thisCtrl.markerLayer
 		], {
 		    clickout: false, toggle: true,
 		    multiple: false, hover: false,
@@ -2342,7 +2343,7 @@ GeoAnnotator.MapPanelCtrl = {
 	setDrawMode : function(mode) {
 		var thisCtrl = GeoAnnotator.MapPanelCtrl;
 		if (thisCtrl.navigationControl) {
-			thisCtrl.navigationControl.deactivate();	
+			thisCtrl.navigationControl.activate();	
 		}
 		if (thisCtrl.selectFootprintControl) {
 			thisCtrl.selectFootprintControl.deactivate();
@@ -2977,10 +2978,12 @@ GeoAnnotator.MapPanelCtrl = {
 	    feature.layer.drawFeature (feature, 'hover');
 	    thisCtrl.hoverFeature = feature; 
 	    // show related markers
-	    for (var i = 0; i < feature.attributes.markers.length; i++) {
-		var marker = feature.attributes.markers[i];
-		if (marker.icon.imageDiv.style.display == 'none') { // tricky here to determine if markers available or not 
-		    marker.display(true); // show if hidden
+	    if (feature.attributes.markers) {
+		for (var i = 0; i < feature.attributes.markers.length; i++) {
+		    var marker = feature.attributes.markers[i];
+		    if (marker.icon.imageDiv.style.display == 'none') { // tricky here to determine if markers available or not 
+			marker.display(true); // show if hidden
+		    }
 		}
 	    }
 	},
