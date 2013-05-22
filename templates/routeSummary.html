@@ -12,168 +12,194 @@
 	<link href='{{ STATIC_URL }}lib/star-rating/jquery.rating.css' type="text/css" rel="stylesheet"/>
     </head>
     <body>
-	{% if editable %}
-	<a id='editLink' href='../questions/{{routeId}}/0'>Edit</a><br>
-	{% endif %}
-	<table>
-	    <tr>
-		<td><label>Route drawn by: </label></td>
-		<td><label> {{ owner }} </label</td>
-	    </tr>
-	    <tr>
-		<td><label>Route visibility: </label></td>
-		<td><label> {{ visibility }} </label</td>
-	    </tr>
-	    <tr>
-		<td><label>Route used for: </label></td>
-		<td>
-		    <ul>
-			{% if 'work' in reasons %}
-			<li>Route to work</li>
-			{% endif %}
-			{% if 'child' in reasons %}
-			<li>Route to my child's school</li>
-			{% endif %}
-			{% if 'destination' in reasons %}
-			<li>Route to a destination I often visit</li>
-			{% endif %}
-		    </ul>
-		    <table>
-			<tr>
-			</tr>
-		    </table>
-	    </tr>
-	    <tr>
-		<td><label>Walk or Bike: </label></td>
-		<td><label> {{ transport }} </label</td>
-	    </tr>
-	    <tr>
-		<td><label>Route type: </label></td>
-		<td><label> {{ pathType }} </label</td>
-	    </tr>
-	    <tr>
-		<td><label>Route condition rate: </label></td>
-		<td>
-		    <input name="pathCondition" type="radio" class="star" title="many problems" value="1"/>
-		    <input name="pathCondition" type="radio" class="star" title="some problems" value="2"/>
-		    <input name="pathCondition" type="radio" class="star" title="good" value="3"/>
-		    <input name="pathCondition" type="radio" class="star" title="very few problems" value="4"/>
-		    <input name="pathCondition" type="radio" class="star" title="excellent" value="5"/>
-		</td>
-	    </tr>
-	    <tr>
-		<td><label>Ease of {{ transport|lower }} on the route: </label></td>
-		<td>
-		    <input name="easeGoing" type="radio" class="star" title="many problems" value="1"/>
-		    <input name="easeGoing" type="radio" class="star" title="some problems" value="2"/>
-		    <input name="easeGoing" type="radio" class="star" title="good" value="3"/>
-		    <input name="easeGoing" type="radio" class="star" title="very few problems" value="4"/>
-		    <input name="easeGoing" type="radio" class="star" title="excellent" value="5"/>
-		</td>
-	    </tr>
-	    <tr>
-		<td><label>Ease of crossing at inersection: </label></td>
-		<td>
-		    <input name="easeCrossing" type="radio" class="star" title="many problems" value="1"/>
-		    <input name="easeCrossing" type="radio" class="star" title="some problems" value="2"/>
-		    <input name="easeCrossing" type="radio" class="star" title="good" value="3"/>
-		    <input name="easeCrossing" type="radio" class="star" title="very few problems" value="4"/>
-		    <input name="easeCrossing" type="radio" class="star" title="excellent" value="5"/>
-		</td>
-	    </tr>
-	    <tr>
-		<td><label>Any detour to your destination? </label></td>
-		<td><label> {{ detour }} </label</td>
-	    </tr>
-	    {% if transport == 'Biking' %}
-	    <tr>
-		<td><label>Safety measures while biking: </label></td>
-		<td>
-		    <ul>
-			{% if 'helmet' in safetyChoices %}
-			<li> Wear bicycle helmet </li>
-			{% endif %}
-			{% if 'traffic rule' in safetyChoices %}
-			<li> Obey traffic signal and signs </li>
-			{% endif %}
-			{% if 'with traffic' in safetyChoices %}
-			<li> Ride with (not agaist) traffic </li>
-			{% endif %}
-			{% if 'signal' in safetyChoices %}
-			<li> Signal my turns </li>
-			{% endif %}
-			{% if 'light' in safetyChoices %}
-			<li> Use light if at night </li>
-			{% endif %}
-			{% if 'clothing' in safetyChoices %}
-			<li> Wear bright or reflective clothing </li>
-			{% endif %}
-			{% if 'courteous' in safetyChoices %}
-			<li> Be courteous to other travelers </li>
-			{% endif %}
-		    </ul>
-		</td>
-	    </tr>
+	<div id='basicInfo' class='InfoGroup'>
+	    <label><strong>Basic info about the route</strong></label>
+	    {% if editable %}
+	    <input type='button' class='EditBtn' value='Edit' onClick=""><br><br>
 	    {% endif %}
-	    <tr>
-		<td><label>Driver behaviors: </label></td>
-		<td>
-		    <ul>
-			{% if 'fine' in driverBehaviors %}
-			<li> Just fine </li>
-			{% endif%}
-			{% if 'yield' in driverBehaviors %}
-			<li> Drivers didn't yield to pedestrians </li>
-			{% endif%}
-			{% if 'speed' in driverBehaviors %}
-			<li> Drivers didn't obey speed limit</li>
-			{% endif%}
-			{% if 'cutoff' in driverBehaviors %}
-			<li> I was cut off by a motorist</li>
-			{% endif%}
-			{% if 'aware' in driverBehaviors %}
-			<li> Drivers weren't aware of me</li>
-			{% endif%}
-		    </ul>
-		</td>
-	    </tr>
-	    <tr>
-		<td><label>Frequency for necessities: </label></td>
-		<td>
-		    <input name="groceryFrequency" type="radio" class="star" title="never" value="1"/>
-		    <input name="groceryFrequency" type="radio" class="star" title="rarely" value="2"/>
-		    <input name="groceryFrequency" type="radio" class="star" title="sometimes" value="3"/>
-		    <input name="groceryFrequency" type="radio" class="star" title="often" value="4"/>
-		    <input name="groceryFrequency" type="radio" class="star" title="everyday" value="5"/>
-		</td>
-	    </tr>
-	    <tr>
-		<td><label>Frequency for fun: </label></td>
-		<td>
-		    <input name="funFrequency" type="radio" class="star" title="never" value="1"/>
-		    <input name="funFrequency" type="radio" class="star" title="rarely" value="2"/>
-		    <input name="funFrequency" type="radio" class="star" title="sometimes" value="3"/>
-		    <input name="funFrequency" type="radio" class="star" title="often" value="4"/>
-		    <input name="funFrequency" type="radio" class="star" title="everyday" value="5"/>
-		</td>
-	    </tr>
-	    <tr>
-		<td><label>Frequency for recreation: </label></td>
-		<td>
-		    <input name="exerciseFrequency" type="radio" class="star" title="never" value="1"/>
-		    <input name="exerciseFrequency" type="radio" class="star" title="rarely" value="2"/>
-		    <input name="exerciseFrequency" type="radio" class="star" title="sometimes" value="3"/>
-		    <input name="exerciseFrequency" type="radio" class="star" title="often" value="4"/>
-		    <input name="exerciseFrequency" type="radio" class="star" title="everyday" value="5"/>
-		</td>
-	    </tr>
-	</table>
+	    <table>
+		<tr>
+		    <td><label>Route drawn by: </label></td>
+		    <td><label> {{ owner }} </label</td>
+		</tr>
+		<tr>
+		    <td><label>Route visibility: </label></td>
+		    <td><label> {{visibility}} </label></td>
+		</tr>
+		<tr>
+		    <td><label>Walk or Bike: </label></td>
+		    <td><label> {{ transport }} </label</td>
+		</tr>
+		<tr>
+		    <td><label>Route type: </label></td>
+		    <td><label> {{ pathType }} </label</td>
+		</tr>
+	    </table>
+	</div>
+	<div class='Separator'></div>  
+	<div id='detailInfo' class='InfoGroup'>
+	    <label><strong>Detailed info about the route</strong></label>
+	    {% if editable %}
+	    <input type='button' class='EditBtn' value='Edit' onClick="window.location='../questions/{{routeId}}/0'"> <br><br>
+	    {% endif %}
+	    <table>
+		<tr>
+		    <td><label>Route used for: </label></td>
+		    <td>
+			<ul>
+			    {% if 'work' in reasons %}
+			    <li>Route to work</li>
+			    {% endif %}
+			    {% if 'child' in reasons %}
+			    <li>Route to my child's school</li>
+			    {% endif %}
+			    {% if 'destination' in reasons %}
+			    <li>Route to a destination I often visit</li>
+			    {% endif %}
+			</ul>
+		    </td>
+		</tr>
+		<tr>
+		    <td><label>Route condition rate: </label></td>
+		    <td>
+			<input name="pathCondition" type="radio" class="star" title="many problems" value="1"/>
+			<input name="pathCondition" type="radio" class="star" title="some problems" value="2"/>
+			<input name="pathCondition" type="radio" class="star" title="good" value="3"/>
+			<input name="pathCondition" type="radio" class="star" title="very few problems" value="4"/>
+			<input name="pathCondition" type="radio" class="star" title="excellent" value="5"/>
+		    </td>
+		</tr>
+		<tr>
+		    <td><label>Ease of {{ transport|lower }} on the route: </label></td>
+		    <td>
+			<input name="easeGoing" type="radio" class="star" title="many problems" value="1"/>
+			<input name="easeGoing" type="radio" class="star" title="some problems" value="2"/>
+			<input name="easeGoing" type="radio" class="star" title="good" value="3"/>
+			<input name="easeGoing" type="radio" class="star" title="very few problems" value="4"/>
+			<input name="easeGoing" type="radio" class="star" title="excellent" value="5"/>
+		    </td>
+		</tr>
+		<tr>
+		    <td><label>Ease of crossing at inersection: </label></td>
+		    <td>
+			<input name="easeCrossing" type="radio" class="star" title="many problems" value="1"/>
+			<input name="easeCrossing" type="radio" class="star" title="some problems" value="2"/>
+			<input name="easeCrossing" type="radio" class="star" title="good" value="3"/>
+			<input name="easeCrossing" type="radio" class="star" title="very few problems" value="4"/>
+			<input name="easeCrossing" type="radio" class="star" title="excellent" value="5"/>
+		    </td>
+		</tr>
+		<tr>
+		    <td><label>Any detour to your destination? </label></td>
+		    <td><label> {{ detour }} </label</td>
+		</tr>
+		{% if transport == 'Biking' %}
+		<tr>
+		    <td><label>Safety measures while biking: </label></td>
+		    <td>
+			<ul>
+			    {% if 'helmet' in safetyChoices %}
+			    <li> Wear bicycle helmet </li>
+			    {% endif %}
+			    {% if 'traffic rule' in safetyChoices %}
+			    <li> Obey traffic signal and signs </li>
+			    {% endif %}
+			    {% if 'with traffic' in safetyChoices %}
+			    <li> Ride with (not agaist) traffic </li>
+			    {% endif %}
+			    {% if 'signal' in safetyChoices %}
+			    <li> Signal my turns </li>
+			    {% endif %}
+			    {% if 'light' in safetyChoices %}
+			    <li> Use light if at night </li>
+			    {% endif %}
+			    {% if 'clothing' in safetyChoices %}
+			    <li> Wear bright or reflective clothing </li>
+			    {% endif %}
+			    {% if 'courteous' in safetyChoices %}
+			    <li> Be courteous to other travelers </li>
+			    {% endif %}
+			</ul>
+		    </td>
+		</tr>
+		{% endif %}
+		<tr>
+		    <td><label>Driver behaviors: </label></td>
+		    <td>
+			<ul>
+			    {% if 'fine' in driverBehaviors %}
+			    <li> Just fine </li>
+			    {% endif%}
+			    {% if 'yield' in driverBehaviors %}
+			    <li> Drivers didn't yield to pedestrians </li>
+			    {% endif%}
+			    {% if 'speed' in driverBehaviors %}
+			    <li> Drivers didn't obey speed limit</li>
+			    {% endif%}
+			    {% if 'cutoff' in driverBehaviors %}
+			    <li> I was cut off by a motorist</li>
+			    {% endif%}
+			    {% if 'aware' in driverBehaviors %}
+			    <li> Drivers weren't aware of me</li>
+			    {% endif%}
+			</ul>
+		    </td>
+		</tr>
+		<tr>
+		    <td><label>Frequency for necessities: </label></td>
+		    <td>
+			<input name="groceryFrequency" type="radio" class="star" title="never" value="1"/>
+			<input name="groceryFrequency" type="radio" class="star" title="rarely" value="2"/>
+			<input name="groceryFrequency" type="radio" class="star" title="sometimes" value="3"/>
+			<input name="groceryFrequency" type="radio" class="star" title="often" value="4"/>
+			<input name="groceryFrequency" type="radio" class="star" title="everyday" value="5"/>
+		    </td>
+		</tr>
+		<tr>
+		    <td><label>Frequency for fun: </label></td>
+		    <td>
+			<input name="funFrequency" type="radio" class="star" title="never" value="1"/>
+			<input name="funFrequency" type="radio" class="star" title="rarely" value="2"/>
+			<input name="funFrequency" type="radio" class="star" title="sometimes" value="3"/>
+			<input name="funFrequency" type="radio" class="star" title="often" value="4"/>
+			<input name="funFrequency" type="radio" class="star" title="everyday" value="5"/>
+		    </td>
+		</tr>
+		<tr>
+		    <td><label>Frequency for recreation: </label></td>
+		    <td>
+			<input name="exerciseFrequency" type="radio" class="star" title="never" value="1"/>
+			<input name="exerciseFrequency" type="radio" class="star" title="rarely" value="2"/>
+			<input name="exerciseFrequency" type="radio" class="star" title="sometimes" value="3"/>
+			<input name="exerciseFrequency" type="radio" class="star" title="often" value="4"/>
+			<input name="exerciseFrequency" type="radio" class="star" title="everyday" value="5"/>
+		    </td>
+		</tr>
+	    </table>
+	</div>
+	<div class='Separator'></div>
+
 	<input type="hidden" id="pathConditionValue" value="{{pathCondition}}">
 	<input type="hidden" id="easeGoingValue" value="{{easeGoing}}">
 	<input type="hidden" id="easeCrossingValue" value="{{easeCrossing}}">
 	<input type="hidden" id="groceryFrequencyValue" value="{{groceryFrequency}}">
 	<input type="hidden" id="funFrequencyValue" value="{{funFrequency}}">
 	<input type="hidden" id="exerciseFrequencyValue" value="{{exerciseFrequency}}">
+
+	<div id='markerInfo' class='InfoGroup'>
+	    <label><strong> Number of observations along the route </strong></label><br>
+	    <table>
+	    {% for key, num in markersSummary.items %}
+		{% if num != 0 %}
+		<tr>
+		    <td><input type='checkbox' name='marker' value='{{key}}'><img src='{{STATIC_URL}}/images/{{key}}.png'>&nbsp;{{key}}</td>
+		    <td><label>{{num}}</label></td>
+		</tr>
+		{% endif %}
+	    {% endfor %}
+	    </table>
+	</div>
+
 	<script>
 	    $(document).ready(function () {
 		var pcv = $('#pathConditionValue').val();

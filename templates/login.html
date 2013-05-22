@@ -2,8 +2,12 @@
 <html>
     <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+	<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+	<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
     	<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}styles/ext_main.css">
     	<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}styles/login.css">
+	<script type="text/javascript" src="{{ STATIC_URL }}js/questionnaire/login.js"></script>
 	<title>GeoDeliberator</title>
     </head>
     <body>
@@ -58,6 +62,40 @@
 			    <label for='email'>Email: </label>
 			</td><td>
 			<input type='email' name='email' id='email' value='{{email}}'><br>
+		    </td></tr>
+		    <tr><td>
+			    <label for='firstName'>First name: </label>
+			</td><td>
+			<input type='text' name='firstName' id='firstName' value='{{firstName}}'><br>
+		    </td></tr>
+		    <tr><td>
+			    <label for='lastName'>LastName: </label>
+			</td><td>
+			<input type='text' name='lastName' id='lastName' value='{{lastName}}'><br>
+		    </td></tr>
+		    <tr><td>
+			    <label for='gender'>Gender: </label>
+			</td><td>
+			<select id='gender' name='gender'>
+			    <option value="M">Male</option>
+			    <option value="F">Female</option>
+			    <option value="O">Other</option>
+			</select>
+		    </td></tr>
+		    <tr><td>
+			    <label for='birthday'>Birthday: </label>
+			</td><td>
+			<input type='text' name='birthday' id='birthday' value='{{birthday}}'><br>
+		    </td></tr>
+		    <tr><td>
+			    <label for='occupation'>Occupation: </label>
+			</td><td>
+			<input type='text' name='occupation' id='occupation' value='{{occupation}}'><br>
+		    </td></tr>
+		    <tr><td>
+			    <label for='org'>Organization: </label>
+			</td><td>
+			<input type='text' name='org' id='org' value='{{org}}'><br>
 		    </td></tr>
 		    <tr><td>
 			    <label>Participating Forum(s):</label>

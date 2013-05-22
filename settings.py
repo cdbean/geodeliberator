@@ -11,6 +11,9 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
+SYS_MAIL_USER = 'spatiallabist'
+SYS_MAIL_PSW  = 'ist102aist'
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.contrib.gis.db.backends.postgis', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.

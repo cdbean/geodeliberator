@@ -26,25 +26,62 @@ def index(request):
     else:
 	return redirect('/user/login')
 
+def updateMarker(request, markerId):
+    response = {}
+    updates = json.loads(request.REQUEST.get('updates'))
+    print updates
+    if updates:
+	try:
+	    marker = MarkAnnotation.objects.get(id=markerId)
+	except Exception as e:
+	    response['success'] = False
+	    response['error'] = 'No such marker found'
+	    print e
+	else:
+	    if 'comment' in updates:
+		marker.annotation.content = updates['comment']
+		marker.annotation.save()
+		marker.save()
+		response['id'] = marker.id
+		response['comment'] = marker.annotation.content
+		response['route'] = marker.route.id
+		response['success'] = True
+	    else:
+		response['success'] = False
+		response['error'] = 'Cannot deal with this update now'
+		
+    return HttpResponse(json.dumps(response), mimetype='application/json')
+
 def saveMarker(request):
     response = {}
     markannotations = json.loads(request.REQUEST.get('markannotations', None))
     if markannotations == None:
 	response['id'] = '0'
     else:
+	# create a footprint for all annotations
+	annotation_info = markannotations[0]['annotation']
+	footprint_info = annotation_info['footprints'][0]
+	footprint = Footprint(created_at=parser.parse(annotation_info["timeCreated"]), shape=GEOSGeometry('SRID=%s;%s' % (footprint_info["srid"], footprint_info["shape"])) )
+	footprint.save()
+	response['annotationsId'] = []
+	print 'saved footprint: ', footprint.id
+
 	for markannotation in markannotations:
 	    annotation_info = markannotation['annotation']
-	    # footprint
-	    footprint_info = annotation_info['footprints'][0]
-	    footprint = Footprint(created_at=parser.parse(annotation_info["timeCreated"]), shape=GEOSGeometry('SRID=%s;%s' % (footprint_info["srid"], footprint_info["shape"])) )
-	    footprint.save()
-
 	    author	= User.objects.get(id=int(annotation_info['userId']))
 	    forum = Forum.objects.get(id=int(annotation_info['forumId']))
 	    procon	= annotation_info.get('procon', 'con')
-	    annotation = Annotation(content=annotation_info["content"], author=author, forum=forum, sharelevel=annotation_info["shareLevel"], created_at=parser.parse(annotation_info["timeCreated"]), updated_at=parser.parse(annotation_info["timeCreated"]), contextmap=annotation_info["contextMap"])
-	    annotation.save()
-	    GeoReference.objects.create(footprint=footprint, annotation=annotation)
+	    print 'Got all info from client'
+	    try:
+		annotation = Annotation(content=annotation_info["content"], author=author, forum=forum, sharelevel=annotation_info["shareLevel"], created_at=parser.parse(annotation_info["timeCreated"]), updated_at=parser.parse(annotation_info["timeCreated"]), contextmap=annotation_info["contextMap"])
+		annotation.save()
+		print 'Saved annotation', annotation.id
+		GeoReference.objects.create(footprint=footprint, annotation=annotation)
+		print 'created georeference'
+	    except Exception as e: 
+		print 'annotation problem'
+		print e
+		print 'annotation problem 2'
 	    
 	    marktype = markannotation['markertype']
 	    try:
@@ -54,9 +91,16 @@ def saveMarker(request):
 
 		marker = MarkAnnotation(procon=procon, annotation=annotation, markType=marktype,route=route, route_seg=route_seg)
 		marker.save()
+		# send arbitrary marker id back
+		response['id'] = str(footprint.id)
+		response['annotationsId'].append(str(marker.id))
+		response['comment'] = marker.annotation.content
+		response['route'] = marker.route.id
+		response['success'] = True
 	    except Exception as e:
+		response['success'] = False
+		response['error'] = 'Add marker failed, please try later'
 		print e
-	    response['id'] = str(marker.id);
 
 	    if marktype == 'stop':
 		# split route 
@@ -146,6 +190,7 @@ def loadRoutes(request):
 	selfRoutes = Route.objects.filter(user=user)
 	otherRoutes = Route.objects.exclude(user=user).filter(visibility='everyone')
 	routes = list(chain(selfRoutes, otherRoutes))
+	print 'Routes found: ', len(routes)
 
 	for route in routes:
 	    route_info = {}
@@ -157,24 +202,42 @@ def loadRoutes(request):
 	    route_info['owner']['id'] = route.user.id
 	    route_info['owner']['name'] = route.user.username
 	    route_info['rate'] = route.pathCondition
-	    response['routes'].append(route_info)
+	    route_info['transport'] = route.transport
 	
 	    route_info['markers'] = []
 	    markannotations = MarkAnnotation.objects.filter(route=route)
+	    footprints = []
 	    for ma in markannotations:
+		refs = GeoReference.objects.filter(annotation=ma.annotation)
+		print 'refs found: ', len(refs)
+		for ref in refs:
+		    footprints.append(ref.footprint)
+	    print 'footprints found: ', len(footprints)
+	    for fp in footprints:
 		ma_info = {}
-		ma_info['id'] = str(ma.id)
-		ma_info['type'] = str(ma.markType)
-		ma_info['route'] = str(ma.route.id)
-		ma_info['seg'] = str(ma.route_seg.id)
-		annotation = ma.annotation
-		ma_info['footprints'] = []
-		for fp in annotation.footprints.all():
+		ma_info['id'] = str(fp.id)
+		refs = GeoReference.objects.filter(footprint=fp)
+		print 'refs found per footprint: ', len(refs)
+		if (len(refs) > 1):
+		    ma_info['type'] = str('multiple')
+		else:
+		    ma_info['type'] = str(ma.markType)
+		for ref in refs:
+		    ma = MarkAnnotation.objects.get(annotation=ref.annotation)
+		    ma_info['route'] = str(ma.route.id)
+		    ma_info['seg'] = str(ma.route_seg.id)
+		    annotation = ma.annotation
+		    ma_info['comment'] = annotation.content
+		    ma_info['footprints'] = []
+		    
 		    fp_info = {}
 		    fp_info['shape'] = fp.shape.wkt
 		    fp_info['srid'] = fp.shape.srid
-		    ma_info['footprints'].append(fp_info)
+		    ma_info['footprint'] = fp_info
+
 		route_info['markers'].append(ma_info)
+		print 'one footprint created'
+	    response['routes'].append(route_info)
 
 	    route_segs = RouteSegment.objects.filter(route=route)
 	    for seg in route_segs:
@@ -285,35 +348,57 @@ def loadQuestions(request, route_id, step):
 		return redirect('/questionnaire/' + str(route.id) + '/summary')
 #		return render(request, 'questions.html', res) 
 
-def loadRouteSummary(request, routeId):
+def loadRouteSummary(request):
     res= {}
+    res['success'] = False
     try:
-	route = Route.objects.get(id=routeId)
-    except Route.DoesNotExist:
-	res= "Error: Route does not exist!"
-    else:
-	res['owner']	  = route.user.username
-	res['visibility'] = route.visibility
-	res['routeId']  = str(route.id)
-	res['reasons'] = route.reasons.split('@')
-	res['transport'] = route.transport
-	res['pathType']  = route.pathType
-	res['pathCondition']  = route.pathCondition
-	res['easeGoing']  = route.easeGoing
-	res['easeCrossing']  = route.easeCrossing
-	res['detour']  = route.detour
-	res['safetyChoices']  = route.safetyChoices.split('@')
-	res['driverBehaviors']  = route.driverBehaviors.split('@')
-	res['groceryFrequency']  = route.groceryFrequency
-	res['funFrequency']  = route.funFrequency
-	res['exerciseFrequency']  = route.exerciseFrequency
-	res['encourageMethods']  = route.encourageMethods.split('@')
-	if request.user == route.user: 
-	    res['editable'] = True
+	routes = []
+	routesId = request.GET.getlist('routesId')
+	print routesId
+	if len(routesId) == 1:
+	    routeId = routesId[0]
+	    route = Route.objects.get(id=routeId)
+	    routes.append(route)
+	    res['owner']	  = route.user.username
+	    res['visibility'] = route.visibility
+	    res['routeId']  = str(route.id)
+	    res['reasons'] = route.reasons.split('@')
+	    res['transport'] = route.transport
+	    res['pathType']  = route.pathType
+	    res['pathCondition']  = route.pathCondition
+	    res['easeGoing']  = route.easeGoing
+	    res['easeCrossing']  = route.easeCrossing
+	    res['detour']  = route.detour
+	    res['safetyChoices']  = route.safetyChoices.split('@')
+	    res['driverBehaviors']  = route.driverBehaviors.split('@')
+	    res['groceryFrequency']  = route.groceryFrequency
+	    res['funFrequency']  = route.funFrequency
+	    res['exerciseFrequency']  = route.exerciseFrequency
+	    res['encourageMethods']  = route.encourageMethods.split('@')
+	    res['markersSummary'] = {}
 	else:
-	    res['editable'] = False
-
+	    for routeId in routesId:
+		route = Route.objects.get(id=routeId)
+		routes.append(route)
+    except Route.DoesNotExist:
+	res['error'] = "Error: Route does not exist!"
+    else:
+	for route in routes:
+	    markers = MarkAnnotation.objects.filter(route=route)
+	    if markers:
+		for marker in markers:
+		    if marker.markType in res['markersSummary']:
+			res['markersSummary'][marker.markType] += 1
+		    else:
+			res['markersSummary'][marker.markType] = 1
+	    if request.user == route.user: 
+		res['editable'] = True
+	    else:
+		res['editable'] = False
+	res['success'] = True
     return render(request, 'routeSummary.html', res)
+
+#    return HttpResponse(json.dumps(res), mimetype='application/json')
 		
 
 def setVisibility(request, routeId):
@@ -331,6 +416,50 @@ def setVisibility(request, routeId):
 	except Exception as e:
 	    response['error'] = ''
 	    print 'Error: set route visibility failed:  ',  e
+    return HttpResponse(json.dumps(response), mimetype='application/json')
+
+def getComments(request, markerId):
+    response = {}
+    if request.method == 'GET':
+	response['comments'] = []
+	try:
+	    footprint = Footprint.objects.get(id=int(markerId))
+	    print 'footprint clicked: ', markerId
+	    references = GeoReference.objects.filter(footprint=footprint)
+	    annotation_list = []
+	    for ref in references:
+		annotation_list.append(ref.annotation)
+	    for annotation in annotation_list:
+		print 'Annotation found: ', annotation.id
+		comment = {}
+		marker = MarkAnnotation.objects.get(annotation=annotation)
+		comment['type'] = marker.markType
+		comment['content'] = annotation.content
+		comment['createAt'] = str(annotation.created_at)
+		comment['owner'] = annotation.author.username
+		response['comments'].append(comment)
+	    response['success'] = True
+	except Exception as e:
+	    response['success'] = False
+	    response['error'] = 'Retrieve comments failed..Please try later'
+	    print e
+    return HttpResponse(json.dumps(response), mimetype='application/json')
+
+
+def deleteMarker(request, markerId):
+    response = {}
+    if request.method == 'POST':
+	marker_id = int(request.POST.get('markerId', '0'))
+	user_id  = int(request.POST.get('userId', '0'))
+	try:
+	    user	= User.objects.get(id=user_id)
+	    marker	= MarkAnnotation.objects.get(id=marker_id)
+	    marker.delete()
+	    response['success'] = True
+	except Exception as e:
+	    response['success'] = False
+	    response['error'] = 'Delete marker failed, please try later'
+	    print 'Error: delete marker failed', e
     return HttpResponse(json.dumps(response), mimetype='application/json')
 
 def deleteRoute(request, routeId):
