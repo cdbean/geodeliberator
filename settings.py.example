@@ -6,7 +6,7 @@ DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 SYS_MAIL_USER = 'spatiallabist'
-SYS_MAIL_PWD  = 'ist102aist'
+SYS_MAIL_PSW  = 'ist102aist'
 
 ADMINS = (
     # ('Your Name', 'your_email@domain.com'),
