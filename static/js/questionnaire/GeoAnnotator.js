@@ -3420,8 +3420,8 @@ GeoAnnotator.MapPanelCtrl = {
 		    feature.attributes.markers[i].style = {display: 'none'};
 		}
 		GeoAnnotator.MapPanelCtrl.pointLayer.redraw();
-		var html = "<p>Click on the route to see the detailed information</p>";
-		html += "<button onclick='GeoAnnotator.MapPanelCtrl.setDrawMode(\"line\")'>Draw another route</button> "
+		var html = "<div class='default-info'><p>Click on the route to see the detailed information</p>";
+		html += "<button onclick='GeoAnnotator.MapPanelCtrl.setDrawMode(\"line\")'>Draw another route</button></div> "
 		GeoAnnotator.AnnotationInfoPanelCtrl.annotationInfoDisplayPanel.body.update(html);
 	    }
 	    else if (feature.attributes.type) {
@@ -4790,8 +4790,8 @@ GeoAnnotator.AnnotationInfoPanelCtrl = {
 	displayRouteSummary : function(routes) {
 	    var thisCtrl = GeoAnnotator.AnnotationInfoPanelCtrl;
 	    var url = 'route/summary?routesId=' + routes.attributes.id; // default transport: walk
-	    var html = "<div id='route_summary_frame' style='width:100%;height=100%'> \
-			    <iframe id='frame_viewport' name='iframe_viewport' frameborder='0' scrolling='auto'  src=" + url + "> \
+	    var html = "<div id='route_summary_frame' style='height:800px;'> \
+			    <iframe id='frame_viewport' style='height:100%;' name='iframe_viewport' frameborder='0' scrolling='auto'  src=" + url + "> \
 				    &lt;p&gt;Your browser does not support iframes.&lt;/p&gt; \
 			    </iframe> \
 			</div> ";

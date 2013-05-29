@@ -345,7 +345,7 @@ def loadQuestions(request, route_id, step):
 		route.exerciseFrequency	= request.POST.get('exerciseFrequency', 0)
 		route.encourageMethods	= encourageMethods		
 		route.save()
-		return redirect('/questionnaire/' + str(route.id) + '/summary')
+		return redirect('/questionnaire/route/summary?routesId=' + str(route.id))
 #		return render(request, 'questions.html', res) 
 
 def loadRouteSummary(request):
