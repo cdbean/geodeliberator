@@ -83,6 +83,7 @@ a:hover {
 
 #mapDiv
 {
+	position: relative;
 	width: 100%;
 	height: 100%;
 	padding: 0;
@@ -282,6 +283,33 @@ a:hover {
 }
 .exclamation{
 	background-image: url(../images/exclamation.png) !important; 
+}
+.house{
+	background-image: url(../images/house.png) !important; 
+}
+.restaurant{
+	background-image: url(../images/restaurant.png) !important; 
+}
+.grocery{
+	background-image: url(../images/grocery.png) !important; 
+}
+.service{
+	background-image: url(../images/service.png) !important; 
+}
+.office{
+	background-image: url(../images/office.png) !important; 
+}
+.school{
+	background-image: url(../images/school.png) !important; 
+}
+.park{
+	background-image: url(../images/park.png) !important; 
+}
+.gathering{
+	background-image: url(../images/gathering.png) !important; 
+}
+.other{
+	background-image: url(../images/other.png) !important; 
 }
 
 .create-issue-btn {
@@ -512,5 +540,12 @@ a:hover {
 
 #frame_viewport {
     height: 500px; 
+}
+
+table {
+    vertical-align:top;
+}
+textarea {
+    resize:both;
 }
 

@@ -5,14 +5,16 @@
 		<title>GeoDeliberator</title>
 		<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script> 
 		<script src="http://code.jquery.com/jquery-migrate-1.1.1.min.js"></script> 
+		<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+		<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+
 		<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}lib/ext-3.2.1/resources/css/ext-all.css">
 		<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}lib/ext-3.2.1/resources/css/xtheme-gray.css">
 		<script type="text/javascript" src="{{ STATIC_URL }}lib/ext-3.2.1/adapter/ext/ext-base.js"></script>
 		<script type="text/javascript" src="{{ STATIC_URL }}lib/ext-3.2.1/ext-all.js"></script>
 <!--		<script type="text/javascript" src="lib/ext/data-view-plugins.js"></script>-->
-<!-- <script type="text/javascript" src="{{ STATIC_URL }}lib/OpenLayers/lib/OpenLayers.js"></script> -->
-<!--		<script type="text/javascript" src="OpenLayers/OpenLayers.js"></script>-->
-		<script type="text/javascript" src="http://openlayers.org/api/OpenLayers.js"></script>
+		<script type="text/javascript" src="{{ STATIC_URL }}lib/OpenLayers-2.12/OpenLayers.js"></script> 
+<!--		<script type="text/javascript" src="http://openlayers.org/api/OpenLayers.js"></script> -->
 <!--		<script type="text/javascript">
         	Timeline_ajax_url='lib/timeline/timeline_ajax/simile-ajax-api.js';
         	Timeline_urlPrefix='lib/timeline/timeline_js/';       
@@ -33,19 +35,280 @@
 <!--	    <script type="text/javascript" src="js/GeoAnnotator.min.js"></script>
 
 -->	     
-        <script src="http://maps.google.com/maps?file=api&amp;v=2&amp;sensor=true&amp;key=ABQIAAAAYtdeaf8I3MU_0Hkv4cr1_xSCwEGung5EHhxRtlSoEmDbQaDD-BT_PzzcOpCOGgLx_xpJF5nUU-ijHw" type="text/javascript"></script>
+        <script type="text/javascript" src="{{ STATIC_URL }}lib/jquery.msgbox.7.1/jquery.msgbox.js"></script>
+        <script type="text/javascript" src="{{ STATIC_URL }}lib/jquery.msgbox.7.1/jquery.dragndrop.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}lib/jquery.msgbox.7.1/jquery.msgbox.css">
+<!--	<script type='text/javascript' src='{{ STATIC_URL }}lib/jquery.msgbox/scripts/jquery.msgBox.js'></script>
+<link rel="stylesheet" href="{{ STATIC_URL }}lib/jquery.msgbox/styles/msgBoxLight.css" />	-->
+
+        <script src="http://maps.google.com/maps?file=api&amp;v=2&amp;sensor=true&amp;key=AIzaSyCPWMaP2464g2fgX0hyKJm39BiYmIu-hwo" type="text/javascript"></script>
         <script type="text/javascript" src="{{ STATIC_URL }}js/questionnaire/GeoAnnotator.js"></script>
 	<script type="text/javascript" src="{{ STATIC_URL }}js/questionnaire/ext_layout.js"></script>
         <script type="text/javascript" src="{{ STATIC_URL }}js/questionnaire/displayQuestions.js"></script>
+
+	<!-- for the start rating -->
+	<script src='{{ STATIC_URL }}lib/star-rating/jquery.js' type="text/javascript"></script>
+	<script src='{{ STATIC_URL }}lib/star-rating/jquery.MetaData.js' type="text/javascript" language="javascript"></script>
+	<script src='{{ STATIC_URL }}lib/star-rating/jquery.rating.js' type="text/javascript" language="javascript"></script>
+	<link href='{{ STATIC_URL }}lib/star-rating/jquery.rating.css' type="text/css" rel="stylesheet"/>
 		
+	<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}styles/routeSummary.css"/>
 	</head>
 	<body>
-		<!-- header-->
-		<div id="header">
-		    <h1>GeoDeliberator</h1>
-		</div>
-		<input type='hidden' id='userId' value='{{ userId }}'>
-		<input type='hidden' id='userName' value='{{ userName }}'>
-		<div id="footer">© 2010 The Pennsylvania State University.</div>
+	    <!-- header-->
+	    <div id="header">
+		<h1>GeoDeliberator</h1>
+	    </div>
+	    <input type='hidden' id='userId' value='{{ userId }}'>
+	    <input type='hidden' id='userName' value='{{ userName }}'>
+	    <div id="footer">© 2010 The Pennsylvania State University.</div>
+	    <div id="dialog-confirm" title="Delete your route?">
+		<p><span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>The route will be permanently deleted and cannot be recovered. Are you sure?</p>
+	    </div>
+	    <div id='markerPopupContent' style='display:none;'>
+		<p>Make a comment or description: </p><br>
+		<textarea id='markerComment' rows='4'></textarea><br>
+		<input type='button' value='Cancel' onclick='GeoAnnotator.MapPanelCtrl.onCommentCanceled()'><span class='separator'/>
+		<input type='button' value='Confirm' onclick='GeoAnnotator.MapPanelCtrl.onCommentPosted()'>
+	    </div>
+	    <div id='markerCommentReviewPopup' style='display:none;'>
+	    </div>
+	    <div id='markerCommentReviewBtn' style='display:none;'>
+		<input type='button' value='Close' onclick='GeoAnnotator.MapPanelCtrl.onCommentCanceled()'><span class='separator'/>
+	    </div>
+
+	    <div id='observationsPopup' style='display:none;'>
+		<p><strong>Problems here:</strong></p><hr>  
+		<table>
+		    <tr>
+			<td> <input type='checkbox' name='observations' value='noise'> </td>
+			<td> 
+			    <img width='21' src='../static/images/noise.png'/> Noise<br> 
+			    <div id='noiseDiv' hidden='true'>
+				<textarea name='noiseComment' value='Put some comment here...'></textarea> 
+			    </div>
+			</td>
+		    </tr>
+		    <tr>
+			<td> <input type='checkbox' name='observations' value='stop'> </td>
+			<td>
+			    <img width='21' src='../static/images/stop.png'/> Stop<br> 
+			    <div id='stopDiv' hidden='true'>
+				<textarea name='stopComment' value='Put some comment here...'></textarea> 
+			    </div>
+			</td>
+		    </tr>
+		    <tr>
+			<td> <input type='checkbox' name='observations' value='landscape'> </td>
+			<td>
+			    <img width='21' src='../static/images/landscape.png'/> Landscape<br> 
+			    <div id='landscapeDiv' hidden='true'>
+				<textarea  name='landscapeComment' value='Put some comment here...'></textarea> 
+			    </div>
+			</td>
+		    </tr>
+		    <tr>
+			<td> <input type='checkbox' name='observations' value='question'> </td>
+			<td>
+			    <img width='21' src='../static/images/question.png'/> Question<br> 
+			    <div id='questionDiv' hidden='true'>
+				<textarea  name='questionComment' value='Put some comment here...'></textarea> 
+			    </div>
+			</td>
+		    </tr>
+		    <tr>
+			<td> <input type='checkbox' name='observations' value='traffic'></td>
+			<td>
+			    <img width='21' src='../static/images/traffic.png'/> Traffic<br> 
+			    <div id='trafficDiv' hidden='true'>
+				<textarea name='trafficComment' value='Put some comment here...'></textarea> 
+			    </div>
+			</td>
+		    </tr>
+		    <tr>
+			<td> <input type='checkbox' name='observations' value='litter'></td>
+			<td>
+			    <img width='21' src='../static/images/litter.png'/> Litter<br> 
+			    <div id='litterDiv' hidden='true'>
+				<textarea  name='litterComment' value='Put some comment here...'></textarea> 
+			    </div>
+			</td>
+		    </tr>
+		    <tr>
+			<td> <input type='checkbox' name='observations' value='disturbing'></td>
+			<td>
+			    <img width='21' src='../static/images/disturbing.png'/> Disturbing<br> 
+			    <div id='disturbingDiv' hidden='true'>
+				<textarea  name='disturbingComment' value='Put some comment here...'></textarea> 
+			    </div>
+			</td>
+		    </tr>
+		    <tr>
+			<td> <input type='checkbox' name='observations' value='safety'> </td>
+			<td>
+			    <img width='21' src='../static/images/safety.png'/> Safety<br> 
+			    <div id='safetyDiv' hidden='true'>
+				<textarea  name='safetyComment' value='Put some comment here...'></textarea> 
+			    </div>
+			</td>
+		    </tr>
+		    <tr>
+			<td> <input type='checkbox' name='observations' value='lighting'> </td>
+			<td>
+			    <img width='21' src='../static/images/lighting.png'/> Lighting<br> 
+			    <div id='lightingDiv' hidden='true'>
+				<textarea  name='lightingComment' value='Put some comment here...'></textarea> 
+			    </div>
+			</td>
+		    </tr>
+		    <tr>
+			<td> <input type='checkbox' name='observations' value='smell'></td>
+			<td>
+			    <img width='21' src='../static/images/smell.png'/> Smell<br> 
+			    <div id='smellDiv' hidden='true'>
+				<textarea  name='smellComment' value='Put some comment here...'></textarea> 
+			    </div>
+			</td>
+		    </tr>
+		    <tr>
+			<td> <input type='checkbox' name='observations' value='exclamation'></td>
+			<td>
+			    <img width='21' src='../static/images/exclamation.png'/> exclamation<br> 
+			    <div id='exclamationDiv' hidden='true'>
+				<textarea  name='exclamationComment' hidden='true' value='Put some comment here...'></textarea>
+			    </div>
+			</td>
+		    </tr>
+		</table>
+		<hr>
+		<p><strong>Facilities here:</strong></p><hr>  
+		<table>
+		    <tr>
+			<td> <input type='checkbox' name='observations' value='house'></td>
+			<td>
+			    <img width='21' src='../static/images/house.png'/> Houses/Apartments<br> 
+			    <div id='houseDiv' hidden='true'>
+				<input type='radio' name='houseProCon' value='Pro'>&nbsp;Pro&nbsp;&nbsp;&nbsp;<input type='radio' name='houseProCon' value='Con'>&nbsp;Con
+				<textarea  name='houseComment' value='Put some comment here...'></textarea>
+			    </div> 
+			</td>
+		    </tr>
+		    <tr>
+			<td><input type='checkbox' name='observations' value='restaurant'></td>
+			<td>
+			    <img width='21' src='../static/images/restaurant.png'/> Restaurants/Shops<br> 
+			    <div id='restaurantDiv' hidden='true'>
+				<input type='radio' name='restaurantProCon' value='Pro'>&nbsp;Pro&nbsp;&nbsp;&nbsp;<input type='radio' name='restaurantProCon' value='Con'>&nbsp;Con
+				<textarea  name='restaurantComment'  value='Put some comment here...'></textarea>
+			    </div> 
+			</td>
+		    </tr>
+		    <tr>
+			<td><input type='checkbox' name='observations' value='grocery'></td>
+			<td>
+			    <img width='21' src='../static/images/grocery.png'/> Grocery store<br> 
+			    <div id='groceryDiv' hidden='true'>
+				<input type='radio' name='groceryProCon' value='Pro'>&nbsp;Pro&nbsp;&nbsp;&nbsp;<input type='radio' name='groceryProCon' value='Con'>&nbsp;Con
+				<textarea  name='groceryComment'  value='Put some comment here...'></textarea>
+			    </div> 
+			</td>
+		    </tr>
+		    <tr>
+			<td><input type='checkbox' name='observations' value='service'></td>
+			<td>
+			    <img width='21' src='../static/images/service.png'/> Services(Laundry Mat, Cat Repair, Post Office, etc.<br> 
+			    <div id='serviceDiv' hidden='true'>
+				<input type='radio' name='serviceProCon' value='Pro'>&nbsp;Pro&nbsp;&nbsp;&nbsp;<input type='radio' name='serviceProCon' value='Con'>&nbsp;Con
+				<textarea  name='groceryComment'  value='Put some comment here...'></textarea>
+			    </div> 
+			</td>
+		    </tr>
+		    <tr>
+			<td><input type='checkbox' name='observations' value='office'></td>
+			<td>
+			    <img width='21' src='../static/images/office.png'/> Offices <br>
+			    <div id='officeDiv' hidden='true'>
+			       <input type='radio' name='officeProCon' value='Pro'>&nbsp;Pro&nbsp;&nbsp;&nbsp;<input type='radio' name='officeProCon' value='Con'>&nbsp;Con
+			       <textarea  name='officeComment'  value='Put some comment here...'></textarea>
+			   </div> 
+			</td>
+		    </tr>
+		    <tr>
+			<td><input type='checkbox' name='observations' value='school'></td>
+			<td>
+			    <img width='21' src='../static/images/school.png'/> Schools, churches or other community centers<br> 
+			    <div id='schoolDiv' hidden='true'>
+				<input type='radio' name='schoolProCon' value='Pro'>&nbsp;Pro&nbsp;&nbsp;&nbsp;<input type='radio' name='schoolProCon' value='Con'>&nbsp;Con
+				<textarea  name='schoolComment' value='Put some comment here...'></textarea>
+			    </div> 
+			</td>
+		    </tr>
+		    <tr>
+			<td><input type='checkbox' name='observations' value='park'></td>
+			<td>
+			    <img width='21' src='../static/images/park.png'/> Recreation trails, parks, or forested areas<br> 
+			    <div id='parkDiv' hidden='true'>
+				<input type='radio' name='parkProCon'  value='Pro'>&nbsp;Pro&nbsp;&nbsp;&nbsp;<input type='radio' name='parkProCon' value='Con'>&nbsp;Con
+				<textarea  name='parkComment' value='Put some comment here...'></textarea>
+			    </div> 
+			</td>
+		    </tr>
+		    <tr>
+			<td><input type='checkbox' name='observations' value='gathering'></td>
+			<td>
+			    <img width='21' src='../static/images/gathering.png'/> Neighborhood gathering space (a coffee shop, plaza, or other popular hang out<br> 
+			    <div id='gatheringDiv' hidden='true'>
+				<input type='radio' name='gatheringProCon' value='Pro'>&nbsp;Pro&nbsp;&nbsp;&nbsp;<input type='radio' name='gatheringProCon' value='Con'>&nbsp;Con
+				<textarea  name='gatheringComment' value='Put some comment here...'></textarea>
+			    </div> 
+			</td>
+		    </tr>
+		    <tr>
+			<td> <input type='checkbox' name='observations' value='other'></td> 
+			<td>
+			    &nbsp; Other comments 
+			    <div id='otherDiv' hidden='true'>
+				<input type='radio' name='otherProCon' value='Pro'>&nbsp;Pro&nbsp;&nbsp;&nbsp;<input type='radio' name='otherProCon' value='Con'>&nbsp;Con
+				<textarea name='otherComment'></textarea>
+			    </div> 
+			</td>
+		    </tr>
+		    <tr>
+			<td></td>
+			<td>
+			    <table>
+				<tr>
+				    <td> <input type='button' name='cancel' value='Cancel' onclick='GeoAnnotator.MapPanelCtrl.destroyPopup()'><span>&nbsp;&nbsp;&nbsp;&nbsp;</span> </td>
+				    <td> <input type='button' name='confirm' value='Confirm' onclick='GeoAnnotator.MapPanelCtrl.onCommentPosted()'> </td>
+				</tr>
+			    </table>
+			</td>
+		    </tr>
+		</table>
+	    </div>
+
+
+	    
+	    <div id='markerInfo' class='InfoGroup'>
+	    </div>
+
+	    <script>
+		$(document).ready(function () {
+		    var pcv = $('#pathConditionValue').val();
+		    $("input[name='pathCondition']").rating('select', pcv); 
+		    var egv = $('#easeGoingValue').val();
+		    $("input[name='easeGoing']").rating('select', egv); 
+		    var ecv = $('#easeCrossingValue').val();
+		    $("input[name='easeCrossing']").rating('select', ecv); 
+		    var gfv = $('#groceryFrequencyValue').val();
+		    $("input[name='groceryFrequency']").rating('select', gfv); 
+		    var ffv = $('#funFrequencyValue').val();
+		    $("input[name='funFrequency']").rating('select', ffv); 
+		    var efv = $('#exerciseFrequencyValue').val();
+		    $("input[name='exerciseFrequency']").rating('select', efv); 
+		    // disable all ratings
+		    $(".star").rating("readOnly", true);
+		});
+		</script>
 	</body>
 </html>

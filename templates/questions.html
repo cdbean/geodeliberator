@@ -25,13 +25,13 @@
 			<span class='QuestionAnswers'> 
 			    <table id='' class='QuestionText' border='0'> 
 				<tbody><tr> 
-				    <td><input type='checkbox' name='reason' value='work'>&nbsp;This is my route to work, class, or daily errands</td> 
+					<td><input type='checkbox' name='reasons' value='work' {% if 'work' in reasons %} checked {% endif %}>&nbsp;This is my route to work, class, or daily errands</td> 
 				    </tr><tr> 
-				    <td><input type='checkbox' name='reason' value='child'>&nbsp;This is the route to my child's school</td> 
+				    <td><input type='checkbox' name='reasons' value='child' {% if 'child' in reasons %} checked {% endif %}>&nbsp;This is the route to my child's school</td> 
 				    </tr><tr> 
-				    <td><input type='checkbox' name='reason' value='child'>&nbsp;This is the route to a destination I would like to visit</td> 
+				    <td><input type='checkbox' name='reasons' value='destination' {% if 'destination' in reasons %} checked {% endif %}>&nbsp;This is the route to a destination I would like to visit</td> 
 				    </tr><tr> 
-				    <td><label for='reasonText'>Other: </label><input type='text' name='reasonText' id='reasonText'></td> 
+				    <td><label for='reasonText'>Other: </label><textarea name='reasonText' id='reasonText'></textarea></td> 
 				</tr> </tbody> 
 			    </table> 
 			    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
@@ -44,16 +44,16 @@
 		    <td class='QuestionBackground' valign='middle' align='left' height='75'> &nbsp;</td> 
 		    <td colspan='6' valign='middle' class='QuestionBackground'> 
 			<div> 
-			    <span class='QuestionTitle'>1. Do you usually walk or bike on the route you just drew? </span> 
+			    <span class='QuestionTitle'>2. Do you usually walk or bike on the route you just drew? </span> 
 			</div> 
 			<span class='QuestionAnswers'> 
 			    <table id='' class='QuestionText' border='0'> 
 				<tbody><tr> 
-				    <td><input type='radio' name='WalkOrBike' value='Walk'>&nbsp;Walk</td> 
+				    <td><input type='radio' name='WalkOrBike' value='Walk' {% if WalkOrBike == 'Walk' %} checked {% endif %}>&nbsp;Walk</td> 
 				    </tr><tr> 
-				    <td><input type='radio' name='WalkOrBike' value='Bike'>&nbsp;Bike</td> 
+				    <td><input type='radio' name='WalkOrBike' value='Bike' {% if WalkOrBike == 'Bike' %} checked {% endif %}>&nbsp;Bike</td> 
 				    </tr><tr> 
-				    <td><input type='radio' name='WalkOrBike' value='Both'>&nbsp;Both</td> 
+				    <td><input type='radio' name='WalkOrBike' value='Both' {% if WalkOrBike == 'Both' %} checked {% endif %}>&nbsp;Both</td> 
 				</tr> </tbody> 
 			    </table> 
 			    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
@@ -86,15 +86,15 @@
 			<span class='QuestionAnswers'> 
 			    <table id='' class='QuestionText' border='0'> 
 				<tbody><tr> 
-				    <td><input type='radio' name='pathType' value='Sidewalk'>&nbsp;Sidewalk</td> 
+				    <td><input type='radio' name='pathType' value='Sidewalk' {% if pathType == 'Sidewalk' %} checked {% endif %}>&nbsp;Sidewalk</td> 
 				    </tr><tr> 
-				    <td><input type='radio' name='pathType' value='Bike'>&nbsp;Bike path / Shared use path</td> 
+				    <td><input type='radio' name='pathType' value='Bike' {% if pathType == 'Bike' %} checked {% endif %}>&nbsp;Bike path / Shared use path</td> 
 				    </tr><tr> 
-				    <td><input type='radio' name='pathType' value='Trail'>&nbsp;Trail</td> 
+				    <td><input type='radio' name='pathType' value='Trail' {% if pathType == 'Trail' %} checked {% endif %}>&nbsp;Trail</td> 
 				    </tr><tr> 
-				    <td><input type='radio' name='pathType' value='Street'>&nbsp;Street</td> 
+				    <td><input type='radio' name='pathType' value='Street' {% if pathType == 'Street' %} checked {% endif %}>&nbsp;Street</td> 
 				    </tr><tr> 
-				    <td><input type='radio' name='pathType' value='Own'>&nbsp;I had to make my own path</td> 
+				    <td><input type='radio' name='pathType' value='Own path' {% if pathType == 'Own path' %} checked {% endif %}>&nbsp;I had to make my own path</td> 
 				</tr> </tbody> 
 			    </table> 
 			    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
@@ -183,16 +183,16 @@
 		    <td class='QuestionBackground' valign='middle' align='left' height='75'> &nbsp;</td> 
 		    <td colspan='6' valign='middle' class='QuestionBackground'> 
 			<div> 
-			    <span class='QuestionTitle'>6. Did your path go to your destination without any detours?  </span> 
+			    <span class='QuestionTitle'>6. Did your path go to your destination with any detours?  </span> 
 			</div> 
 			<span class='QuestionAnswers'> 
 			    <table id='' class='QuestionText' border='0'> 
 				<tbody><tr> 
-				    <td><input type='radio' name='noDetour' value='Yes'>&nbsp;Yes</td> 
+				    <td><input type='radio' name='detour' value='Yes' {% if detour == 'Yes' %} checked {% endif %}>&nbsp;Yes</td> 
 				    </tr><tr> 
-				    <td><input type='radio' name='noDetour' value='No'>&nbsp;No</td> 
+				    <td><input type='radio' name='detour' value='No' {% if detour == 'No' %} checked {% endif %}>&nbsp;No</td> 
 				    </tr><tr> 
-				    <td><label for='noDetourText'>Where did you run into problems: </label><input type='text' name='noDetourText' id='noDetourText'></td> 
+				    <td><label for='detourText'>Where did you run into problems: </label><textarea name='detourText' id='detourText'></textarea></td> 
 				</tr> </tbody> 
 			    </table> 
 			    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
@@ -226,21 +226,21 @@
 			<span class='QuestionAnswers'> 
 			    <table id='' class='QuestionText' border='0'> 
 				<tbody><tr> 
-				    <td><input type='checkbox' name='safetyChoices' value='helmet'>&nbsp;Wore a bicycle helmet</td> 
+				    <td><input type='checkbox' name='safetyChoices' value='helmet' {% if 'helmet' in safetyChoices %} checked {% endif %}>&nbsp;Wore a bicycle helmet</td> 
 				    </tr><tr> 
-				    <td><input type='checkbox' name='safetyChoices' value='traffic rule'>&nbsp;Obeyed traffic signal and signs</td> 
+				    <td><input type='checkbox' name='safetyChoices' value='traffic rule' {% if 'traffic rule' in safetyChoices %} checked {% endif %}>&nbsp;Obeyed traffic signal and signs</td> 
 				    </tr><tr> 
-				    <td><input type='checkbox' name='safetyChoices' value='with traffic'>&nbsp;Rode with (not against) traffic</td> 
+				    <td><input type='checkbox' name='safetyChoices' value='with traffic' {% if 'with traffic' in safetyChoices %} checked {% endif %}>&nbsp;Rode with (not against) traffic</td> 
 				    </tr><tr> 
-				    <td><input type='checkbox' name='safetyChoices' value='signal'>&nbsp;Signaled my turns</td> 
+				    <td><input type='checkbox' name='safetyChoices' value='signal' {% if 'signal' in safetyChoices %} checked {% endif %}>&nbsp;Signaled my turns</td> 
 				    </tr><tr> 
-				    <td><input type='checkbox' name='safetyChoices' value='light'>&nbsp;Used lights, if at night</td> 
+				    <td><input type='checkbox' name='safetyChoices' value='light' {% if 'light' in safetyChoices %} checked {% endif %}>&nbsp;Used lights, if at night</td> 
 				    </tr><tr> 
-				    <td><input type='checkbox' name='safetyChoices' value='clothing'>&nbsp;Wore bright or reflective clothing</td> 
+				    <td><input type='checkbox' name='safetyChoices' value='clothing' {% if 'clothing' in safetyChoices %} checked {% endif %}>&nbsp;Wore bright or reflective clothing</td> 
 				    </tr><tr> 
-				    <td><input type='checkbox' name='safetyChoices' value='courteous'>&nbsp;Was courteous to other travelers</td> 
+				    <td><input type='checkbox' name='safetyChoices' value='courteous' {% if 'courteous' in safetyChoices %} checked {% endif %}>&nbsp;Was courteous to other travelers</td> 
 				    </tr><tr> 
-				    <td><label for='safetyChoicesText'>Other: </label><input type='text' name='safetyChoicesText' id='safetyChoicesText'></td> 
+				    <td><label for='safetyChoicesText'>Other: </label><textarea name='safetyChoicesText' id='safetyChoicesText'></textarea></td> 
 				</tr> </tbody> 
 			    </table> 
 			    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
@@ -259,17 +259,17 @@
 			<span class='QuestionAnswers'> 
 			    <table id='' class='QuestionText' border='0'> 
 				<tbody><tr> 
-				    <td><input type='checkbox' name='driverBehavior' value='Fine'>&nbsp;Just Fine</td> 
+				    <td><input type='checkbox' name='driverBehaviors' value='fine' {% if 'fine' in driverBehaviors %} checked {% endif %}>&nbsp;Just Fine</td> 
+				    </tr><tr>                                      
+				    <td><input type='checkbox' name='driverBehaviors' value='yield' {% if 'yield' in driverBehaviors %} checked {% endif %}>&nbsp;Drivers didn't yield to pedestrians</td> 
+				    </tr><tr>                                      
+				    <td><input type='checkbox' name='driverBehaviors' value='speed' {% if 'speed' in driverBehaviors %} checked {% endif %}>&nbsp;Drivers didnt obey speed limit</td> 
+				    </tr><tr>                                      
+				    <td><input type='checkbox' name='driverBehaviors' value='cutoff' {% if 'cutoff' in driverBehaviors %} checked {% endif %}>&nbsp;I was cut off by a motorist</td> 
+				    </tr><tr>                                      
+				    <td><input type='checkbox' name='driverBehaviors' value='aware' {% if 'aware' in driverBehaviors %} checked {% endif %}>&nbsp;Drivers weren't aware of me</td> 
 				    </tr><tr> 
-				    <td><input type='checkbox' name='driverBehavior' value='yield'>&nbsp;Drivers didn't yield to pedestrians</td> 
-				    </tr><tr> 
-				    <td><input type='checkbox' name='driverBehavior' value='speed'>&nbsp;Drivers didnt obey speed limit</td> 
-				    </tr><tr> 
-				    <td><input type='checkbox' name='driverBehavior' value='cutoff'>&nbsp;I was cut off by a motorist</td> 
-				    </tr><tr> 
-				    <td><input type='checkbox' name='driverBehavior' value='aware'>&nbsp;Drivers weren't aware of me</td> 
-				    </tr><tr> 
-				    <td><label for='driverBehaviorText'>Other: </label><input type='text' name='driverBehaviorText' id='driverBehaviorText'></td> 
+				    <td><label for='driverBehaviorText'>Other: </label><textarea name='driverBehaviorText' id='driverBehaviorsText'></textarea></td> 
 				</tr> </tbody> 
 			    </table> 
 			    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
@@ -297,7 +297,7 @@
 		    <td class='QuestionBackground' valign='middle' align='left' height='75'> &nbsp;</td> 
 		    <td colspan='6' valign='middle' class='QuestionBackground'> 
 			<div> 
-			    <span class='QuestionTitle'>8. How often do you walk for the following reasons? </span> 
+			    <span class='QuestionTitle'>8. How often do you {{ WalkOrBike|lower }} for the following reasons? </span> 
 			</div> 
 			<span class='QuestionAnswers'> 
 			    <table>
@@ -376,34 +376,34 @@
 			<span class='QuestionAnswers'> 
 			    <table id='' class='QuestionText' border='0'> 
 				<tbody><tr> 
-				    <td><input type='checkbox' name='encourageMethods' value='Nothing'>&nbsp;Nothing</td> 
+				    <td><input type='checkbox' name='encourageMethods' value='nothing' {% if 'nothing' in encourageMethods %} checked {% endif %}>&nbsp;Nothing</td> 
 				    </tr><tr> 
-				    <td><input type='checkbox' name='encourageMethods' value='dedicated path'>&nbsp;Dedicated path to my destination</td> 
+				    <td><input type='checkbox' name='encourageMethods' value='dedicated path' {% if 'dedicated path' in encourageMethods %} checked {% endif %}>&nbsp;Dedicated path to my destination</td> 
 				    </tr><tr> 
-				    <td><input type='checkbox' name='encourageMethods' value='closer destination'>&nbsp;My destination was closer</td> 
+				    <td><input type='checkbox' name='encourageMethods' value='closer destination' {% if 'closer destination' in encourageMethods %} checked {% endif %}>&nbsp;My destination was closer</td> 
 				    </tr><tr> 
-				    <td><input type='checkbox' name='encourageMethods' value='more to do'>&nbsp;There were more things to do along the route</td> 
+				    <td><input type='checkbox' name='encourageMethods' value='more to do' {% if 'more to do' in encourageMethods %} checked {% endif %}>&nbsp;There were more things to do along the route</td> 
 				    </tr><tr> 
-				    <td><input type='checkbox' name='encourageMethods' value='weather'>&nbsp;The weather was better</td> 
+				    <td><input type='checkbox' name='encourageMethods' value='weather' {% if 'weather' in encourageMethods %} checked {% endif %}>&nbsp;The weather was better</td> 
 				    </tr><tr> 
-				    <td><input type='checkbox' name='encourageMethods' value='time'>&nbsp;If I had more time</td> 
+				    <td><input type='checkbox' name='encourageMethods' value='time' {% if 'time' in encourageMethods %} checked {% endif %}>&nbsp;If I had more time</td> 
 				    </tr><tr> 
 				    {% if WalkOrBike == 'Walk' %}
-				    <td><input type='checkbox' name='encourageMethods' value='errands'>&nbsp;If I could run errands easily by walk</td> 
+				    <td><input type='checkbox' name='encourageMethods' value='errands' {% if 'errands' in encourageMethods %} checked {% endif %}>&nbsp;If I could run errands easily by walk</td> 
 				    </tr><tr> 
-				    <td><input type='checkbox' name='encourageMethods' value='benefits'>&nbsp;If I had a better understanding of the benefits of walking versus driving</td> 
+				    <td><input type='checkbox' name='encourageMethods' value='benefits' {% if 'benefits' in encourageMethods %} checked {% endif %}>&nbsp;If I had a better understanding of the benefits of walking versus driving</td> 
 				    {% endif %}
 				    {% if WalkOrBike == 'Bike' %}
-				    <td><input type='checkbox' name='encourageMethods' value='errands'>&nbsp;If I could run errands easily by bike</td> 
+				    <td><input type='checkbox' name='encourageMethods' value='errands' {% if 'errands' in encourageMethods %} checked {% endif %}>&nbsp;If I could run errands easily by bike</td> 
 				    </tr><tr> 
-				    <td><input type='checkbox' name='encourageMethods' value='training'>&nbsp;If I had proper training about bicycle safety</td> 
+				    <td><input type='checkbox' name='encourageMethods' value='training' {% if 'training' in encourageMethods %} checked {% endif %}>&nbsp;If I had proper training about bicycle safety</td> 
 				    </tr><tr> 
-				    <td><input type='checkbox' name='encourageMethods' value='benefits'>&nbsp;If I had a better understanding of the benefits of biking versus driving</td> 
+				    <td><input type='checkbox' name='encourageMethods' value='benefits' {% if 'benefits' in encourageMethods %} checked {% endif %}>&nbsp;If I had a better understanding of the benefits of biking versus driving</td> 
 				    {% endif %}
 				    </tr><tr> 
-				    <td><input type='checkbox' name='encourageMethods' value='drivers'>&nbsp;If drivers were more considerate</td> 
+				    <td><input type='checkbox' name='encourageMethods' value='drivers' {% if 'drivers' in encourageMethods %} checked {% endif %}>&nbsp;If drivers were more considerate</td> 
 				    </tr><tr> 
-				    <td><label for='encourageMethodsText'>Other: </label><input type='text' name='encourageMethodsText' id='encourageMethodsText'></td> 
+				    <td><label for='encourageMethodsText'>Other: </label><textarea name='encourageMethodsText' id='encourageMethodsText'></textarea></td> 
 				</tr> </tbody> 
 			    </table> 
 			    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
@@ -417,7 +417,7 @@
 		    <td>
 			<div> 
 			    <input type='button' value='Back' onclick="window.location.href='2'"><span class='buttonSeparator'>&nbsp;&nbsp;&nbsp;</span>
-			    <input type='submit' value='Next'> 
+			    <input type='submit' value='Finish'> 
 			</div> 
 		    </td>
 		</tr>
@@ -428,5 +428,29 @@
 	Great! Thanks for your feedback about your overall feeling about the route. <br><br>
 	Now please use the <b>Markers</b> tools in the left top to describe specific places along the route.
 	{% endif %}
+	<input type="hidden" id="pathConditionValue" value="{{pathCondition}}">
+	<input type="hidden" id="easeGoingValue" value="{{easeGoing}}">
+	<input type="hidden" id="easeCrossingValue" value="{{easeCrossing}}">
+	<input type="hidden" id="groceryFrequencyValue" value="{{groceryFrequency}}">
+	<input type="hidden" id="funFrequencyValue" value="{{funFrequency}}">
+	<input type="hidden" id="exerciseFrequencyValue" value="{{exerciseFrequency}}">
+	<script>
+	    $(document).ready(function () {
+		var pcv = $('#pathConditionValue').val();
+		$("input[name='pathCondition']").rating('select', pcv); 
+		var egv = $('#easeGoingValue').val();
+		$("input[name='easeGoing']").rating('select', egv); 
+		var ecv = $('#easeCrossingValue').val();
+		$("input[name='easeCrossing']").rating('select', ecv); 
+		var gfv = $('#groceryFrequencyValue').val();
+		$("input[name='groceryFrequency']").rating('select', gfv); 
+		var ffv = $('#funFrequencyValue').val();
+		$("input[name='funFrequency']").rating('select', ffv); 
+		var efv = $('#exerciseFrequencyValue').val();
+		$("input[name='exerciseFrequency']").rating('select', efv); 
+	    });
+	</script>
+	<script>
+	</script>
     </body>
 </html>

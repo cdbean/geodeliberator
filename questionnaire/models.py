@@ -16,17 +16,19 @@ class Route(models.Model):
     objects = models.GeoManager()
 
     # about the questionnaire
-    transport	= models.CharField(max_length=10, null=True) # walk or bike
-    pathType	= models.CharField(max_length=20, null=True)
-    pathCondition = models.IntegerField(null=True)
+    transport	= models.CharField(max_length=10, null=True, default='') # walk or bike
+    reasons	= models.CharField(max_length=300, null=True, default='')
+    pathType	= models.CharField(max_length=20, null=True, default='')
+    pathCondition = models.IntegerField(null=True) # overall rating
     easeGoing	= models.IntegerField(null=True)
     easeCrossing    = models.IntegerField(null=True)
-    safetyChoices = models.CharField(max_length=300, null=True)
-    driverBehavior  = models.CharField(max_length=300, null=True)
+    detour    = models.CharField(max_length=10, null=True, default='')
+    safetyChoices = models.CharField(max_length=300, null=True, default='')
+    driverBehaviors  = models.CharField(max_length=300, null=True, default='')
     groceryFrequency	= models.IntegerField(null=True)
     funFrequency    = models.IntegerField(null=True)
-    execiseFrequency	= models.IntegerField(null=True)
-    encourageMethods	= models.CharField(max_length=300, null=True)
+    exerciseFrequency	= models.IntegerField(null=True)
+    encourageMethods	= models.CharField(max_length=300, null=True, default='')
 
 
     class Meta:
