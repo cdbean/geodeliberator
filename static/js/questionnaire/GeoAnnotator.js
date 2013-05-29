@@ -1107,9 +1107,9 @@ GeoAnnotator.MapPanelCtrl = {
 		thisCtrl.buildMap(thisCtrl.mapDiv, mapOptions);            
 
 		thisCtrl.baseLayer = new OpenLayers.Layer.Image("GeoDeliberation", 
-			'http://1.bp.blogspot.com/_HgqZlW4QMjY/SAvFVYcK-uI/AAAAAAAAAF0/6hkIIK4WqC8/s320/It%27s%2BUp%2BTo%2BAll%2BOf%2BUs.JPG',
+			'../static/images/instruction.png',
 			new OpenLayers.Bounds(-180, -88.759, 180, 88.759),
-			new OpenLayers.Size(250, 307),
+			new OpenLayers.Size(400, 400),
 			{numZoomLevels: 1}
 		);
     	
@@ -1189,7 +1189,7 @@ GeoAnnotator.MapPanelCtrl = {
 				    var thisCtrl = GeoAnnotator.MapPanelCtrl;
 				    if (currFeature !== null) {
 					thisCtrl.setModifyMode();
-					thisCtrl.modifyFeatureControl.selectControl.select(currFeature);
+					thisCtrl.selectFeatureControl.selectFeature(currFeature);
 				    }
 				}
 			    });
@@ -3379,6 +3379,7 @@ GeoAnnotator.MapPanelCtrl = {
 				var comments = res.comments;
 				for (var i=0; i < comments.length; i++) {
 				    // create popup element for each comment
+				    $('<hr>').prependTo('#markerCommentReviewPopup');
 				    $('<br>').prependTo('#markerCommentReviewPopup');
 				    $('<label></label>').text(comments[i].createAt).prependTo('#markerCommentReviewPopup');
 				    $('<textarea></textarea>').attr('disabled', true).attr('id', comments[i].type+'MarkerCommentReview').text(comments[i].content).prependTo('#markerCommentReviewPopup');
