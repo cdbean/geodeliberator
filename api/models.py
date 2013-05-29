@@ -74,7 +74,7 @@ class Annotation(models.Model):
     forum =  models.ForeignKey(Forum)
     contextmap = models.TextField()
     created_at = models.DateTimeField(verbose_name='date created')
-    updated_at = models.DateTimeField(verbose_name='date updated')
+    updated_at = models.DateTimeField(verbose_name='date updated', default=created_at)
     sharelevel = models.CharField(max_length=10, choices=SHARE_LEVELS)
     content_type = models.CharField(max_length=20, choices=TYPE_CHOICES, verbose_name="content type", null=True)
     footprints = models.ManyToManyField(Footprint, related_name='referred_annotations', through='GeoReference')
