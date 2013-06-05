@@ -2,6 +2,7 @@
 
 # Compiled source #
 *.pyc
+*.swp
 
 # runtime file #
 *.sock
