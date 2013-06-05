@@ -2,7 +2,6 @@
  * @author byu
  */
 
- 
 var GeoAnnotator = {
 	currUserId : '0',
 	currForumId : '0',
