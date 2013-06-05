@@ -10,7 +10,7 @@ var GeoAnnotator = {
 			
 	//var baseUrl = "http://130.203.158.62/geoannotator/";
 	//baseUrl : "../GeoAnnotatorService/",
-	baseUrl : "/api/",
+	baseUrl : "api/",
 	
 	init : function (){
 		this.currUserId = '0';
@@ -197,13 +197,10 @@ GeoAnnotator.ContainerTBCtrl = {
 			thisCtrl.containerTB.add({xtype: 'tbtext', text: 'Welcome, ' + thisCtrl.currUserInfo.userName + '!'});
 			thisCtrl.containerTB.add('-');
 			thisCtrl.containerTB.add({
-			    itemId: 'logoutLink',
-			    xtype: 'box',
-			    autoEl: {
-				tag: 'a',
-				href: '/user/logout',
-				html: 'Log out'
-			    }
+				text: 'Log Out',
+				listeners: {
+					'click' : thisCtrl.onLogOutClick 
+				}
 			});
 		}
 		else {
@@ -874,7 +871,6 @@ GeoAnnotator.ContributePanelCtrl = {
 									var projWords = GeoAnnotator.MapPanelCtrl.map.projection.getCode().split(":");
 									footprint.srid = projWords[projWords.length - 1];
                         			footprint.shape = new OpenLayers.Format.WKT().write(feature);
-						alert (footprint.srid);
 									newAnnotation.footprints.push(footprint);
                         			break;
                     			}
@@ -1551,13 +1547,13 @@ GeoAnnotator.MapPanelCtrl = {
 			[thisCtrl.annotationVectors,thisCtrl.newFootprintVectors],
 	 		{
 	        	clickout: true, toggle: false,
-			multiple: false, hover: false,
-			//toggleKey: "ctrlKey", // ctrl key removes from selection
-			//multipleKey: "shiftKey", // shift key adds to selection
-			//box: true,
-			//onSelect: thisCtrl.onFeatureSelect, onUnselect: thisCtrl.onFeatureUnselect,
-			//displayClass: 'olControlSelectFeature',
-			callbacks: {over: thisCtrl.onOverFeature, out: thisCtrl.onOutFeature, click: thisCtrl.onClickFeature}
+	            multiple: false, hover: false,
+	            //toggleKey: "ctrlKey", // ctrl key removes from selection
+	            //multipleKey: "shiftKey", // shift key adds to selection
+	            //box: true,
+				//onSelect: thisCtrl.onFeatureSelect, onUnselect: thisCtrl.onFeatureUnselect,
+				//displayClass: 'olControlSelectFeature',
+				callbacks: {over: thisCtrl.onOverFeature, out: thisCtrl.onOutFeature, click: thisCtrl.onClickFeature}
 			}
 		);
 		thisCtrl.map.addControl(thisCtrl.selectFootprintControl);
@@ -3886,5 +3882,4 @@ GeoAnnotator.Util = {
 			}
 	}
 };
-
 

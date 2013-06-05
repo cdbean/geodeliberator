@@ -3,7 +3,7 @@
  * @author byu
  */
 
-Ext.BLANK_IMAGE_URL = '/static/lib/ext-3.2.1/resources/images/default/s.gif';
+Ext.BLANK_IMAGE_URL = 'static/lib/ext-3.2.1/resources/images/default/s.gif';
 
 
 /*******Begin Header Definitions******/
@@ -77,7 +77,6 @@ var annotationInfoPanel = new Ext.Panel({
 	title: 'Annotation Info',
 	region: 'center',
 	//height : 500,
-	autoHeight: true,
 	layout: 'fit',
 	//border: false,
 	//split:true,
@@ -222,4 +221,3 @@ function registerComponents () {
 	GeoAnnotator.ContributePanelCtrl.register(contributePanel);
 	GeoAnnotator.ManageWindowCtrl.register(manageWindow);
 };
-

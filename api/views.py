@@ -314,7 +314,6 @@ def api_map(request):
             pass
     elif forumId > 0:
         try:
-	    print "forum id received", forumId
             forum = Forum.objects.get(id=forumId)
             response["mapString"] = forum.contextmap
             response["type"] = 'group'
@@ -333,7 +332,6 @@ def api_map(request):
                 footprint_info['type'] = footprint.shape.geom_type
                 footprint_info['refCount'] = footprint.referred_annotations.count()
                 response['footprints'].append(footprint_info)            
-
         except Forum.DoesNotExist:
             pass
         
