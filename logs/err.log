@@ -23138,3 +23138,52 @@ error: [Errno 54] Connection reset by peer
   "use STATIC_URL instead.", DeprecationWarning)
 /Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/conf/__init__.py:75: DeprecationWarning: The ADMIN_MEDIA_PREFIX setting has been removed; use STATIC_URL instead.
   "use STATIC_URL instead.", DeprecationWarning)
+2013-06-05 11:52:12 [29456] [ERROR] WORKER TIMEOUT (pid:29467)
+None
+2013-06-05 11:52:12 [29456] [ERROR] WORKER TIMEOUT (pid:29468)
+None
+2013-06-05 11:52:12 [29456] [ERROR] WORKER TIMEOUT (pid:29471)
+None
+2013-06-05 11:52:18 [29512] [INFO] Booting worker with pid: 29512
+2013-06-05 11:52:18 [29513] [INFO] Booting worker with pid: 29513
+2013-06-05 11:52:18 [29515] [INFO] Booting worker with pid: 29515
+/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/conf/__init__.py:75: DeprecationWarning: The ADMIN_MEDIA_PREFIX setting has been removed; use STATIC_URL instead.
+  "use STATIC_URL instead.", DeprecationWarning)
+/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/conf/__init__.py:75: DeprecationWarning: The ADMIN_MEDIA_PREFIX setting has been removed; use STATIC_URL instead.
+  "use STATIC_URL instead.", DeprecationWarning)
+/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/conf/__init__.py:75: DeprecationWarning: The ADMIN_MEDIA_PREFIX setting has been removed; use STATIC_URL instead.
+  "use STATIC_URL instead.", DeprecationWarning)
+2013-06-05 11:52:53 [29456] [INFO] Handling signal: term
+2013-06-05 10:52:53 [29512] [INFO] Worker exiting (pid: 29512)
+2013-06-05 10:52:53 [29513] [INFO] Worker exiting (pid: 29513)
+2013-06-05 10:52:53 [29515] [INFO] Worker exiting (pid: 29515)
+2013-06-05 11:52:54 [29456] [INFO] Shutting down: Master
+2013-06-05 11:52:56 [29534] [INFO] Starting gunicorn 0.13.4
+2013-06-05 11:52:56 [29534] [INFO] Listening at: http://0.0.0.0:9000 (29534)
+2013-06-05 11:52:56 [29534] [INFO] Using worker: sync
+2013-06-05 11:52:56 [29544] [INFO] Booting worker with pid: 29544
+2013-06-05 11:52:56 [29546] [INFO] Booting worker with pid: 29546
+2013-06-05 11:52:56 [29547] [INFO] Booting worker with pid: 29547
+/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/conf/__init__.py:75: DeprecationWarning: The ADMIN_MEDIA_PREFIX setting has been removed; use STATIC_URL instead.
+  "use STATIC_URL instead.", DeprecationWarning)
+/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/conf/__init__.py:75: DeprecationWarning: The ADMIN_MEDIA_PREFIX setting has been removed; use STATIC_URL instead.
+  "use STATIC_URL instead.", DeprecationWarning)
+/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/conf/__init__.py:75: DeprecationWarning: The ADMIN_MEDIA_PREFIX setting has been removed; use STATIC_URL instead.
+  "use STATIC_URL instead.", DeprecationWarning)
+2013-06-05 11:54:34 [29534] [INFO] Handling signal: term
+2013-06-05 10:54:34 [29544] [INFO] Worker exiting (pid: 29544)
+2013-06-05 10:54:34 [29546] [INFO] Worker exiting (pid: 29546)
+2013-06-05 10:54:34 [29547] [INFO] Worker exiting (pid: 29547)
+2013-06-05 11:54:34 [29534] [INFO] Shutting down: Master
+2013-06-05 11:54:36 [29616] [INFO] Starting gunicorn 0.13.4
+2013-06-05 11:54:36 [29616] [INFO] Listening at: http://0.0.0.0:9000 (29616)
+2013-06-05 11:54:36 [29616] [INFO] Using worker: sync
+2013-06-05 11:54:36 [29621] [INFO] Booting worker with pid: 29621
+2013-06-05 11:54:36 [29622] [INFO] Booting worker with pid: 29622
+2013-06-05 11:54:36 [29623] [INFO] Booting worker with pid: 29623
+/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/conf/__init__.py:75: DeprecationWarning: The ADMIN_MEDIA_PREFIX setting has been removed; use STATIC_URL instead.
+  "use STATIC_URL instead.", DeprecationWarning)
+/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/conf/__init__.py:75: DeprecationWarning: The ADMIN_MEDIA_PREFIX setting has been removed; use STATIC_URL instead.
+  "use STATIC_URL instead.", DeprecationWarning)
+/Users/spatial/.virtualenvs/geodeliberator/lib/python2.6/site-packages/django/conf/__init__.py:75: DeprecationWarning: The ADMIN_MEDIA_PREFIX setting has been removed; use STATIC_URL instead.
+  "use STATIC_URL instead.", DeprecationWarning)
