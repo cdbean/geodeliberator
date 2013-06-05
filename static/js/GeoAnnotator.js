@@ -30,11 +30,9 @@ var GeoAnnotator = {
 		GeoAnnotator.AnnotationBookmarkWindowCtrl.init();
 		GeoAnnotator.AnnotationHistoryWindowCtrl.init();
 		
-		
 		// check whether the user is stored in cookie
 		//var userId = Ext.state.Manager.get('userId', '0');
-//		this.currUserId = Ext.state.Manager.get('userId', '0'); 
-		
+//		this.currUserId = Ext.state.Manager.get('userId', '0'); 	
 		// check the url params
 //		var params = Ext.urlDecode(location.search.substring(1));
 //		this.currUserId = params['userId'] || this.currUserId;
@@ -51,9 +49,7 @@ var GeoAnnotator = {
 			GeoAnnotator.TimelinePanelCtrl.update();
 			GeoAnnotator.MapPanelCtrl.update();
 			GeoAnnotator.ManageWindowCtrl.update();
-		};
-		
-		
+		};	
 	}
 };
 
@@ -936,7 +932,25 @@ GeoAnnotator.ContributePanelCtrl = {
 						}
 					};
 					if (!exists) {
+					
 						newAnnotation.references.push(id.substring(2));
+					// below
+						var currAnnotationInfo = GeoAnnotator.AnnotationInfoPanelCtrl.currAnnotationInfo;
+						for (var i = 0; i < currAnnotationInfo.footprints.length; i++) {
+							var footprint = currAnnotationInfo.footprints[i];
+							var exists = false;
+							for (var j = 0; j < newAnnotation.footprints.length; j++) {
+								if (newAnnotation.footprints[j].id == footprint.id)
+								exists = true;
+								break;
+							}
+							if (!exists) {
+								newAnnotation.footprints.push(footprint);
+							}
+						
+							
+						}
+						// above
 					}
 				}	
 			}
