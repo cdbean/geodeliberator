@@ -1,20 +1,16 @@
 # Create your views here.
-from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 
 import smtplib
 from email.MIMEMultipart import MIMEMultipart
-from email.MIMEBase import MIMEBase
 from email.MIMEText import MIMEText
-from email import Encoders
 import thread
 
 import datetime
 
 from api.models import Forum, Membership
-import json
 from geodeliberator.settings import SYS_MAIL_USER, SYS_MAIL_PSW
 
 from users.models import *

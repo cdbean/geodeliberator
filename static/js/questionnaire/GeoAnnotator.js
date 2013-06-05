@@ -18,6 +18,7 @@ var GeoAnnotator = {
 		this.currForumId = '0';
 		this.currAnnotationId = '0';
 		this.currFootprintId = '0';
+                alert('{{ userId }}');
 						
 		GeoAnnotator.ContainerTBCtrl.init();
 		
@@ -378,6 +379,7 @@ GeoAnnotator.ContainerTBCtrl = {
 		    var html = "<div class='default-info'> Please draw a route on the map. <br><br>\
 				<button onclick='GeoAnnotator.MapPanelCtrl.setDrawMode(\"line\")'>Start drawing your route!</button> \
 				</div>";	
+                    html += $('#legend').clone().css('display', '').html();
 		    GeoAnnotator.AnnotationInfoPanelCtrl.annotationInfoDisplayPanel.body.update(html);
 		}
 
@@ -1382,7 +1384,7 @@ GeoAnnotator.MapPanelCtrl = {
 		    strokeWidth: 3,
 		    strokeOpacity: 1,
 		    strokeColor: '#00FF00',
-		    pointRadius:8,
+		    pointRadius:16,
 		});
 		var typeRule = {
 		    'noise': {externalGraphic: '../static/images/noise.png'},
@@ -1395,7 +1397,6 @@ GeoAnnotator.MapPanelCtrl = {
 		    'lighting': {externalGraphic: '../static/images/lighting.png'},
 		    'safety': {externalGraphic: '../static/images/safety.png'},
 		    'smell': {externalGraphic: '../static/images/smell.png'},
-		    'exclamation': {externalGraphic: '../static/images/exclamation.png'},
 		    'multiple': {externalGraphic: '../static/images/problems.png'},
 		    'house': {externalGraphic: '../static/images/house.png'},
 		    'restaurant': {externalGraphic: '../static/images/restaurant.png'},
@@ -1488,11 +1489,11 @@ GeoAnnotator.MapPanelCtrl = {
 		});
 
 		var lookup = {
-		    "1": {strokeColor: '#990000'},
-		    "2": {strokeColor: '#FF3333'},
-		    "3": {strokeColor: '#FF6666'},
-		    "4": {strokeColor: '#CC6666'},
-		    "5": {strokeColor: '#FF9999'},
+		    "5": {strokeColor: '#FF665A'},
+		    "4": {strokeColor: '#CF575C'},
+		    "3": {strokeColor: '#A14973'},
+		    "2": {strokeColor: '#73355C'},
+		    "1": {strokeColor: '#4C264C'},
 		    "null": {strokeColor: '#FF9999'} 
 		};
 		thisCtrl.myRouteStyle.addUniqueValueRules("default", "rate", lookup);
@@ -2472,23 +2473,7 @@ GeoAnnotator.MapPanelCtrl = {
 						    }
 					    },
 			    tooltip: { text: 'smell' }
-			}, {
-			    id: 'exclamation',
-			    iconCls: 'exclamation',
-			    pressed: false,
-			    enableToggle: true,
-			    toggleGroup: 'marks',
-			    toggleHandler: function(button, pressed){
-						    if(pressed){
-							thisCtrl.setDrawMode('point');
-							thisCtrl.currMarkerType = button.id;
-						    }
-						    else{
-							thisCtrl.setNavigationMode();
-						    }
-					    },
-			    tooltip: { text: 'others' }
-			} ]
+			}, ]
 		    });
 		    tbar.add({
 			xtype: 'buttongroup',
@@ -4795,6 +4780,7 @@ GeoAnnotator.AnnotationInfoPanelCtrl = {
 				    &lt;p&gt;Your browser does not support iframes.&lt;/p&gt; \
 			    </iframe> \
 			</div> ";
+            html += $('#legend').clone().css('display', '').html();
 	    thisCtrl.annotationInfoDisplayPanel.body.update(html);
 //	    $.get(url, {}, function(res) {
 //		var html = "<div id='route_summary_frame' style='width:100%;height=100%'> \
