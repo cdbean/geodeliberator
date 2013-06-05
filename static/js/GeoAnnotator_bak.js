@@ -13,7 +13,7 @@ var GeoAnnotator = {
 	baseUrl : "api/",
 	
 	init : function (){
-		this.currUserId = $('#userId').val();
+		this.currUserId = '0';
 		this.currForumId = '0';
 		this.currAnnotationId = '0';
 		this.currFootprintId = '0';
@@ -33,12 +33,12 @@ var GeoAnnotator = {
 		
 		// check whether the user is stored in cookie
 		//var userId = Ext.state.Manager.get('userId', '0');
-//		this.currUserId = Ext.state.Manager.get('userId', '0'); 
+		this.currUserId = Ext.state.Manager.get('userId', '0'); 
 		
 		// check the url params
-//		var params = Ext.urlDecode(location.search.substring(1));
-//		this.currUserId = params['userId'] || this.currUserId;
-//		this.currForumId = params['forumId'] || this.currForumId;
+		var params = Ext.urlDecode(location.search.substring(1));
+		this.currUserId = params['userId'] || this.currUserId;
+		this.currForumId = params['forumId'] || this.currForumId;
 		GeoAnnotator.ContainerTBCtrl.update();
 		if (this.currUserId !== '0') {
 			GeoAnnotator.ManageWindowCtrl.update();
@@ -197,13 +197,10 @@ GeoAnnotator.ContainerTBCtrl = {
 			thisCtrl.containerTB.add({xtype: 'tbtext', text: 'Welcome, ' + thisCtrl.currUserInfo.userName + '!'});
 			thisCtrl.containerTB.add('-');
 			thisCtrl.containerTB.add({
-			    itemId: 'logoutLink',
-			    xtype: 'box',
-			    autoEl: {
-				tag: 'a',
-				href: '/geodeliberator/user/logout',
-				html: 'Log out'
-			    }
+				text: 'Log Out',
+				listeners: {
+					'click' : thisCtrl.onLogOutClick 
+				}
 			});
 		}
 		else {
@@ -417,7 +414,7 @@ GeoAnnotator.ContainerTBCtrl = {
 	            closeAction :'hide',
 	            plain       : true,
 				modal		: false,
-				html		: html
+				html		: html,
 	    	});
 			thisCtrl.forumInfoWindow.on('hide', function(){GeoAnnotator.ContainerTBCtrl.forumInfoWindow.body.update('');});
 		}
@@ -474,36 +471,6 @@ GeoAnnotator.ContributePanelCtrl = {
                 name: 'newAnnotationId',
                 value: '0'
             },
-                    //added by FZ on 0529, temporary change, delete this section when possible
-                   {
-                    xtype: 'datefield',
-                    format : 'Y-m-d',
-                    fieldLabel : 'Pick a date', 
-                    id : 'newAnnotationDate',
-                    submitFormat: 'Y-m-d H:i:s',
-                    name : 'newAnnotationDate',
-                    //value: new Date()
-                    anchor : 0,
-                    value : new Date(),
-                    allowBlank : false
-					},
-					{
-                    //adde by FZ 0529
-                    xtype: 'timefield',
-                    //format : 'Y-m-d',
-                    fieldLabel : 'Then define a Time', 
-                    id : 'newAnnotationTime',
-                    //submitFormat: 'Y-m-d H:i:s',
-                    name : 'newAnnotationTime',
-                    //value: new Date()
-                    anchor : 0,
-                    allowBlank : false,
-                    increment: 1,
-                    format     : 'H:i'
-                    
-					},
-                    //ƒ/ above
-					
             {
                 xtype: 'htmleditor',
                 id: 'newAnnotationContent',
@@ -768,7 +735,7 @@ GeoAnnotator.ContributePanelCtrl = {
 		var htmleditor = thisCtrl.contributeFormPanel.getForm().findField('newAnnotationContent');
 		var content = htmleditor.getValue();
 		
-		var regex = '/<a href=\"#\" class=\"ref-link\" id=\"ref-([fp,an]+-?[0-9]+)\">([a-z,0-9,_,\s,\-,\[,\]]+)<\/a>/gi'; 
+		var regex = /<a href=\"#\" class=\"ref-link\" id=\"ref-([fp,an]+-?[0-9]+)\">([a-z,0-9,_,\s,\-,\[,\]]+)<\/a>/gi; 
 		var input = content
 		if(regex.test(input)) {
 			regex.lastIndex = 0;
@@ -858,17 +825,7 @@ GeoAnnotator.ContributePanelCtrl = {
             }
         };
         // 6. timeCreated
-        //added by FZ 0530, delete when possible.
-        newAnnotation.timeCreated = 
-        thisCtrl.contributeFormPanel.getForm().findField('newAnnotationDate').getValue().format('Y-m-d').trim()
-        +' on '+ thisCtrl.contributeFormPanel.getForm().findField('newAnnotationTime').getValue()
-        ;
-        // above
-        
         newAnnotation.timeCreated = new Date().toGMTString();
-        //above is the original line.
-        
-        
         // 7. contextMap
         newAnnotation.contextMap = thisCtrl.getContextMap();
         
@@ -1178,26 +1135,16 @@ GeoAnnotator.MapPanelCtrl = {
 				
 				}
 				else {
-				    thisCtrl.contextMenu.add({
-					id:'draw-polygon-ctx',
-					iconCls:'draw-footprint-icon',
-					text:'Draw polygon',
-					scope: thisCtrl,
-					handler:function(){
-					    var thisCtrl = GeoAnnotator.MapPanelCtrl;
-					    thisCtrl.setDrawMode('polygon');
-					}
-				    });
-				    thisCtrl.contextMenu.add({
-					id:'draw-line-ctx',
-					iconCls:'draw-footprint-icon',
-					text:'Draw line',
-					scope: thisCtrl,
-					handler:function(){
-					    var thisCtrl = GeoAnnotator.MapPanelCtrl;
-					    thisCtrl.setDrawMode('line');
-					}
-				    });
+					thisCtrl.contextMenu.add({
+	                  	id:'draw-footprint-ctx',
+	                  	iconCls:'draw-footprint-icon',
+	                  	text:'Draw a footprint',
+	                  	scope: thisCtrl,
+	                  	handler:function(){
+							var thisCtrl = GeoAnnotator.MapPanelCtrl;
+							thisCtrl.setDrawMode();
+	                  	}
+	               	});
 				}
 				if (thisCtrl.contextMenu.items.length > 0) {
 					thisCtrl.contextMenu.showAt(evt.getXY());
@@ -1209,11 +1156,11 @@ GeoAnnotator.MapPanelCtrl = {
 		
 		thisCtrl.footprintStyle = new OpenLayers.StyleMap({
 			'default': new OpenLayers.Style({
-			    strokeColor: "#EE4F44",
-			    strokeOpacity: 1,
-			    strokeWidth: 2,
-			    fillColor: "#EE4F44",
-			    fillOpacity: 0
+				strokeColor: "#EE4F44",
+                strokeOpacity: 1,
+                strokeWidth: 2,
+                fillColor: "#EE4F44",
+                fillOpacity: 0.0
                 //pointerEvents: 'visiblePainted',
                 //pointRadius: 6, // sized according to type attribute
 				//label : '${refCount}',
@@ -1223,24 +1170,24 @@ GeoAnnotator.MapPanelCtrl = {
 				//fontSize: '13px'
 				}),
 			'select': new OpenLayers.Style({
-			    fillColor: '#FFCC33',
-			    fillOpacity: 0.3, 
-//			    strokeColor: 'blue',
-//			    strokeOpacity: 0,
-			    strokeWidth: 4,
-			    //pointerEvents: 'visiblePainted',
-			    cursor: 'pointer'
+				fillColor: '#FFCC33',
+    			fillOpacity: 0.3, 
+    			strokeColor: '#blue',
+    			strokeOpacity: 1,
+    			strokeWidth: 4,
+    			//pointerEvents: 'visiblePainted',
+		        cursor: 'pointer'
 				//pointRadius: 6
 			}),
 			'hover': new OpenLayers.Style({
-			    fillColor: '#FFCC33',
-			    fillOpacity: 0.5, 
-			    strokeColor: '#EE4F44',
-			    strokeOpacity: 1,
-			    strokeWidth: 3,
-			    //pointerEvents: 'visiblePainted',
-			    cursor: 'pointer'
-			    //pointRadius: 6
+				fillColor: '#FFCC33',
+    			fillOpacity: 0.5, 
+    			strokeColor: '#EE4F44',
+    			strokeOpacity: 1,
+    			strokeWidth: 3,
+    			//pointerEvents: 'visiblePainted',
+		        cursor: 'pointer'
+				//pointRadius: 6
 			})
 		});
 
@@ -1249,7 +1196,7 @@ GeoAnnotator.MapPanelCtrl = {
         default_style.strokeOpacity = 1;
         default_style.strokeWidth = 2;
         default_style.fillColor = "#D4DDC3";
-        default_style.fillOpacity = 1.0;
+        default_style.fillOpacity = 0.0;
 		default_style.strokeDashstyle = "dashdot";
 		var hover_style = OpenLayers.Util.extend({}, OpenLayers.Feature.Vector.style['default']);
 		hover_style.strokeColor = "#00FF00";
@@ -1619,31 +1566,17 @@ GeoAnnotator.MapPanelCtrl = {
 		//thisCtrl.modifyNewFootprintControl.onDeletingStart = thisCtrl.onFeatureDeleted;
 		thisCtrl.map.addControl(thisCtrl.modifyNewFootprintControl);
 				
-		thisCtrl.drawFootprintControl = {
-		    polygon: new OpenLayers.Control.DrawFeature(
+		thisCtrl.drawFootprintControl = new OpenLayers.Control.DrawFeature(
 			thisCtrl.newFootprintVectors, 
 			OpenLayers.Handler.Polygon, 
 			{
-			    featureAdded:function(feature) { 
-				feature.state = OpenLayers.State.INSERT; 
-				thisCtrl.onFeatureAdded(feature);
-			    }
+				featureAdded:function(feature) { 
+					feature.state = OpenLayers.State.INSERT; 
+					thisCtrl.onFeatureAdded(feature);
+				}
 			}
-		    ),
-		    line: new OpenLayers.Control.DrawFeature(
-			thisCtrl.newFootprintVectors, 
-			OpenLayers.Handler.Path, 
-			{
-			    featureAdded:function(feature) { 
-				feature.state = OpenLayers.State.INSERT; 
-				thisCtrl.onFeatureAdded(feature);
-			    }
-			}
-		    )
-		};
-		for (var key in thisCtrl.drawFootprintControl) {
-		    thisCtrl.map.addControl(thisCtrl.drawFootprintControl[key]);    	
-		}
+		);
+		thisCtrl.map.addControl(thisCtrl.drawFootprintControl);    	
 		
 
 		// set the default behavoirs
@@ -1760,16 +1693,14 @@ GeoAnnotator.MapPanelCtrl = {
 			thisCtrl.selectFootprintControl.activate();
 		}
 		if (thisCtrl.drawFootprintControl) {
-		    for (var key in thisCtrl.drawFootprintControl) {
-			thisCtrl.drawFootprintControl[key].deactivate();
-		    }
+			thisCtrl.drawFootprintControl.deactivate();
 		}
 		if (thisCtrl.modifyNewFootprintControl) {
 			thisCtrl.modifyNewFootprintControl.deactivate();					
 		}
 	},
 
-	setDrawMode : function(mode) {
+	setDrawMode : function() {
 		var thisCtrl = GeoAnnotator.MapPanelCtrl;
 		if (thisCtrl.navigationControl) {
 			thisCtrl.navigationControl.deactivate();	
@@ -1778,11 +1709,7 @@ GeoAnnotator.MapPanelCtrl = {
 			thisCtrl.selectFootprintControl.deactivate();
 		}
 		if (thisCtrl.drawFootprintControl) {
-		    for (var key in thisCtrl.drawFootprintControl) {
-			if (mode == key) {
-			    thisCtrl.drawFootprintControl[key].activate();
-			}
-		    }
+			thisCtrl.drawFootprintControl.activate();
 		}
 		if (thisCtrl.modifyNewFootprintControl) {
 			thisCtrl.modifyNewFootprintControl.deactivate();					
@@ -1798,9 +1725,7 @@ GeoAnnotator.MapPanelCtrl = {
 			thisCtrl.selectFootprintControl.deactivate();
 		}
 		if (thisCtrl.drawFootprintControl) {
-		    for (var key in thisCtrl.drawFootprintControl) {
-			thisCtrl.drawFootprintControl[key].deactivate();
-		    }
+			thisCtrl.drawFootprintControl.deactivate();
 		}
 		if (thisCtrl.modifyNewFootprintControl) {
 			thisCtrl.modifyNewFootprintControl.activate();					
@@ -1931,7 +1856,7 @@ GeoAnnotator.MapPanelCtrl = {
             			displayInfo: true,
             			displayMsg: 'Annotations {0} - {1} of {2}',
             			emptyMsg: "No annotations to display"
-        			})		
+        			}),		
 		    });
 			//thisCtrl.annotationListWindow.on('hide', function(){btn.toggle(false);})
 		}
@@ -2049,7 +1974,7 @@ GeoAnnotator.MapPanelCtrl = {
 		GeoAnnotator.AnnotationInfoPanelCtrl.update();
 		
 		//GeoAnnotator.MapPanelCtrl.update();
-	}
+	},
 };
 
 GeoAnnotator.TimelinePanelCtrl = {
@@ -2615,7 +2540,7 @@ GeoAnnotator.TimelinePanelCtrl = {
             			displayInfo: true,
             			displayMsg: 'Annotations {0} - {1} of {2}',
             			emptyMsg: "No annotations to display"
-        			})		
+        			}),		
 		    });
 			//thisCtrl.annotationListWindow.on('hide', function(){btn.toggle(false);})
 		}
@@ -2761,7 +2686,7 @@ GeoAnnotator.AnnotationInfoPanelCtrl = {
 			region:'center',
 			//height: 150,
 			//autoHeight: true,
-			autoScroll: true
+			autoScroll: true,
 		});	
 				
 		// 2. add the toolbar
@@ -2971,7 +2896,7 @@ GeoAnnotator.AnnotationInfoPanelCtrl = {
    			failure: function() {
 				alert('failed to load annotation info!');
 			},
-   			params: {'annotationId':annotationId, 'userId':GeoAnnotator.currUserId, 'forumId': GeoAnnotator.currForumId}
+   			params: {'annotationId':annotationId, 'userId':GeoAnnotator.currUserId, 'forumId': GeoAnnotator.currForumId},
 		});
 	},
 	
@@ -3046,7 +2971,7 @@ GeoAnnotator.AnnotationInfoPanelCtrl = {
    			failure: function() {
 				alert('failed to load annotation info!');
 			},
-   			params: {'annotationId':thisCtrl.currAnnotationInfo.id, 'userId':GeoAnnotator.currUserId, 'forumId': GeoAnnotator.currForumId}
+   			params: {'annotationId':thisCtrl.currAnnotationInfo.id, 'userId':GeoAnnotator.currUserId, 'forumId': GeoAnnotator.currForumId},
 		});
 	},
 	
