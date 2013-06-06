@@ -26,7 +26,7 @@ def login_user(request):
 	    response["error"] = "Username and password don't match!"
 	    print response
 	    return render(request, 'login.html', response)
-	return redirect('/geodeliberator')
+	return redirect('../..')
 
 def register(request):
     response	= {}
@@ -59,7 +59,7 @@ def register(request):
 		user = authenticate(username=username, password=pwd)
 		if user is not None:
 		    login(request, user)
-		    return redirect('/geodeliberator')
+		    return redirect('../..')
 		else:
 		    response['success'] = False
 		    response['error'] = 'User authentication failed!'

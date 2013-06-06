@@ -3116,12 +3116,18 @@ GeoAnnotator.AnnotationInfoPanelCtrl = {
 	},
 	
 	drawThreadNode : function(threadNodeInfo, x, y, width, height, style) {
+                var strip = function(html) {
+                   var tmp = document.createElement("DIV");
+                   tmp.innerHTML = html;
+                   return tmp.textContent||tmp.innerText;
+                };
+
 		var thisCtrl = GeoAnnotator.AnnotationInfoPanelCtrl;
 		var top = y - 0.5 * height;
 		var left = x - 0.5 * width;
 		var thread_node = {}
 		var box = thisCtrl.spaceTree.rect(left, top, width, height).attr(style["default"]);
-		var label = thisCtrl.spaceTree.text(x, y, threadNodeInfo.userName + ":\n" + threadNodeInfo.excerpt.substring(0, 20)).attr(style["text"]);
+		var label = thisCtrl.spaceTree.text(x, y, threadNodeInfo.userName + ":\n" + strip(threadNodeInfo.excerpt.substring(0, 20))).attr(style["text"]);
 		var blanket = thisCtrl.spaceTree.rect(left, top, width, height).attr(style["blanket"]);
 		thread_node.id = threadNodeInfo.id;
 		thread_node.box = box;
