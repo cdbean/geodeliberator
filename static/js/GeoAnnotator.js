@@ -2671,7 +2671,8 @@ GeoAnnotator.TimelinePanelCtrl = {
 	}
 }
 
-GeoAnnotator.AnnotationInfoPanelCtrl = {
+GeoAnnotator.AnnotationInfoPanelCtrl = 
+{
 	// containerPanel
 	containerPanel: null,
 	annotationInfoDisplayPanel : null,
@@ -3115,7 +3116,8 @@ GeoAnnotator.AnnotationInfoPanelCtrl = {
 		}
 	},
 	
-	drawThreadNode : function(threadNodeInfo, x, y, width, height, style) {
+	drawThreadNode : function(threadNodeInfo, x, y, width, height, style) 
+	{
 		var thisCtrl = GeoAnnotator.AnnotationInfoPanelCtrl;
 		var top = y - 0.5 * height;
 		var left = x - 0.5 * width;
@@ -3342,7 +3344,8 @@ GeoAnnotator.AnnotationInfoPanelCtrl = {
          				closeAction :'hide',
          				plain       : true,
 				modal		: false,
-				items : [thisCtrl.referenceSpaceTreePanel]
+				items : [thisCtrl.referenceSpaceTreePanel],
+				title : 'Thread tree view'
  					});
 		}
 		else {
@@ -3937,7 +3940,6 @@ GeoAnnotator.AnnotationBookmarkWindowCtrl = {
 		
 	}
 };
-
 
 GeoAnnotator.Util = {
 	/**

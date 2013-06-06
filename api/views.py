@@ -403,15 +403,15 @@ def api_threads(request):
         response['children'] = []
         for reference in theme_references:
             reference_info = {}
-            reference_info['id'] = str(reference.source.id)
-            reference_info['type'] = reference.source.content_type
-            reference_info['forumId'] = str(reference.source.forum.id)
-            reference_info['userId'] = str(reference.source.author.id)
-            reference_info['userName'] = reference.source.author.username
-            reference_info['shareLevel'] = reference.source.sharelevel
-            reference_info['timeCreated'] = reference.source.created_at.ctime()
-            reference_info['timeUpdated'] = reference.source.updated_at.ctime()
-            reference_info['excerpt'] = reference.source.get_excerpt(10)
+            reference_info['id'] = str(reference.target.id)
+            reference_info['type'] = reference.target.content_type
+            reference_info['forumId'] = str(reference.target.forum.id)
+            reference_info['userId'] = str(reference.target.author.id)
+            reference_info['userName'] = reference.target.author.username
+            reference_info['shareLevel'] = reference.target.sharelevel
+            reference_info['timeCreated'] = reference.target.created_at.ctime()
+            reference_info['timeUpdated'] = reference.target.updated_at.ctime()
+            reference_info['excerpt'] = reference.target.get_excerpt(10)
             reference_info['alias'] = reference.alias
             reference_info['relation'] = reference.relation
             response['children'].append(reference_info)
