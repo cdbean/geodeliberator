@@ -2671,7 +2671,8 @@ GeoAnnotator.TimelinePanelCtrl = {
 	}
 }
 
-GeoAnnotator.AnnotationInfoPanelCtrl = {
+GeoAnnotator.AnnotationInfoPanelCtrl = 
+{
 	// containerPanel
 	containerPanel: null,
 	annotationInfoDisplayPanel : null,
@@ -3115,6 +3116,7 @@ GeoAnnotator.AnnotationInfoPanelCtrl = {
 		}
 	},
 	
+<<<<<<< HEAD
 	drawThreadNode : function(threadNodeInfo, x, y, width, height, style) {
                 var strip = function(html) {
                    var tmp = document.createElement("DIV");
@@ -3122,6 +3124,10 @@ GeoAnnotator.AnnotationInfoPanelCtrl = {
                    return tmp.textContent||tmp.innerText;
                 };
 
+=======
+	drawThreadNode : function(threadNodeInfo, x, y, width, height, style) 
+	{
+>>>>>>> 98fe1acaa8eba3e131ea0e5593c8d8ff540a2e68
 		var thisCtrl = GeoAnnotator.AnnotationInfoPanelCtrl;
 		var top = y - 0.5 * height;
 		var left = x - 0.5 * width;
