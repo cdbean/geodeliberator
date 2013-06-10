@@ -659,8 +659,7 @@ GeoAnnotator.ContributePanelCtrl = {
                                 xw.writeAttributeString('key', key);
                                 xw.writeAttributeString('value', value);
                                 xw.writeEndElement();
-                                // param
-                                      
+                                // param     
                             }
                         }
                         xw.writeEndElement();
