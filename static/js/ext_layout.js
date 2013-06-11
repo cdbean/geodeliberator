@@ -96,7 +96,6 @@ var contributePanel = new Ext.Panel({
 	//tbar: new Ext.Toolbar(),
 	animCollapse: false
 });
-
 // right panel container
 var rightPanels = new Ext.Panel({
 	//layout: 'ux.row',

@@ -88,10 +88,28 @@ def api_authentication(request):
         response["success"] = False
         response["errors"] = {"reason": "Your username and password were incorrect."}
     return HttpResponse(json.dumps(response), mimetype='application/json')
-    
+
+def api_foruminfo(request):
+    print "api_foruminfo inside"
+    response = {}
+    forumId = int(request.REQUEST.get('forumId', '0')) or int(request.REQUEST.get('groupId', '0'))
+    print "Forum Id is: " + str(forumId)
+    if forumId > 0:
+        try:
+            newinfo = str(request.REQUEST.get('newinfo', '0'))
+            #print "new info is: " + newinfo
+            forum = Forum.objects.get(id=forumId)
+            print str(forum.description)
+            forum.description=newinfo
+            forum.save
+            response["success"] = True
+        except Forum.DoesNotExist:
+            pass
+    return HttpResponse(json.dumps(response), mimetype='application/json')
+        
+
 def api_annotations(request):
     response = {}
-    
     userId = int(request.REQUEST.get('userId', '0'))
     forumId = int(request.REQUEST.get('forumId', '0')) or int(request.REQUEST.get('groupId', '0'))
     start = int(request.REQUEST.get('start', '0'))
@@ -235,8 +253,7 @@ def delete_annotation(annotation_id):
         response["success"] = False
         response["errors"] = {"reason": "The annotation does not exist!"}
     return response
-    
-    
+        
 def get_annotation(annotation_id):
     annotation_info = {}
     try:

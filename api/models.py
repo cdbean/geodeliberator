@@ -55,7 +55,6 @@ class Footprint(models.Model):
     def __unicode__(self):
         return str(self.id)
 
-    
 class Annotation(models.Model):
     SHARE_LEVELS = (
         ('everyone', 'Everyone'),

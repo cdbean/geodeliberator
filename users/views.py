@@ -26,7 +26,7 @@ def login_user(request):
 	    response["error"] = "Username and password don't match!"
 	    print response
 	    return render(request, 'login.html', response)
-	return redirect('/geodeliberator')
+	return redirect('/')
 
 def register(request):
     response	= {}

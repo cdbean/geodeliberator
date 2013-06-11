@@ -61,6 +61,8 @@ GeoAnnotator.ContainerTBCtrl = {
 	// log in window
 	logInWindow : null,
 	forumInfoWindow : null,
+	forumEditWindow : null,
+	
 	forumList : null,
 	register : function (containerTB) {
 		GeoAnnotator.ContainerTBCtrl.containerTB = containerTB;
@@ -123,7 +125,17 @@ GeoAnnotator.ContainerTBCtrl = {
 			listeners:{
 				'click': thisCtrl.onForumDetailClick
 			}
-		});		
+		});
+		thisCtrl.containerTB.add({
+			id: 'forum-edit-btn',
+			text: 'Edit Forum Info',
+			iconCls: 'detail-icon',
+			disabled : true,
+			listeners:{
+				'click': thisCtrl.onForumEditClick
+			}
+		});
+	
 		thisCtrl.containerTB.add(' ');
 		// 2. toggle History and bookmark windows
 		thisCtrl.containerTB.add({
@@ -347,6 +359,7 @@ GeoAnnotator.ContainerTBCtrl = {
 			GeoAnnotator.currForumId = id;
 			
 			thisCtrl.containerTB.getComponent('forum-id-btn').enable();
+			thisCtrl.containerTB.getComponent('forum-edit-btn').enable();
 			thisCtrl.containerTB.getComponent('timeline-btn').enable();
 			thisCtrl.containerTB.getComponent('annotation-history-btn').enable();
 			thisCtrl.containerTB.getComponent('annotation-bookmark-btn').enable();
@@ -379,6 +392,19 @@ GeoAnnotator.ContainerTBCtrl = {
             }
         });
 	},
+	onForumEditClick : function() {
+		var thisCtrl = GeoAnnotator.ContainerTBCtrl;
+        // request the group information
+        Ext.Ajax.request({
+            url: GeoAnnotator.baseUrl + 'forum/',
+            success: thisCtrl.onEditForumInfoSuccess,
+            failure: thisCtrl.onLoadForumInfoFailure,
+            params: {
+                'userId': GeoAnnotator.currUserId,
+                'forumId': GeoAnnotator.currForumId
+            }
+        });
+	},
 	
 	onLoadForumInfoSuccess: function(xhr) {
        var thisCtrl = GeoAnnotator.ContainerTBCtrl;
@@ -386,6 +412,21 @@ GeoAnnotator.ContainerTBCtrl = {
        if (thisCtrl.currForumInfo != null) {
            // show the forum detail
            thisCtrl.showForumInfo();
+
+           // set cookies
+           if (GeoAnnotator.currUserId != '0' && GeoAnnotator.currForumId != '0') {
+               Ext.state.Manager.set('userId', GeoAnnotator.currUserId);
+               Ext.state.Manager.set('forumId', GeoAnnotator.currForumId);
+           }
+       }
+    },
+	onEditForumInfoSuccess: function(xhr) {
+       var thisCtrl = GeoAnnotator.ContainerTBCtrl;
+       thisCtrl.currForumInfo = Ext.util.JSON.decode(xhr.responseText);
+       if (thisCtrl.currForumInfo != null) 
+	   {
+           // show the forum detail
+           thisCtrl.editForumInfo();
 
            // set cookies
            if (GeoAnnotator.currUserId != '0' && GeoAnnotator.currForumId != '0') {
@@ -422,7 +463,95 @@ GeoAnnotator.ContainerTBCtrl = {
 		}
 		thisCtrl.forumInfoWindow.show();
 		thisCtrl.forumInfoWindow.alignTo(thisCtrl.containerTB.getComponent('forum-id-btn').el, 'tl-tl');
-	}
+	},
+	
+	editForumInfo : function() {
+		var thisCtrl = GeoAnnotator.ContainerTBCtrl;
+		html = '<div id="forumGeneralInfo">' + thisCtrl.currForumInfo.description + '</div>';
+		var edit = new Ext.FormPanel({
+			id: 'forum-info-edit-form',
+            labelAlign: 'top',
+            frame: true,
+            autoHeight: true,
+            bodyStyle: 'padding: 5 5 5 5;',
+            items : 
+			[{
+                xtype: 'htmleditor',
+				id: 'newForumInfo',
+				name: 'newForumInfo',
+                fieldLabel: 'Forum Information Editor',
+                enableFont: true,
+                enableLists: true,
+                enableAlignments: true,
+                height: 450,
+                width: 450,
+                autoScroll: true,
+                anchor: '100%',
+				value	: html
+            }],
+			buttons: [{
+					text: 'Submit',
+					handler: thisCtrl.onForumEditSubmit
+			}]
+		}); 
+		//alert(html);
+		if(!thisCtrl.forumEditWindow){
+			//alert("!thisCtrl.forumEditWindow");
+			thisCtrl.forumEditWindow = new Ext.Window({
+		    	layout      : 'fit',
+	            width       : 500,
+	            height      : 500,
+				autoScroll	: true,
+	            closeAction :'hide',
+	            plain       : true,
+				modal		: 	false,
+				items		:	edit
+	    	});
+	    	//thisCtrl.forumEditWindow.on('hide', function(){GeoAnnotator.ContainerTBCtrl.forumEditWindow.body.update('');});// added by FZ 0610. don't know what is this.
+		}
+		else {
+			//alert("else");
+			//thisCtrl.forumEditWindow.body.update(html);
+		}
+		thisCtrl.forumEditWindow.show();
+		thisCtrl.forumEditWindow.alignTo(thisCtrl.containerTB.getComponent('forum-edit-btn').el, 'tl-tl');
+	},
+	onForumEditSubmit : function(){
+		var html_info = thisCtrl.forumEditWindow.getComponent('forum-info-edit-form').getForm().findField('newForumInfo').getValue();	//added by FZ 0610. need more explain latter.	
+		
+		thisCtrl.submitEditFormData(html_info);
+	},
+	submitEditFormData: function(html_info){
+		//alert(html_info);
+		//alert(Ext.util.JSON.encode(newAnnotation));
+        var thisCtrl = GeoAnnotator.ContainerTBCtrl;
+		alert("step one,Forum ID is: "+GeoAnnotator.currForumId);
+		
+        // request the user information
+        Ext.Ajax.request({
+            url: GeoAnnotator.baseUrl + 'foruminfo/',
+            success: thisCtrl.onSubmitEditInfoSuccess,
+            failure: thisCtrl.onSubmitEditInfoFail,
+            params: {
+                'userId': GeoAnnotator.currUserId,
+                'forumId': GeoAnnotator.currForumId,
+				'newinfo': html_info
+            }
+        });
+	},
+	onSubmitEditInfoFail: function(xhr) {
+        alert('failed to edit Forum info!');
+    },
+	onSubmitEditInfoSuccess: function(xhr) {
+        var submitState = Ext.util.JSON.decode(xhr.responseText);
+		if (submitState.success == true) 
+		{
+			alert('successed!');
+		}
+		else
+			alert('Not 100% successed');
+    }
+        
 };
 
 GeoAnnotator.ContributePanelCtrl = {
@@ -651,11 +780,10 @@ GeoAnnotator.ContributePanelCtrl = {
                     if (params != undefined & params != null) {
                         xw.writeStartElement('params');
 
-                        for (var key in params) {      
-                            var value = params[key];
-                                  
+                        for (var key in params) {
+						var value = params[key];
                             if (value != undefined && value != null) {
-                                        xw.writeStartElement('param');
+								xw.writeStartElement('param');
                                 xw.writeAttributeString('key', key);
                                 xw.writeAttributeString('value', value);
                                 xw.writeEndElement();
@@ -682,12 +810,9 @@ GeoAnnotator.ContributePanelCtrl = {
                 if (options != undefined && options != null) {
                     xw.writeStartElement('options');
                     for (var key in options) {
-                              
-                        var value = options[key];
-                              
+						var value = options[key];
                         if (value != undefined && value != null) {
-                                    
-                            if (key != 'formatOptions' && key != 'visibility') {
+							if (key != 'formatOptions' && key != 'visibility') {
                                 xw.writeStartElement('option');
                                 xw.writeAttributeString('key', key);
                                 if (key == 'format') {
@@ -700,9 +825,7 @@ GeoAnnotator.ContributePanelCtrl = {
                                     xw.writeAttributeString('value', value);
                                 }
                                 xw.writeEndElement();
-                                // option
                             }
-                                  
                         }
                     }
                     // write visibility option;
@@ -720,11 +843,9 @@ GeoAnnotator.ContributePanelCtrl = {
                     xw.writeStartElement('formatOptions');
                     var formatOptions = options['formatOptions'];
                     for (var key in formatOptions) {
-                              
                         var value = formatOptions[key];
-                              
                         if (value != undefined && value != null) {
-                                    xw.writeStartElement('formatOption');
+							xw.writeStartElement('formatOption');
                             xw.writeAttributeString('key', key);
                             xw.writeAttributeString('value', value);
                             xw.writeEndElement();
