@@ -90,10 +90,10 @@ def api_authentication(request):
     return HttpResponse(json.dumps(response), mimetype='application/json')
 
 def api_foruminfo(request):
-    print "api_foruminfo inside"
+    #print "api_foruminfo inside"
     response = {}
     forumId = int(request.REQUEST.get('forumId', '0')) or int(request.REQUEST.get('groupId', '0'))
-    print "Forum Id is: " + str(forumId)
+    #print "Forum Id is: " + str(forumId)
     if forumId > 0:
         try:
             newinfo = str(request.REQUEST.get('newinfo', '0'))
@@ -101,7 +101,8 @@ def api_foruminfo(request):
             forum = Forum.objects.get(id=forumId)
             print str(forum.description)
             forum.description=newinfo
-            forum.save
+            print str(forum.description)
+            forum.save()
             response["success"] = True
         except Forum.DoesNotExist:
             pass
@@ -144,7 +145,6 @@ def api_annotations(request):
     
     if limit > -1:
         annotations = annotations[start:start+limit]
-
     response['annotations'] = []
     for annotation in annotations:
         annotation_info = {}
@@ -398,6 +398,7 @@ def api_threads(request):
         response['timeCreated'] = annotation.created_at.ctime()
         response['timeUpdated'] = annotation.updated_at.ctime()
         response['excerpt'] = annotation.get_excerpt(10)
+        print response['excerpt']
         # get parents
         theme_references = ThemeReference.objects.filter(target=annotationId)
         response['parents'] = []

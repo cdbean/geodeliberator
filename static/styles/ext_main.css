@@ -326,6 +326,9 @@ a:hover {
 .annotation-edit-icon {
     background-image: url(../images/edit.png) !important;    
 }
+.foruminfo-edit-icon {
+    background-image: url(../images/edit_info.png) !important;    
+}
 
 .annotation-delete-icon {
     background-image: url(../images/delete.png) !important;    

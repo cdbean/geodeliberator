@@ -30,13 +30,13 @@ var GeoAnnotator = {
 		GeoAnnotator.AnnotationBookmarkWindowCtrl.init();
 		GeoAnnotator.AnnotationHistoryWindowCtrl.init();
 		
-		// 	check whether the user is stored in cookie
-		//	var userId = Ext.state.Manager.get('userId', '0');
-		//	this.currUserId = Ext.state.Manager.get('userId', '0'); 	
-		// 	check the url params
-		//	var params = Ext.urlDecode(location.search.substring(1));
-		//	this.currUserId = params['userId'] || this.currUserId;
-		//	this.currForumId = params['forumId'] || this.currForumId;
+		// check whether the user is stored in cookie
+		//var userId = Ext.state.Manager.get('userId', '0');
+//		this.currUserId = Ext.state.Manager.get('userId', '0'); 	
+		// check the url params
+//		var params = Ext.urlDecode(location.search.substring(1));
+//		this.currUserId = params['userId'] || this.currUserId;
+//		this.currForumId = params['forumId'] || this.currForumId;
 		GeoAnnotator.ContainerTBCtrl.update();
 		if (this.currUserId !== '0') {
 			GeoAnnotator.ManageWindowCtrl.update();
@@ -61,8 +61,6 @@ GeoAnnotator.ContainerTBCtrl = {
 	// log in window
 	logInWindow : null,
 	forumInfoWindow : null,
-	forumEditWindow : null,
-	
 	forumList : null,
 	register : function (containerTB) {
 		GeoAnnotator.ContainerTBCtrl.containerTB = containerTB;
@@ -125,17 +123,7 @@ GeoAnnotator.ContainerTBCtrl = {
 			listeners:{
 				'click': thisCtrl.onForumDetailClick
 			}
-		});
-		thisCtrl.containerTB.add({
-			id: 'forum-edit-btn',
-			text: 'Edit Forum Info',
-			iconCls: 'foruminfo-edit-icon',
-			disabled : true,
-			listeners:{
-				'click': thisCtrl.onForumEditClick
-			}
-		});
-	
+		});		
 		thisCtrl.containerTB.add(' ');
 		// 2. toggle History and bookmark windows
 		thisCtrl.containerTB.add({
@@ -338,7 +326,8 @@ GeoAnnotator.ContainerTBCtrl = {
 				}
 				else {
 					if (Ext.state.Manager.get('forumId', '0') != '0'){
-						// simulate the click on the group		
+						// simulate the click on the group
+						
 					}
 				}
 			}		
@@ -356,12 +345,13 @@ GeoAnnotator.ContainerTBCtrl = {
 		if (id && GeoAnnotator.currForumId != id) {
 			// reset the new footprints array
 			GeoAnnotator.currForumId = id;
+			
 			thisCtrl.containerTB.getComponent('forum-id-btn').enable();
-			thisCtrl.containerTB.getComponent('forum-edit-btn').enable();
 			thisCtrl.containerTB.getComponent('timeline-btn').enable();
 			thisCtrl.containerTB.getComponent('annotation-history-btn').enable();
 			thisCtrl.containerTB.getComponent('annotation-bookmark-btn').enable();
-		}		
+		}
+			
 		// update controls		
 		var currParams = {};
 		if (GeoAnnotator.currUserId != '0'){
@@ -373,28 +363,16 @@ GeoAnnotator.ContainerTBCtrl = {
 		GeoAnnotator.MapPanelCtrl.update(currParams);
 		GeoAnnotator.TimelinePanelCtrl.update();
 		GeoAnnotator.ManageWindowCtrl.update();
+
 	},
 	
 	onForumDetailClick : function() {
 		var thisCtrl = GeoAnnotator.ContainerTBCtrl;
-        // request the forum information
+        // request the group information
         Ext.Ajax.request({
             url: GeoAnnotator.baseUrl + 'forum/',
             success: thisCtrl.onLoadForumInfoSuccess,
             failure: thisCtrl.onLoadForumInfoFailure,
-            params: {
-                'userId': GeoAnnotator.currUserId,
-                'forumId': GeoAnnotator.currForumId
-            }
-        });
-	},
-	onForumEditClick : function() {
-		var thisCtrl = GeoAnnotator.ContainerTBCtrl;
-        // request the forum information
-        Ext.Ajax.request({
-            url: GeoAnnotator.baseUrl + 'forum/',
-            success: thisCtrl.onEditForumInfoSuccess,	// 	if we load the info success we can edit it. 
-            failure: thisCtrl.onLoadForumInfoFailure,	//	otherwise we just consider it as a load failure
             params: {
                 'userId': GeoAnnotator.currUserId,
                 'forumId': GeoAnnotator.currForumId
@@ -408,22 +386,8 @@ GeoAnnotator.ContainerTBCtrl = {
        if (thisCtrl.currForumInfo != null) {
            // show the forum detail
            thisCtrl.showForumInfo();
+
            // set cookies
-           if (GeoAnnotator.currUserId != '0' && GeoAnnotator.currForumId != '0') {
-               Ext.state.Manager.set('userId', GeoAnnotator.currUserId);
-               Ext.state.Manager.set('forumId', GeoAnnotator.currForumId);
-           }
-       }
-    },
-	
-	onEditForumInfoSuccess: function(xhr) {
-       var thisCtrl = GeoAnnotator.ContainerTBCtrl;
-       thisCtrl.currForumInfo = Ext.util.JSON.decode(xhr.responseText);
-       if (thisCtrl.currForumInfo != null) 
-	   {
-           // show the forum detail
-           thisCtrl.editForumInfo();
-           // set cookies	//added by FZ, not sure if these are useful. will come back latter.
            if (GeoAnnotator.currUserId != '0' && GeoAnnotator.currForumId != '0') {
                Ext.state.Manager.set('userId', GeoAnnotator.currUserId);
                Ext.state.Manager.set('forumId', GeoAnnotator.currForumId);
@@ -438,17 +402,8 @@ GeoAnnotator.ContainerTBCtrl = {
  
 	showForumInfo : function() {
 		var thisCtrl = GeoAnnotator.ContainerTBCtrl;
-		var regex = /^.*<div id=\"forumGeneralInfo\">.*$/gi;	// this regex will check if the forum description contains the div tag.
-		if(regex.test(thisCtrl.currForumInfo.description))
-		{
-			html = thisCtrl.currForumInfo.description;
-		}
-		else
-		{
-			html = '<div id="forumGeneralInfo">' + thisCtrl.currForumInfo.description + '</div>';
-			// if not, we add the div tag to the description.
-		}	
-
+		html = '<div id="forumGeneralInfo">' + thisCtrl.currForumInfo.description + '</div>';
+		//alert(html);
 		if(!thisCtrl.forumInfoWindow){
 			thisCtrl.forumInfoWindow = new Ext.Window({
 		    	layout      : 'fit',
@@ -467,98 +422,7 @@ GeoAnnotator.ContainerTBCtrl = {
 		}
 		thisCtrl.forumInfoWindow.show();
 		thisCtrl.forumInfoWindow.alignTo(thisCtrl.containerTB.getComponent('forum-id-btn').el, 'tl-tl');
-	},
-	
-	editForumInfo : function() {
-		var thisCtrl = GeoAnnotator.ContainerTBCtrl;
-		var regex = /^.*<div id=\"forumGeneralInfo\">.*$/gi;	//	refer back to the showForumInfo function for more explanation
-		if(regex.test(thisCtrl.currForumInfo.description))
-		{
-			html = thisCtrl.currForumInfo.description;
-		}
-		else
-		{
-			html = '<div id="forumGeneralInfo">' + thisCtrl.currForumInfo.description + '</div>';
-		}	
-		
-		var edit = new Ext.FormPanel({
-			id: 'forum-info-edit-form',
-            labelAlign: 'top',
-            frame: true,
-            autoHeight: true,
-            bodyStyle: 'padding: 5 5 5 5;',
-            items : 
-			[{
-                xtype: 'htmleditor',
-				id: 'newForumInfo',
-				name: 'newForumInfo',
-                fieldLabel: 'Forum Information Editor',
-                enableFont: true,
-                enableLists: true,
-                enableAlignments: true,
-                height: 450,
-                width: 450,
-                autoScroll: true,
-                anchor: '100%',
-				value	: html
-            }],
-			buttons: [{
-					text: 'Submit',
-					handler: thisCtrl.onForumEditSubmit
-			}]
-		}); 
-		//alert(html);
-		if(!thisCtrl.forumEditWindow){
-			//alert("!thisCtrl.forumEditWindow");
-			thisCtrl.forumEditWindow = new Ext.Window({
-		    	layout      : 'fit',
-	            width       : 500,	// gives wider and taller panel for neat display purpos.
-	            height      : 600,
-				autoScroll	: true,
-	            closeAction :'hide',
-	            plain       : true,
-				modal		: 	false,
-				items		:	edit
-	    	});}
-	    	//thisCtrl.forumEditWindow.on('hide', function(){GeoAnnotator.ContainerTBCtrl.forumEditWindow.body.update('');});
-			// added by FZ 0610. This line cause error, will fix it latter.
-		
-		thisCtrl.forumEditWindow.show();
-		thisCtrl.forumEditWindow.alignTo(thisCtrl.containerTB.getComponent('forum-edit-btn').el, 'tl-tl');
-	},
-	onForumEditSubmit : function(){
-		var html_info = thisCtrl.forumEditWindow.getComponent('forum-info-edit-form').getForm().findField('newForumInfo').getValue();	
-		//added by FZ 0610. need more explain latter.	
-		thisCtrl.submitEditFormData(html_info);
-	},
-	submitEditFormData: function(html_info){
-		var thisCtrl = GeoAnnotator.ContainerTBCtrl;
-        // request the user information
-        Ext.Ajax.request({
-            url: GeoAnnotator.baseUrl + 'foruminfo/',
-            success: thisCtrl.onSubmitEditInfoSuccess,
-            failure: thisCtrl.onSubmitEditInfoFail,
-            params: {
-                'userId': GeoAnnotator.currUserId,
-                'forumId': GeoAnnotator.currForumId,
-				'newinfo': html_info
-            }
-        });
-	},
-	onSubmitEditInfoFail: function(xhr) {
-        alert('failed to edit Forum info!');
-    },
-	onSubmitEditInfoSuccess: function(xhr) {
-        var submitState = Ext.util.JSON.decode(xhr.responseText);
-		if (submitState.success == true) 
-		{
-			alert('You have successfully edit the forum information!');
-			// here we may try to turn off the window.
-		}
-		else
-			alert('Edit submission failed!');
-    }
-        
+	}
 };
 
 GeoAnnotator.ContributePanelCtrl = {
@@ -787,14 +651,16 @@ GeoAnnotator.ContributePanelCtrl = {
                     if (params != undefined & params != null) {
                         xw.writeStartElement('params');
 
-                        for (var key in params) {
-						var value = params[key];
+                        for (var key in params) {      
+                            var value = params[key];
+                                  
                             if (value != undefined && value != null) {
-								xw.writeStartElement('param');
+                                        xw.writeStartElement('param');
                                 xw.writeAttributeString('key', key);
                                 xw.writeAttributeString('value', value);
                                 xw.writeEndElement();
-                                // param     
+                                // param
+                                      
                             }
                         }
                         xw.writeEndElement();
@@ -817,9 +683,12 @@ GeoAnnotator.ContributePanelCtrl = {
                 if (options != undefined && options != null) {
                     xw.writeStartElement('options');
                     for (var key in options) {
-						var value = options[key];
+                              
+                        var value = options[key];
+                              
                         if (value != undefined && value != null) {
-							if (key != 'formatOptions' && key != 'visibility') {
+                                    
+                            if (key != 'formatOptions' && key != 'visibility') {
                                 xw.writeStartElement('option');
                                 xw.writeAttributeString('key', key);
                                 if (key == 'format') {
@@ -832,7 +701,9 @@ GeoAnnotator.ContributePanelCtrl = {
                                     xw.writeAttributeString('value', value);
                                 }
                                 xw.writeEndElement();
+                                // option
                             }
+                                  
                         }
                     }
                     // write visibility option;
@@ -850,9 +721,11 @@ GeoAnnotator.ContributePanelCtrl = {
                     xw.writeStartElement('formatOptions');
                     var formatOptions = options['formatOptions'];
                     for (var key in formatOptions) {
+                              
                         var value = formatOptions[key];
+                              
                         if (value != undefined && value != null) {
-							xw.writeStartElement('formatOption');
+                                    xw.writeStartElement('formatOption');
                             xw.writeAttributeString('key', key);
                             xw.writeAttributeString('value', value);
                             xw.writeEndElement();
@@ -891,7 +764,7 @@ GeoAnnotator.ContributePanelCtrl = {
 		var htmleditor = thisCtrl.contributeFormPanel.getForm().findField('newAnnotationContent');
 		var content = htmleditor.getValue();
 		
-		var regex = /<a href=\"#\" class=\"ref-link\" id=\"ref-([fp,an]+-?[0-9]+)\">([a-z,0-9,_,\s,\-,\[,\]]+)<\/a>/gi; 
+		var regex = '/<a href=\"#\" class=\"ref-link\" id=\"ref-([fp,an]+-?[0-9]+)\">([a-z,0-9,_,\s,\-,\[,\]]+)<\/a>/gi'; 
 		var input = content
 		if(regex.test(input)) {
 			regex.lastIndex = 0;
@@ -3243,14 +3116,24 @@ GeoAnnotator.AnnotationInfoPanelCtrl =
 		}
 	},
 	
+<<<<<<< HEAD
+	drawThreadNode : function(threadNodeInfo, x, y, width, height, style) {
+                var strip = function(html) {
+                   var tmp = document.createElement("DIV");
+                   tmp.innerHTML = html;
+                   return tmp.textContent||tmp.innerText;
+                };
+
+=======
 	drawThreadNode : function(threadNodeInfo, x, y, width, height, style) 
 	{
+>>>>>>> 98fe1acaa8eba3e131ea0e5593c8d8ff540a2e68
 		var thisCtrl = GeoAnnotator.AnnotationInfoPanelCtrl;
 		var top = y - 0.5 * height;
 		var left = x - 0.5 * width;
 		var thread_node = {}
 		var box = thisCtrl.spaceTree.rect(left, top, width, height).attr(style["default"]);
-		var label = thisCtrl.spaceTree.text(x, y, threadNodeInfo.userName + ":\n" + threadNodeInfo.excerpt.substring(0, 20)).attr(style["text"]);
+		var label = thisCtrl.spaceTree.text(x, y, threadNodeInfo.userName + ":\n" + strip(threadNodeInfo.excerpt.substring(0, 20))).attr(style["text"]);
 		var blanket = thisCtrl.spaceTree.rect(left, top, width, height).attr(style["blanket"]);
 		thread_node.id = threadNodeInfo.id;
 		thread_node.box = box;

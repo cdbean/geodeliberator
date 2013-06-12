@@ -28,22 +28,24 @@ def login_user(request):
 	    return render(request, 'login.html', response)
 	return redirect('/')
 
+#below is the user's register page.
 def register(request):
     response	= {}
     if request.method == 'POST':
-	username	= request.POST.get('registerName', None)
-	pwd		= request.POST.get('registerPwd', None)
-	email	= request.POST.get('email', None)
-	forumList	= request.POST.getlist('forumList', [])
-	response['registerName'] = username
-	response['email'] = email
+        username	= request.POST.get('registerName', None)
+        pwd		= request.POST.get('registerPwd', None)
+        email	= request.POST.get('email', None)
+        forumList	= request.POST.getlist('forumList', [])
+        response['registerName'] = username
+        response['email'] = email
 
 	forums	= []
 	for fo in forumList:
 	    try:
 		forum   = Forum.objects.get(name=fo)
 		forums.append(forum)
-	    except Forum.DoesNotExist:
+	    except Forum.DoesNotExist as e:
+		print e
 		continue
 	if username and pwd and email and len(forums) != 0:
 	    try:
@@ -51,21 +53,25 @@ def register(request):
 		for forum in forums:
 		    Membership.objects.create(user=user, forum=forum, role='member')
 		    response["data"] = {"userId": user.id, "userName": user.username}
-		response['success'] = True
-		user.is_active = True
-		user.save()
-		print 'is anonymous: ', user.is_anonymous()
-		print username, pwd
+		    response['success'] = True
+                    user.is_active = True
+		    user.save()
+		print 'user is anonymous? : ', user.is_anonymous()
+		#print username, pwd
 		user = authenticate(username=username, password=pwd)
 		if user is not None:
 		    login(request, user)
-		    return redirect('/geodeliberator')
+		    print "user logged in"
+                    print response
+		    return redirect('/')
 		else:
 		    response['success'] = False
 		    response['error'] = 'User authentication failed!'
+		    print "User authentication failed"
 	    except Exception as e:
 		response['success'] = False
 		response['error'] = 'User existed!'
+		print e
 	else:
 	    response['success'] = False
 	    response['error'] = 'Required information missing'
@@ -79,6 +85,6 @@ def logout_user(request):
 	print 'log out user'
     except Exception as e:
 	print e
-    return redirect('/geodeliberator/user/login')
+    return redirect('/user/login')
 
 
