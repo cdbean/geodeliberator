@@ -16,8 +16,8 @@ urlpatterns += patterns('',
     # Example:
     # (r'^geodeliberator/', include('geodeliberator.foo.urls')),
     (r'^api/', include('api.urls')),
-    (r'^user/', include('users.urls')),
-	url(r'^$', views.index, name='index'),
+    (r'^geodeliberator/user/', include('users.urls')),
+	url(r'^geodeliberator', views.index, name='index'),
 
     # Uncomment the admin/doc line below and add 'django.contrib.admindocs' 
     # to INSTALLED_APPS to enable admin documentation:

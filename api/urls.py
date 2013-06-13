@@ -4,6 +4,7 @@ from views import *
 
 urlpatterns = patterns('',
     url(r'^user/$', api_user, name='api_user'),
+    url(r'^userlist/$', api_userlist, name='api_userlist'),
     url(r'^forum/$', api_forum, name='api_forum'), 
     url(r'^foruminfo/$', api_foruminfo, name='api_foruminfo'),    
     url(r'^forums/$', api_forums, name='api_forums'),    

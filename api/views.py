@@ -17,11 +17,15 @@ def api_user(request):
     if userId > 0:
         try:
             user = User.objects.get(id=userId)
+            role = Membership.objects.filter(user_id=userId);
+            #print 'about to print the role!!!!!!!!!'
+            #print role[0].role
             response["id"] = str(user.id)
             response["userName"] = user.username
             response["email"] = user.email
             response["first_name"] = user.first_name
             response["last_name"] = user.last_name
+            response["role"] = role[0].role
         except User.DoesNotExist:
             response["id"] = '-1'
             response["userName"] = 'DoesNotExist'
@@ -37,7 +41,8 @@ def api_forum(request):
         try:
             forum = Forum.objects.get(id=forumId)
             response["id"] = str(forum.id)
-            response["name"] = forum.name
+            response["name"] = str(forum.name)
+            print "forum's name is: "+str(forum.name)
             response["description"] = forum.description
             response["scope"] = forum.scope
             response["contextmap"] = forum.contextmap
@@ -54,9 +59,13 @@ def api_forums(request):
             # participating forums
             response["participating"] = []
             for forum in user.joined_forums.all():
+                role = Membership.objects.get(user_id=userId, forum=forum.id);
+                print "the role in api_forums is: "+role.role
                 forum_info = {}
                 forum_info["id"] = str(forum.id)
                 forum_info["name"] = forum.name
+                forum_info["role"] = role.role
+                #print '!!!!!!!!!!!!the role of user of forum is: '+forum.role
                 response["participating"].append(forum_info)
         except User.DoesNotExist:
             pass
@@ -69,6 +78,24 @@ def api_forums(request):
         forum_info["name"] = forum.name
         if userId <= 0 or userId not in forum.members.values_list('id', flat=True):
             response["public"].append(forum_info)    
+    return HttpResponse(json.dumps(response), mimetype='application/json')
+
+def api_userlist(request):
+    response = {}
+    userId = int(request.REQUEST.get('userId', '0'))    #need verify the user. latter.
+    #print '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!the user ID is: ' + str(userId)
+    current_forumId= int(request.REQUEST.get('forumId', '0'))
+    #print '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!current_forumId is: '+str(current_forumId)
+    #current_forumId = 1 #this need to be deleted.
+    response["user_list"] = []
+    for user in Membership.objects.filter(forum=current_forumId):
+        user_info = {}
+        user_info["id"] = str(user.user.id)
+        user_info["name"] = str(user.user)
+        user_info["role"] = str(user.role)
+        #print '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!role is: '+str(user.role)
+        response["user_list"].append(user_info)    
+    
     return HttpResponse(json.dumps(response), mimetype='application/json')
 
 def api_authentication(request):

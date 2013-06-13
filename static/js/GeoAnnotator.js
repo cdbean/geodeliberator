@@ -7,7 +7,8 @@ var GeoAnnotator = {
 	currForumId : '0',
 	currAnnotationId : '0',
 	currFootprintId : '0',
-			
+	isAdmin : false,
+	isOwner	: false,
 	//var baseUrl = "http://130.203.158.62/geoannotator/";
 	//baseUrl : "../GeoAnnotatorService/",
 	baseUrl : "api/",
@@ -62,8 +63,9 @@ GeoAnnotator.ContainerTBCtrl = {
 	logInWindow : null,
 	forumInfoWindow : null,
 	forumEditWindow : null,
-	
+
 	forumList : null,
+	admin_user_list: null,
 	register : function (containerTB) {
 		GeoAnnotator.ContainerTBCtrl.containerTB = containerTB;
 	},
@@ -100,10 +102,18 @@ GeoAnnotator.ContainerTBCtrl = {
 			baseParams: {'userId':GeoAnnotator.currUserId},
     		root: 'participating',
     		idProperty: 'id',
-    		fields: ['id', 'name']
+    		fields: ['id', 'name','role']
 		});
-		thisCtrl.forumList = new Ext.form.ComboBox({
-    		store: forumListStore, 
+		var forumUserStore = new Ext.data.JsonStore({
+    		autoDestroy: true,
+			autoLoad: true,
+    		url: GeoAnnotator.baseUrl + 'userlist/',
+			baseParams: {'userId':GeoAnnotator.currUserId,'forumId': GeoAnnotator.currForumId},
+    		root: 'user_list',
+    		idProperty: 'id',
+    		fields: ['id', 'name','role']
+		});
+		thisCtrl.forumList = new Ext.form.ComboBox({store: forumListStore, 
 			displayField:'name',
     		typeAhead: true,
     		mode: 'local',
@@ -114,20 +124,36 @@ GeoAnnotator.ContainerTBCtrl = {
          		'select': thisCtrl.onForumListSelect
     		}
 		});
+		thisCtrl.admin_user_list = new Ext.form.ComboBox({
+    		store: forumUserStore, 
+			displayField:'name',
+    		typeAhead: true,
+    		mode: 'local',
+			disabled : true,
+			id: 'forum-user-select',
+			width: 120,
+			triggerAction: 'all',
+    		emptyText:'Select a user',
+			
+    		selectOnFocus:true,
+			listeners:{
+         		'select': thisCtrl.onUserListSelect
+    		}
+		});
+		
 		thisCtrl.containerTB.add({xtype: 'tbtext', text: 'Current Forum: '});
 		thisCtrl.containerTB.add(thisCtrl.forumList);
 		thisCtrl.containerTB.add('-');
-		thisCtrl.containerTB.add({
-			id: 'forum-id-btn',
+		thisCtrl.containerTB.add({id: 'forum-id-btn',
 			text: 'Forum Info',
+			
 			iconCls: 'detail-icon',
 			disabled : true,
 			listeners:{
 				'click': thisCtrl.onForumDetailClick
 			}
 		});
-		thisCtrl.containerTB.add({
-			id: 'forum-edit-btn',
+		thisCtrl.containerTB.add({id: 'forum-edit-btn',
 			text: 'Edit Forum Info',
 			iconCls: 'foruminfo-edit-icon',
 			disabled : true,
@@ -202,8 +228,14 @@ GeoAnnotator.ContainerTBCtrl = {
 		// 3. the login buttons
 		if (GeoAnnotator.currUserId != '0') {
 			thisCtrl.containerTB.add('->');
-			thisCtrl.containerTB.add({xtype: 'tbtext', text: 'Welcome, ' + thisCtrl.currUserInfo.userName + '!'});
+			thisCtrl.containerTB.add({
+				xtype: 'tbtext', 
+				text: 'Welcome, ' + thisCtrl.currUserInfo.userName + '!'
+				});
+			
 			thisCtrl.containerTB.add('-');
+			thisCtrl.containerTB.add(thisCtrl.admin_user_list);
+			if(!GeoAnnotator.isAdmin)	thisCtrl.admin_user_list.setVisible(false);
 			thisCtrl.containerTB.add({
 			    itemId: 'logoutLink',
 			    xtype: 'box',
@@ -325,6 +357,24 @@ GeoAnnotator.ContainerTBCtrl = {
 	onLoadUserInfoSuccess : function (xhr) {
 		thisCtrl = GeoAnnotator.ContainerTBCtrl;
 		thisCtrl.currUserInfo = Ext.util.JSON.decode(xhr.responseText);
+		//alert(thisCtrl.currUserInfo.role);
+		if(thisCtrl.currUserInfo.role=="admin")
+			{
+				GeoAnnotator.isAdmin= true;
+				thisCtrl.containerTB.getComponent('forum-user-select').setVisible(true);
+				//alert("This user is an admin!");
+			}
+		/*if(thisCtrl.currUserInfo.role=="owner")
+			{
+				GeoAnnotator.isOwner= true;
+				alert("This user is current forum's owner!");
+			}	
+			else
+			{
+				GeoAnnotator.isOwner= false;
+				alert("This user's role is: "+thisCtrl.currUserInfo.role);
+			}	
+		*/
 		if (thisCtrl.currUserInfo != null) {
 			// update panel
 			thisCtrl.updatePanelContent();
@@ -352,12 +402,61 @@ GeoAnnotator.ContainerTBCtrl = {
 	
 	onForumListSelect : function(combo, record, index) {
 		var id = record.get('id');
+		//alert('onforumlist select, role is: '+record.get('role'));
+		if(record.get('role')=='owner')
+		{
+			GeoAnnotator.isOwner=true;
+		}
+		else
+		{
+			GeoAnnotator.isOwner=false;
+		}
 		var thisCtrl = GeoAnnotator.ContainerTBCtrl;
 		if (id && GeoAnnotator.currForumId != id) {
 			// reset the new footprints array
 			GeoAnnotator.currForumId = id;
 			thisCtrl.containerTB.getComponent('forum-id-btn').enable();
-			thisCtrl.containerTB.getComponent('forum-edit-btn').enable();
+			thisCtrl.containerTB.getComponent('forum-edit-btn').setVisible(false);
+			if(GeoAnnotator.isAdmin||GeoAnnotator.isOwner)
+			{
+				thisCtrl.containerTB.getComponent('forum-edit-btn').enable();
+				thisCtrl.containerTB.getComponent('forum-edit-btn').setVisible(true);
+			}
+			thisCtrl.containerTB.getComponent('timeline-btn').enable();
+			thisCtrl.containerTB.getComponent('annotation-history-btn').enable();
+			thisCtrl.containerTB.getComponent('annotation-bookmark-btn').enable();
+			if(GeoAnnotator.isAdmin)	thisCtrl.containerTB.getComponent('forum-user-select').enable();
+			if(!GeoAnnotator.isAdmin)	thisCtrl.containerTB.getComponent('forum-user-select').setVisible(false);		
+		}		
+		// update controls		
+		var currParams = {};
+		if (GeoAnnotator.currUserId != '0'){
+			currParams.userId = GeoAnnotator.currUserId;	
+		} 
+		if (GeoAnnotator.currForumId != '0'){
+			currParams.forumId = GeoAnnotator.currForumId;
+			//alert("current forum id has changed to: "+GeoAnnotator.currForumId);
+		}
+		GeoAnnotator.MapPanelCtrl.update(currParams);
+		GeoAnnotator.TimelinePanelCtrl.update();
+		GeoAnnotator.ManageWindowCtrl.update();
+		
+		//GeoAnnotator.ContainerTBCtrl.admin_user_list.store.baseParams.forumId=GeoAnnotator.currForumId;
+		GeoAnnotator.ContainerTBCtrl.admin_user_list.store.setBaseParam('forumId',GeoAnnotator.currForumId);
+		GeoAnnotator.ContainerTBCtrl.admin_user_list.store.load();
+	},
+	
+	onUserListSelect : function(combo, record, index) {
+		//alert(record.get('id'));
+		var id = record.get('id');
+		GeoAnnotator.currUserId=id;
+		//alert(GeoAnnotator.currUserId);
+		var thisCtrl = GeoAnnotator.ContainerTBCtrl;
+		if (id && GeoAnnotator.currForumId != id) {
+			// reset the new footprints array
+			//GeoAnnotator.currForumId = id;
+			thisCtrl.containerTB.getComponent('forum-id-btn').enable();
+			thisCtrl.containerTB.getComponent('forum-edit-btn').enable();// this need to be modified.
 			thisCtrl.containerTB.getComponent('timeline-btn').enable();
 			thisCtrl.containerTB.getComponent('annotation-history-btn').enable();
 			thisCtrl.containerTB.getComponent('annotation-bookmark-btn').enable();
@@ -388,6 +487,7 @@ GeoAnnotator.ContainerTBCtrl = {
             }
         });
 	},
+	
 	onForumEditClick : function() {
 		var thisCtrl = GeoAnnotator.ContainerTBCtrl;
         // request the forum information
@@ -405,6 +505,7 @@ GeoAnnotator.ContainerTBCtrl = {
 	onLoadForumInfoSuccess: function(xhr) {
        var thisCtrl = GeoAnnotator.ContainerTBCtrl;
        thisCtrl.currForumInfo = Ext.util.JSON.decode(xhr.responseText);
+	   //alert("thisCtrl.currForumInfo is: "+thisCtrl.currForumInfo.name);
        if (thisCtrl.currForumInfo != null) {
            // show the forum detail
            thisCtrl.showForumInfo();
@@ -458,7 +559,8 @@ GeoAnnotator.ContainerTBCtrl = {
 	            closeAction :'hide',
 	            plain       : true,
 				modal		: false,
-				html		: html
+				html		: html,
+				title		: 'Forum Information of '+thisCtrl.currForumInfo.name
 	    	});
 			thisCtrl.forumInfoWindow.on('hide', function(){GeoAnnotator.ContainerTBCtrl.forumInfoWindow.body.update('');});
 		}
@@ -468,7 +570,6 @@ GeoAnnotator.ContainerTBCtrl = {
 		thisCtrl.forumInfoWindow.show();
 		thisCtrl.forumInfoWindow.alignTo(thisCtrl.containerTB.getComponent('forum-id-btn').el, 'tl-tl');
 	},
-	
 	editForumInfo : function() {
 		var thisCtrl = GeoAnnotator.ContainerTBCtrl;
 		var regex = /^.*<div id=\"forumGeneralInfo\">.*$/gi;	//	refer back to the showForumInfo function for more explanation
@@ -501,6 +602,7 @@ GeoAnnotator.ContainerTBCtrl = {
                 autoScroll: true,
                 anchor: '100%',
 				value	: html
+				
             }],
 			buttons: [{
 					text: 'Submit',
@@ -518,7 +620,8 @@ GeoAnnotator.ContainerTBCtrl = {
 	            closeAction :'hide',
 	            plain       : true,
 				modal		: 	false,
-				items		:	edit
+				items		:	edit,
+				title	: 'Forum Information of '+thisCtrl.currForumInfo.name
 	    	});}
 	    	//thisCtrl.forumEditWindow.on('hide', function(){GeoAnnotator.ContainerTBCtrl.forumEditWindow.body.update('');});
 			// added by FZ 0610. This line cause error, will fix it latter.
@@ -606,16 +709,16 @@ GeoAnnotator.ContributePanelCtrl = {
                 name: 'newAnnotationId',
                 value: '0'
             },
-                    //added by FZ on 0529, temporary change, delete this section when possible
-                   {
-                    xtype: 'datefield',
-                    format : 'Y-m-d',
-                    fieldLabel : 'Pick a date', 
-                    id : 'newAnnotationDate',
-                    submitFormat: 'Y-m-d H:i:s',
-                    name : 'newAnnotationDate',
-                    //value: new Date()
-                    anchor : 0,
+            //added by FZ on 0529, temporary change, delete this section when possible
+            {
+                xtype: 'datefield',
+                format : 'Y-m-d',
+                fieldLabel : 'Pick a date', 
+                id : 'newAnnotationDate',
+                submitFormat: 'Y-m-d H:i:s',
+                name : 'newAnnotationDate',
+                //value: new Date()
+				anchor : 0,
                     value : new Date(),
                     allowBlank : false
 					},
