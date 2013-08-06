@@ -18,8 +18,6 @@ def api_user(request):
         try:
             user = User.objects.get(id=userId)
             role = Membership.objects.filter(user_id=userId);
-            #print 'about to print the role!!!!!!!!!'
-            #print role[0].role
             response["id"] = str(user.id)
             response["userName"] = user.username
             response["email"] = user.email
@@ -42,7 +40,6 @@ def api_forum(request):
             forum = Forum.objects.get(id=forumId)
             response["id"] = str(forum.id)
             response["name"] = str(forum.name)
-            print "forum's name is: "+str(forum.name)
             response["description"] = forum.description
             response["scope"] = forum.scope
             response["contextmap"] = forum.contextmap
@@ -60,12 +57,10 @@ def api_forums(request):
             response["participating"] = []
             for forum in user.joined_forums.all():
                 role = Membership.objects.get(user_id=userId, forum=forum.id);
-                print "the role in api_forums is: "+role.role
                 forum_info = {}
                 forum_info["id"] = str(forum.id)
                 forum_info["name"] = forum.name
                 forum_info["role"] = role.role
-                #print '!!!!!!!!!!!!the role of user of forum is: '+forum.role
                 response["participating"].append(forum_info)
         except User.DoesNotExist:
             pass
@@ -83,17 +78,13 @@ def api_forums(request):
 def api_userlist(request):
     response = {}
     userId = int(request.REQUEST.get('userId', '0'))    #need verify the user. latter.
-    #print '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!the user ID is: ' + str(userId)
     current_forumId= int(request.REQUEST.get('forumId', '0'))
-    #print '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!current_forumId is: '+str(current_forumId)
-    #current_forumId = 1 #this need to be deleted.
     response["user_list"] = []
     for user in Membership.objects.filter(forum=current_forumId):
         user_info = {}
         user_info["id"] = str(user.user.id)
         user_info["name"] = str(user.user)
         user_info["role"] = str(user.role)
-        #print '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!role is: '+str(user.role)
         response["user_list"].append(user_info)    
     
     return HttpResponse(json.dumps(response), mimetype='application/json')
@@ -117,18 +108,13 @@ def api_authentication(request):
     return HttpResponse(json.dumps(response), mimetype='application/json')
 
 def api_foruminfo(request):
-    #print "api_foruminfo inside"
     response = {}
     forumId = int(request.REQUEST.get('forumId', '0')) or int(request.REQUEST.get('groupId', '0'))
-    #print "Forum Id is: " + str(forumId)
     if forumId > 0:
         try:
             newinfo = str(request.REQUEST.get('newinfo', '0'))
-            #print "new info is: " + newinfo
             forum = Forum.objects.get(id=forumId)
-            print str(forum.description)
             forum.description=newinfo
-            print str(forum.description)
             forum.save()
             response["success"] = True
         except Forum.DoesNotExist:
@@ -217,7 +203,6 @@ def add_annotation(annotation_info):
         
         annotation = Annotation(content=annotation_info["content"], author=author, forum=forum, sharelevel=annotation_info["shareLevel"], created_at=parser.parse(annotation_info["timeCreated"]), updated_at=parser.parse(annotation_info["timeCreated"]), contextmap=annotation_info["contextMap"])
         annotation.save()
-        print 'int(annotation_info.id)'        
     
         content = annotation.content;
         for reference_id in annotation_info["references"]:
@@ -425,8 +410,7 @@ def api_threads(request):
         response['timeCreated'] = annotation.created_at.ctime()
         response['timeUpdated'] = annotation.updated_at.ctime()
         response['excerpt'] = annotation.get_excerpt(10)
-        print response['excerpt']
-        # get parents
+        #print response['excerpt']
         theme_references = ThemeReference.objects.filter(target=annotationId)
         response['parents'] = []
         for reference in theme_references:
