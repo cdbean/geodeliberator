@@ -1,8 +1,8 @@
 from django.contrib.gis.db import models
 from django.contrib.auth.models import User
-
+import unicodedata
 from BeautifulSoup import BeautifulSoup
-
+import HTMLParser
 # Create your models here.
 class Forum(models.Model):
     SCOPE_CHOICES = (
@@ -85,6 +85,8 @@ class Annotation(models.Model):
 
 
     def get_excerpt(self, limit):
+        #strs=self.content.encode('ascii','ignore')
+        #strs.replace('&nbsp;',' ')
         return ' '.join((''.join(BeautifulSoup(self.content).findAll(text=True))).split(' ')[:limit])                       
     
     def __unicode__(self):
