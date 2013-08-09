@@ -9,6 +9,7 @@ var GeoAnnotator = {
 	currFootprintId : '0',
 	isAdmin : false,
 	isOwner	: false,
+	
 	//var baseUrl = "http://130.203.158.62/geoannotator/";
 	//baseUrl : "../GeoAnnotatorService/",
 	baseUrl : "api/",
@@ -350,8 +351,9 @@ GeoAnnotator.ContainerTBCtrl = {
 	},
 	
 	onLogOutClick : function() {
-		Ext.state.Manager.clear('userId');
-		GeoAnnotator.init();
+//		Ext.state.Manager.clear('userId');
+//		GeoAnnotator.init();
+		$.get('geodeliberator/usr/logout');
 	},
 	
 	onLoadUserInfoSuccess : function (xhr) {
@@ -379,7 +381,8 @@ GeoAnnotator.ContainerTBCtrl = {
 			// update panel
 			thisCtrl.updatePanelContent();
 			
-			if (GeoAnnotator.currUserId != '0') {
+			if (GeoAnnotator.currUserId != '0') 
+			{
 				var storedUserId = Ext.state.Manager.get('userId', '0');
 				
 				if (GeoAnnotator.currUserId != storedUserId) {
@@ -387,10 +390,11 @@ GeoAnnotator.ContainerTBCtrl = {
 					Ext.state.Manager.set('userId', GeoAnnotator.currUserId);
 				}
 				else {
-					if (Ext.state.Manager.get('forumId', '0') != '0'){
-						// simulate the click on the group		
+						if (Ext.state.Manager.get('forumId', '0') != '0')
+						{
+							// simulate the click on the group		
+						}
 					}
-				}
 			}		
 		}
 	},
@@ -1087,11 +1091,12 @@ GeoAnnotator.ContributePanelCtrl = {
         //added by FZ 0530, delete when possible.
         newAnnotation.timeCreated = 
         thisCtrl.contributeFormPanel.getForm().findField('newAnnotationDate').getValue().format('Y-m-d').trim()
-        +' on '+ thisCtrl.contributeFormPanel.getForm().findField('newAnnotationTime').getValue()
-        ;
+        +
+        ' '
+        + thisCtrl.contributeFormPanel.getForm().findField('newAnnotationTime').getValue();
         // above
         
-        newAnnotation.timeCreated = new Date().toGMTString();
+        //newAnnotation.timeCreated = new Date().toGMTString();
         //above is the original line.
         
         
@@ -2903,7 +2908,7 @@ GeoAnnotator.TimelinePanelCtrl = {
 
 GeoAnnotator.AnnotationInfoPanelCtrl = 
 {
-	// containerPanel
+	//containerPanel
 	containerPanel: null,
 	annotationInfoDisplayPanel : null,
 	referenceSpaceTreePanel : null,
@@ -2922,33 +2927,103 @@ GeoAnnotator.AnnotationInfoPanelCtrl =
 	min_spacing : 10.0,	
 	currentNodeStyle : {
 		"default" : {
-			fill: "#0F4BFF", 
-			stroke: "#003DF5", 
+			fill: "#00BFFF", 
+			stroke: "#99CCFF", 
 			"fill-opacity": 0.6, 
 			"stroke-width": 2
 		},
 		"hover" : {
-			fill: "#0F4BFF", 
-			stroke: "#003DF5", 
+			fill: "#00BFFF", 
+			stroke: "#0E2038", 
 			"fill-opacity": 0.8, 
 			"stroke-width": 3
 		},
 		"text" : {
-			stroke:"#fff",
-			fill: "#fff"
+			stroke:"#003300",
+			fill: "#003300",
+			"font-size": 10,
+			"font-family": "Arial, Helvetica, sans-serif"
+			
 		},
 		"blanket" : {stroke: "none", fill: "#fff", "opacity": 0.0}
 	},
 		
 	parentNodeStyle : {
 		"default" : {
-			fill: "#0F4BFF", 
+			fill: "#00BFFF", 
+			stroke: "#1C3F70", 
+			"fill-opacity": 0.6, 
+			"stroke-width": 2
+		},
+		"hover" : {
+			fill: "#00BFFF", 
+			stroke: "#0E2038", 
+			"fill-opacity": 0.8, 
+			"stroke-width": 3
+		},
+		"text" : {
+			stroke:"#003300",
+			fill: "#003300",
+			"font-size": 10,
+			"font-family": "Arial, Helvetica, sans-serif"
+		},
+		"blanket" : {stroke: "none", fill: "#fff", "opacity": 0.0}
+	},
+
+	childNodeStyle : {
+		"default" : {
+			fill: "#00BFFF", 
+			stroke: "#3B7565", 
+			"fill-opacity": 0.6, 
+			"stroke-width": 2
+		},
+		"hover" : {
+			fill: "#00BFFF", 
+			stroke: "#0E2038", 
+			"fill-opacity": 0.8, 
+			"stroke-width": 3
+		},
+		"text" : {
+			stroke:"#003300",
+			fill: "#003300",
+			"font-size": 10,
+			"font-family": "Arial, Helvetica, sans-serif"
+		},
+		"blanket" : {stroke: "none", fill: "#fff", "opacity": 0.0}
+	},
+	
+	facilitator_currentNodeStyle : {
+		"default" : {
+			fill: "#DC143C", 
+			stroke: "#CCCC99", 
+			"fill-opacity": 0.6, 
+			"stroke-width": 2
+		},
+		"hover" : {
+			fill: "#DC143C", 
+			stroke: "#003DF5", 
+			"fill-opacity": 0.8, 
+			"stroke-width": 3
+		},
+		"text" : {
+			stroke:"#000",
+			fill: "#000",
+			"font-size": 10,
+			"font-family": "Arial, Helvetica, sans-serif"
+			
+		},
+		"blanket" : {stroke: "none", fill: "#fff", "opacity": 0.0}
+	},
+		
+	facilitator_parentNodeStyle : {
+		"default" : {
+			fill: "#DC143C", 
 			stroke: "#003DF5", 
 			"fill-opacity": 0.6, 
 			"stroke-width": 2
 		},
 		"hover" : {
-			fill: "#0F4BFF", 
+			fill: "#DC143C", 
 			stroke: "#003DF5", 
 			"fill-opacity": 0.8, 
 			"stroke-width": 3
@@ -2960,15 +3035,15 @@ GeoAnnotator.AnnotationInfoPanelCtrl =
 		"blanket" : {stroke: "none", fill: "#fff", "opacity": 0.0}
 	},
 
-	childNodeStyle : {
+	facilitator_childNodeStyle : {
 		"default" : {
-			fill: "#0F4BFF", 
+			fill: "#DC143C", 
 			stroke: "#003DF5", 
 			"fill-opacity": 0.6, 
 			"stroke-width": 2
 		},
 		"hover" : {
-			fill: "#0F4BFF", 
+			fill: "#DC143C", 
 			stroke: "#003DF5", 
 			"fill-opacity": 0.8, 
 			"stroke-width": 3
@@ -3281,20 +3356,24 @@ GeoAnnotator.AnnotationInfoPanelCtrl =
 		var thisCtrl = GeoAnnotator.AnnotationInfoPanelCtrl;
 		var w = thisCtrl.referenceSpaceTreePanel.getInnerWidth();
 		var h = thisCtrl.referenceSpaceTreePanel.getInnerHeight();
-	 	
+			//alert("buildReferenceSpaceTree");
 		thisCtrl.spaceTree = Raphael(thisCtrl.spaceTreeContainer, w, h);
 		
-		// request the annotation information
 		Ext.Ajax.request({
    			url: GeoAnnotator.baseUrl + 'threads/',
    			success: thisCtrl.onLoadThreadsInfoSuccess,
    			failure: function() {
-				alert('failed to load annotation info!');
+				alert('failed to load tree annotation info!');
 			},
    			params: {'annotationId':thisCtrl.currAnnotationInfo.id, 'userId':GeoAnnotator.currUserId, 'forumId': GeoAnnotator.currForumId}
 		});
 	},
-	
+	/*
+	  params: {
+                'userId': GeoAnnotator.currUserId,
+                'forumId': GeoAnnotator.currForumId
+            }
+	*/
 	onLoadThreadsInfoSuccess : function(xhr) {
 		var threadsInfo = Ext.util.JSON.decode(xhr.responseText);
 		var thisCtrl = GeoAnnotator.AnnotationInfoPanelCtrl;
@@ -3312,7 +3391,13 @@ GeoAnnotator.AnnotationInfoPanelCtrl =
 		var spacing, offset_x, offset_y;
 		
 		// draw current node
-		var current_node = thisCtrl.drawThreadNode(threadsInfo, w * 0.5, h * 0.5, width, height, thisCtrl.currentNodeStyle);
+		//var current_node = thisCtrl.drawThreadNode(threadsInfo, w * 0.5, h * 0.5, width, height, thisCtrl.currentNodeStyle);
+		//alert(threadsInfo.current_role);
+		var current_node = thisCtrl.drawThreadNode(threadsInfo, w * 0.5, h * 0.5, width, height,
+		((threadsInfo.current_role=="member")? thisCtrl.currentNodeStyle:thisCtrl.facilitator_currentNodeStyle)
+		);
+		
+		
 		// draw parents
 		if (threadsInfo.parents.length > 0) {
 			spacing = (1.0 * h - threadsInfo.parents.length * height) / (threadsInfo.parents.length + 1);
@@ -3324,6 +3409,7 @@ GeoAnnotator.AnnotationInfoPanelCtrl =
 			var parent_node;
 			for (var i=0; i < threadsInfo.parents.length; i++) {
 				parent_node = thisCtrl.drawThreadNode(threadsInfo.parents[i], offset_x, offset_y, width, height, thisCtrl.parentNodeStyle);
+
 				thisCtrl.drawThreadLink(parent_node, current_node);
 				offset_y = offset_y + spacing + height;
 			}
@@ -3340,6 +3426,8 @@ GeoAnnotator.AnnotationInfoPanelCtrl =
 			var child_node;
 			for (var i=0; i < threadsInfo.children.length; i++) {
 				child_node = thisCtrl.drawThreadNode(threadsInfo.children[i], offset_x, offset_y, width, height, thisCtrl.childNodeStyle);
+				
+				
 				thisCtrl.drawThreadLink(current_node, child_node);
 				offset_y = offset_y + spacing + height;
 			}
@@ -3556,6 +3644,10 @@ GeoAnnotator.AnnotationInfoPanelCtrl =
 	onBookmarkClick : function() {
 		GeoAnnotator.AnnotationBookmarkWindowCtrl.add(GeoAnnotator.AnnotationInfoPanelCtrl.currAnnotationInfo);
 	},
+	on_researcher_switch_Click : function() {
+		//GeoAnnotator.AnnotationBookmarkWindowCtrl.add(GeoAnnotator.AnnotationInfoPanelCtrl.currAnnotationInfo);
+	},
+	
 	
 	onThreadClick: function(){
 		var thisCtrl = GeoAnnotator.AnnotationInfoPanelCtrl;
@@ -3568,15 +3660,28 @@ GeoAnnotator.AnnotationInfoPanelCtrl =
 			});
 
 			thisCtrl.referenceSpaceTreeWindow = new Ext.Window({
-  					layout      : 'fit',
+						layout      : 'fit',
          				width       : 600,
          				height      : 480,
          				closeAction :'hide',
          				plain       : true,
-				modal		: false,
-				items : [thisCtrl.referenceSpaceTreePanel],
-				title : 'Thread tree view'
- 					});
+						modal		: false,
+						items : [thisCtrl.referenceSpaceTreePanel],
+						title : 'Thread tree view',
+						tbar: new Ext.Toolbar({
+						
+							id : 'thread-info-tbar',
+							hidden : false, 
+							items: [
+							{
+								id: 'thread-bkm-btn',
+								iconCls: 'annotation-bkm-btn',
+								iconAlign: 'top',
+								handler: thisCtrl.on_researcher_switch_Click,
+								text: 'Researcher',
+								tooltip: {title:'Display the research nodes', text: 'Description of the this switch for researcher'}
+							}]
+						})})
 		}
 		else {
 			thisCtrl.updateReferenceSpaceTreePanel();

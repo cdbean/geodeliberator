@@ -4,7 +4,7 @@ from django.contrib.auth import authenticate
 from django.db.models import Q
 from django.db.models import Count
 from django.contrib.gis.geos import *
-
+from pprint import pprint
 from dateutil import parser
 
 from api.models import *
@@ -401,6 +401,11 @@ def api_threads(request):
     annotationId = int(request.REQUEST.get('annotationId', '0'))
     try:
         annotation = Annotation.objects.get(id=annotationId)
+        
+        role = Membership.objects.filter(user_id=Annotation.objects.get(id=annotationId).author.id,forum=forumId)
+        print "annotation author role is:"
+        print role[0].role
+        print "done"
         response['id'] = str(annotation.id)
         response['type'] = annotation.content_type
         response['forumId'] = str(annotation.forum.id)
@@ -410,10 +415,21 @@ def api_threads(request):
         response['timeCreated'] = annotation.created_at.ctime()
         response['timeUpdated'] = annotation.updated_at.ctime()
         response['excerpt'] = annotation.get_excerpt(10)
+<<<<<<< HEAD
         #print response['excerpt']
+=======
+        response['current_role'] = role[0].role
+        #print response['excerpt']
+        print "current role printing done"
+
+>>>>>>> color node
         theme_references = ThemeReference.objects.filter(target=annotationId)
+        #print 'theme references : '
+        #pprint(theme_references)
         response['parents'] = []
         for reference in theme_references:
+            role = Membership.objects.filter(user_id=reference.source.author.id,forum=forumId)
+            #print str(role[0].role)
             reference_info = {}
             reference_info['id'] = str(reference.source.id)
             reference_info['type'] = reference.source.content_type
@@ -426,11 +442,14 @@ def api_threads(request):
             reference_info['excerpt'] = reference.source.get_excerpt(10)
             reference_info['alias'] = reference.alias
             reference_info['relation'] = reference.relation
+            reference_info['parents_role']=role[0].role
             response['parents'].append(reference_info)
+            print "parents information load success"
         # get children
         theme_references = ThemeReference.objects.filter(source=annotationId)
         response['children'] = []
         for reference in theme_references:
+            role = Membership.objects.filter(user_id=reference.target.author.id,forum=forumId)
             reference_info = {}
             reference_info['id'] = str(reference.target.id)
             reference_info['type'] = reference.target.content_type
@@ -443,7 +462,9 @@ def api_threads(request):
             reference_info['excerpt'] = reference.target.get_excerpt(10)
             reference_info['alias'] = reference.alias
             reference_info['relation'] = reference.relation
+            reference_info['child_role'] = role[0].role
             response['children'].append(reference_info)
+            print "children information load success"
     except Annotation.DoesNotExist:
         pass       
     return HttpResponse(json.dumps(response), mimetype='application/json')

@@ -27,6 +27,9 @@ class Membership(models.Model):
         ('creator', 'Creator'),
         ('moderator', 'Moderator'),
         ('member', 'Member'),
+        ('admin','Admin'),
+        ('facilitator','Facilitator')
+        
     )
     user = models.ForeignKey(User)
     forum = models.ForeignKey(Forum)
