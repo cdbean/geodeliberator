@@ -415,14 +415,10 @@ def api_threads(request):
         response['timeCreated'] = annotation.created_at.ctime()
         response['timeUpdated'] = annotation.updated_at.ctime()
         response['excerpt'] = annotation.get_excerpt(10)
-<<<<<<< HEAD
-        #print response['excerpt']
-=======
         response['current_role'] = role[0].role
         #print response['excerpt']
         print "current role printing done"
 
->>>>>>> color node
         theme_references = ThemeReference.objects.filter(target=annotationId)
         #print 'theme references : '
         #pprint(theme_references)

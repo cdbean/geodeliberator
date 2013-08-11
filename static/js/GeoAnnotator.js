@@ -9,7 +9,7 @@ var GeoAnnotator = {
 	currFootprintId : '0',
 	isAdmin : false,
 	isOwner	: false,
-	
+	isResearchModeOn : false,
 	//var baseUrl = "http://130.203.158.62/geoannotator/";
 	//baseUrl : "../GeoAnnotatorService/",
 	baseUrl : "api/",
@@ -3379,8 +3379,7 @@ GeoAnnotator.AnnotationInfoPanelCtrl =
 		var thisCtrl = GeoAnnotator.AnnotationInfoPanelCtrl;
 		var w = thisCtrl.referenceSpaceTreePanel.getInnerWidth();
 		var h = thisCtrl.referenceSpaceTreePanel.getInnerHeight();
-	 	if (thisCtrl.spaceTree) {
-			thisCtrl.spaceTree.clear();
+	 	if (thisCtrl.spaceTree) {thisCtrl.spaceTree.clear();
 		}
 		else {
 			thisCtrl.spaceTree = Raphael(thisCtrl.spaceTreeContainer, w, h);
@@ -3394,8 +3393,7 @@ GeoAnnotator.AnnotationInfoPanelCtrl =
 		//var current_node = thisCtrl.drawThreadNode(threadsInfo, w * 0.5, h * 0.5, width, height, thisCtrl.currentNodeStyle);
 		//alert(threadsInfo.current_role);
 		var current_node = thisCtrl.drawThreadNode(threadsInfo, w * 0.5, h * 0.5, width, height,
-		((threadsInfo.current_role=="member")? thisCtrl.currentNodeStyle:thisCtrl.facilitator_currentNodeStyle)
-		);
+		((threadsInfo.current_role=="member")? thisCtrl.currentNodeStyle:thisCtrl.facilitator_currentNodeStyle),((threadsInfo.current_role=="member")? true:false));
 		
 		
 		// draw parents
@@ -3408,9 +3406,10 @@ GeoAnnotator.AnnotationInfoPanelCtrl =
 			offset_y = 0.5 * h - 0.5 * (height + spacing) * (threadsInfo.parents.length - 1);		
 			var parent_node;
 			for (var i=0; i < threadsInfo.parents.length; i++) {
-				parent_node = thisCtrl.drawThreadNode(threadsInfo.parents[i], offset_x, offset_y, width, height, thisCtrl.parentNodeStyle);
-
-				thisCtrl.drawThreadLink(parent_node, current_node);
+				parent_node = thisCtrl.drawThreadNode(threadsInfo.parents[i], offset_x, offset_y, width, height, thisCtrl.parentNodeStyle,((threadsInfo.parents[i].parents_role=="member")? true:false));
+				alert("parent "+i+"th node is: "+threadsInfo.parents[i].parents_role);
+				if(parent_node.role=="member"&&GeoAnnotator.isResearchModeOn!=true)
+				{thisCtrl.drawThreadLink(parent_node, current_node);}
 				offset_y = offset_y + spacing + height;
 			}
 		}
@@ -3425,29 +3424,36 @@ GeoAnnotator.AnnotationInfoPanelCtrl =
 			offset_y = 0.5 * h - 0.5 * (height + spacing) * (threadsInfo.children.length - 1);		
 			var child_node;
 			for (var i=0; i < threadsInfo.children.length; i++) {
-				child_node = thisCtrl.drawThreadNode(threadsInfo.children[i], offset_x, offset_y, width, height, thisCtrl.childNodeStyle);
-				
-				
-				thisCtrl.drawThreadLink(current_node, child_node);
+				child_node = thisCtrl.drawThreadNode(threadsInfo.children[i], offset_x, offset_y, width, height, thisCtrl.childNodeStyle,((threadsInfo.children[i].child_role=="member")? true:false));
+				alert("children "+i+"th node is: "+threadsInfo.children[i].child_role);
+				if(child_node.role=="member"&&GeoAnnotator.isResearchModeOn!=true)
+				{thisCtrl.drawThreadLink(current_node, child_node);}
 				offset_y = offset_y + spacing + height;
 			}
 		}
 	},
 	
-	drawThreadNode : function(threadNodeInfo, x, y, width, height, style) 
+	drawThreadNode : function(threadNodeInfo, x, y, width, height, style,role) 
 	{
+		//if(role != true) return 0;
 		var thisCtrl = GeoAnnotator.AnnotationInfoPanelCtrl;
 		var top = y - 0.5 * height;
 		var left = x - 0.5 * width;
 		var thread_node = {}
+		
 		var box = thisCtrl.spaceTree.rect(left, top, width, height).attr(style["default"]);
 		var label = thisCtrl.spaceTree.text(x, y, threadNodeInfo.userName + ":\n" + threadNodeInfo.excerpt.substring(0, 20)).attr(style["text"]);
+		if(role==false&&GeoAnnotator.isResearchModeOn!=true)
+		{
+			box.hide();
+			label.hide();
+		}
 		var blanket = thisCtrl.spaceTree.rect(left, top, width, height).attr(style["blanket"]);
 		thread_node.id = threadNodeInfo.id;
 		thread_node.box = box;
 		thread_node.label = label;
 		thread_node.blanket = blanket;
-		
+		thread_node.role=threadNodeInfo.role
 		box.thread_node = thread_node;
 		label.thread_node = thread_node;
 		blanket.thread_node = thread_node;
@@ -3646,6 +3652,11 @@ GeoAnnotator.AnnotationInfoPanelCtrl =
 	},
 	on_researcher_switch_Click : function() {
 		//GeoAnnotator.AnnotationBookmarkWindowCtrl.add(GeoAnnotator.AnnotationInfoPanelCtrl.currAnnotationInfo);
+		GeoAnnotator.isResearchModeOn=!(GeoAnnotator.isResearchModeOn);
+		GeoAnnotator.AnnotationInfoPanelCtrl.updateReferenceSpaceTreePanel();
+		//alert(GeoAnnotator.isResearchModeOn);
+		//refresh the thread view and draw nodes.
+	
 	},
 	
 	
@@ -3672,13 +3683,12 @@ GeoAnnotator.AnnotationInfoPanelCtrl =
 						
 							id : 'thread-info-tbar',
 							hidden : false, 
-							items: [
-							{
-								id: 'thread-bkm-btn',
+							items: [{
+								id: 'thread-research-btn',
 								iconCls: 'annotation-bkm-btn',
 								iconAlign: 'top',
 								handler: thisCtrl.on_researcher_switch_Click,
-								text: 'Researcher',
+								text: 'Researcher\'s opinion',
 								tooltip: {title:'Display the research nodes', text: 'Description of the this switch for researcher'}
 							}]
 						})})
