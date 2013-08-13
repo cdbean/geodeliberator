@@ -2925,6 +2925,7 @@ GeoAnnotator.AnnotationInfoPanelCtrl =
 	node_height : 30,
 	node_width : 100,
 	min_spacing : 10.0,	
+	
 	currentNodeStyle : {
 		"default" : {
 			fill: "#00BFFF", 
@@ -3342,6 +3343,7 @@ GeoAnnotator.AnnotationInfoPanelCtrl =
 	},
 	
 	updateReferenceSpaceTreePanel : function() {
+	//alert("updateReferenceSpaceTreePanel called");
 		var thisCtrl = GeoAnnotator.AnnotationInfoPanelCtrl;
 		if (thisCtrl.spaceTree) {
 			thisCtrl.spaceTree.clear();
@@ -3368,12 +3370,7 @@ GeoAnnotator.AnnotationInfoPanelCtrl =
    			params: {'annotationId':thisCtrl.currAnnotationInfo.id, 'userId':GeoAnnotator.currUserId, 'forumId': GeoAnnotator.currForumId}
 		});
 	},
-	/*
-	  params: {
-                'userId': GeoAnnotator.currUserId,
-                'forumId': GeoAnnotator.currForumId
-            }
-	*/
+
 	onLoadThreadsInfoSuccess : function(xhr) {
 		var threadsInfo = Ext.util.JSON.decode(xhr.responseText);
 		var thisCtrl = GeoAnnotator.AnnotationInfoPanelCtrl;
@@ -3406,9 +3403,13 @@ GeoAnnotator.AnnotationInfoPanelCtrl =
 			offset_y = 0.5 * h - 0.5 * (height + spacing) * (threadsInfo.parents.length - 1);		
 			var parent_node;
 			for (var i=0; i < threadsInfo.parents.length; i++) {
-				parent_node = thisCtrl.drawThreadNode(threadsInfo.parents[i], offset_x, offset_y, width, height, thisCtrl.parentNodeStyle,((threadsInfo.parents[i].parents_role=="member")? true:false));
-				alert("parent "+i+"th node is: "+threadsInfo.parents[i].parents_role);
-				if(parent_node.role=="member"&&GeoAnnotator.isResearchModeOn!=true)
+				//parent_node = thisCtrl.drawThreadNode(threadsInfo.parents[i], offset_x, offset_y, width, height, thisCtrl.parentNodeStyle,((threadsInfo.parents[i].parents_role=="member")? true:false));
+				
+				parent_node = thisCtrl.drawThreadNode(threadsInfo.parents[i], offset_x, offset_y, width, height, ((threadsInfo.parents[i].
+				parents_role=="member")? thisCtrl.currentNodeStyle:thisCtrl.facilitator_parentNodeStyle),((threadsInfo.parents[i].
+				parents_role=="member")? true:false));
+				//alert("parent "+i+"th node is: "+threadsInfo.parents[i].parents_role);
+				if(threadsInfo.parents[i].parents_role=="member"||(GeoAnnotator.isResearchModeOn==false&&threadsInfo.parents[i].parents_role!="member"))
 				{thisCtrl.drawThreadLink(parent_node, current_node);}
 				offset_y = offset_y + spacing + height;
 			}
@@ -3424,9 +3425,13 @@ GeoAnnotator.AnnotationInfoPanelCtrl =
 			offset_y = 0.5 * h - 0.5 * (height + spacing) * (threadsInfo.children.length - 1);		
 			var child_node;
 			for (var i=0; i < threadsInfo.children.length; i++) {
-				child_node = thisCtrl.drawThreadNode(threadsInfo.children[i], offset_x, offset_y, width, height, thisCtrl.childNodeStyle,((threadsInfo.children[i].child_role=="member")? true:false));
-				alert("children "+i+"th node is: "+threadsInfo.children[i].child_role);
-				if(child_node.role=="member"&&GeoAnnotator.isResearchModeOn!=true)
+				//child_node = thisCtrl.drawThreadNode(threadsInfo.children[i], offset_x, offset_y, width, height, thisCtrl.childNodeStyle,((threadsInfo.children[i].child_role=="member")? true:false));
+				child_node = thisCtrl.drawThreadNode(threadsInfo.children[i], offset_x, offset_y, width, height,
+				((threadsInfo.children[i].child_role=="member")? thisCtrl.currentNodeStyle:thisCtrl.facilitator_childNodeStyle),
+				((threadsInfo.children[i].child_role=="member")? true:false));
+				
+				//alert("children "+i+"th node is: "+threadsInfo.children[i].child_role);
+				if(threadsInfo.children[i].child_role=="member"||(GeoAnnotator.isResearchModeOn==false&&threadsInfo.children[i].child_role!="member"))
 				{thisCtrl.drawThreadLink(current_node, child_node);}
 				offset_y = offset_y + spacing + height;
 			}
@@ -3441,13 +3446,14 @@ GeoAnnotator.AnnotationInfoPanelCtrl =
 		var left = x - 0.5 * width;
 		var thread_node = {}
 		
-		var box = thisCtrl.spaceTree.rect(left, top, width, height).attr(style["default"]);
+		var box = thisCtrl.spaceTree.rect(left, top, width, height,(role? 0:10)).attr(style["default"]);
 		var label = thisCtrl.spaceTree.text(x, y, threadNodeInfo.userName + ":\n" + threadNodeInfo.excerpt.substring(0, 20)).attr(style["text"]);
-		if(role==false&&GeoAnnotator.isResearchModeOn!=true)
+		if((role==false)&&(GeoAnnotator.isResearchModeOn==true))	//when role is not member and not in research mode the node will be hiden.
 		{
 			box.hide();
 			label.hide();
 		}
+		
 		var blanket = thisCtrl.spaceTree.rect(left, top, width, height).attr(style["blanket"]);
 		thread_node.id = threadNodeInfo.id;
 		thread_node.box = box;
@@ -3474,7 +3480,8 @@ GeoAnnotator.AnnotationInfoPanelCtrl =
 		return thread_node;
 	},
 	
-	drawThreadLink : function(from_node, to_node) {
+	drawThreadLink : function(from_node, to_node) 
+	{
 		var thisCtrl = GeoAnnotator.AnnotationInfoPanelCtrl;
 		var from_x = from_node.blanket.getBBox().x + from_node.blanket.getBBox().width;
 		var from_y = Math.round(from_node.blanket.getBBox().y + from_node.blanket.getBBox().height * 0.5);
@@ -3484,6 +3491,7 @@ GeoAnnotator.AnnotationInfoPanelCtrl =
 		var pathString = "M" + from_x + "," + from_y + "H" + mid_x + " V" + to_y + "H" + to_x + "l-5,5 M" + to_x + "," + to_y + "l-5,-5";
 		
 		thisCtrl.spaceTree.path(pathString);
+		
 	},
 	
 	updatePanelContent: function(){
@@ -3656,6 +3664,8 @@ GeoAnnotator.AnnotationInfoPanelCtrl =
 		GeoAnnotator.AnnotationInfoPanelCtrl.updateReferenceSpaceTreePanel();
 		//alert(GeoAnnotator.isResearchModeOn);
 		//refresh the thread view and draw nodes.
+		GeoAnnotator.AnnotationInfoPanelCtrl.referenceSpaceTreeWindow.show();
+		GeoAnnotator.AnnotationInfoPanelCtrl.buildReferenceSpaceTree();
 	
 	},
 	
@@ -3680,7 +3690,6 @@ GeoAnnotator.AnnotationInfoPanelCtrl =
 						items : [thisCtrl.referenceSpaceTreePanel],
 						title : 'Thread tree view',
 						tbar: new Ext.Toolbar({
-						
 							id : 'thread-info-tbar',
 							hidden : false, 
 							items: [{
@@ -3690,7 +3699,17 @@ GeoAnnotator.AnnotationInfoPanelCtrl =
 								handler: thisCtrl.on_researcher_switch_Click,
 								text: 'Researcher\'s opinion',
 								tooltip: {title:'Display the research nodes', text: 'Description of the this switch for researcher'}
-							}]
+							},
+							'-',
+							{
+								id: 'thread-user-btn',
+								iconCls: 'thread-user-btn',
+								iconAlign: 'top',
+								handler: thisCtrl.on_researcher_switch_Click,
+								text: 'User\'s opinion',
+								tooltip: {title:'Display the user\'s nodes'}
+							}
+							]
 						})})
 		}
 		else {
