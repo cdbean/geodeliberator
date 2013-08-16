@@ -17,8 +17,13 @@ urlpatterns += patterns('',
     # (r'^geodeliberator/', include('geodeliberator.foo.urls')),
     (r'^api/', include('api.urls')),
     (r'^geodeliberator/user/', include('users.urls')),
-	url(r'^geodeliberator', views.index, name='index'),
-
+    url(r'^geodeliberator$', views.index, name='index'),
+    #url(r'^geodeliberator/$', views.index, name='index'),
+    
+    url(r'^$', views.index, name='index'),
+    #url(r'^geodeliberator/dash_board', views.admin_dashboard, name='dashboard'),
+    url(r'^geodeliberator/dash_board', include('api.urls')),
+                        
     # Uncomment the admin/doc line below and add 'django.contrib.admindocs' 
     # to INSTALLED_APPS to enable admin documentation:
     # (r'^admin/doc/', include('django.contrib.admindocs.urls')),

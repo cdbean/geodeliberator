@@ -3239,6 +3239,7 @@ GeoAnnotator.AnnotationInfoPanelCtrl =
 	},
 	
 	updateAnnotationInfoDisplayPanel : function(){
+		//alert("trigger");
 		var thisCtrl = GeoAnnotator.AnnotationInfoPanelCtrl;
 		var html = '';
 		html +='<div id="annotationInfoHeader">On ' + thisCtrl.currAnnotationInfo.timeCreated + ', <b>' + thisCtrl.currAnnotationInfo.userName + '</b> says:</div>';		
