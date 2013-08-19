@@ -20,7 +20,7 @@ def api_maintenance(request):
     response = {}
     if 'forumId' in request.POST:
         print request.POST       
-        search_forum = int(1)   #later to be changed of getting information for request
+        search_forum = int(13)   #later to be changed of getting information for request
         annotations = Annotation.objects.filter(forum=search_forum)
         detailed_info= True
         #print len(annotations)
