@@ -1126,6 +1126,7 @@ GeoAnnotator.ContributePanelCtrl = {
 				var name = match[2];
 				
 				if (id.indexOf('fp') === 0) {
+				//alert('indexOf fp');
 					var exists = false;
 					for (var j=0; j < newAnnotation.footprints.length; j++) {
 						if (newAnnotation.footprints[j].id === id.substring(2)) {
@@ -1160,24 +1161,24 @@ GeoAnnotator.ContributePanelCtrl = {
 				else if (id.indexOf('an') === 0) {
 					// reference
 					var exists = false;
+					//alert('false');
 					for (var j=0; j < newAnnotation.references.length; j++) {
 						if (newAnnotation.references[j] === id.substring(2)) {
 							exists = true;
 							break;
 						}
 					};
-					if (!exists) {
-					
+					if (!exists) {				
 						newAnnotation.references.push(id.substring(2));
 					// below
 						var currAnnotationInfo = GeoAnnotator.AnnotationInfoPanelCtrl.currAnnotationInfo;
-						for (var i = 0; i < currAnnotationInfo.footprints.length; i++) {
-							var footprint = currAnnotationInfo.footprints[i];
+						for (var k = 0; k < currAnnotationInfo.footprints.length; k++) {
+							var footprint = currAnnotationInfo.footprints[k];
 							var exists = false;
 							for (var j = 0; j < newAnnotation.footprints.length; j++) {
 								if (newAnnotation.footprints[j].id == footprint.id)
 								exists = true;
-								break;
+								break; 
 							}
 							if (!exists) {
 								newAnnotation.footprints.push(footprint);
