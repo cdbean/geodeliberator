@@ -6,3 +6,4 @@ def index(request):
 	response['userId'] = request.user.id
 	return render(request, 'index.html', response)
     return redirect('/geodeliberator/user/login')
+

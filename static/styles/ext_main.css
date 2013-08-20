@@ -210,6 +210,9 @@ a:hover {
 .annotation-bkm-btn {
 	background-image: url(../images/bookmark.png) !important;
 }
+.thread-user-btn {
+	background-image: url(../images/customUsernodeicon.png) !important;
+}
 
 .reference-display-forward {
 	background-image: url(../images/forward.png) !important;

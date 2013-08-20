@@ -4,12 +4,66 @@ from django.contrib.auth import authenticate
 from django.db.models import Q
 from django.db.models import Count
 from django.contrib.gis.geos import *
-
+from pprint import pprint
 from dateutil import parser
-
+from django.shortcuts import render, redirect
 from api.models import *
-
+import re
 import json
+
+def api_dash_board(request):
+    response = {}
+    return render(request, 'dashboard.html', response)
+
+def api_maintenance(request):
+    print "api_maintenance"
+    response = {}
+    if 'forumId' in request.POST:
+        print request.POST       
+        search_forum = int(13)   #later to be changed of getting information for request
+        annotations = Annotation.objects.filter(forum=search_forum)
+        detailed_info= True
+        #print len(annotations)
+        #print "apply regular expression"
+        for annotation in annotations:
+            m = re.findall("id=\"ref-an(\d+)",annotation.content)
+            #note above line, initially I used search but only the first match returned. then I switch to findall.
+            if m:
+                #print len(m)
+                information = 'Current Annotation Id is: '
+                information +=str(annotation.id)
+                information +='. '
+                for n in m:
+                    if detailed_info:
+                        print (information+"AN id is: "+n)
+                    theme_references = ThemeReference.objects.filter(target=annotation.id,source = n)
+                    if theme_references:
+                        for theme in theme_references:
+                            if detailed_info:
+                                print ("Exist reference target :  "+str(theme.target) + " and source is: "+str(theme.source))
+                    else:
+                        if detailed_info:
+                            print "Error! Reference in content but not found in table, may be an error!"
+                            print ("Try to Retrieve annotation with ID: " + str(n))
+                            try:
+                                source_annotation = Annotation.objects.get(id=int(n))
+                                if detailed_info:
+                                    print ("!Success with ID: " + str(source_annotation.id))
+                                ThemeReference(source =source_annotation, target = annotation).save()
+                                if detailed_info:
+                                    print "The missing relationship has been added to the database."
+                            except :
+                                if detailed_info:
+                                    print "Retieve failed, annotation not exist"
+
+                        #ThemeReference(source =n, target = annotation).save
+                        #print "The missing relationship has been added to the database."
+        
+        print "Operation is Done."
+        response["message"] = "Success!" # add more information for the message label.
+        return render(request,'dashboard.html',response)
+    else :
+        return render(request,'dashboard.html')
 
 def api_user(request):
     response = {}
@@ -18,8 +72,6 @@ def api_user(request):
         try:
             user = User.objects.get(id=userId)
             role = Membership.objects.filter(user_id=userId);
-            #print 'about to print the role!!!!!!!!!'
-            #print role[0].role
             response["id"] = str(user.id)
             response["userName"] = user.username
             response["email"] = user.email
@@ -42,7 +94,6 @@ def api_forum(request):
             forum = Forum.objects.get(id=forumId)
             response["id"] = str(forum.id)
             response["name"] = str(forum.name)
-            print "forum's name is: "+str(forum.name)
             response["description"] = forum.description
             response["scope"] = forum.scope
             response["contextmap"] = forum.contextmap
@@ -60,12 +111,10 @@ def api_forums(request):
             response["participating"] = []
             for forum in user.joined_forums.all():
                 role = Membership.objects.get(user_id=userId, forum=forum.id);
-                print "the role in api_forums is: "+role.role
                 forum_info = {}
                 forum_info["id"] = str(forum.id)
                 forum_info["name"] = forum.name
                 forum_info["role"] = role.role
-                #print '!!!!!!!!!!!!the role of user of forum is: '+forum.role
                 response["participating"].append(forum_info)
         except User.DoesNotExist:
             pass
@@ -83,17 +132,13 @@ def api_forums(request):
 def api_userlist(request):
     response = {}
     userId = int(request.REQUEST.get('userId', '0'))    #need verify the user. latter.
-    #print '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!the user ID is: ' + str(userId)
     current_forumId= int(request.REQUEST.get('forumId', '0'))
-    #print '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!current_forumId is: '+str(current_forumId)
-    #current_forumId = 1 #this need to be deleted.
     response["user_list"] = []
     for user in Membership.objects.filter(forum=current_forumId):
         user_info = {}
         user_info["id"] = str(user.user.id)
         user_info["name"] = str(user.user)
         user_info["role"] = str(user.role)
-        #print '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!role is: '+str(user.role)
         response["user_list"].append(user_info)    
     
     return HttpResponse(json.dumps(response), mimetype='application/json')
@@ -117,18 +162,13 @@ def api_authentication(request):
     return HttpResponse(json.dumps(response), mimetype='application/json')
 
 def api_foruminfo(request):
-    #print "api_foruminfo inside"
     response = {}
     forumId = int(request.REQUEST.get('forumId', '0')) or int(request.REQUEST.get('groupId', '0'))
-    #print "Forum Id is: " + str(forumId)
     if forumId > 0:
         try:
             newinfo = str(request.REQUEST.get('newinfo', '0'))
-            #print "new info is: " + newinfo
             forum = Forum.objects.get(id=forumId)
-            print str(forum.description)
             forum.description=newinfo
-            print str(forum.description)
             forum.save()
             response["success"] = True
         except Forum.DoesNotExist:
@@ -217,7 +257,6 @@ def add_annotation(annotation_info):
         
         annotation = Annotation(content=annotation_info["content"], author=author, forum=forum, sharelevel=annotation_info["shareLevel"], created_at=parser.parse(annotation_info["timeCreated"]), updated_at=parser.parse(annotation_info["timeCreated"]), contextmap=annotation_info["contextMap"])
         annotation.save()
-        print 'int(annotation_info.id)'        
     
         content = annotation.content;
         for reference_id in annotation_info["references"]:
@@ -416,6 +455,11 @@ def api_threads(request):
     annotationId = int(request.REQUEST.get('annotationId', '0'))
     try:
         annotation = Annotation.objects.get(id=annotationId)
+        
+        role = Membership.objects.filter(user_id=Annotation.objects.get(id=annotationId).author.id,forum=forumId)
+        #print "annotation author role is:"
+        #print role[0].role
+        #print "done"
         response['id'] = str(annotation.id)
         response['type'] = annotation.content_type
         response['forumId'] = str(annotation.forum.id)
@@ -425,11 +469,29 @@ def api_threads(request):
         response['timeCreated'] = annotation.created_at.ctime()
         response['timeUpdated'] = annotation.updated_at.ctime()
         response['excerpt'] = annotation.get_excerpt(10)
-        print response['excerpt']
-        # get parents
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+        response['current_role'] = role[0].role
+        #print response['excerpt']
+        #print "current role printing done"
+
+=======
+        #print response['excerpt']
+>>>>>>> b3658d0e7ff3a34a35242d51d7395a3ac7d3a9d6
+=======
+        #print response['excerpt']
+>>>>>>> b3658d0e7ff3a34a35242d51d7395a3ac7d3a9d6
+=======
+        #print response['excerpt']
+>>>>>>> b3658d0e7ff3a34a35242d51d7395a3ac7d3a9d6
         theme_references = ThemeReference.objects.filter(target=annotationId)
+        #print 'theme references : '
+        #pprint(theme_references)
         response['parents'] = []
         for reference in theme_references:
+            role = Membership.objects.filter(user_id=reference.source.author.id,forum=forumId)
+            #print str(role[0].role)
             reference_info = {}
             reference_info['id'] = str(reference.source.id)
             reference_info['type'] = reference.source.content_type
@@ -442,11 +504,14 @@ def api_threads(request):
             reference_info['excerpt'] = reference.source.get_excerpt(10)
             reference_info['alias'] = reference.alias
             reference_info['relation'] = reference.relation
+            reference_info['parents_role']=role[0].role
             response['parents'].append(reference_info)
+            #print "parents information load success"
         # get children
         theme_references = ThemeReference.objects.filter(source=annotationId)
         response['children'] = []
         for reference in theme_references:
+            role = Membership.objects.filter(user_id=reference.target.author.id,forum=forumId)
             reference_info = {}
             reference_info['id'] = str(reference.target.id)
             reference_info['type'] = reference.target.content_type
@@ -459,7 +524,9 @@ def api_threads(request):
             reference_info['excerpt'] = reference.target.get_excerpt(10)
             reference_info['alias'] = reference.alias
             reference_info['relation'] = reference.relation
+            reference_info['child_role'] = role[0].role
             response['children'].append(reference_info)
+            #print "children information load success"
     except Annotation.DoesNotExist:
         pass       
     return HttpResponse(json.dumps(response), mimetype='application/json')

@@ -1,7 +1,8 @@
 from django.conf.urls.defaults import *
 
 from views import * 
-
+from maintenance import *
+print "api.urls"
 urlpatterns = patterns('',
     url(r'^user/$', api_user, name='api_user'),
     url(r'^userlist/$', api_userlist, name='api_userlist'),
@@ -23,6 +24,10 @@ urlpatterns = patterns('',
     url(r'^Annotation/$', api_annotation, name='api_annotation'),   
     url(r'^Map/$', api_map, name='api_map'),   
     url(r'^Timeline/$', api_timeline, name='api_timeline'),
-    url(r'^Threads/$', api_threads, name='api_threads'),              
+    url(r'^Threads/$', api_threads, name='api_threads'),
+    # below is the maintenance functions
+    url(r'^/maintenance$', api_maintenance, name = 'api_dash_board'),
+    url(r'^/$', api_maintenance, name = 'api_dash_board'),
+    
 )
 
