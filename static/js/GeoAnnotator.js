@@ -2924,6 +2924,7 @@ GeoAnnotator.AnnotationInfoPanelCtrl =
 	node_height : 30,
 	node_width : 100,
 	min_spacing : 10.0,	
+	
 	currentNodeStyle : {
 		"default" : {
 			fill: "#00BFFF", 
@@ -3237,6 +3238,7 @@ GeoAnnotator.AnnotationInfoPanelCtrl =
 	},
 	
 	updateAnnotationInfoDisplayPanel : function(){
+		//alert("trigger");
 		var thisCtrl = GeoAnnotator.AnnotationInfoPanelCtrl;
 		var html = '';
 		html +='<div id="annotationInfoHeader">On ' + thisCtrl.currAnnotationInfo.timeCreated + ', <b>' + thisCtrl.currAnnotationInfo.userName + '</b> says:</div>';		
@@ -3341,6 +3343,7 @@ GeoAnnotator.AnnotationInfoPanelCtrl =
 	},
 	
 	updateReferenceSpaceTreePanel : function() {
+	//alert("updateReferenceSpaceTreePanel called");
 		var thisCtrl = GeoAnnotator.AnnotationInfoPanelCtrl;
 		if (thisCtrl.spaceTree) {
 			thisCtrl.spaceTree.clear();
@@ -3394,7 +3397,6 @@ GeoAnnotator.AnnotationInfoPanelCtrl =
 		//alert(threadsInfo.current_role);
 		var current_node = thisCtrl.drawThreadNode(threadsInfo, w * 0.5, h * 0.5, width, height,
 		((threadsInfo.current_role=="member")? thisCtrl.currentNodeStyle:thisCtrl.facilitator_currentNodeStyle),((threadsInfo.current_role=="member")? true:false));
-		);
 		
 		
 		// draw parents
@@ -3449,7 +3451,8 @@ GeoAnnotator.AnnotationInfoPanelCtrl =
 		var top = y - 0.5 * height;
 		var left = x - 0.5 * width;
 		var thread_node = {}
-		var box = thisCtrl.spaceTree.rect(left, top, width, height).attr(style["default"]);
+		
+		var box = thisCtrl.spaceTree.rect(left, top, width, height,(role? 0:10)).attr(style["default"]);
 		var label = thisCtrl.spaceTree.text(x, y, threadNodeInfo.userName + ":\n" + threadNodeInfo.excerpt.substring(0, 20)).attr(style["text"]);
 		if((role==false)&&(GeoAnnotator.isResearchModeOn==true))	//when role is not member and not in research mode the node will be hiden.
 		{

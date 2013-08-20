@@ -470,7 +470,12 @@ def api_threads(request):
         response['timeUpdated'] = annotation.updated_at.ctime()
         response['excerpt'] = annotation.get_excerpt(10)
         response['current_role'] = role[0].role
+        #print response['excerpt']
+        #print "current role printing done"
+
         theme_references = ThemeReference.objects.filter(target=annotationId)
+        #print 'theme references : '
+        #pprint(theme_references)
         response['parents'] = []
         for reference in theme_references:
             role = Membership.objects.filter(user_id=reference.source.author.id,forum=forumId)
