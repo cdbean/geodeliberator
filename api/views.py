@@ -258,9 +258,7 @@ def add_annotation(annotation_info):
         annotation = Annotation(content=annotation_info["content"], author=author, forum=forum, sharelevel=annotation_info["shareLevel"], created_at=parser.parse(annotation_info["timeCreated"]), updated_at=parser.parse(annotation_info["timeCreated"]), contextmap=annotation_info["contextMap"])
         annotation.save()
     
-        content = annotation.content
-        print "annotation: ", annotation_info
-        print "anntation references: ", annotation_info["references"]
+        content = annotation.content;
         for reference_id in annotation_info["references"]:
             source = Annotation.objects.get(id=int(reference_id))
             ThemeReference.objects.create(source=source, target=annotation)
