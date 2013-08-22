@@ -22,6 +22,9 @@ urlpatterns += patterns('',
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 142045a4e9c5995c9689c5002c3c50c60d39774a
     #url(r'^nltk', include('nltk.urls')),
 =======
     
@@ -29,9 +32,12 @@ urlpatterns += patterns('',
 =======
     
 >>>>>>> parent of da4f324... maintenance webpage
+<<<<<<< HEAD
 =======
     
 >>>>>>> parent of da4f324... maintenance webpage
+=======
+>>>>>>> 142045a4e9c5995c9689c5002c3c50c60d39774a
     url(r'^$', views.index, name='index'),
     #url(r'^geodeliberator/dash_board', views.admin_dashboard, name='dashboard'),
     url(r'^geodeliberator/dash_board', include('api.urls')),
