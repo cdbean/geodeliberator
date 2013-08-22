@@ -19,11 +19,16 @@ def api_maintenance(request):
     #print "api_maintenance"
     response = {}
     if 'forumId' in request.POST:
+
         #print request.POST       
         search_forum = int(13)   #later to be changed of getting information for request
         annotations = Annotation.objects.filter(forum=search_forum) # note this is not very true, we need apply the forum object but not the id.
         #however this works for now so we will leave it here till next revision.
         detailed_info= False
+        print request.POST       
+        search_forum = int(1)   #later to be changed of getting information for request
+        annotations = Annotation.objects.filter(forum=search_forum)
+        detailed_info= True
         #print len(annotations)
         #print "apply regular expression"
         for annotation in annotations:
