@@ -20,7 +20,11 @@ urlpatterns += patterns('',
     url(r'^geodeliberator$', views.index, name='index'),
     #url(r'^geodeliberator/$', views.index, name='index'),
 <<<<<<< HEAD
+<<<<<<< HEAD
     #url(r'^nltk', include('nltk.urls')),
+=======
+    
+>>>>>>> parent of da4f324... maintenance webpage
 =======
     
 >>>>>>> parent of da4f324... maintenance webpage
