@@ -16,13 +16,14 @@ def api_dash_board(request):
     return render(request, 'dashboard.html', response)
 
 def api_maintenance(request):
-    print "api_maintenance"
+    #print "api_maintenance"
     response = {}
     if 'forumId' in request.POST:
-        print request.POST       
-        search_forum = int(1)   #later to be changed of getting information for request
-        annotations = Annotation.objects.filter(forum=search_forum)
-        detailed_info= True
+        #print request.POST       
+        search_forum = int(13)   #later to be changed of getting information for request
+        annotations = Annotation.objects.filter(forum=search_forum) # note this is not very true, we need apply the forum object but not the id.
+        #however this works for now so we will leave it here till next revision.
+        detailed_info= False
         #print len(annotations)
         #print "apply regular expression"
         for annotation in annotations:
@@ -59,7 +60,7 @@ def api_maintenance(request):
                         #ThemeReference(source =n, target = annotation).save
                         #print "The missing relationship has been added to the database."
         
-        print "Operation is Done."
+        #print "Operation is Done."
         response["message"] = "Success!" # add more information for the message label.
         return render(request,'dashboard.html',response)
     else :
@@ -71,7 +72,8 @@ def api_user(request):
     if userId > 0:
         try:
             user = User.objects.get(id=userId)
-            role = Membership.objects.filter(user_id=userId);
+            role = Membership.objects.filter(user=user);
+            #print 'role is: ',role[0].role
             response["id"] = str(user.id)
             response["userName"] = user.username
             response["email"] = user.email
@@ -110,7 +112,7 @@ def api_forums(request):
             # participating forums
             response["participating"] = []
             for forum in user.joined_forums.all():
-                role = Membership.objects.get(user_id=userId, forum=forum.id);
+                role = Membership.objects.get(user=userId, forum=forum.id);
                 forum_info = {}
                 forum_info["id"] = str(forum.id)
                 forum_info["name"] = forum.name
@@ -456,7 +458,7 @@ def api_threads(request):
     try:
         annotation = Annotation.objects.get(id=annotationId)
         
-        role = Membership.objects.filter(user_id=Annotation.objects.get(id=annotationId).author.id,forum=forumId)
+        role = Membership.objects.filter(user=Annotation.objects.get(id=annotationId).author.id,forum=forumId)
         #print "annotation author role is:"
         #print role[0].role
         #print "done"
@@ -478,7 +480,7 @@ def api_threads(request):
         #pprint(theme_references)
         response['parents'] = []
         for reference in theme_references:
-            role = Membership.objects.filter(user_id=reference.source.author.id,forum=forumId)
+            role = Membership.objects.filter(user=reference.source.author.id,forum=forumId)
             #print str(role[0].role)
             reference_info = {}
             reference_info['id'] = str(reference.source.id)
@@ -499,7 +501,7 @@ def api_threads(request):
         theme_references = ThemeReference.objects.filter(source=annotationId)
         response['children'] = []
         for reference in theme_references:
-            role = Membership.objects.filter(user_id=reference.target.author.id,forum=forumId)
+            role = Membership.objects.filter(user=reference.target.author.id,forum=forumId)
             reference_info = {}
             reference_info['id'] = str(reference.target.id)
             reference_info['type'] = reference.target.content_type
