@@ -19,7 +19,19 @@ urlpatterns += patterns('',
     (r'^geodeliberator/user/', include('users.urls')),
     url(r'^geodeliberator$', views.index, name='index'),
     #url(r'^geodeliberator/$', views.index, name='index'),
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+    #url(r'^nltk', include('nltk.urls')),
+=======
     
+>>>>>>> parent of da4f324... maintenance webpage
+=======
+    
+>>>>>>> parent of da4f324... maintenance webpage
+=======
+    
+>>>>>>> parent of da4f324... maintenance webpage
     url(r'^$', views.index, name='index'),
     #url(r'^geodeliberator/dash_board', views.admin_dashboard, name='dashboard'),
     url(r'^geodeliberator/dash_board', include('api.urls')),

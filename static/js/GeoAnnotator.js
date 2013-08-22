@@ -1166,18 +1166,17 @@ GeoAnnotator.ContributePanelCtrl = {
 							break;
 						}
 					};
-					if (!exists) {
-					
+					if (!exists) {				
 						newAnnotation.references.push(id.substring(2));
 					// below
 						var currAnnotationInfo = GeoAnnotator.AnnotationInfoPanelCtrl.currAnnotationInfo;
-						for (var i = 0; i < currAnnotationInfo.footprints.length; i++) {
-							var footprint = currAnnotationInfo.footprints[i];
+						for (var k = 0; k < currAnnotationInfo.footprints.length; k++) {
+							var footprint = currAnnotationInfo.footprints[k];
 							var exists = false;
 							for (var j = 0; j < newAnnotation.footprints.length; j++) {
 								if (newAnnotation.footprints[j].id == footprint.id)
 								exists = true;
-								break;
+								break; 
 							}
 							if (!exists) {
 								newAnnotation.footprints.push(footprint);
@@ -3371,13 +3370,19 @@ GeoAnnotator.AnnotationInfoPanelCtrl =
    			params: {'annotationId':thisCtrl.currAnnotationInfo.id, 'userId':GeoAnnotator.currUserId, 'forumId': GeoAnnotator.currForumId}
 		});
 	},
-
+	/*
+	  params: {
+                'userId': GeoAnnotator.currUserId,
+                'forumId': GeoAnnotator.currForumId
+            }
+	*/
 	onLoadThreadsInfoSuccess : function(xhr) {
 		var threadsInfo = Ext.util.JSON.decode(xhr.responseText);
 		var thisCtrl = GeoAnnotator.AnnotationInfoPanelCtrl;
 		var w = thisCtrl.referenceSpaceTreePanel.getInnerWidth();
 		var h = thisCtrl.referenceSpaceTreePanel.getInnerHeight();
-	 	if (thisCtrl.spaceTree) {thisCtrl.spaceTree.clear();
+	 	if (thisCtrl.spaceTree) {
+			thisCtrl.spaceTree.clear();
 		}
 		else {
 			thisCtrl.spaceTree = Raphael(thisCtrl.spaceTreeContainer, w, h);
