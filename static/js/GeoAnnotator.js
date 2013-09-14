@@ -351,8 +351,8 @@ GeoAnnotator.ContainerTBCtrl = {
 	},
 	
 	onLogOutClick : function() {
-//		Ext.state.Manager.clear('userId');
-//		GeoAnnotator.init();
+		//Ext.state.Manager.clear('userId');
+		//GeoAnnotator.init();
 		$.get('geodeliberator/usr/logout');
 	},
 	
@@ -477,7 +477,7 @@ GeoAnnotator.ContainerTBCtrl = {
 		GeoAnnotator.TimelinePanelCtrl.update();
 		GeoAnnotator.ManageWindowCtrl.update();
 	},
-	
+
 	onForumDetailClick : function() {
 		var thisCtrl = GeoAnnotator.ContainerTBCtrl;
         // request the forum information
@@ -665,7 +665,6 @@ GeoAnnotator.ContainerTBCtrl = {
 		else
 			alert('Edit submission failed!');
     }
-        
 };
 
 GeoAnnotator.ContributePanelCtrl = {
@@ -1473,8 +1472,8 @@ GeoAnnotator.MapPanelCtrl = {
 			'select': new OpenLayers.Style({
 			    fillColor: '#FFCC33',
 			    fillOpacity: 0.3, 
-//			    strokeColor: 'blue',
-//			    strokeOpacity: 0,
+			    //strokeColor: 'blue',
+			    //strokeOpacity: 0,
 			    strokeWidth: 4,
 			    //pointerEvents: 'visiblePainted',
 			    cursor: 'pointer'
@@ -2920,6 +2919,10 @@ GeoAnnotator.AnnotationInfoPanelCtrl =
 	spaceTreeContainer : 'reference-spaceTree',
 	threadOrientation : 'left',
 	currAnnotationInfo : {},
+	// code window
+	codeWindow : null,
+	codePanel : null,
+
 	// spaceTree styles
 	node_height : 30,
 	node_width : 100,
@@ -3097,8 +3100,8 @@ GeoAnnotator.AnnotationInfoPanelCtrl =
 					text: 'Comment',
 					tooltip: {title:'Comment', text: 'Make a quick comment on the current annotation.'}
 				},
-				'-',
-*/				{
+				'-',*/
+				{
 					id: 'annotation-bkm-btn',
 					iconCls: 'annotation-bkm-btn',
 					iconAlign: 'top',
@@ -3209,6 +3212,11 @@ GeoAnnotator.AnnotationInfoPanelCtrl =
 						handler: thisCtrl.onDeleteClick
 					});
 				}
+                thisCtrl.contextMenu.add({
+                    id: 'code-display-ctx',
+                    text: 'Code',
+                    handler: thisCtrl.onCodeClick
+                })
 				thisCtrl.contextMenu.showAt(evt.getXY());
 				evt.preventDefault();
 			}
@@ -3342,6 +3350,14 @@ GeoAnnotator.AnnotationInfoPanelCtrl =
 		return content; 
 	},
 	
+	updateCodePanel : function() {
+		var thisCtrl = GeoAnnotator.AnnotationInfoPanelCtrl;
+		var html = '<div id="' + thisCtrl.codeContainer + '"></div>';
+		if (thisCtrl.codePanel.body) {
+			thisCtrl.codePanel.body.update(html);	
+		}
+	},
+
 	updateReferenceSpaceTreePanel : function() {
 	//alert("updateReferenceSpaceTreePanel called");
 		var thisCtrl = GeoAnnotator.AnnotationInfoPanelCtrl;
@@ -3675,7 +3691,147 @@ GeoAnnotator.AnnotationInfoPanelCtrl =
 	
 	},
 	
-	
+	onCodeClick: function(){
+		var thisCtrl = GeoAnnotator.AnnotationInfoPanelCtrl;
+		if (thisCtrl.codeWindow === null) {
+			thisCtrl.codePanel = new Ext.FormPanel({
+				id: 'code-form',
+    			autoHeight : true,
+    			autoWidth : true,
+				bodyStyle: 'padding: 0 1 0 1;',
+				items : [
+				{
+					xtype : 'hidden',
+					id: 'codeId',
+					name: 'codeId',
+					value : '0'
+				},
+				{
+					xtype: 'combo',
+					id : 'codePhase',
+					name : 'codePhase',
+					width: 200,
+					editable : false,
+					fieldLabel : 'Phase',
+					store: ['None', 'Phase 1', 'Phase 2', 'Phase 3', 'Phase 4', 'Phase 5'], 
+					displayField:'name',
+		    		typeAhead: true,
+		    		mode: 'local',
+					triggerAction: 'all',
+		    		value:'None',
+		    		selectOnFocus:true,
+				},
+				{
+					xtype: 'combo',
+					id : 'codeComment',
+					name : 'codeComment',
+					width: 200,
+					fieldLabel : 'Comment (optional)',
+					store: [ 
+						'Opinion or argument w/o reason', 
+						'Question', 
+						'Statement w/o reason', 
+						'Noise', 
+						'New idea',
+						'Clarifying stmt',
+						'Supporting stmt',
+						'Thread maintenance'
+					], 
+					displayField:'name',
+		    		typeAhead: true,
+		    		mode: 'local',
+					triggerAction: 'all',
+		    		value:'',
+				}],
+
+				buttons: [
+				{
+					text : 'Submit',
+					handler: thisCtrl.onPhaseSubmit
+				},
+				{
+					text : 'Cancel',
+					handler: thisCtrl.onPhaseCancel
+				}]
+			});
+
+			thisCtrl.codeWindow = new Ext.Window({
+						layout      : 'fit',
+         				//width       : 180,
+         				//height      : 300,
+         				closeAction :'hide',
+         				plain       : true,
+						modal		: false,
+						items : [thisCtrl.codePanel],
+						title : 'Code view',
+			});
+		}
+		else {
+			thisCtrl.updateCodePanel();
+		}
+		thisCtrl.codeWindow.show();
+	},
+
+	onPhaseSubmit : function(){
+		var thisCtrl = GeoAnnotator.AnnotationInfoPanelCtrl;
+		var newCode = {};
+		newCode.id = thisCtrl.codePanel.getForm().findField('codeId').getValue();
+		newCode.annotationId = GeoAnnotator.currAnnotationId;
+		newCode.phase = thisCtrl.codePanel.getForm().findField('codePhase').getValue();
+		newCode.comment = thisCtrl.codePanel.getForm().findField('codeComment').getValue();
+		Ext.Ajax.request({
+			url: GeoAnnotator.baseUrl + 'code/',
+			success: thisCtrl.onPhaseSubmitSuccess,
+			//failure: alert("failed!"),
+			params: newCode
+		});
+	},
+
+	onPhaseSubmitSuccess: function() {
+		var thisCtrl = GeoAnnotator.AnnotationInfoPanelCtrl;
+		thisCtrl.codeWindow.hide();
+	},
+
+	onPhaseCancel : function(){
+		var thisCtrl = GeoAnnotator.AnnotationInfoPanelCtrl;
+		thisCtrl.codeWindow.hide();
+	},
+
+    onAddNewAnnotationSuccess: function(xhr) {
+        var thisCtrl = GeoAnnotator.ContributePanelCtrl;
+		var submitState = Ext.util.JSON.decode(xhr.responseText);
+		if (submitState.success == true) {
+            // change the states
+            //alert('successfuly added!');
+            // reset the new footprints array
+			
+            thisCtrl.newFootprints = [];
+			GeoAnnotator.currFootprintId = '0';
+
+			GeoAnnotator.currAnnotationId = submitState.data.id;
+
+            // update controls		
+            GeoAnnotator.TimelinePanelCtrl.update();
+            GeoAnnotator.AnnotationInfoPanelCtrl.update();
+			GeoAnnotator.ContributePanelCtrl.update();
+			var currParams = {}
+			if (GeoAnnotator.currUserId != '0'){
+				currParams.userId = GeoAnnotator.currUserId;	
+			}  
+			if (GeoAnnotator.currForumId != '0'){
+				currParams.forumId = GeoAnnotator.currForumId;
+			}
+			GeoAnnotator.MapPanelCtrl.update(currParams);     
+			//GeoAnnotator.MapPanelCtrl.update();
+			GeoAnnotator.ManageWindowCtrl.update();
+
+			thisCtrl.containerPanel.collapse(false);
+        }
+        else {
+            alert(submitState.errors.message);
+        }
+    },
+
 	onThreadClick: function(){
 		var thisCtrl = GeoAnnotator.AnnotationInfoPanelCtrl;
 		if (thisCtrl.referenceSpaceTreeWindow === null) {

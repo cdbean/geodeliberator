@@ -95,6 +95,13 @@ class Annotation(models.Model):
     def __unicode__(self):
         return str(self.id)
 
+class Code(models.Model):
+    phase = models.IntegerField(null=False)
+    comment = models.CharField(max_length=100) 
+    annotation = models.ForeignKey(Annotation)
+    class Meta:
+        db_table = 'geoannotator_code'
+
 class ThemeReference(models.Model):
     RELATION_CHOICES = (
         ('for', 'For'),

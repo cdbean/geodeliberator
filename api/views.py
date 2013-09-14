@@ -15,6 +15,8 @@ def api_dash_board(request):
     response = {}
     return render(request, 'dashboard.html', response)
 
+
+
 def api_maintenance(request):
     #print "api_maintenance"
     response = {}
@@ -234,6 +236,39 @@ def api_annotations(request):
         annotation_info['content'] = annotation.content        
         response['annotations'].append(annotation_info)
     return HttpResponse(json.dumps(response), mimetype='application/json')
+
+def api_code(request):
+    response = {}
+    try:
+        #print request.REQUEST
+        phase = str(request.REQUEST.get('phase', 'None'))
+        comment = str(request.REQUEST.get('comment', '<blank>'))
+        annotationId = int(request.REQUEST.get('annotationId', '0'))
+        id = int(request.REQUEST.get('id', '0'))
+        if len(comment) == 0:
+            comment = '<blank>'
+        code = Code(comment=comment)
+        if phase == 'Phase 1':
+            code.phase = 1
+        elif phase == 'Phase 2':
+            code.phase = 2
+        elif phase == 'Phase 3':
+            code.phase = 3
+        elif phase == 'Phase 4':
+            code.phase = 4
+        elif phase == 'Phase 5':
+            code.phase = 5
+        else:
+            code.phase = 0
+        code.annotation = Annotation.objects.get(id=annotationId)
+        #print code.phase
+        #print code.comment
+        #print code.annotation.id
+        code.save()
+    except Exception as e:
+        print e
+    return HttpResponse(json.dumps(response), mimetype='application/json')
+
 
 def api_annotation(request):
     response = {}

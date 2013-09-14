@@ -2,7 +2,7 @@ from django.conf.urls.defaults import *
 
 from views import * 
 from maintenance import *
-print "api.urls"
+
 urlpatterns = patterns('',
     url(r'^user/$', api_user, name='api_user'),
     url(r'^userlist/$', api_userlist, name='api_userlist'),
@@ -11,7 +11,8 @@ urlpatterns = patterns('',
     url(r'^forums/$', api_forums, name='api_forums'),    
     url(r'^authentication/$', api_authentication, name='api_authentication'),        
     url(r'^annotations/$', api_annotations, name='api_annotations'),   
-    url(r'^annotation/$', api_annotation, name='api_annotation'),   
+    url(r'^annotation/$', api_annotation, name='api_annotation'),
+    url(r'^code/$', api_code, name='api_code'),
     url(r'^map/$', api_map, name='api_map'),   
     url(r'^timeline/$', api_timeline, name='api_timeline'),   
     url(r'^threads/$', api_threads, name='api_threads'),   
