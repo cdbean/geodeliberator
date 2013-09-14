@@ -1,0 +1,26 @@
+*.settings.py
+
+# Compiled source #
+*.pyc
+*.swp
+
+# runtime file #
+*.sock
+*.pid
+
+# ignore all files in backup 
+backup/
+
+# ignore all lib files in client
+geodeliberator_client/lib/
+
+# OS generated file
+.DS_Store?
+.DS_Store
+ehthumbs.db
+Icon?
+Thumbs.db
+
+logs/
+
+urls.py
