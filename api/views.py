@@ -239,32 +239,61 @@ def api_annotations(request):
 
 def api_code(request):
     response = {}
+    # print request.REQUEST
+    annotationId = int(request.REQUEST.get('annotationId', '0'))
+    deleteCodeId = int(request.REQUEST.get('delete', '0'))
+    if request.REQUEST.get('classification', 'null') != 'null': # add a code
+        try:
+            classification = str(request.REQUEST.get('classification', 'None'))
+            description = str(request.REQUEST.get('description', ''))
+            comment = str(request.REQUEST.get('comment', ''))
+            id = int(request.REQUEST.get('id', '0'))
+            if len(comment) == 0:
+                comment = ''
+            if len(description) == 0:
+                description = ''
+            code = Code(classification=classification, description=description, comment=comment)
+            code.annotation = Annotation.objects.get(id=annotationId)
+            code.save()
+            response["success"] = True
+        except Exception as e:
+            response["success"] = False
+            response["errors"] = {"reason", e}
+    elif deleteCodeId > 0: # delete a code
+        try:
+            code = Code.objects.get(id=deleteCodeId)
+            code.delete()
+            response["success"] = True
+        except Code.DoesNotExist:
+            response["success"] = False
+            response["errors"] = {"reason" : "The code does not exist!"}
+    else: # fetch a code
+        try:
+            code = Code.objects.get(annotation=annotationId)
+            response['id'] = str(code.id)
+            response['classification'] = code.classification
+            response['description'] = code.description
+            response['comment'] = code.comment
+            response['annotationId'] = code.annotation.id
+            response["success"] = True
+        except Exception as e:
+            response["success"] = True
+            pass
+    return HttpResponse(json.dumps(response), mimetype='application/json')
+
+def api_codescheme(request):
+    response = {}
     try:
-        #print request.REQUEST
-        phase = str(request.REQUEST.get('phase', 'None'))
-        comment = str(request.REQUEST.get('comment', '<blank>'))
-        annotationId = int(request.REQUEST.get('annotationId', '0'))
-        id = int(request.REQUEST.get('id', '0'))
-        if len(comment) == 0:
-            comment = '<blank>'
-        code = Code(comment=comment)
-        if phase == 'Phase 1':
-            code.phase = 1
-        elif phase == 'Phase 2':
-            code.phase = 2
-        elif phase == 'Phase 3':
-            code.phase = 3
-        elif phase == 'Phase 4':
-            code.phase = 4
-        elif phase == 'Phase 5':
-            code.phase = 5
-        else:
-            code.phase = 0
-        code.annotation = Annotation.objects.get(id=annotationId)
-        #print code.phase
-        #print code.comment
-        #print code.annotation.id
-        code.save()
+        code_schemes = CodeScheme.objects.all()
+        response['codescheme'] = []
+        for code_scheme in code_schemes:
+            code_scheme_entry = {}
+            code_scheme_entry['id'] = str(code_scheme.id)
+            code_scheme_entry['classification'] = str(code_scheme.classification)
+            code_scheme_entry['description'] = str(code_scheme.description)
+            response['codescheme'].append(code_scheme_entry)
+
+        
     except Exception as e:
         print e
     return HttpResponse(json.dumps(response), mimetype='application/json')
@@ -362,6 +391,7 @@ def delete_annotation(annotation_id):
         response["errors"] = {"reason": "The annotation does not exist!"}
     return response
         
+
 def get_annotation(annotation_id):
     annotation_info = {}
     try:

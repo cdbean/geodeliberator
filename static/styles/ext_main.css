@@ -66,6 +66,15 @@ a:hover {
     color:#555;
     background: #f9f9f9;
 }
+
+#codeContent {
+	margin:10px;
+    padding:10px;
+    border:1px dotted #999;
+    color:#555;
+    background: #f9f9f9;
+}
+
 #annotationInfoHeader {
 	margin:5px;
 }

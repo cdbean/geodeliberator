@@ -93,7 +93,24 @@ class FootprintAdmin(admin.ModelAdmin):
     #list_filter = ('geom_type',)
     search_fields = ('name',)
     exclude = ('footprint_id',)
-    
+
+class CodeAdmin(admin.ModelAdmin):
+    """
+    Class for specifiying the options for administering the
+    geodeliberator.geoannotator.models Code model via the Django admin.
+    """
+    list_display = ('id', 'classification', 'description', 'comment')
+
+class CodeSchemeAdmin(admin.ModelAdmin):
+    """
+    Class for specifiying the options for administering the
+    geodeliberator.geoannotator.models CodeScheme model via the Django admin.
+    """
+    list_display = ('id', 'classification', 'description')
+
+
 admin.site.register(Forum, ForumAdmin)
 admin.site.register(Annotation, AnnotationAdmin)
 admin.site.register(Footprint, FootprintAdmin)
+admin.site.register(Code, CodeAdmin)
+admin.site.register(CodeScheme, CodeSchemeAdmin)

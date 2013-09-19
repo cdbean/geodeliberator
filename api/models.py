@@ -96,11 +96,18 @@ class Annotation(models.Model):
         return str(self.id)
 
 class Code(models.Model):
-    phase = models.IntegerField(null=False)
-    comment = models.CharField(max_length=100) 
+    classification = models.CharField(null=False, max_length=100)
+    description = models.CharField(max_length=2000)
+    comment = models.CharField(max_length=2000) 
     annotation = models.ForeignKey(Annotation)
     class Meta:
         db_table = 'geoannotator_code'
+
+class CodeScheme(models.Model):
+    classification = models.CharField(null=False, max_length=100)
+    description = models.CharField(null=True, max_length=2000)
+    class Meta:
+        db_table = 'geoannotator_codescheme'
 
 class ThemeReference(models.Model):
     RELATION_CHOICES = (

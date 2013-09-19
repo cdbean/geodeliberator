@@ -82,10 +82,10 @@ GeoAnnotator.ContainerTBCtrl = {
 		thisCtrl = GeoAnnotator.ContainerTBCtrl;
 		// request the user information
 		Ext.Ajax.request({
-   			url: GeoAnnotator.baseUrl + 'user/',
-   			success: thisCtrl.onLoadUserInfoSuccess,
-   			failure: thisCtrl.onLoadUserInfoFailure,
-   			params: {'userId':GeoAnnotator.currUserId}
+			url: GeoAnnotator.baseUrl + 'user/',
+			success: thisCtrl.onLoadUserInfoSuccess,
+			failure: thisCtrl.onLoadUserInfoFailure,
+			params: {'userId':GeoAnnotator.currUserId}
 		});
 	},
 		
@@ -97,49 +97,49 @@ GeoAnnotator.ContainerTBCtrl = {
 		}		
 		// 1. the forum selection list
 		var forumListStore = new Ext.data.JsonStore({
-    		autoDestroy: true,
+			autoDestroy: true,
 			autoLoad: true,
-    		url: GeoAnnotator.baseUrl + 'forums/',
+			url: GeoAnnotator.baseUrl + 'forums/',
 			baseParams: {'userId':GeoAnnotator.currUserId},
-    		root: 'participating',
-    		idProperty: 'id',
-    		fields: ['id', 'name','role']
+			root: 'participating',
+			idProperty: 'id',
+			fields: ['id', 'name','role']
 		});
 		var forumUserStore = new Ext.data.JsonStore({
-    		autoDestroy: true,
+			autoDestroy: true,
 			autoLoad: true,
-    		url: GeoAnnotator.baseUrl + 'userlist/',
+			url: GeoAnnotator.baseUrl + 'userlist/',
 			baseParams: {'userId':GeoAnnotator.currUserId,'forumId': GeoAnnotator.currForumId},
-    		root: 'user_list',
-    		idProperty: 'id',
-    		fields: ['id', 'name','role']
+			root: 'user_list',
+			idProperty: 'id',
+			fields: ['id', 'name','role']
 		});
 		thisCtrl.forumList = new Ext.form.ComboBox({store: forumListStore, 
 			displayField:'name',
-    		typeAhead: true,
-    		mode: 'local',
+			typeAhead: true,
+			mode: 'local',
 			triggerAction: 'all',
-    		emptyText:'Select a forum...',
-    		selectOnFocus:true,
+			emptyText:'Select a forum...',
+			selectOnFocus:true,
 			listeners:{
-         		'select': thisCtrl.onForumListSelect
-    		}
+				'select': thisCtrl.onForumListSelect
+			}
 		});
 		thisCtrl.admin_user_list = new Ext.form.ComboBox({
-    		store: forumUserStore, 
+			store: forumUserStore, 
 			displayField:'name',
-    		typeAhead: true,
-    		mode: 'local',
+			typeAhead: true,
+			mode: 'local',
 			disabled : true,
 			id: 'forum-user-select',
 			width: 120,
 			triggerAction: 'all',
-    		emptyText:'Select a user',
+			emptyText:'Select a user',
 			
-    		selectOnFocus:true,
+			selectOnFocus:true,
 			listeners:{
-         		'select': thisCtrl.onUserListSelect
-    		}
+				'select': thisCtrl.onUserListSelect
+			}
 		});
 		
 		thisCtrl.containerTB.add({xtype: 'tbtext', text: 'Current Forum: '});
@@ -166,12 +166,12 @@ GeoAnnotator.ContainerTBCtrl = {
 		thisCtrl.containerTB.add(' ');
 		// 2. toggle History and bookmark windows
 		thisCtrl.containerTB.add({
-            id: 'timeline-btn',
-            iconCls: 'timeline-icon',
-            disabled : true,
+			id: 'timeline-btn',
+			iconCls: 'timeline-icon',
+			disabled : true,
 			pressed: false,
-            enableToggle: true,
-            toggleHandler: function(button, pressed){
+			enableToggle: true,
+			toggleHandler: function(button, pressed){
 				if(pressed){
 					GeoAnnotator.TimelinePanelCtrl.containerPanel.expand(false);
 				}
@@ -179,19 +179,19 @@ GeoAnnotator.ContainerTBCtrl = {
 					GeoAnnotator.TimelinePanelCtrl.containerPanel.collapse(false);
 				}
 			},
-            text: 'Timeline',
-            tooltip: {
-                title: 'Timeline',
-                text: 'Show the timeline'
-            }
-        });
+			text: 'Timeline',
+			tooltip: {
+				title: 'Timeline',
+				text: 'Show the timeline'
+			}
+		});
 		thisCtrl.containerTB.add({
-            id: 'annotation-history-btn',
-            iconCls: 'annotation-history-tab',
-            disabled : true,
+			id: 'annotation-history-btn',
+			iconCls: 'annotation-history-tab',
+			disabled : true,
 			pressed: false,
-            enableToggle: true,
-            toggleHandler: function(button, pressed){
+			enableToggle: true,
+			toggleHandler: function(button, pressed){
 				if(pressed){
 					GeoAnnotator.AnnotationHistoryWindowCtrl.containerWindow.show();
 				}
@@ -199,19 +199,19 @@ GeoAnnotator.ContainerTBCtrl = {
 					GeoAnnotator.AnnotationHistoryWindowCtrl.containerWindow.hide();
 				}
 			},
-            text: 'History',
-            tooltip: {
-                title: 'History',
-                text: 'Show the browsing history'
-            }
-        });
+			text: 'History',
+			tooltip: {
+				title: 'History',
+				text: 'Show the browsing history'
+			}
+		});
 		thisCtrl.containerTB.add({
-            id: 'annotation-bookmark-btn',
-            iconCls: 'annotation-bookmark-tab',
-            disabled : true,
+			id: 'annotation-bookmark-btn',
+			iconCls: 'annotation-bookmark-tab',
+			disabled : true,
 			pressed: false,
-            enableToggle: true,
-            toggleHandler: function(button, pressed){
+			enableToggle: true,
+			toggleHandler: function(button, pressed){
 				if(pressed){
 					GeoAnnotator.AnnotationBookmarkWindowCtrl.containerWindow.show();
 				}
@@ -219,12 +219,12 @@ GeoAnnotator.ContainerTBCtrl = {
 					GeoAnnotator.AnnotationBookmarkWindowCtrl.containerWindow.hide();
 				}
 			},
-            text: 'Bookmarks',
-            tooltip: {
-                title: 'Bookmarks',
-                text: 'Show the browsing bookmarks'
-            }
-        });
+			text: 'Bookmarks',
+			tooltip: {
+				title: 'Bookmarks',
+				text: 'Show the browsing bookmarks'
+			}
+		});
 		
 		// 3. the login buttons
 		if (GeoAnnotator.currUserId != '0') {
@@ -238,13 +238,13 @@ GeoAnnotator.ContainerTBCtrl = {
 			thisCtrl.containerTB.add(thisCtrl.admin_user_list);
 			if(!GeoAnnotator.isAdmin)	thisCtrl.admin_user_list.setVisible(false);
 			thisCtrl.containerTB.add({
-			    itemId: 'logoutLink',
-			    xtype: 'box',
-			    autoEl: {
+				itemId: 'logoutLink',
+				xtype: 'box',
+				autoEl: {
 				tag: 'a',
 				href: '/geodeliberator/user/logout',
 				html: 'Log out'
-			    }
+				}
 			});
 		}
 		else {
@@ -263,41 +263,41 @@ GeoAnnotator.ContainerTBCtrl = {
 		var thisCtrl = GeoAnnotator.ContainerTBCtrl;
 		if(!thisCtrl.logInWindow){
 			var login = new Ext.FormPanel({ 
-	        	labelWidth:80,
-	        	url: GeoAnnotator.baseUrl + 'authentication/', 
-	        	frame:true, 
-	        	title:'Please Login', 
-	        	defaultType:'textfield',
+				labelWidth:80,
+				url: GeoAnnotator.baseUrl + 'authentication/', 
+				frame:true, 
+				title:'Please Login', 
+				defaultType:'textfield',
 				monitorValid:true,
 				// Specific attributes for the text fields for username / password. 
 				// The "name" attribute defines the name of variables sent to the server.
-	        	items:[{ 
-	                fieldLabel:'Username', 
-	                name:'userName', 
-	                allowBlank:false 
-	            },
+				items:[{ 
+					fieldLabel:'Username', 
+					name:'userName', 
+					allowBlank:false 
+				},
 				{ 
-	                fieldLabel:'Password', 
-	                name:'password', 
-	                inputType:'password', 
-	                allowBlank:false 
-	            }],
+					fieldLabel:'Password', 
+					name:'password', 
+					inputType:'password', 
+					allowBlank:false 
+				}],
 	 
 				// All the magic happens after the user clicks the button     
-	        	buttons:[{ 
-	                text:'Login',
-	                formBind: true,	 
+				buttons:[{ 
+					text:'Login',
+					formBind: true,	 
 					id: 'login-btn',
-	                // Function that fires when user clicks the button 
-	                handler:function(){ 
-	                    login.getForm().submit({ 
-		                    method:'POST', 
-		                    waitTitle:'Connecting', 
-		                    waitMsg:'Sending data...',
+					// Function that fires when user clicks the button 
+					handler:function(){ 
+						login.getForm().submit({ 
+							method:'POST', 
+							waitTitle:'Connecting', 
+							waitMsg:'Sending data...',
 		  
-		                    success:function(form, action){ 
+							success:function(form, action){ 
 								var obj = Ext.util.JSON.decode(action.response.responseText); 
-		                    	//Ext.Msg.alert('Status', obj.data.userId);
+								//Ext.Msg.alert('Status', obj.data.userId);
 								GeoAnnotator.currForumId = '0';
 								GeoAnnotator.currAnnotationId = '0';
 								GeoAnnotator.currFootprintId = '0';
@@ -317,34 +317,34 @@ GeoAnnotator.ContainerTBCtrl = {
 								Ext.state.Manager.set('userId', GeoAnnotator.currUserId);
 								GeoAnnotator.ContainerTBCtrl.update();
 								GeoAnnotator.ContainerTBCtrl.logInWindow.hide();
-		                   	},
+							},
 		  
-		                    failure:function(form, action){ 
-		                    	if(action.failureType == 'server'){ 
-		                       		obj = Ext.util.JSON.decode(action.response.responseText); 
+							failure:function(form, action){ 
+								if(action.failureType == 'server'){ 
+									obj = Ext.util.JSON.decode(action.response.responseText); 
 									Ext.Msg.alert('Login Failed!', obj.errors.reason); 
-		                        }
+								}
 								else{ 
-		                            Ext.Msg.alert('Warning!', 'Authentication server is unreachable : ' + action.response.responseText); 
-		                        } 
-		                        login.getForm().reset(); 
-		                    } 
-	                	}); 
-	                } 
-	            }] 
-	    	});
+									Ext.Msg.alert('Warning!', 'Authentication server is unreachable : ' + action.response.responseText); 
+								} 
+								login.getForm().reset(); 
+							} 
+						}); 
+					} 
+				}] 
+			});
 
 			thisCtrl.logInWindow = new Ext.Window({
-		    	layout      : 'fit',
-	            width       : 300,
-	            height      : 150,
-	            closeAction :'hide',
-	            plain       : true,
+				layout      : 'fit',
+				width       : 300,
+				height      : 150,
+				closeAction :'hide',
+				plain       : true,
 				modal		: true,
 				//title		: 'Legend',
-	            items : [login],
+				items : [login],
 				defaultButton: 'login-btn'
-	    	});
+			});
 			thisCtrl.logInWindow.on('hide', function(){login.getForm().reset();});
 		}
 		thisCtrl.logInWindow.show();
@@ -480,66 +480,66 @@ GeoAnnotator.ContainerTBCtrl = {
 
 	onForumDetailClick : function() {
 		var thisCtrl = GeoAnnotator.ContainerTBCtrl;
-        // request the forum information
-        Ext.Ajax.request({
-            url: GeoAnnotator.baseUrl + 'forum/',
-            success: thisCtrl.onLoadForumInfoSuccess,
-            failure: thisCtrl.onLoadForumInfoFailure,
-            params: {
-                'userId': GeoAnnotator.currUserId,
-                'forumId': GeoAnnotator.currForumId
-            }
-        });
+		// request the forum information
+		Ext.Ajax.request({
+			url: GeoAnnotator.baseUrl + 'forum/',
+			success: thisCtrl.onLoadForumInfoSuccess,
+			failure: thisCtrl.onLoadForumInfoFailure,
+			params: {
+				'userId': GeoAnnotator.currUserId,
+				'forumId': GeoAnnotator.currForumId
+			}
+		});
 	},
 	
 	onForumEditClick : function() {
 		var thisCtrl = GeoAnnotator.ContainerTBCtrl;
-        // request the forum information
-        Ext.Ajax.request({
-            url: GeoAnnotator.baseUrl + 'forum/',
-            success: thisCtrl.onEditForumInfoSuccess,	// 	if we load the info success we can edit it. 
-            failure: thisCtrl.onLoadForumInfoFailure,	//	otherwise we just consider it as a load failure
-            params: {
-                'userId': GeoAnnotator.currUserId,
-                'forumId': GeoAnnotator.currForumId
-            }
-        });
+		// request the forum information
+		Ext.Ajax.request({
+			url: GeoAnnotator.baseUrl + 'forum/',
+			success: thisCtrl.onEditForumInfoSuccess,	// 	if we load the info success we can edit it. 
+			failure: thisCtrl.onLoadForumInfoFailure,	//	otherwise we just consider it as a load failure
+			params: {
+				'userId': GeoAnnotator.currUserId,
+				'forumId': GeoAnnotator.currForumId
+			}
+		});
 	},
 	
 	onLoadForumInfoSuccess: function(xhr) {
-       var thisCtrl = GeoAnnotator.ContainerTBCtrl;
-       thisCtrl.currForumInfo = Ext.util.JSON.decode(xhr.responseText);
+	   var thisCtrl = GeoAnnotator.ContainerTBCtrl;
+	   thisCtrl.currForumInfo = Ext.util.JSON.decode(xhr.responseText);
 	   //alert("thisCtrl.currForumInfo is: "+thisCtrl.currForumInfo.name);
-       if (thisCtrl.currForumInfo != null) {
-           // show the forum detail
-           thisCtrl.showForumInfo();
-           // set cookies
-           if (GeoAnnotator.currUserId != '0' && GeoAnnotator.currForumId != '0') {
-               Ext.state.Manager.set('userId', GeoAnnotator.currUserId);
-               Ext.state.Manager.set('forumId', GeoAnnotator.currForumId);
-           }
-       }
-    },
+	   if (thisCtrl.currForumInfo != null) {
+		   // show the forum detail
+		   thisCtrl.showForumInfo();
+		   // set cookies
+		   if (GeoAnnotator.currUserId != '0' && GeoAnnotator.currForumId != '0') {
+			   Ext.state.Manager.set('userId', GeoAnnotator.currUserId);
+			   Ext.state.Manager.set('forumId', GeoAnnotator.currForumId);
+		   }
+	   }
+	},
 	
 	onEditForumInfoSuccess: function(xhr) {
-       var thisCtrl = GeoAnnotator.ContainerTBCtrl;
-       thisCtrl.currForumInfo = Ext.util.JSON.decode(xhr.responseText);
-       if (thisCtrl.currForumInfo != null) 
+	   var thisCtrl = GeoAnnotator.ContainerTBCtrl;
+	   thisCtrl.currForumInfo = Ext.util.JSON.decode(xhr.responseText);
+	   if (thisCtrl.currForumInfo != null) 
 	   {
-           // show the forum detail
-           thisCtrl.editForumInfo();
-           // set cookies	//added by FZ, not sure if these are useful. will come back latter.
-           if (GeoAnnotator.currUserId != '0' && GeoAnnotator.currForumId != '0') {
-               Ext.state.Manager.set('userId', GeoAnnotator.currUserId);
-               Ext.state.Manager.set('forumId', GeoAnnotator.currForumId);
-           }
-       }
-    },
+		   // show the forum detail
+		   thisCtrl.editForumInfo();
+		   // set cookies	//added by FZ, not sure if these are useful. will come back latter.
+		   if (GeoAnnotator.currUserId != '0' && GeoAnnotator.currForumId != '0') {
+			   Ext.state.Manager.set('userId', GeoAnnotator.currUserId);
+			   Ext.state.Manager.set('forumId', GeoAnnotator.currForumId);
+		   }
+	   }
+	},
 
-    onLoadForumInfoFailure: function() {
-        // do nothing
-        alert("Failed to load forum information!");
-    },
+	onLoadForumInfoFailure: function() {
+		// do nothing
+		alert("Failed to load forum information!");
+	},
  
 	showForumInfo : function() {
 		var thisCtrl = GeoAnnotator.ContainerTBCtrl;
@@ -556,16 +556,16 @@ GeoAnnotator.ContainerTBCtrl = {
 
 		if(!thisCtrl.forumInfoWindow){
 			thisCtrl.forumInfoWindow = new Ext.Window({
-		    	layout      : 'fit',
-	            width       : 500,
-	            height      : 500,
+				layout      : 'fit',
+				width       : 500,
+				height      : 500,
 				autoScroll	: true,
-	            closeAction :'hide',
-	            plain       : true,
+				closeAction :'hide',
+				plain       : true,
 				modal		: false,
 				html		: html,
 				title		: 'Forum Information of '+thisCtrl.currForumInfo.name
-	    	});
+			});
 			thisCtrl.forumInfoWindow.on('hide', function(){GeoAnnotator.ContainerTBCtrl.forumInfoWindow.body.update('');});
 		}
 		else {
@@ -588,26 +588,26 @@ GeoAnnotator.ContainerTBCtrl = {
 		
 		var edit = new Ext.FormPanel({
 			id: 'forum-info-edit-form',
-            labelAlign: 'top',
-            frame: true,
-            autoHeight: true,
-            bodyStyle: 'padding: 5 5 5 5;',
-            items : 
+			labelAlign: 'top',
+			frame: true,
+			autoHeight: true,
+			bodyStyle: 'padding: 5 5 5 5;',
+			items : 
 			[{
-                xtype: 'htmleditor',
+				xtype: 'htmleditor',
 				id: 'newForumInfo',
 				name: 'newForumInfo',
-                fieldLabel: 'Forum Information Editor',
-                enableFont: true,
-                enableLists: true,
-                enableAlignments: true,
-                height: 450,
-                width: 450,
-                autoScroll: true,
-                anchor: '100%',
+				fieldLabel: 'Forum Information Editor',
+				enableFont: true,
+				enableLists: true,
+				enableAlignments: true,
+				height: 450,
+				width: 450,
+				autoScroll: true,
+				anchor: '100%',
 				value	: html
 				
-            }],
+			}],
 			buttons: [{
 					text: 'Submit',
 					handler: thisCtrl.onForumEditSubmit
@@ -617,17 +617,17 @@ GeoAnnotator.ContainerTBCtrl = {
 		if(!thisCtrl.forumEditWindow){
 			//alert("!thisCtrl.forumEditWindow");
 			thisCtrl.forumEditWindow = new Ext.Window({
-		    	layout      : 'fit',
-	            width       : 500,	// gives wider and taller panel for neat display purpos.
-	            height      : 600,
+				layout      : 'fit',
+				width       : 500,	// gives wider and taller panel for neat display purpos.
+				height      : 600,
 				autoScroll	: true,
-	            closeAction :'hide',
-	            plain       : true,
+				closeAction :'hide',
+				plain       : true,
 				modal		: 	false,
 				items		:	edit,
 				title	: 'Forum Information of '+thisCtrl.currForumInfo.name
-	    	});}
-	    	//thisCtrl.forumEditWindow.on('hide', function(){GeoAnnotator.ContainerTBCtrl.forumEditWindow.body.update('');});
+			});}
+			//thisCtrl.forumEditWindow.on('hide', function(){GeoAnnotator.ContainerTBCtrl.forumEditWindow.body.update('');});
 			// added by FZ 0610. This line cause error, will fix it latter.
 		
 		thisCtrl.forumEditWindow.show();
@@ -640,23 +640,23 @@ GeoAnnotator.ContainerTBCtrl = {
 	},
 	submitEditFormData: function(html_info){
 		var thisCtrl = GeoAnnotator.ContainerTBCtrl;
-        // request the user information
-        Ext.Ajax.request({
-            url: GeoAnnotator.baseUrl + 'foruminfo/',
-            success: thisCtrl.onSubmitEditInfoSuccess,
-            failure: thisCtrl.onSubmitEditInfoFail,
-            params: {
-                'userId': GeoAnnotator.currUserId,
-                'forumId': GeoAnnotator.currForumId,
+		// request the user information
+		Ext.Ajax.request({
+			url: GeoAnnotator.baseUrl + 'foruminfo/',
+			success: thisCtrl.onSubmitEditInfoSuccess,
+			failure: thisCtrl.onSubmitEditInfoFail,
+			params: {
+				'userId': GeoAnnotator.currUserId,
+				'forumId': GeoAnnotator.currForumId,
 				'newinfo': html_info
-            }
-        });
+			}
+		});
 	},
 	onSubmitEditInfoFail: function(xhr) {
-        alert('failed to edit Forum info!');
-    },
+		alert('failed to edit Forum info!');
+	},
 	onSubmitEditInfoSuccess: function(xhr) {
-        var submitState = Ext.util.JSON.decode(xhr.responseText);
+		var submitState = Ext.util.JSON.decode(xhr.responseText);
 		if (submitState.success == true) 
 		{
 			alert('You have successfully edit the forum information!');
@@ -664,21 +664,21 @@ GeoAnnotator.ContainerTBCtrl = {
 		}
 		else
 			alert('Edit submission failed!');
-    }
+	}
 };
 
 GeoAnnotator.ContributePanelCtrl = {
-    containerPanel: null,
-    contributeFormPanel: null,
-    // new created footprints array
+	containerPanel: null,
+	contributeFormPanel: null,
+	// new created footprints array
 	newFootprints : [],
 
-    register: function(containerPanel) {
-        GeoAnnotator.ContributePanelCtrl.containerPanel = containerPanel;
-    },
+	register: function(containerPanel) {
+		GeoAnnotator.ContributePanelCtrl.containerPanel = containerPanel;
+	},
 
-    init: function() {
-        var thisCtrl = GeoAnnotator.ContributePanelCtrl;
+	init: function() {
+		var thisCtrl = GeoAnnotator.ContributePanelCtrl;
 		thisCtrl.newFootprints = [];
 
 		if (!thisCtrl.contributeFormPanel) {
@@ -689,112 +689,112 @@ GeoAnnotator.ContributePanelCtrl = {
 		}
 		thisCtrl.containerPanel.collapse(false);
 		
-    },
+	},
 
-    update: function() {
+	update: function() {
 		var thisCtrl = GeoAnnotator.ContributePanelCtrl;
-        thisCtrl.onContributeReset();
-    },
+		thisCtrl.onContributeReset();
+	},
 
-    createContributePanel: function() {
-        var thisCtrl = GeoAnnotator.ContributePanelCtrl;
+	createContributePanel: function() {
+		var thisCtrl = GeoAnnotator.ContributePanelCtrl;
 
-        thisCtrl.contributeFormPanel = new Ext.FormPanel({
-            id: 'contribute-form',
-            labelAlign: 'top',
-            frame: true,
-            autoHeight: true,
-            bodyStyle: 'padding: 0 5 0 5;',
-            items: [
-            {
-                xtype: 'hidden',
-                id: 'newAnnotationId',
-                name: 'newAnnotationId',
-                value: '0'
-            },
-            //added by FZ on 0529, temporary change, delete this section when possible
-            {
-                xtype: 'datefield',
-                format : 'Y-m-d',
-                fieldLabel : 'Pick a date', 
-                id : 'newAnnotationDate',
-                submitFormat: 'Y-m-d H:i:s',
-                name : 'newAnnotationDate',
-                //value: new Date()
+		thisCtrl.contributeFormPanel = new Ext.FormPanel({
+			id: 'contribute-form',
+			labelAlign: 'top',
+			frame: true,
+			autoHeight: true,
+			bodyStyle: 'padding: 0 5 0 5;',
+			items: [
+			{
+				xtype: 'hidden',
+				id: 'newAnnotationId',
+				name: 'newAnnotationId',
+				value: '0'
+			},
+			//added by FZ on 0529, temporary change, delete this section when possible
+			{
+				xtype: 'datefield',
+				format : 'Y-m-d',
+				fieldLabel : 'Pick a date', 
+				id : 'newAnnotationDate',
+				submitFormat: 'Y-m-d H:i:s',
+				name : 'newAnnotationDate',
+				//value: new Date()
 				anchor : 0,
-                    value : new Date(),
-                    allowBlank : false
+					value : new Date(),
+					allowBlank : false
 					},
 					{
-                    //adde by FZ 0529
-                    xtype: 'timefield',
-                    //format : 'Y-m-d',
-                    fieldLabel : 'Then define a Time', 
-                    id : 'newAnnotationTime',
-                    //submitFormat: 'Y-m-d H:i:s',
-                    name : 'newAnnotationTime',
-                    //value: new Date()
-                    anchor : 0,
-                    allowBlank : false,
-                    increment: 1,
-                    format     : 'H:i'
-                    
-					},
-                    //ƒ/ above
+					//adde by FZ 0529
+					xtype: 'timefield',
+					//format : 'Y-m-d',
+					fieldLabel : 'Then define a Time', 
+					id : 'newAnnotationTime',
+					//submitFormat: 'Y-m-d H:i:s',
+					name : 'newAnnotationTime',
+					//value: new Date()
+					anchor : 0,
+					allowBlank : false,
+					increment: 1,
+					format     : 'H:i'
 					
-            {
-                xtype: 'htmleditor',
-                id: 'newAnnotationContent',
-                name: 'newAnnotationContent',
-                fieldLabel: 'Content',
-                enableFont: false,
-                enableLists: false,
-                enableAlignments: false,
-                height: 150,
-                width: 330,
-                autoScroll: true,
-                anchor: '100%'
-            },
+					},
+					//ƒ/ above
+					
 			{
-                xtype: 'radiogroup',
-                fieldLabel: 'Visible to',
-                hideLabel: false,
-                name: 'shareLevelGroup',
-                id: 'shareLevelGroup',
-                columns: 2,
-                items: [
-                {
-                    boxLabel: 'everyone',
-                    name: 'shareLevel',
-                    inputValue: 'everyone',
-                    checked: true
-                },
-                {
-                    boxLabel: 'registered users',
-                    name: 'shareLevel',
-                    inputValue: 'user'
-                },
-                {
-                    boxLabel: 'group members',
-                    name: 'shareLevel',
-                    inputValue: 'member'
-                },
-                {
-                    boxLabel: 'myself',
-                    name: 'shareLevel',
-                    inputValue: 'author'
-                }]
-            }],
+				xtype: 'htmleditor',
+				id: 'newAnnotationContent',
+				name: 'newAnnotationContent',
+				fieldLabel: 'Content',
+				enableFont: false,
+				enableLists: false,
+				enableAlignments: false,
+				height: 150,
+				width: 330,
+				autoScroll: true,
+				anchor: '100%'
+			},
+			{
+				xtype: 'radiogroup',
+				fieldLabel: 'Visible to',
+				hideLabel: false,
+				name: 'shareLevelGroup',
+				id: 'shareLevelGroup',
+				columns: 2,
+				items: [
+				{
+					boxLabel: 'everyone',
+					name: 'shareLevel',
+					inputValue: 'everyone',
+					checked: true
+				},
+				{
+					boxLabel: 'registered users',
+					name: 'shareLevel',
+					inputValue: 'user'
+				},
+				{
+					boxLabel: 'group members',
+					name: 'shareLevel',
+					inputValue: 'member'
+				},
+				{
+					boxLabel: 'myself',
+					name: 'shareLevel',
+					inputValue: 'author'
+				}]
+			}],
 
-            buttons: [{
-                text: 'Submit',
-                handler: thisCtrl.onContributeSubmit
-            },
-            {
-                text: 'Cancel',
-                handler: thisCtrl.onContributeReset
-            }]
-        });
+			buttons: [{
+				text: 'Submit',
+				handler: thisCtrl.onContributeSubmit
+			},
+			{
+				text: 'Cancel',
+				handler: thisCtrl.onContributeReset
+			}]
+		});
 		
 		thisCtrl.containerPanel.add(thisCtrl.contributeFormPanel);
 		thisCtrl.containerPanel.doLayout();
@@ -814,173 +814,173 @@ GeoAnnotator.ContributePanelCtrl = {
 			}
 			thisCtrl.contributeFormPanel.findById('newAnnotationContent').focus();
 		});
-    },
+	},
 
-    getContextMap: function() {
-        var map = GeoAnnotator.MapPanelCtrl.map;
-        var xw = new XMLWriter();
-        xw.writeStartDocument();
-        xw.writeStartElement('contextmap');
-        var zoom = map.getZoom();
-        var centerX = map.getCenter().lon;
-        var centerY = map.getCenter().lat;
+	getContextMap: function() {
+		var map = GeoAnnotator.MapPanelCtrl.map;
+		var xw = new XMLWriter();
+		xw.writeStartDocument();
+		xw.writeStartElement('contextmap');
+		var zoom = map.getZoom();
+		var centerX = map.getCenter().lon;
+		var centerY = map.getCenter().lat;
 
-        xw.writeAttributeString('zoom', zoom);
-        xw.writeAttributeString('centerX', centerX);
-        xw.writeAttributeString('centerY', centerY);
+		xw.writeAttributeString('zoom', zoom);
+		xw.writeAttributeString('centerX', centerX);
+		xw.writeAttributeString('centerY', centerY);
 
-        // write options for map
-        xw.writeStartElement('options');
-        if (map.projection != null) {
-            xw.writeStartElement('option');
-            xw.writeAttributeString('key', 'projection');
-            xw.writeAttributeString('value', map.projection);
-            xw.writeEndElement();
-        }
-        if (map.displayProjection != null) {
-            xw.writeStartElement('option');
-            xw.writeAttributeString('key', 'displayProjection');
-            xw.writeAttributeString('value', map.displayProjection);
-            xw.writeEndElement();
-        }
-        if (map.units != null) {
-            xw.writeStartElement('option');
-            xw.writeAttributeString('key', 'units');
-            xw.writeAttributeString('value', map.units);
-            xw.writeEndElement();
-        }
-        if (map.maxResolution != null) {
-            xw.writeStartElement('option');
-            xw.writeAttributeString('key', 'maxResolution');
-            xw.writeAttributeString('value', map.maxResolution);
-            xw.writeEndElement();
-        }
-        if (map.maxExtent != null) {
-            xw.writeStartElement('option');
-            xw.writeAttributeString('key', 'maxExtent');
-            xw.writeAttributeString('value', map.maxExtent.toBBOX(8));
-            xw.writeEndElement();
-        }
-        if (map.numZoomLevels != null) {
-            xw.writeStartElement('option');
-            xw.writeAttributeString('key', 'numZoomLevels');
-            xw.writeAttributeString('value', map.numZoomLevels);
-            xw.writeEndElement();
-        }
-        xw.writeEndElement();
-        // options
-        var currLayers = GeoAnnotator.MapPanelCtrl.currLayers;
-        if (currLayers.length > 0)
-        {
-            xw.writeStartElement('layers');
+		// write options for map
+		xw.writeStartElement('options');
+		if (map.projection != null) {
+			xw.writeStartElement('option');
+			xw.writeAttributeString('key', 'projection');
+			xw.writeAttributeString('value', map.projection);
+			xw.writeEndElement();
+		}
+		if (map.displayProjection != null) {
+			xw.writeStartElement('option');
+			xw.writeAttributeString('key', 'displayProjection');
+			xw.writeAttributeString('value', map.displayProjection);
+			xw.writeEndElement();
+		}
+		if (map.units != null) {
+			xw.writeStartElement('option');
+			xw.writeAttributeString('key', 'units');
+			xw.writeAttributeString('value', map.units);
+			xw.writeEndElement();
+		}
+		if (map.maxResolution != null) {
+			xw.writeStartElement('option');
+			xw.writeAttributeString('key', 'maxResolution');
+			xw.writeAttributeString('value', map.maxResolution);
+			xw.writeEndElement();
+		}
+		if (map.maxExtent != null) {
+			xw.writeStartElement('option');
+			xw.writeAttributeString('key', 'maxExtent');
+			xw.writeAttributeString('value', map.maxExtent.toBBOX(8));
+			xw.writeEndElement();
+		}
+		if (map.numZoomLevels != null) {
+			xw.writeStartElement('option');
+			xw.writeAttributeString('key', 'numZoomLevels');
+			xw.writeAttributeString('value', map.numZoomLevels);
+			xw.writeEndElement();
+		}
+		xw.writeEndElement();
+		// options
+		var currLayers = GeoAnnotator.MapPanelCtrl.currLayers;
+		if (currLayers.length > 0)
+		{
+			xw.writeStartElement('layers');
 
-            for (var i = 0; i < currLayers.length; i++) {
-                xw.writeStartElement('layer');
-                xw.writeAttributeString('name', currLayers[i].name);
-                switch (currLayers[i].CLASS_NAME) {
-                case "OpenLayers.Layer.Google":
-                    xw.writeAttributeString('type', "Google");
-                    break;
-                case "OpenLayers.Layer.WMS":
-                    xw.writeAttributeString('type', "WMS");
-                    //write url
-                    if (currLayers[i].url != undefined && currLayers[i].url != null) {
-                        xw.writeElementString('url', currLayers[i].url);
-                    }
-                    // write params
-                    var params = currLayers[i].params;
+			for (var i = 0; i < currLayers.length; i++) {
+				xw.writeStartElement('layer');
+				xw.writeAttributeString('name', currLayers[i].name);
+				switch (currLayers[i].CLASS_NAME) {
+				case "OpenLayers.Layer.Google":
+					xw.writeAttributeString('type', "Google");
+					break;
+				case "OpenLayers.Layer.WMS":
+					xw.writeAttributeString('type', "WMS");
+					//write url
+					if (currLayers[i].url != undefined && currLayers[i].url != null) {
+						xw.writeElementString('url', currLayers[i].url);
+					}
+					// write params
+					var params = currLayers[i].params;
 
-                    if (params != undefined & params != null) {
-                        xw.writeStartElement('params');
+					if (params != undefined & params != null) {
+						xw.writeStartElement('params');
 
-                        for (var key in params) {
+						for (var key in params) {
 						var value = params[key];
-                            if (value != undefined && value != null) {
+							if (value != undefined && value != null) {
 								xw.writeStartElement('param');
-                                xw.writeAttributeString('key', key);
-                                xw.writeAttributeString('value', value);
-                                xw.writeEndElement();
-                                // param     
-                            }
-                        }
-                        xw.writeEndElement();
-                        //params
-                    }
-                    break;
-                case "OpenLayers.Layer.GML":
-                    xw.writeAttributeString('type', "GML");
-                    //write url
-                    if (currLayers[i].url != undefined && currLayers[i].url != null) {
-                        xw.writeElementString('url', currLayers[i].url);
-                    }
-                    break;
-                default:
-                    break;
-                }
+								xw.writeAttributeString('key', key);
+								xw.writeAttributeString('value', value);
+								xw.writeEndElement();
+								// param     
+							}
+						}
+						xw.writeEndElement();
+						//params
+					}
+					break;
+				case "OpenLayers.Layer.GML":
+					xw.writeAttributeString('type', "GML");
+					//write url
+					if (currLayers[i].url != undefined && currLayers[i].url != null) {
+						xw.writeElementString('url', currLayers[i].url);
+					}
+					break;
+				default:
+					break;
+				}
 
-                // write options
-                var options = currLayers[i].options;
-                if (options != undefined && options != null) {
-                    xw.writeStartElement('options');
-                    for (var key in options) {
+				// write options
+				var options = currLayers[i].options;
+				if (options != undefined && options != null) {
+					xw.writeStartElement('options');
+					for (var key in options) {
 						var value = options[key];
-                        if (value != undefined && value != null) {
+						if (value != undefined && value != null) {
 							if (key != 'formatOptions' && key != 'visibility') {
-                                xw.writeStartElement('option');
-                                xw.writeAttributeString('key', key);
-                                if (key == 'format') {
-                                    xw.writeAttributeString('value', new value().CLASS_NAME);
-                                }
-                                else if (currLayers[i].CLASS_NAME == 'OpenLayers.Layer.Google' && key == 'type') {
-                                    xw.writeAttributeString('value', value.toString());
-                                }
-                                else {
-                                    xw.writeAttributeString('value', value);
-                                }
-                                xw.writeEndElement();
-                            }
-                        }
-                    }
-                    // write visibility option;
-                    xw.writeStartElement('option');
-                    xw.writeAttributeString('key', 'visibility');
-                    xw.writeAttributeString('value', currLayers[i].visibility);
-                    xw.writeEndElement();
+								xw.writeStartElement('option');
+								xw.writeAttributeString('key', key);
+								if (key == 'format') {
+									xw.writeAttributeString('value', new value().CLASS_NAME);
+								}
+								else if (currLayers[i].CLASS_NAME == 'OpenLayers.Layer.Google' && key == 'type') {
+									xw.writeAttributeString('value', value.toString());
+								}
+								else {
+									xw.writeAttributeString('value', value);
+								}
+								xw.writeEndElement();
+							}
+						}
+					}
+					// write visibility option;
+					xw.writeStartElement('option');
+					xw.writeAttributeString('key', 'visibility');
+					xw.writeAttributeString('value', currLayers[i].visibility);
+					xw.writeEndElement();
 
-                    xw.writeEndElement();
-                    //options
-                }
+					xw.writeEndElement();
+					//options
+				}
 
-                // write formatOptions
-                if (options['formatOptions'] != undefined && options['formatOptions'] != null) {
-                    xw.writeStartElement('formatOptions');
-                    var formatOptions = options['formatOptions'];
-                    for (var key in formatOptions) {
-                        var value = formatOptions[key];
-                        if (value != undefined && value != null) {
+				// write formatOptions
+				if (options['formatOptions'] != undefined && options['formatOptions'] != null) {
+					xw.writeStartElement('formatOptions');
+					var formatOptions = options['formatOptions'];
+					for (var key in formatOptions) {
+						var value = formatOptions[key];
+						if (value != undefined && value != null) {
 							xw.writeStartElement('formatOption');
-                            xw.writeAttributeString('key', key);
-                            xw.writeAttributeString('value', value);
-                            xw.writeEndElement();
-                            // format option
-                        }
-                    }
-                    xw.writeEndElement();
-                    // formatOptions
-                }
+							xw.writeAttributeString('key', key);
+							xw.writeAttributeString('value', value);
+							xw.writeEndElement();
+							// format option
+						}
+					}
+					xw.writeEndElement();
+					// formatOptions
+				}
 
-                xw.writeEndElement();
-                // layer
-                //}	
-            }
-            xw.writeEndElement();
-            // layers
-        }
-        xw.writeEndElement();
-        // contextmap
-        xw.writeEndDocument();
-        return xw.flush();
-    },
+				xw.writeEndElement();
+				// layer
+				//}	
+			}
+			xw.writeEndElement();
+			// layers
+		}
+		xw.writeEndElement();
+		// contextmap
+		xw.writeEndDocument();
+		return xw.flush();
+	},
 
 	addFootprintToReference: function(fpId, name) {
 		var thisCtrl = GeoAnnotator.ContributePanelCtrl;
@@ -988,7 +988,7 @@ GeoAnnotator.ContributePanelCtrl = {
 		htmleditor.focus();
 		//htmleditor.insertAtCursor ('[[' + name + '|fp' + id + ']]');
 		//htmleditor.setValue(htmleditor.getValue() + '[[' + name + '|fp' + id + ']]');
-		var link_html = '<a href="#" class="ref-link" id="ref-fp' + fpId + '">' + name + '</a>'
+		var link_html = '<a href="#" class="ref-link" id="ref-fp' + fpId + '">' + name + '</a>';
 		htmleditor.setValue(htmleditor.getValue() + link_html);
 	},
 	
@@ -998,20 +998,20 @@ GeoAnnotator.ContributePanelCtrl = {
 		var content = htmleditor.getValue();
 		
 		var regex = /<a href=\"#\" class=\"ref-link\" id=\"ref-([fp,an]+-?[0-9]+)\">([a-z,0-9,_,\s,\-,\[,\]]+)<\/a>/gi; 
-		var input = content
+		var input = content;
 		if(regex.test(input)) {
 			regex.lastIndex = 0;
 			var matches = [];
 			var match;
 			while((match = regex.exec(input)) !== null) {
 				if(match[0] === "") { 
-					regex.lastIndex += 1 
+					regex.lastIndex += 1 ;
 				}
 				else {
 					matches.push({result: match, lastIndex: regex.lastIndex});
 				}
 			}
-  			for (var i=0; i < matches.length; i++) {
+			for (var i=0; i < matches.length; i++) {
 				var match = matches[i].result;
 				var id = match[1];
 				var name = match[2];
@@ -1027,7 +1027,7 @@ GeoAnnotator.ContributePanelCtrl = {
 		var thisCtrl = GeoAnnotator.ContributePanelCtrl;
 		var htmleditor = thisCtrl.contributeFormPanel.getForm().findField('newAnnotationContent');
 		htmleditor.focus();
-		var link_html = '<a href="#" class="ref-link" id="ref-an' + anId + '">' + name + '</a>'
+		var link_html = '<a href="#" class="ref-link" id="ref-an' + anId + '">' + name + '</a>';
 		htmleditor.setValue(htmleditor.getValue() + link_html);		
 	},
 	
@@ -1037,20 +1037,20 @@ GeoAnnotator.ContributePanelCtrl = {
 		var content = htmleditor.getValue();
 		
 		var regex = /<a href=\"#\" class=\"ref-link\" id=\"ref-([fp,an]+-?[0-9]+)\">([a-z,0-9,_,\s,\-,\[,\]]+)<\/a>/gi; 
-		var input = content
+		var input = content;
 		if(regex.test(input)) {
 			regex.lastIndex = 0;
 			var matches = [];
 			var match;
 			while((match = regex.exec(input)) !== null) {
 				if(match[0] === "") { 
-					regex.lastIndex += 1 
+					regex.lastIndex += 1 ;
 				}
 				else {
 					matches.push({result: match, lastIndex: regex.lastIndex});
 				}
 			}
-  			for (var i=0; i < matches.length; i++) {
+			for (var i=0; i < matches.length; i++) {
 				var match = matches[i].result;
 				var id = match[1];
 				var name = match[2];
@@ -1062,64 +1062,64 @@ GeoAnnotator.ContributePanelCtrl = {
 		htmleditor.setValue(content);
 	},	
 	
-    onContributeSubmit: function() {
-        var thisCtrl = GeoAnnotator.ContributePanelCtrl
-        var newAnnotation = {};
-        // 0. id
-        newAnnotation.id = thisCtrl.contributeFormPanel.getForm().findField('newAnnotationId').getValue();
-        // 1. content
-        newAnnotation.content = thisCtrl.contributeFormPanel.getForm().findField('newAnnotationContent').getValue();
-        if (newAnnotation.content.length == 0) {
-            Ext.Msg.alert('Error', 'The content of the annotation cannot be empty');
-            return;
-        }
-        // 2. userId
-        newAnnotation.userId = GeoAnnotator.currUserId;
-        // 3. forumId
-        newAnnotation.forumId = GeoAnnotator.currForumId;
-        // 4. shareLevel
-        var shareLevelGroup = thisCtrl.contributeFormPanel.getForm().findField('shareLevelGroup').items;
-        newAnnotation.shareLevel = 'everyone';
-        for (var i = 0; i < shareLevelGroup.items.length; i++) {
-            if (shareLevelGroup.items[i].checked) {
-                newAnnotation.shareLevel = shareLevelGroup.items[i].inputValue;
-                break;
-            }
-        };
-        // 6. timeCreated
-        //added by FZ 0530, delete when possible.
-        newAnnotation.timeCreated = 
-        thisCtrl.contributeFormPanel.getForm().findField('newAnnotationDate').getValue().format('Y-m-d').trim()
-        +
-        ' '
-        + thisCtrl.contributeFormPanel.getForm().findField('newAnnotationTime').getValue();
-        // above
-        
-        //newAnnotation.timeCreated = new Date().toGMTString();
-        //above is the original line.
-        
-        
-        // 7. contextMap
-        newAnnotation.contextMap = thisCtrl.getContextMap();
-        
+	onContributeSubmit: function() {
+		var thisCtrl = GeoAnnotator.ContributePanelCtrl;
+		var newAnnotation = {};
+		// 0. id
+		newAnnotation.id = thisCtrl.contributeFormPanel.getForm().findField('newAnnotationId').getValue();
+		// 1. content
+		newAnnotation.content = thisCtrl.contributeFormPanel.getForm().findField('newAnnotationContent').getValue();
+		if (newAnnotation.content.length == 0) {
+			Ext.Msg.alert('Error', 'The content of the annotation cannot be empty');
+			return;
+		}
+		// 2. userId
+		newAnnotation.userId = GeoAnnotator.currUserId;
+		// 3. forumId
+		newAnnotation.forumId = GeoAnnotator.currForumId;
+		// 4. shareLevel
+		var shareLevelGroup = thisCtrl.contributeFormPanel.getForm().findField('shareLevelGroup').items;
+		newAnnotation.shareLevel = 'everyone';
+		for (var i = 0; i < shareLevelGroup.items.length; i++) {
+			if (shareLevelGroup.items[i].checked) {
+				newAnnotation.shareLevel = shareLevelGroup.items[i].inputValue;
+				break;
+			}
+		};
+		// 6. timeCreated
+		//added by FZ 0530, delete when possible.
+		newAnnotation.timeCreated = 
+		thisCtrl.contributeFormPanel.getForm().findField('newAnnotationDate').getValue().format('Y-m-d').trim()
+		+
+		' '
+		+ thisCtrl.contributeFormPanel.getForm().findField('newAnnotationTime').getValue();
+		// above
+		
+		//newAnnotation.timeCreated = new Date().toGMTString();
+		//above is the original line.
+		
+		
+		// 7. contextMap
+		newAnnotation.contextMap = thisCtrl.getContextMap();
+		
 		// 8. references and footprints
-        newAnnotation.footprints = [];
+		newAnnotation.footprints = [];
 		newAnnotation.references = [];
 		var regex = /<a href=\"#\" class=\"ref-link\" id=\"ref-([fp,an]+-?[0-9]+)\">([a-z,0-9,_,\s,\-,\[,\]]+)<\/a>/gi; 
-		var input = newAnnotation.content
+		var input = newAnnotation.conten;
 		if(regex.test(input)) {
 			regex.lastIndex = 0;
 			var matches = [];
 			var match;
 			while((match = regex.exec(input)) !== null) {
 				if(match[0] === "") { 
-					regex.lastIndex += 1 
+					regex.lastIndex += 1 ;
 				}
 				else {
 					matches.push({result: match, lastIndex: regex.lastIndex});
 				}
 			}
-  			for (var i=0; i < matches.length; i++) {
+			for (var i=0; i < matches.length; i++) {
 				var match = matches[i].result;
 				var id = match[1];
 				var name = match[2];
@@ -1139,15 +1139,15 @@ GeoAnnotator.ContributePanelCtrl = {
 						if (id.indexOf('fp-') === 0) {
 							// new footprint
 							for (var j = 0; j < thisCtrl.newFootprints.length; j++) {
-                    			var feature = thisCtrl.newFootprints[j];
-                    			if (footprint.id == feature.attributes.id) {
+								var feature = thisCtrl.newFootprints[j];
+								if (footprint.id == feature.attributes.id) {
 									var projWords = GeoAnnotator.MapPanelCtrl.map.projection.getCode().split(":");
 									footprint.srid = projWords[projWords.length - 1];
-                        			footprint.shape = new OpenLayers.Format.WKT().write(feature);
+									footprint.shape = new OpenLayers.Format.WKT().write(feature);
 									newAnnotation.footprints.push(footprint);
-                        			break;
-                    			}
-                			}
+									break;
+								}
+							}
 						}
 						else {
 							// existing footprint
@@ -1189,72 +1189,72 @@ GeoAnnotator.ContributePanelCtrl = {
 			}
 		} 
 		thisCtrl.submitContributeFormData(newAnnotation);
-    },
+	},
 
-    onContributeReset: function() {
-        var thisCtrl = GeoAnnotator.ContributePanelCtrl;
+	onContributeReset: function() {
+		var thisCtrl = GeoAnnotator.ContributePanelCtrl;
 
-        // 0. id
-        thisCtrl.contributeFormPanel.getForm().findField('newAnnotationId').setValue('0');
-        // 1. content
-        thisCtrl.contributeFormPanel.getForm().findField('newAnnotationContent').setValue('');
-        // 2. shareLevel
-        var shareLevelGroup = thisCtrl.contributeFormPanel.getForm().findField('shareLevelGroup').items;
+		// 0. id
+		thisCtrl.contributeFormPanel.getForm().findField('newAnnotationId').setValue('0');
+		// 1. content
+		thisCtrl.contributeFormPanel.getForm().findField('newAnnotationContent').setValue('');
+		// 2. shareLevel
+		var shareLevelGroup = thisCtrl.contributeFormPanel.getForm().findField('shareLevelGroup').items;
 		if (shareLevelGroup && shareLevelGroup.items) {
 			for (var i = 0; i < shareLevelGroup.items.length; i++) {
-            	if (i == 0) {
-                	shareLevelGroup.items[i].setValue(true);
-            	}
-            	else {
-                	shareLevelGroup.items[i].setValue(false);
-            	}
-        	}
+				if (i == 0) {
+					shareLevelGroup.items[i].setValue(true);
+				}
+				else {
+					shareLevelGroup.items[i].setValue(false);
+				}
+			}
 		}
 		thisCtrl.containerPanel.collapse(false);
 
-        //thisCtrl.contributePanel.items.get('contribute-form').getForm().findField('issue').setValue(false);
-        // 4. references
-        //thisCtrl.referenceStore.removeAll();
+		//thisCtrl.contributePanel.items.get('contribute-form').getForm().findField('issue').setValue(false);
+		// 4. references
+		//thisCtrl.referenceStore.removeAll();
 
-        // 5. footprints
-        //thisCtrl.footprintStore.removeAll();
+		// 5. footprints
+		//thisCtrl.footprintStore.removeAll();
 
-    },
-    
+	},
+	
 	submitContributeFormData: function(newAnnotation) {
-        //alert(Ext.util.JSON.encode(newAnnotation));
-        var thisCtrl = GeoAnnotator.ContributePanelCtrl;
-        // request the user information
-        Ext.Ajax.request({
-            url: GeoAnnotator.baseUrl + 'annotation/',
-            success: thisCtrl.onAddNewAnnotationSuccess,
-            failure: thisCtrl.onAddNewAnnotationFailure,
-            params: {
-                'new': Ext.util.JSON.encode(newAnnotation),
-                'userId': GeoAnnotator.currUserId,
-                'forumId': GeoAnnotator.currForumId
-            }
-        });
-    },
+		//alert(Ext.util.JSON.encode(newAnnotation));
+		var thisCtrl = GeoAnnotator.ContributePanelCtrl;
+		// request the user information
+		Ext.Ajax.request({
+			url: GeoAnnotator.baseUrl + 'annotation/',
+			success: thisCtrl.onAddNewAnnotationSuccess,
+			failure: thisCtrl.onAddNewAnnotationFailure,
+			params: {
+				'new': Ext.util.JSON.encode(newAnnotation),
+				'userId': GeoAnnotator.currUserId,
+				'forumId': GeoAnnotator.currForumId
+			}
+		});
+	},
 
-    onAddNewAnnotationSuccess: function(xhr) {
-        var thisCtrl = GeoAnnotator.ContributePanelCtrl;
+	onAddNewAnnotationSuccess: function(xhr) {
+		var thisCtrl = GeoAnnotator.ContributePanelCtrl;
 		var submitState = Ext.util.JSON.decode(xhr.responseText);
 		if (submitState.success == true) {
-            // change the states
-            //alert('successfuly added!');
-            // reset the new footprints array
+			// change the states
+			//alert('successfuly added!');
+			// reset the new footprints array
 			
-            thisCtrl.newFootprints = [];
+			thisCtrl.newFootprints = [];
 			GeoAnnotator.currFootprintId = '0';
 
 			GeoAnnotator.currAnnotationId = submitState.data.id;
 
-            // update controls		
-            GeoAnnotator.TimelinePanelCtrl.update();
-            GeoAnnotator.AnnotationInfoPanelCtrl.update();
+			// update controls		
+			GeoAnnotator.TimelinePanelCtrl.update();
+			GeoAnnotator.AnnotationInfoPanelCtrl.update();
 			GeoAnnotator.ContributePanelCtrl.update();
-			var currParams = {}
+			var currParams = {};
 			if (GeoAnnotator.currUserId != '0'){
 				currParams.userId = GeoAnnotator.currUserId;	
 			} 
@@ -1266,16 +1266,16 @@ GeoAnnotator.ContributePanelCtrl = {
 			GeoAnnotator.ManageWindowCtrl.update();
 
 			thisCtrl.containerPanel.collapse(false);
-        }
-        else {
-            alert(submitState.errors.message);
-        }
-    },
+		}
+		else {
+			alert(submitState.errors.message);
+		}
+	},
 
-    onAddNewAnnotationFailoure: function() {
-        alert('failed to add new annotation');
-    }
-    
+	onAddNewAnnotationFailoure: function() {
+		alert('failed to add new annotation');
+	}
+	
 };
 
 GeoAnnotator.MapPanelCtrl = {
@@ -1327,10 +1327,10 @@ GeoAnnotator.MapPanelCtrl = {
 		// stop event listening before map destroy
 		if (thisCtrl.navigationControl && thisCtrl.navigationControl.events){
 			thisCtrl.navigationControl.events.un({
-                'activate': thisCtrl.onNavigationActivate,
+				'activate': thisCtrl.onNavigationActivate,
 				'deactivate': thisCtrl.onNavigationDeactivate,
-               	scope: thisCtrl
-    		});
+				scope: thisCtrl
+			});
 		}
 		// destory the map if not null
 		if(thisCtrl.map != null) {
@@ -1353,13 +1353,13 @@ GeoAnnotator.MapPanelCtrl = {
 		};
 		thisCtrl.buildMap(thisCtrl.mapDiv, mapOptions);            
 
-	    thisCtrl.baseLayer = new OpenLayers.Layer.Image("GeoDeliberation", 
+		thisCtrl.baseLayer = new OpenLayers.Layer.Image("GeoDeliberation", 
 			'http://1.bp.blogspot.com/_HgqZlW4QMjY/SAvFVYcK-uI/AAAAAAAAAF0/6hkIIK4WqC8/s320/It%27s%2BUp%2BTo%2BAll%2BOf%2BUs.JPG',
 			new OpenLayers.Bounds(-180, -88.759, 180, 88.759),
 			new OpenLayers.Size(250, 307),
 			{numZoomLevels: 1}
 		);
-    	
+		
 		
 		thisCtrl.currLayers.push(thisCtrl.baseLayer);
 		thisCtrl.map.addLayers(thisCtrl.currLayers);
@@ -1369,11 +1369,11 @@ GeoAnnotator.MapPanelCtrl = {
 		thisCtrl.containerPanel.getEl().on('contextmenu', function(evt, div) {
 			var thisCtrl = GeoAnnotator.MapPanelCtrl; 
 			if(!thisCtrl.contextMenu){ // create context menu on first right click
-            	thisCtrl.contextMenu = new Ext.menu.Menu({
-                	id:'map-panel-ctx',
-                	items: []
-            	});
-        	}
+				thisCtrl.contextMenu = new Ext.menu.Menu({
+					id:'map-panel-ctx',
+					items: []
+				});
+			}
 			thisCtrl.contextMenu.removeAll();
 			
 			if (GeoAnnotator.currUserId !== '0' && GeoAnnotator.currForumId !== '0') {
@@ -1381,70 +1381,70 @@ GeoAnnotator.MapPanelCtrl = {
 					var id = thisCtrl.hoverFeature.attributes.id;
 					if (GeoAnnotator.ContributePanelCtrl.containerPanel.collapsed === false) {
 						thisCtrl.contextMenu.add({
-		               		id:'add-footprint-ctx',
-		               		iconCls:'add-footprint-icon',
-		               		text:'Add to reference',
-		               		scope: thisCtrl,
-		               		handler:function(){
+							id:'add-footprint-ctx',
+							iconCls:'add-footprint-icon',
+							text:'Add to reference',
+							scope: thisCtrl,
+							handler:function(){
 								var thisCtrl = GeoAnnotator.MapPanelCtrl;
 								if (thisCtrl.hoverFeature !== null) {
 									thisCtrl.addFeatureToReference(thisCtrl.hoverFeature);
 								}
-		               		}
-	               		});
+							}
+						});
 					}
 					if (thisCtrl.hoverFeature.attributes.id.indexOf('-') === 0) {
 						thisCtrl.contextMenu.add({
-	                   		id:'delete-footprint-ctx',
-	                   		iconCls:'delete-footprint-icon',
-	                   		text:'Delete',
-	                   		scope: thisCtrl,
-	                   		handler:function(){
+							id:'delete-footprint-ctx',
+							iconCls:'delete-footprint-icon',
+							text:'Delete',
+							scope: thisCtrl,
+							handler:function(){
 								var thisCtrl = GeoAnnotator.MapPanelCtrl;
 								if (thisCtrl.hoverFeature !== null) {
 									var feature = thisCtrl.hoverFeature;																	
 									thisCtrl.setNavigationMode();
 									thisCtrl.deleteFeature(feature);
 								}
-	                   		}
-	               		});
+							}
+						});
 						thisCtrl.contextMenu.add({
-	                   		id:'modify-footprint-ctx',
-	                   		iconCls:'modify-footprint-icon',
-	                   		text:'Modify',
-	                   		scope: thisCtrl,
-	                   		handler:function(){
+							id:'modify-footprint-ctx',
+							iconCls:'modify-footprint-icon',
+							text:'Modify',
+							scope: thisCtrl,
+							handler:function(){
 								var thisCtrl = GeoAnnotator.MapPanelCtrl;
 								if (thisCtrl.hoverFeature !== null) {
 									thisCtrl.setModifyMode();
 									thisCtrl.modifyNewFootprintControl.selectControl.select(thisCtrl.hoverFeature);
 								}
-	                   		}
-	               		});
+							}
+						});
 					}; 
 				
 				}
 				else {
-				    thisCtrl.contextMenu.add({
+					thisCtrl.contextMenu.add({
 					id:'draw-polygon-ctx',
 					iconCls:'draw-footprint-icon',
 					text:'Draw polygon',
 					scope: thisCtrl,
 					handler:function(){
-					    var thisCtrl = GeoAnnotator.MapPanelCtrl;
-					    thisCtrl.setDrawMode('polygon');
+						var thisCtrl = GeoAnnotator.MapPanelCtrl;
+						thisCtrl.setDrawMode('polygon');
 					}
-				    });
-				    thisCtrl.contextMenu.add({
+					});
+					thisCtrl.contextMenu.add({
 					id:'draw-line-ctx',
 					iconCls:'draw-footprint-icon',
 					text:'Draw line',
 					scope: thisCtrl,
 					handler:function(){
-					    var thisCtrl = GeoAnnotator.MapPanelCtrl;
-					    thisCtrl.setDrawMode('line');
+						var thisCtrl = GeoAnnotator.MapPanelCtrl;
+						thisCtrl.setDrawMode('line');
 					}
-				    });
+					});
 				}
 				if (thisCtrl.contextMenu.items.length > 0) {
 					thisCtrl.contextMenu.showAt(evt.getXY());
@@ -1456,62 +1456,62 @@ GeoAnnotator.MapPanelCtrl = {
 		
 		thisCtrl.footprintStyle = new OpenLayers.StyleMap({
 			'default': new OpenLayers.Style({
-			    strokeColor: "#EE4F44",
-			    strokeOpacity: 1,
-			    strokeWidth: 2,
-			    fillColor: "#EE4F44",
-			    fillOpacity: 0
-                //pointerEvents: 'visiblePainted',
-                //pointRadius: 6, // sized according to type attribute
+				strokeColor: "#EE4F44",
+				strokeOpacity: 1,
+				strokeWidth: 2,
+				fillColor: "#EE4F44",
+				fillOpacity: 0
+				//pointerEvents: 'visiblePainted',
+				//pointRadius: 6, // sized according to type attribute
 				//label : '${refCount}',
-                //fontColor: '#ffffff',
+				//fontColor: '#ffffff',
 				//labelAlign: 'center',
-                //fontWeight: 'bold',
+				//fontWeight: 'bold',
 				//fontSize: '13px'
 				}),
 			'select': new OpenLayers.Style({
-			    fillColor: '#FFCC33',
-			    fillOpacity: 0.3, 
-			    //strokeColor: 'blue',
-			    //strokeOpacity: 0,
-			    strokeWidth: 4,
-			    //pointerEvents: 'visiblePainted',
-			    cursor: 'pointer'
+				fillColor: '#FFCC33',
+				fillOpacity: 0.3, 
+				//strokeColor: 'blue',
+				//strokeOpacity: 0,
+				strokeWidth: 4,
+				//pointerEvents: 'visiblePainted',
+				cursor: 'pointer'
 				//pointRadius: 6
 			}),
 			'hover': new OpenLayers.Style({
-			    fillColor: '#FFCC33',
-			    fillOpacity: 0.5, 
-			    strokeColor: '#EE4F44',
-			    strokeOpacity: 1,
-			    strokeWidth: 3,
-			    //pointerEvents: 'visiblePainted',
-			    cursor: 'pointer'
-			    //pointRadius: 6
+				fillColor: '#FFCC33',
+				fillOpacity: 0.5, 
+				strokeColor: '#EE4F44',
+				strokeOpacity: 1,
+				strokeWidth: 3,
+				//pointerEvents: 'visiblePainted',
+				cursor: 'pointer'
+				//pointRadius: 6
 			})
 		});
 
 		var default_style = OpenLayers.Util.extend({}, OpenLayers.Feature.Vector.style['default']);
 		default_style.strokeColor = "#00FF00";
-        default_style.strokeOpacity = 1;
-        default_style.strokeWidth = 2;
-        default_style.fillColor = "#D4DDC3";
-        default_style.fillOpacity = 1.0;
+		default_style.strokeOpacity = 1;
+		default_style.strokeWidth = 2;
+		default_style.fillColor = "#D4DDC3";
+		default_style.fillOpacity = 1.0;
 		default_style.strokeDashstyle = "dashdot";
 		var hover_style = OpenLayers.Util.extend({}, OpenLayers.Feature.Vector.style['default']);
 		hover_style.strokeColor = "#00FF00";
-        hover_style.strokeOpacity = 1;
-        hover_style.strokeWidth = 3;
-        hover_style.fillColor = "#D4DDC3";
-        hover_style.fillOpacity = 0.5;
+		hover_style.strokeOpacity = 1;
+		hover_style.strokeWidth = 3;
+		hover_style.fillColor = "#D4DDC3";
+		hover_style.fillOpacity = 0.5;
 		hover_style.strokeDashstyle = "dashdot";
 		hover_style.cursor = 'pointer';
 		var select_style = OpenLayers.Util.extend({}, OpenLayers.Feature.Vector.style['select']);
 		select_style.strokeColor = "blue";
-        select_style.strokeOpacity = 1;
-        select_style.strokeWidth = 3;
-        select_style.fillColor = "#D4DDC3";
-        select_style.fillOpacity = 0.5;
+		select_style.strokeOpacity = 1;
+		select_style.strokeWidth = 3;
+		select_style.fillColor = "#D4DDC3";
+		select_style.fillOpacity = 0.5;
 		select_style.strokeDashstyle = "dashdot";
 		select_style.cursor = 'pointer';
 		
@@ -1525,9 +1525,9 @@ GeoAnnotator.MapPanelCtrl = {
 	
 	update: function(params) {
 		var thisCtrl = GeoAnnotator.MapPanelCtrl;
-		var currParams = {}
+		var currParams = {};
 		if (params && params !== null && params !== {}) {
-			currParams = params
+			currParams = params;
 		}
 		else {
 			if (GeoAnnotator.currUserId != '0'){
@@ -1589,8 +1589,8 @@ GeoAnnotator.MapPanelCtrl = {
 				return;
 			}
 			var zoom = mapNode.getAttribute('zoom') || '';
-	    	var centerX = mapNode.getAttribute('centerX') || '';
-	    	var centerY = mapNode.getAttribute('centerY') || '';
+			var centerX = mapNode.getAttribute('centerX') || '';
+			var centerY = mapNode.getAttribute('centerY') || '';
 		
 			var extent = mapNode.getAttribute('extent') || '';
 			if (extent && extent !== '') {
@@ -1608,7 +1608,7 @@ GeoAnnotator.MapPanelCtrl = {
 		}
 		else if (thisCtrl.currMapInfo.footprints != null) {
 			for (var i = 0; i < thisCtrl.currMapInfo.footprints.length; i++) {
-	    		var footprint = thisCtrl.currMapInfo.footprints[i];
+				var footprint = thisCtrl.currMapInfo.footprints[i];
 				for (var i=0; i < thisCtrl.annotationVectors.features.length; i++) {
 					var feature = thisCtrl.annotationVectors.features[i];
 					if (feature.attributes.id === footprint.id) {
@@ -1618,7 +1618,7 @@ GeoAnnotator.MapPanelCtrl = {
 						thisCtrl.selectFootprintControl.unhighlight(feature);
 					}
 				};
-    		}	
+			}	
 		}
 	},
 	
@@ -1634,160 +1634,160 @@ GeoAnnotator.MapPanelCtrl = {
 		}
 		
 		var zoom = mapNode.getAttribute('zoom');
-    	var centerX = mapNode.getAttribute('centerX');
-    	var centerY = mapNode.getAttribute('centerY');
+		var centerX = mapNode.getAttribute('centerX');
+		var centerY = mapNode.getAttribute('centerY');
 		
 		var extent = mapNode.getAttribute('extent') || '';
 
 		// get the map options
-    	var mapOptions = new Object();
-    	if (mapNode.getElementsByTagName('options').length > 0) {
-  			var optionsNode = mapNode.getElementsByTagName('options').item(0);
-  			var optionNodes = optionsNode.getElementsByTagName('option');
-  			for (var i = 0; i < optionNodes.length; i++) {
-  				var optionNode = optionNodes.item(i);
-  				var key = optionNode.getAttribute('key');
-  				var value = optionNode.getAttribute('value');
-  				// handle the problem of boolean false
-  				if(value.toLowerCase() == 'true') {
-  					value = true;
-  				}
-  				if (value.toLowerCase() == 'false'){
-  					value = false;
-  				}
-  				
-	  			switch(key)
-	  			{
-	  			case 'projection':
-	  				mapOptions[key] = new OpenLayers.Projection(value);	
-	  				break;
-	  			case 'displayProjection':
-	  				//mapOptions[key] = new OpenLayers.Projection(value);	
-	  				mapOptions['displayProjection'] = new OpenLayers.Projection(value);
+		var mapOptions = new Object();
+		if (mapNode.getElementsByTagName('options').length > 0) {
+			var optionsNode = mapNode.getElementsByTagName('options').item(0);
+			var optionNodes = optionsNode.getElementsByTagName('option');
+			for (var i = 0; i < optionNodes.length; i++) {
+				var optionNode = optionNodes.item(i);
+				var key = optionNode.getAttribute('key');
+				var value = optionNode.getAttribute('value');
+				// handle the problem of boolean false
+				if(value.toLowerCase() == 'true') {
+					value = true;
+				}
+				if (value.toLowerCase() == 'false'){
+					value = false;
+				}
+				
+				switch(key)
+				{
+				case 'projection':
+					mapOptions[key] = new OpenLayers.Projection(value);	
 					break;
-	  			case 'minExtent':
-	  				mapOptions[key] = OpenLayers.Bounds.fromString(value);
-	  				break;
-	  			case 'maxExtent':
-	  				mapOptions[key] = OpenLayers.Bounds.fromString(value);
-	  				break;
+				case 'displayProjection':
+					//mapOptions[key] = new OpenLayers.Projection(value);	
+					mapOptions['displayProjection'] = new OpenLayers.Projection(value);
+					break;
+				case 'minExtent':
+					mapOptions[key] = OpenLayers.Bounds.fromString(value);
+					break;
+				case 'maxExtent':
+					mapOptions[key] = OpenLayers.Bounds.fromString(value);
+					break;
 				case 'numZoomLevels':
 					mapOptions[key] = parseInt(value);
 				default:
-	  				mapOptions[key] = value;
-	  			}  			
-  			}
-  		}
-  	
-    
+					mapOptions[key] = value;
+				}  			
+			}
+		}
+	
+	
 		if(mapNode.getElementsByTagName('layers').length > 0) {
 			// rebuild map
 			// stop event listening before map destroy
 			if (thisCtrl.navigationControl && thisCtrl.navigationControl.events){
 				thisCtrl.navigationControl.events.un({
-                    'activate': thisCtrl.onNavigationActivate,
+					'activate': thisCtrl.onNavigationActivate,
 					'deactivate': thisCtrl.onNavigationDeactivate,
-                   	scope: thisCtrl
-        		});
+					scope: thisCtrl
+				});
 			}
 			thisCtrl.map.destroy();
 			mapOptions["controls"] = [];
 			thisCtrl.buildMap(this.mapDiv, mapOptions);
-    		thisCtrl.currLayers.length = 0;
-	    
-	    	var layersNode = mapNode.getElementsByTagName('layers').item(0);
+			thisCtrl.currLayers.length = 0;
+		
+			var layersNode = mapNode.getElementsByTagName('layers').item(0);
 			var layerNodes = layersNode.getElementsByTagName('layer');
-    	    
-    		for (var i = 0; i < layerNodes.length; i++) {
-	    		var layerNode = layerNodes.item(i);
-	    		var layerName = layerNode.getAttribute('name');
-	    		var layerType = layerNode.getAttribute('type');
-	    		var layerOptions = new Object();
-	    		
-  				if (layerNode.getElementsByTagName('options').length > 0) {
-  					var optionsNode = layerNode.getElementsByTagName('options').item(0);
-  					var optionNodes = optionsNode.getElementsByTagName('option');
-  					for (var j = 0; j < optionNodes.length; j++) {
-  						var optionNode = optionNodes.item(j);
-  						var key = optionNode.getAttribute('key');
-  						var value = optionNode.getAttribute('value');
-  						// handle the problem of boolean false
-  					
-  						if(value.toLowerCase() == 'true') {
-  							layerOptions[key] = true;
-  						}
-  						else if (value.toLowerCase() == 'false'){
-  							layerOptions[key] = false;
-  						}
+			
+			for (var i = 0; i < layerNodes.length; i++) {
+				var layerNode = layerNodes.item(i);
+				var layerName = layerNode.getAttribute('name');
+				var layerType = layerNode.getAttribute('type');
+				var layerOptions = new Object();
+				
+				if (layerNode.getElementsByTagName('options').length > 0) {
+					var optionsNode = layerNode.getElementsByTagName('options').item(0);
+					var optionNodes = optionsNode.getElementsByTagName('option');
+					for (var j = 0; j < optionNodes.length; j++) {
+						var optionNode = optionNodes.item(j);
+						var key = optionNode.getAttribute('key');
+						var value = optionNode.getAttribute('value');
+						// handle the problem of boolean false
+					
+						if(value.toLowerCase() == 'true') {
+							layerOptions[key] = true;
+						}
+						else if (value.toLowerCase() == 'false'){
+							layerOptions[key] = false;
+						}
 						else if (key == 'minZoomLevel' || key == 'maxZoomLevel'){
 							layerOptions[key] = parseInt(value);
 							
 						}	  			
-  						else {
-  							layerOptions[key] = value;	
-  						}
-  					}
-  				}
-  			
-    			var newLayer;
-    			switch(layerType)
+						else {
+							layerOptions[key] = value;	
+						}
+					}
+				}
+			
+				var newLayer;
+				switch(layerType)
 				{
 				case 'Google':
-  					if (layerOptions['type'] && typeof layerOptions['type'] == "string") {
-  						layerOptions['type'] = thisCtrl.getGMapType(layerOptions['type']);
-  					}
-  					newLayer = new OpenLayers.Layer.Google(layerName, layerOptions);
-  					break;    
+					if (layerOptions['type'] && typeof layerOptions['type'] == "string") {
+						layerOptions['type'] = thisCtrl.getGMapType(layerOptions['type']);
+					}
+					newLayer = new OpenLayers.Layer.Google(layerName, layerOptions);
+					break;    
 				case 'WMS':
 					var layerUrl = layerNode.getElementsByTagName('url').item(0).childNodes[0].nodeValue;
 				
-  					var layerParams = new Object();
-  					if (layerNode.getElementsByTagName('params').length > 0) {
-  						var paramsNode = layerNode.getElementsByTagName('params').item(0);
-  						var paramNodes = paramsNode.getElementsByTagName('param');
-  						for (var j = 0; j < paramNodes.length; j++) {
-  							var paramNode = paramNodes.item(j);
-  							layerParams[paramNode.getAttribute('key')] = paramNode.getAttribute('value');	
-  						}
-  					}
-  					newLayer = new OpenLayers.Layer.WMS(layerName, layerUrl, layerParams, layerOptions);
-  					break;
-  				case 'GML':
-  					var layerUrl = layerNode.getElementsByTagName('url').item(0).childNodes[0].nodeValue;
-  				
-  					if (layerOptions['format'] == 'OpenLayers.Format.KML') {
-  						layerOptions['format'] = OpenLayers.Format.KML;
-  					}
-  				
-  					var layerFormatOptions = new Object();
-  					if (layerNode.getElementsByTagName('formatOptions').length > 0) {
-  						var formatOptionsNode = layerNode.getElementsByTagName('formatOptions').item(0);
-  						var formatOptionNodes = formatOptionsNode.getElementsByTagName('formatOption');
-  						for (var j = 0; j < formatOptionNodes.length; j++) {
-  							var formatOptionNode = formatOptionNodes.item(j);
-  							layerFormatOptions[formatOptionNode.getAttribute('key')] = formatOptionNode.getAttribute('value');	
-  						}
-  					}
-  					layerOptions['formatOptions'] = layerFormatOptions;
-  				
-  					newLayer = new OpenLayers.Layer.GML(layerName, layerUrl, layerOptions);
-  					break;
+					var layerParams = new Object();
+					if (layerNode.getElementsByTagName('params').length > 0) {
+						var paramsNode = layerNode.getElementsByTagName('params').item(0);
+						var paramNodes = paramsNode.getElementsByTagName('param');
+						for (var j = 0; j < paramNodes.length; j++) {
+							var paramNode = paramNodes.item(j);
+							layerParams[paramNode.getAttribute('key')] = paramNode.getAttribute('value');	
+						}
+					}
+					newLayer = new OpenLayers.Layer.WMS(layerName, layerUrl, layerParams, layerOptions);
+					break;
+				case 'GML':
+					var layerUrl = layerNode.getElementsByTagName('url').item(0).childNodes[0].nodeValue;
+				
+					if (layerOptions['format'] == 'OpenLayers.Format.KML') {
+						layerOptions['format'] = OpenLayers.Format.KML;
+					}
+				
+					var layerFormatOptions = new Object();
+					if (layerNode.getElementsByTagName('formatOptions').length > 0) {
+						var formatOptionsNode = layerNode.getElementsByTagName('formatOptions').item(0);
+						var formatOptionNodes = formatOptionsNode.getElementsByTagName('formatOption');
+						for (var j = 0; j < formatOptionNodes.length; j++) {
+							var formatOptionNode = formatOptionNodes.item(j);
+							layerFormatOptions[formatOptionNode.getAttribute('key')] = formatOptionNode.getAttribute('value');	
+						}
+					}
+					layerOptions['formatOptions'] = layerFormatOptions;
+				
+					newLayer = new OpenLayers.Layer.GML(layerName, layerUrl, layerOptions);
+					break;
 				default:
 					break;
-    			}
-    			if (newLayer != undefined && newLayer != null) {
-    				if (layerOptions['visibility'] == true && layerOptions['isBaseLayer'] == true) {
-    					thisCtrl.baseLayer = newLayer;
-    				}
-    				thisCtrl.currLayers.push(newLayer);
-    			}
-	    	}
+				}
+				if (newLayer != undefined && newLayer != null) {
+					if (layerOptions['visibility'] == true && layerOptions['isBaseLayer'] == true) {
+						thisCtrl.baseLayer = newLayer;
+					}
+					thisCtrl.currLayers.push(newLayer);
+				}
+			}
 		
 			thisCtrl.map.addLayers(thisCtrl.currLayers);
-		    thisCtrl.map.setBaseLayer(thisCtrl.baseLayer);
-		    
+			thisCtrl.map.setBaseLayer(thisCtrl.baseLayer);
 			
-		    thisCtrl.map.setCenter(new OpenLayers.LonLat(centerX, centerY), parseInt(zoom));
+			
+			thisCtrl.map.setCenter(new OpenLayers.LonLat(centerX, centerY), parseInt(zoom));
 			if (extent && extent !== '') {
 				thisCtrl.map.zoomToExtent(OpenLayers.Bounds.fromString(extent));
 			};
@@ -1801,29 +1801,29 @@ GeoAnnotator.MapPanelCtrl = {
 		var wktParser = new OpenLayers.Format.WKT();
 		
 		thisCtrl.annotationVectors = new OpenLayers.Layer.Vector(
-    		'Annotation Footprints', {styleMap: thisCtrl.footprintStyle, displayInLayerSwitcher: true}
-    	);		
+			'Annotation Footprints', {styleMap: thisCtrl.footprintStyle, displayInLayerSwitcher: true}
+		);		
 		thisCtrl.map.addLayer(this.annotationVectors);
 		
 		// load footprints
 		if (thisCtrl.currMapInfo.footprints != null) {
 			for (var i = 0; i < thisCtrl.currMapInfo.footprints.length; i++) {
-	    		var footprint = thisCtrl.currMapInfo.footprints[i];
+				var footprint = thisCtrl.currMapInfo.footprints[i];
 				
 				var feature = wktParser.read(footprint.shape);
 				origin_prj = new OpenLayers.Projection("EPSG:" + footprint.srid);
 				feature.geometry.transform(origin_prj, thisCtrl.map.projection);
 				feature.attributes = {};
-	    		feature.attributes.id = footprint.id;
+				feature.attributes.id = footprint.id;
 				if (footprint.refCount != null) {
 					feature.attributes.pointRadius = footprint.refCount * 5;
 					feature.attributes.refCount = footprint.refCount;
 				}
-	    		if (footprint.alias != null) {
+				if (footprint.alias != null) {
 					feature.attributes.alias = footprint.alias;
 				}
 				thisCtrl.annotationVectors.addFeatures([feature]);
-    		}	
+			}	
 		}
 		
 		
@@ -1837,20 +1837,20 @@ GeoAnnotator.MapPanelCtrl = {
 	loadControls : function() {
 		var thisCtrl = GeoAnnotator.MapPanelCtrl;
 		thisCtrl.map.addControl(new OpenLayers.Control.PanZoomBar());
-    	thisCtrl.map.addControl(new OpenLayers.Control.LayerSwitcher());
+		thisCtrl.map.addControl(new OpenLayers.Control.LayerSwitcher());
 		thisCtrl.map.addControl(new OpenLayers.Control.Attribution());
-    	
-	    thisCtrl.navigationControl = new OpenLayers.Control.Navigation();
+		
+		thisCtrl.navigationControl = new OpenLayers.Control.Navigation();
 		thisCtrl.map.addControl(thisCtrl.navigationControl);
 
 		thisCtrl.selectFootprintControl = new OpenLayers.Control.SelectFeature(
 			[thisCtrl.annotationVectors,thisCtrl.newFootprintVectors],
-	 		{
-	        	clickout: true, toggle: false,
-	            multiple: false, hover: false,
-	            //toggleKey: "ctrlKey", // ctrl key removes from selection
-	            //multipleKey: "shiftKey", // shift key adds to selection
-	            //box: true,
+			{
+				clickout: true, toggle: false,
+				multiple: false, hover: false,
+				//toggleKey: "ctrlKey", // ctrl key removes from selection
+				//multipleKey: "shiftKey", // shift key adds to selection
+				//box: true,
 				//onSelect: thisCtrl.onFeatureSelect, onUnselect: thisCtrl.onFeatureUnselect,
 				//displayClass: 'olControlSelectFeature',
 				callbacks: {over: thisCtrl.onOverFeature, out: thisCtrl.onOutFeature, click: thisCtrl.onClickFeature}
@@ -1867,29 +1867,29 @@ GeoAnnotator.MapPanelCtrl = {
 		thisCtrl.map.addControl(thisCtrl.modifyNewFootprintControl);
 				
 		thisCtrl.drawFootprintControl = {
-		    polygon: new OpenLayers.Control.DrawFeature(
+			polygon: new OpenLayers.Control.DrawFeature(
 			thisCtrl.newFootprintVectors, 
 			OpenLayers.Handler.Polygon, 
 			{
-			    featureAdded:function(feature) { 
+				featureAdded:function(feature) { 
 				feature.state = OpenLayers.State.INSERT; 
 				thisCtrl.onFeatureAdded(feature);
-			    }
+				}
 			}
-		    ),
-		    line: new OpenLayers.Control.DrawFeature(
+			),
+			line: new OpenLayers.Control.DrawFeature(
 			thisCtrl.newFootprintVectors, 
 			OpenLayers.Handler.Path, 
 			{
-			    featureAdded:function(feature) { 
+				featureAdded:function(feature) { 
 				feature.state = OpenLayers.State.INSERT; 
 				thisCtrl.onFeatureAdded(feature);
-			    }
+				}
 			}
-		    )
+			)
 		};
 		for (var key in thisCtrl.drawFootprintControl) {
-		    thisCtrl.map.addControl(thisCtrl.drawFootprintControl[key]);    	
+			thisCtrl.map.addControl(thisCtrl.drawFootprintControl[key]);    	
 		}
 		
 
@@ -1913,18 +1913,18 @@ GeoAnnotator.MapPanelCtrl = {
 			tbar.add({
 				xtype: 'buttongroup',
 				id: 'toolbox-group',
-	            title: 'Annotation',
-	            //columns: 3,
-	            defaults: {
-	                scale: 'medium'
-	            },
-	            items: [
+				title: 'Annotation',
+				//columns: 3,
+				defaults: {
+					scale: 'medium'
+				},
+				items: [
 				{
-	            	id: 'contribute-btn',
-	            	iconCls: 'contribute-btn',
-	            	pressed: false,
-	            	enableToggle: true,
-	            	toggleHandler: function(button, pressed){
+					id: 'contribute-btn',
+					iconCls: 'contribute-btn',
+					pressed: false,
+					enableToggle: true,
+					toggleHandler: function(button, pressed){
 						if(pressed){
 							GeoAnnotator.ContributePanelCtrl.containerPanel.expand(false);
 						}
@@ -1932,18 +1932,18 @@ GeoAnnotator.MapPanelCtrl = {
 							GeoAnnotator.ContributePanelCtrl.containerPanel.collapse(false);
 						}
 					},
-	            	text: 'Contribute',
-	            	tooltip: {
-	                	title: 'Contribute',
-	                	text: 'Contribute to the current forum'
-	            	}
-	        	},
+					text: 'Contribute',
+					tooltip: {
+						title: 'Contribute',
+						text: 'Contribute to the current forum'
+					}
+				},
 				{
-		            id: 'manage-btn',
-		            iconCls: 'manage-btn',
-		            pressed: false,
-		            enableToggle: true,
-		            toggleHandler: function(button, pressed){
+					id: 'manage-btn',
+					iconCls: 'manage-btn',
+					pressed: false,
+					enableToggle: true,
+					toggleHandler: function(button, pressed){
 						if(pressed){
 							GeoAnnotator.ManageWindowCtrl.containerWindow.show();
 						}
@@ -1951,12 +1951,12 @@ GeoAnnotator.MapPanelCtrl = {
 							GeoAnnotator.ManageWindowCtrl.containerWindow.hide();
 						}
 					},
-		            text: 'Manage',
-		            tooltip: {
-		                title: 'Manage',
-		                text: 'Manage the annotations'
-		            }
-	        	}]
+					text: 'Manage',
+					tooltip: {
+						title: 'Manage',
+						text: 'Manage the annotations'
+					}
+				}]
 			});
 		}; 
 
@@ -1964,38 +1964,38 @@ GeoAnnotator.MapPanelCtrl = {
 		tbar.doLayout();
 	},
 	
- 	getGMapType : function(type) {
+	getGMapType : function(type) {
 		var newGMapType;
 		switch(type){
-	  	case 'G_NORMAL_MAP':
-	  		newGMapType = G_NORMAL_MAP;
-	  		newGMapType.toString = function () {return 'G_NORMAL_MAP';};
-	  		break;
-	  	case 'G_SATELLITE_MAP':
-	  		newGMapType = G_SATELLITE_MAP;
-	  		newGMapType.toString = function () {return 'G_SATELLITE_MAP';};
-	  		break;
-	  	case 'G_HYBRID_MAP':
-	  		newGMapType = G_HYBRID_MAP;
-	  		newGMapType.toString = function () {return 'G_HYBRID_MAP';};
-	  		break;
-	  	case 'G_PHYSICAL_MAP':
-	  		newGMapType = G_PHYSICAL_MAP;
-	  		newGMapType.toString = function () {return 'G_PHYSICAL_MAP';};
-	  		break;
-	  	case 'G_CUSTOM_CENTREIMAGERY_MAP':
-	  		var tileCentreImagery= new GTileLayer(new GCopyrightCollection(""),0,19, {
-	      		tileUrlTemplate: 'http://www.apps.geovista.psu.edu/tilecache/tilecache.py/1.0.0/centreimageryjpeg/{Z}/{X}/{Y}.jpg?type=google',
-	      		isPng:false});
-	      	newGMapType = new GMapType([tileCentreImagery,G_HYBRID_MAP.getTileLayers()[1]], new GMercatorProjection(20), "Centre Imagery with Google Labels", {shortName:"CIL"});
-	      	newGMapType.toString = function () {return 'G_CUSTOM_CENTREIMAGERY_MAP';};
-	      	break;
-	  	default:
-	  		newGMapType = G_NORMAL_MAP;
-	  		newGMapType.toString = function () {return 'G_NORMAL_MAP';};
-	  		break;
-	  	}
-  		return newGMapType;  	
+		case 'G_NORMAL_MAP':
+			newGMapType = G_NORMAL_MAP;
+			newGMapType.toString = function () {return 'G_NORMAL_MAP';};
+			break;
+		case 'G_SATELLITE_MAP':
+			newGMapType = G_SATELLITE_MAP;
+			newGMapType.toString = function () {return 'G_SATELLITE_MAP';};
+			break;
+		case 'G_HYBRID_MAP':
+			newGMapType = G_HYBRID_MAP;
+			newGMapType.toString = function () {return 'G_HYBRID_MAP';};
+			break;
+		case 'G_PHYSICAL_MAP':
+			newGMapType = G_PHYSICAL_MAP;
+			newGMapType.toString = function () {return 'G_PHYSICAL_MAP';};
+			break;
+		case 'G_CUSTOM_CENTREIMAGERY_MAP':
+			var tileCentreImagery= new GTileLayer(new GCopyrightCollection(""),0,19, {
+				tileUrlTemplate: 'http://www.apps.geovista.psu.edu/tilecache/tilecache.py/1.0.0/centreimageryjpeg/{Z}/{X}/{Y}.jpg?type=google',
+				isPng:false});
+			newGMapType = new GMapType([tileCentreImagery,G_HYBRID_MAP.getTileLayers()[1]], new GMercatorProjection(20), "Centre Imagery with Google Labels", {shortName:"CIL"});
+			newGMapType.toString = function () {return 'G_CUSTOM_CENTREIMAGERY_MAP';};
+			break;
+		default:
+			newGMapType = G_NORMAL_MAP;
+			newGMapType.toString = function () {return 'G_NORMAL_MAP';};
+			break;
+		}
+		return newGMapType;  	
 	},
 
 	setNavigationMode : function() {
@@ -2007,9 +2007,9 @@ GeoAnnotator.MapPanelCtrl = {
 			thisCtrl.selectFootprintControl.activate();
 		}
 		if (thisCtrl.drawFootprintControl) {
-		    for (var key in thisCtrl.drawFootprintControl) {
+			for (var key in thisCtrl.drawFootprintControl) {
 			thisCtrl.drawFootprintControl[key].deactivate();
-		    }
+			}
 		}
 		if (thisCtrl.modifyNewFootprintControl) {
 			thisCtrl.modifyNewFootprintControl.deactivate();					
@@ -2025,11 +2025,11 @@ GeoAnnotator.MapPanelCtrl = {
 			thisCtrl.selectFootprintControl.deactivate();
 		}
 		if (thisCtrl.drawFootprintControl) {
-		    for (var key in thisCtrl.drawFootprintControl) {
+			for (var key in thisCtrl.drawFootprintControl) {
 			if (mode == key) {
-			    thisCtrl.drawFootprintControl[key].activate();
+				thisCtrl.drawFootprintControl[key].activate();
 			}
-		    }
+			}
 		}
 		if (thisCtrl.modifyNewFootprintControl) {
 			thisCtrl.modifyNewFootprintControl.deactivate();					
@@ -2045,9 +2045,9 @@ GeoAnnotator.MapPanelCtrl = {
 			thisCtrl.selectFootprintControl.deactivate();
 		}
 		if (thisCtrl.drawFootprintControl) {
-		    for (var key in thisCtrl.drawFootprintControl) {
+			for (var key in thisCtrl.drawFootprintControl) {
 			thisCtrl.drawFootprintControl[key].deactivate();
-		    }
+			}
 		}
 		if (thisCtrl.modifyNewFootprintControl) {
 			thisCtrl.modifyNewFootprintControl.activate();					
@@ -2058,10 +2058,10 @@ GeoAnnotator.MapPanelCtrl = {
 	{
 		var thisCtrl = GeoAnnotator.MapPanelCtrl;
 		thisCtrl.map = new OpenLayers.Map(div,options);
-    	
+		
 		//thisCtrl.map.addControl(new OpenLayers.Control.PanZoomBar());
-    	//thisCtrl.map.addControl(new OpenLayers.Control.LayerSwitcher());
-    	//thisCtrl.map.addControl(new OpenLayers.Control.MousePosition());
+		//thisCtrl.map.addControl(new OpenLayers.Control.LayerSwitcher());
+		//thisCtrl.map.addControl(new OpenLayers.Control.MousePosition());
 		//thisCtrl.map.addControl(new OpenLayers.Control.OverviewMap());
 	},
 	
@@ -2071,7 +2071,7 @@ GeoAnnotator.MapPanelCtrl = {
 			name = feature.attributes.alias;
 		}
 		*/
-		var name = '[FP' + feature.attributes.id + ']'
+		var name = '[FP' + feature.attributes.id + ']';
 		var id = feature.attributes.id;		
 		GeoAnnotator.ContributePanelCtrl.addFootprintToReference(id, name);
 				
@@ -2129,57 +2129,57 @@ GeoAnnotator.MapPanelCtrl = {
 		// create the annotation list window if not open
 		if (!thisCtrl.annotationListWindow){
 			thisCtrl.annotationListStore = new Ext.data.JsonStore({
-        		root: 'annotations',
-        		totalProperty: 'totalCount',
-        		idProperty: 'id',
-        		fields: [
-            	'id', 'userName', 
+				root: 'annotations',
+				totalProperty: 'totalCount',
+				idProperty: 'id',
+				fields: [
+				'id', 'userName', 
 				{name: 'timeCreated', type: 'date'},
-	            'excerpt'],
-	        	proxy: new Ext.data.HttpProxy ({
-	            	url: GeoAnnotator.baseUrl + 'annotations/'
-	        	}),
+				'excerpt'],
+				proxy: new Ext.data.HttpProxy ({
+					url: GeoAnnotator.baseUrl + 'annotations/'
+				}),
 				baseParams: {userId: GeoAnnotator.currUserId, forumId: GeoAnnotator.currForumId, start:0, limit:10}
 			});
 			// create the template
 			var annotationListTpl = new Ext.XTemplate(
-	        	'<tpl for=".">',
-	        	'<div class="list-item">',
-	            '<h3><span>{timeCreated:date("M d, Y")}</span>',
-	            '{userName} says:</h3>',
-	            '<p>{excerpt}</p>',
-	        	'</div></tpl>'
-    		);
+				'<tpl for=".">',
+				'<div class="list-item">',
+				'<h3><span>{timeCreated:date("M d, Y")}</span>',
+				'{userName} says:</h3>',
+				'<p>{excerpt}</p>',
+				'</div></tpl>'
+			);
 			thisCtrl.annotationListDataView =  new Ext.DataView({
-            	tpl: annotationListTpl,
-            	store: thisCtrl.annotationListStore,
-            	itemSelector: 'div.list-item',
+				tpl: annotationListTpl,
+				store: thisCtrl.annotationListStore,
+				itemSelector: 'div.list-item',
 				multiSelect: true,
 				selectedClass: 'list-item-selected', 
 				overClass:'list-item-over',
 				emptyText : 'No Annotations'
 				//plugins: new Ext.DataView.DragSelector({dragSafe:false})
-        	});
+			});
 			thisCtrl.annotationListDataView.on('click',thisCtrl.onAnnotationListItemClick);
 			
 			thisCtrl.annotationListWindow = new Ext.Window({
-		            layout      : 'fit',
-		            width       : 450,
-		            autoHeight	: true,
+					layout      : 'fit',
+					width       : 450,
+					autoHeight	: true,
 					//height      : 450,
-		            closeAction :'hide',
-		            plain       : true,
+					closeAction :'hide',
+					plain       : true,
 					title		: 'Annotation List',
 					autoScroll  : true,
-		            items : [thisCtrl.annotationListDataView],
+					items : [thisCtrl.annotationListDataView],
 					tbar: new Ext.PagingToolbar({
-            			store: thisCtrl.annotationListStore,
-            			pageSize: 10,
-            			displayInfo: true,
-            			displayMsg: 'Annotations {0} - {1} of {2}',
-            			emptyMsg: "No annotations to display"
-        			})		
-		    });
+						store: thisCtrl.annotationListStore,
+						pageSize: 10,
+						displayInfo: true,
+						displayMsg: 'Annotations {0} - {1} of {2}',
+						emptyMsg: "No annotations to display"
+					})		
+			});
 			//thisCtrl.annotationListWindow.on('hide', function(){btn.toggle(false);})
 		}
 		thisCtrl.annotationListWindow.show();	
@@ -2227,10 +2227,10 @@ GeoAnnotator.MapPanelCtrl = {
 			
 			if (parseInt(feature.attributes.refCount) === 1) {
 				Ext.Ajax.request({
-   					url: GeoAnnotator.baseUrl + 'annotations/',
-   					//method: 'GET',
-  					params: { userId: GeoAnnotator.currUserId, forumId: GeoAnnotator.currForumId, footprintId: GeoAnnotator.currFootprintId, start:0, limit:1},
-   					success: function(xhr) {
+					url: GeoAnnotator.baseUrl + 'annotations/',
+					//method: 'GET',
+					params: { userId: GeoAnnotator.currUserId, forumId: GeoAnnotator.currForumId, footprintId: GeoAnnotator.currFootprintId, start:0, limit:1},
+					success: function(xhr) {
 						var currAnnotation = Ext.util.JSON.decode(xhr.responseText);
 						// change the states
 						if (currAnnotation.totalCount > 0) {
@@ -2245,7 +2245,7 @@ GeoAnnotator.MapPanelCtrl = {
 							//GeoAnnotator.MapPanelCtrl.update();
 						};
 					},
-   					failure: function() {
+					failure: function() {
 						alert('failed!');
 					}
 				});
@@ -2325,25 +2325,25 @@ GeoAnnotator.TimelinePanelCtrl = {
 		
 		thisCtrl.timelinePanel = new Ext.Panel({
 			//layout: 'fit',
-        	tbar: [
+			tbar: [
 			{
-            	//text: 'Earliest',
+				//text: 'Earliest',
 				id: 'timeline-earliest-btn',
 				iconCls: 'timeline-earliest-icon',
 				//iconAlign: 'left', 
-            	handler: thisCtrl.moveToEarliest
+				handler: thisCtrl.moveToEarliest
 			},
 			'-',
 			{
-            	//text: 'Previous',
+				//text: 'Previous',
 				id : 'timeline-previous-btn',
 				iconCls: 'timeline-previous-icon',
 				//iconAlign: 'left', 
-            	handler: thisCtrl.moveToPrev
+				handler: thisCtrl.moveToPrev
 			},
 			'-',
 			{
-            	text: 'Day',
+				text: 'Day',
 				id : 'timeline-day-btn',
 				enableToggle: true,
 				pressed: false, 
@@ -2357,7 +2357,7 @@ GeoAnnotator.TimelinePanelCtrl = {
 			},
 			'-',
 			{
-            	text: 'Week',
+				text: 'Week',
 				id : 'timeline-week-btn',
 				enableToggle: true,
 				pressed: false, 
@@ -2371,7 +2371,7 @@ GeoAnnotator.TimelinePanelCtrl = {
 			},
 			'-',
 			{
-            	text: 'Month',
+				text: 'Month',
 				id : 'timeline-month-btn',
 				enableToggle: true,
 				pressed: true, 
@@ -2385,7 +2385,7 @@ GeoAnnotator.TimelinePanelCtrl = {
 			},
 			'-',
 			{
-            	text: 'Year',
+				text: 'Year',
 				id : 'timeline-year-btn',
 				enableToggle: true,
 				pressed: false, 
@@ -2399,19 +2399,19 @@ GeoAnnotator.TimelinePanelCtrl = {
 			},
 			'-',
 			{
-            	//text: 'Next',
+				//text: 'Next',
 				id : 'timeline-next-btn',
 				iconCls: 'timeline-next-icon',
 				//iconAlign: 'right', 
-            	handler: thisCtrl.moveToNext
+				handler: thisCtrl.moveToNext
 			},
 			'-',
 			{
-            	//text: 'Latest',
+				//text: 'Latest',
 				id : 'timeline-latest-btn',
 				iconCls: 'timeline-latest-icon',
 				//iconAlign: 'right', 
-            	handler: thisCtrl.moveToLatest
+				handler: thisCtrl.moveToLatest
 			},
 			'->',
 			{
@@ -2421,31 +2421,31 @@ GeoAnnotator.TimelinePanelCtrl = {
 				handler : thisCtrl.moveToNow
 			}
 			],
-        	items: {
-            	xtype: 'columnchart',
-            	store: thisCtrl.timelineData,
-            	yField: 'count',
-	    		url: './static/lib/ext-3.2.1/resources/charts.swf',
-            	xField: 'label',
-            	xAxis: new Ext.chart.CategoryAxis({
-                	title: 'Time'
-            	}),
-            	yAxis: new Ext.chart.NumericAxis({
-                	title: 'Count'
-            	}),
+			items: {
+				xtype: 'columnchart',
+				store: thisCtrl.timelineData,
+				yField: 'count',
+				url: './static/lib/ext-3.2.1/resources/charts.swf',
+				xField: 'label',
+				xAxis: new Ext.chart.CategoryAxis({
+					title: 'Time'
+				}),
+				yAxis: new Ext.chart.NumericAxis({
+					title: 'Count'
+				}),
 				tipRenderer : function(chart, record, index, series){
-                	return record.data.count + ' annotations';
-            	},
-            	extraStyle: {
-               		xAxis: {
-                    	//labelRotation: -90
-                	}
-            	},
+					return record.data.count + ' annotations';
+				},
+				extraStyle: {
+					xAxis: {
+						//labelRotation: -90
+					}
+				},
 				listeners: {
 					itemclick: thisCtrl.onTimelineItemClick
-          		}
+				}
 			}   
-    	});
+		});
 		thisCtrl.containerPanel.add(thisCtrl.timelinePanel);
 		thisCtrl.containerPanel.doLayout();
 		thisCtrl.containerPanel.on('collapse', function() {
@@ -2760,12 +2760,12 @@ GeoAnnotator.TimelinePanelCtrl = {
 		}
 		else {
 			Ext.Ajax.request({
-	   			url: GeoAnnotator.baseUrl + 'timeline/',
-	   			success: thisCtrl.onLoadTimelineInfoSuccess,
-	   			failure: function() {
+				url: GeoAnnotator.baseUrl + 'timeline/',
+				success: thisCtrl.onLoadTimelineInfoSuccess,
+				failure: function() {
 					alert('failed to load timeline info!');
 				},
-	   			params: {'userId':GeoAnnotator.currUserId, 'forumId': GeoAnnotator.currForumId, 'unit': thisCtrl.unit, 'startDate': thisCtrl.startDate.toGMTString(), 'endDate': thisCtrl.endDate.toGMTString()}
+				params: {'userId':GeoAnnotator.currUserId, 'forumId': GeoAnnotator.currForumId, 'unit': thisCtrl.unit, 'startDate': thisCtrl.startDate.toGMTString(), 'endDate': thisCtrl.endDate.toGMTString()}
 			});
 		}		
 	},
@@ -2813,57 +2813,57 @@ GeoAnnotator.TimelinePanelCtrl = {
 		// create the annotation list window if not open
 		if (!thisCtrl.annotationListWindow){
 			thisCtrl.annotationListStore = new Ext.data.JsonStore({
-        		root: 'annotations',
-        		totalProperty: 'totalCount',
-        		idProperty: 'id',
-        		fields: [
-            	'id', 'userName', 
+				root: 'annotations',
+				totalProperty: 'totalCount',
+				idProperty: 'id',
+				fields: [
+				'id', 'userName', 
 				{name: 'timeCreated', type: 'date'},
-	            'excerpt'],
-	        	proxy: new Ext.data.HttpProxy ({
-	            	url: GeoAnnotator.baseUrl + 'Annotations/'
-	        	}),
+				'excerpt'],
+				proxy: new Ext.data.HttpProxy ({
+					url: GeoAnnotator.baseUrl + 'Annotations/'
+				}),
 				baseParams: {userId: GeoAnnotator.currUserId, forumId: GeoAnnotator.currForumId, start:0, limit:10}
 			});
 			// create the template
 			var annotationListTpl = new Ext.XTemplate(
-	        	'<tpl for=".">',
-	        	'<div class="list-item">',
-	            '<h3><span>{timeCreated:date("M d, Y")}</span>',
-	            '{userName} says:</h3>',
-	            '<p>{excerpt}</p>',
-	        	'</div></tpl>'
-    		);
+				'<tpl for=".">',
+				'<div class="list-item">',
+				'<h3><span>{timeCreated:date("M d, Y")}</span>',
+				'{userName} says:</h3>',
+				'<p>{excerpt}</p>',
+				'</div></tpl>'
+			);
 			thisCtrl.annotationListDataView =  new Ext.DataView({
-            	tpl: annotationListTpl,
-            	store: thisCtrl.annotationListStore,
-            	itemSelector: 'div.list-item',
+				tpl: annotationListTpl,
+				store: thisCtrl.annotationListStore,
+				itemSelector: 'div.list-item',
 				multiSelect: true,
 				selectedClass: 'list-item-selected', 
 				overClass:'list-item-over',
 				emptyText : 'No Annotations'
 				//plugins: new Ext.DataView.DragSelector({dragSafe:false})
-        	});
+			});
 			thisCtrl.annotationListDataView.on('click',thisCtrl.onAnnotationListItemClick);
 			
 			thisCtrl.annotationListWindow = new Ext.Window({
-		            layout      : 'fit',
-		            width       : 450,
-		            autoHeight	: true,
+					layout      : 'fit',
+					width       : 450,
+					autoHeight	: true,
 					//height      : 450,
-		            closeAction :'hide',
-		            plain       : true,
+					closeAction :'hide',
+					plain       : true,
 					title		: 'Annotation List',
 					autoScroll  : true,
-		            items : [thisCtrl.annotationListDataView],
+					items : [thisCtrl.annotationListDataView],
 					tbar: new Ext.PagingToolbar({
-            			store: thisCtrl.annotationListStore,
-            			pageSize: 10,
-            			displayInfo: true,
-            			displayMsg: 'Annotations {0} - {1} of {2}',
-            			emptyMsg: "No annotations to display"
-        			})		
-		    });
+						store: thisCtrl.annotationListStore,
+						pageSize: 10,
+						displayInfo: true,
+						displayMsg: 'Annotations {0} - {1} of {2}',
+						emptyMsg: "No annotations to display"
+					})		
+			});
 			//thisCtrl.annotationListWindow.on('hide', function(){btn.toggle(false);})
 		}
 		thisCtrl.annotationListWindow.show();	
@@ -2883,14 +2883,14 @@ GeoAnnotator.TimelinePanelCtrl = {
 		// create the annotation list window if not open
 		var thisCtrl = GeoAnnotator.TimelinePanelCtrl;				
 		thisCtrl.showAnnotationListWindow();
-        var record = thisCtrl.timelineData.getAt(o.index);
+		var record = thisCtrl.timelineData.getAt(o.index);
 		var start_date = new Date(record.get('date'));
 		var end_date = new Date(start_date);
 		
 		if (thisCtrl.unit === 'day') {
 			end_date.setDate(start_date.getDate()+1);
 		}
-        else if (thisCtrl.unit === 'month') {
+		else if (thisCtrl.unit === 'month') {
 			end_date.setMonth(start_date.getMonth()+1);
 		}
 		else if (thisCtrl.unit === 'hour') {
@@ -2900,9 +2900,8 @@ GeoAnnotator.TimelinePanelCtrl = {
 		thisCtrl.annotationListStore.removeAll();
 		thisCtrl.annotationListStore.baseParams = {userId: GeoAnnotator.currUserId, forumId: GeoAnnotator.currForumId, startDate: start_date.toGMTString(), endDate: end_date.toGMTString()};
 		thisCtrl.annotationListStore.load({params:{start:0, limit:10}});
-		
 	}
-}
+},
 
 GeoAnnotator.AnnotationInfoPanelCtrl = 
 {
@@ -2919,9 +2918,11 @@ GeoAnnotator.AnnotationInfoPanelCtrl =
 	spaceTreeContainer : 'reference-spaceTree',
 	threadOrientation : 'left',
 	currAnnotationInfo : {},
+	currCode : {},
 	// code window
 	codeWindow : null,
 	codePanel : null,
+	//codeSchemeStore : null,
 
 	// spaceTree styles
 	node_height : 30,
@@ -3091,7 +3092,7 @@ GeoAnnotator.AnnotationInfoPanelCtrl =
 		var tbar = new Ext.Toolbar({
 			id : 'annotation-info-tbar',
 			 hidden : true, 
-            	items: [
+				items: [
 				/*{
 					id: 'annotation-rpl-btn',
 					iconCls: 'annotation-rpl-btn',
@@ -3112,18 +3113,18 @@ GeoAnnotator.AnnotationInfoPanelCtrl =
 				'-',
 				{
 					id: 'reference-display-btn',
-            		text:'Threads',
-            		tooltip: {title:'Threads',text:'Show issues/annotaions as references or follow-ups of the current annotation.'},
-            		iconCls: (thisCtrl.threadOrientation == 'right'? 'reference-display-backward' : 'reference-display-forward'),
+					text:'Threads',
+					tooltip: {title:'Threads',text:'Show issues/annotaions as references or follow-ups of the current annotation.'},
+					iconCls: (thisCtrl.threadOrientation == 'right'? 'reference-display-backward' : 'reference-display-forward'),
 					iconAlign: 'top',
 					handler: thisCtrl.onThreadClick
 				},
 				'-',
 				{
 					id: 'annotation-edit-btn',
-            		text:'Edit',
-            		tooltip: {title:'Edit',text:'Modify the current annotation.'},
-            		iconCls: 'annotation-edit-icon',
+					text:'Edit',
+					tooltip: {title:'Edit',text:'Modify the current annotation.'},
+					iconCls: 'annotation-edit-icon',
 					iconAlign: 'top',
 					disabled: true,
 					handler: thisCtrl.onEditClick
@@ -3131,15 +3132,22 @@ GeoAnnotator.AnnotationInfoPanelCtrl =
 				'-',
 				{
 					id: 'annotation-delete-btn',
-            		text:'Delete',
-            		tooltip: {title:'Delete',text:'Delete the current annotation.'},
-            		iconCls: 'annotation-delete-icon',
+					text:'Delete',
+					tooltip: {title:'Delete',text:'Delete the current annotation.'},
+					iconCls: 'annotation-delete-icon',
 					iconAlign: 'top',
 					disabled: true,
 					handler: thisCtrl.onDeleteClick
+				},
+				'-',
+				{
+					id: 'code-display-btn',
+					text: 'Code',
+					tooltip: {title:'Code',text:'Add code to the annotation.'},
+					handler: thisCtrl.onCodeClick
 				}
 				]
-        });
+		});
 		
 		thisCtrl.annotationInfoWrapper = new Ext.Panel({
 			id: 'annotationInfo-wrapper-panel',
@@ -3151,7 +3159,7 @@ GeoAnnotator.AnnotationInfoPanelCtrl =
 			//anchor: '100%',
 			//autoScroll: true,
 			items: [thisCtrl.annotationInfoDisplayPanel]//, thisCtrl.referenceSpaceTreePanel]
-		})
+		}),
 		
 		
 		thisCtrl.containerPanel.add(thisCtrl.annotationInfoWrapper);
@@ -3159,11 +3167,11 @@ GeoAnnotator.AnnotationInfoPanelCtrl =
 		thisCtrl.containerPanel.getEl().on('contextmenu', function(evt, div) {
 			var thisCtrl = GeoAnnotator.AnnotationInfoPanelCtrl; 
 			if(!thisCtrl.contextMenu){ // create context menu on first right click
-            	thisCtrl.contextMenu = new Ext.menu.Menu({
-                	id:'annotation-panel-ctx',
-                	items: []
-            	});
-        	}
+				thisCtrl.contextMenu = new Ext.menu.Menu({
+					id:'annotation-panel-ctx',
+					items: []
+				});
+			}
 			thisCtrl.contextMenu.removeAll();
 			if (thisCtrl.currAnnotationInfo && thisCtrl.currAnnotationInfo.id) {
 				var editingAnnotationId = GeoAnnotator.ContributePanelCtrl.contributeFormPanel.getForm().findField('newAnnotationId').getValue();
@@ -3193,30 +3201,30 @@ GeoAnnotator.AnnotationInfoPanelCtrl =
 				});
 				thisCtrl.contextMenu.add({
 					id: 'reference-display-ctx',
-            		text:'Threads',
-            		iconCls: 'reference-display-icon',
+					text:'Threads',
+					iconCls: 'reference-display-icon',
 					handler: thisCtrl.onThreadClick
 				});
 				if (thisCtrl.currAnnotationInfo.userId == GeoAnnotator.currUserId 
 			&& parseInt(thisCtrl.currAnnotationInfo.replies) <= 0) {
 					thisCtrl.contextMenu.add({
 						id: 'annotation-edit-ctx',
-	            		text:'Edit',
-	            		iconCls: 'annotation-edit-icon',
+						text:'Edit',
+						iconCls: 'annotation-edit-icon',
 						handler: thisCtrl.onEditClick
 					});
 					thisCtrl.contextMenu.add({
 						id: 'annotation-delete-ctx',
-	            		text:'Delete',
-	            		iconCls: 'annotation-delete-icon',
+						text:'Delete',
+						iconCls: 'annotation-delete-icon',
 						handler: thisCtrl.onDeleteClick
 					});
 				}
-                thisCtrl.contextMenu.add({
-                    id: 'code-display-ctx',
-                    text: 'Code',
-                    handler: thisCtrl.onCodeClick
-                })
+				thisCtrl.contextMenu.add({
+					id: 'code-display-ctx',
+					text: 'Code',
+					handler: thisCtrl.onCodeClick
+				});
 				thisCtrl.contextMenu.showAt(evt.getXY());
 				evt.preventDefault();
 			}
@@ -3238,10 +3246,18 @@ GeoAnnotator.AnnotationInfoPanelCtrl =
 		
 		// request the annotation information
 		Ext.Ajax.request({
-   			url: GeoAnnotator.baseUrl + 'annotation/',
-   			success: thisCtrl.onLoadAnnotationInfoSuccess,
-   			failure: thisCtrl.onLoadAnnotationInfoFailure,
-   			params: {'annotationId':GeoAnnotator.currAnnotationId, 'userId':GeoAnnotator.currUserId, 'forumId': GeoAnnotator.currForumId}
+			url: GeoAnnotator.baseUrl + 'annotation/',
+			success: thisCtrl.onLoadAnnotationInfoSuccess,
+			failure: thisCtrl.onLoadAnnotationInfoFailure,
+			params: {'annotationId':GeoAnnotator.currAnnotationId, 'userId':GeoAnnotator.currUserId, 'forumId': GeoAnnotator.currForumId}
+		});
+		Ext.Ajax.request({
+			url: GeoAnnotator.baseUrl + 'code/',
+			success: thisCtrl.onLoadCodeSuccess,
+			failure: function() {
+				alert('failed to get code info!');
+			},
+			params: {'annotationId': GeoAnnotator.currAnnotationId}
 		});
 	},
 	
@@ -3251,8 +3267,19 @@ GeoAnnotator.AnnotationInfoPanelCtrl =
 		var html = '';
 		html +='<div id="annotationInfoHeader">On ' + thisCtrl.currAnnotationInfo.timeCreated + ', <b>' + thisCtrl.currAnnotationInfo.userName + '</b> says:</div>';		
 		var new_content = thisCtrl.parseAnnotationContent(thisCtrl.currAnnotationInfo.content);
-
+		//var code_content = thisCtrl.parseCodeContent(thisCtrl.currCode.content);
 		html += '<div id="annotationInfoContent">' + new_content + '</div>';
+		html += '<div id="annotationInfoHeader">Code:</div>'
+		html += '<div id="codeContent">';
+		if (thisCtrl.currCode.classification == undefined) {
+			html += 'No code added.<br>'
+		} else {
+			html += '<b>Classification: </b>' + thisCtrl.currCode.classification + '<br>';
+			html += '<b>Description: </b>' + thisCtrl.currCode.description + '<br>';
+			html += '<b>Comment: </b>' + thisCtrl.currCode.comment + '<br>';
+		}
+		html += '</div>';
+
 		thisCtrl.annotationInfoDisplayPanel.body.update(html);
 		ref_links = Ext.query('.ref-link');
 		for (var i=0; i < ref_links.length; i++) {
@@ -3288,8 +3315,8 @@ GeoAnnotator.AnnotationInfoPanelCtrl =
 		var thisCtrl = GeoAnnotator.AnnotationInfoPanelCtrl;
 		// request the annotation information
 		Ext.Ajax.request({
-   			url: GeoAnnotator.baseUrl + 'annotation/',
-   			success: function(xhr, options) {
+			url: GeoAnnotator.baseUrl + 'annotation/',
+			success: function(xhr, options) {
 				var annotationInfo = Ext.util.JSON.decode(xhr.responseText);
 				if (annotationInfo != null) {
 					GeoAnnotator.currAnnotationId = annotationInfo.id;
@@ -3297,10 +3324,10 @@ GeoAnnotator.AnnotationInfoPanelCtrl =
 					//GeoAnnotator.MapPanelCtrl.update();
 				}
 			},
-   			failure: function() {
+			failure: function() {
 				alert('failed to load annotation info!');
 			},
-   			params: {'annotationId':annotationId, 'userId':GeoAnnotator.currUserId, 'forumId': GeoAnnotator.currForumId}
+			params: {'annotationId':annotationId, 'userId':GeoAnnotator.currUserId, 'forumId': GeoAnnotator.currForumId}
 		});
 	},
 	
@@ -3308,8 +3335,8 @@ GeoAnnotator.AnnotationInfoPanelCtrl =
 		var thisCtrl = GeoAnnotator.AnnotationInfoPanelCtrl;
 				// request the annotation information
 		Ext.Ajax.request({
-   			url: GeoAnnotator.baseUrl + 'annotation/',
-   			success: function(xhr, options) {
+			url: GeoAnnotator.baseUrl + 'annotation/',
+			success: function(xhr, options) {
 				var thisCtrl = GeoAnnotator.AnnotationInfoPanelCtrl;
 				var annotationInfo = Ext.util.JSON.decode(xhr.responseText);
 				if (annotationInfo != null) {
@@ -3317,17 +3344,17 @@ GeoAnnotator.AnnotationInfoPanelCtrl =
 						//closable: true,
 						//autoHide: false,
 						width: 200,
-        				target: options.target,
-        				html: '<i>'+annotationInfo.userName + '</i> says: <br>' + annotationInfo.excerpt
-    				});
+						target: options.target,
+						html: '<i>'+annotationInfo.userName + '</i> says: <br>' + annotationInfo.excerpt
+					});
 					
 					//alert(annotationInfo.content);
 				}
 			},
-   			failure: function() {
+			failure: function() {
 				alert('failed to load annotation info!');
 			},
-   			params: {'annotationId':annotationId, 'userId':GeoAnnotator.currUserId, 'forumId': GeoAnnotator.currForumId},
+			params: {'annotationId':annotationId, 'userId':GeoAnnotator.currUserId, 'forumId': GeoAnnotator.currForumId},
 			target: target
 		});
 
@@ -3337,7 +3364,7 @@ GeoAnnotator.AnnotationInfoPanelCtrl =
 		var regex = /\[\[[a-z,0-9,|,_,\s]+\]\]/gi;
 		var match = null;
 		if(regex.test(content)) {
-  			var matches = content.match(regex);
+			var matches = content.match(regex);
 			for (var i=0; i < matches.length; i++) {
 				match = matches[i];
 				var extracted = match.substring(2, match.length-2);
@@ -3352,9 +3379,18 @@ GeoAnnotator.AnnotationInfoPanelCtrl =
 	
 	updateCodePanel : function() {
 		var thisCtrl = GeoAnnotator.AnnotationInfoPanelCtrl;
-		var html = '<div id="' + thisCtrl.codeContainer + '"></div>';
-		if (thisCtrl.codePanel.body) {
-			thisCtrl.codePanel.body.update(html);	
+		if (thisCtrl.currCode.classification == undefined) { // no code available
+			thisCtrl.codePanel.getComponent('codeClassification').setValue('None');
+			thisCtrl.codePanel.getComponent('codeDescription').setValue('');
+			thisCtrl.codePanel.getComponent('codeComment').setValue('');
+			thisCtrl.codePanel.getFooterToolbar().getComponent("codeDeleteBtn").setDisabled(true);
+			thisCtrl.codePanel.getFooterToolbar().getComponent("codeSubmitBtn").setText("Submit");
+		} else { // retrive current code
+			thisCtrl.codePanel.getComponent('codeClassification').setValue(thisCtrl.currCode.classification);
+			thisCtrl.codePanel.getComponent('codeDescription').setValue(thisCtrl.currCode.description);
+			thisCtrl.codePanel.getComponent('codeComment').setValue(thisCtrl.currCode.comment);
+			thisCtrl.codePanel.getFooterToolbar().getComponent("codeDeleteBtn").setDisabled(false);
+			thisCtrl.codePanel.getFooterToolbar().getComponent("codeSubmitBtn").setText("Update");
 		}
 	},
 
@@ -3378,26 +3414,26 @@ GeoAnnotator.AnnotationInfoPanelCtrl =
 		thisCtrl.spaceTree = Raphael(thisCtrl.spaceTreeContainer, w, h);
 		
 		Ext.Ajax.request({
-   			url: GeoAnnotator.baseUrl + 'threads/',
-   			success: thisCtrl.onLoadThreadsInfoSuccess,
-   			failure: function() {
+			url: GeoAnnotator.baseUrl + 'threads/',
+			success: thisCtrl.onLoadThreadsInfoSuccess,
+			failure: function() {
 				alert('failed to load tree annotation info!');
 			},
-   			params: {'annotationId':thisCtrl.currAnnotationInfo.id, 'userId':GeoAnnotator.currUserId, 'forumId': GeoAnnotator.currForumId}
+			params: {'annotationId':thisCtrl.currAnnotationInfo.id, 'userId':GeoAnnotator.currUserId, 'forumId': GeoAnnotator.currForumId}
 		});
 	},
 	/*
 	  params: {
-                'userId': GeoAnnotator.currUserId,
-                'forumId': GeoAnnotator.currForumId
-            }
+				'userId': GeoAnnotator.currUserId,
+				'forumId': GeoAnnotator.currForumId
+			}
 	*/
 	onLoadThreadsInfoSuccess : function(xhr) {
 		var threadsInfo = Ext.util.JSON.decode(xhr.responseText);
 		var thisCtrl = GeoAnnotator.AnnotationInfoPanelCtrl;
 		var w = thisCtrl.referenceSpaceTreePanel.getInnerWidth();
 		var h = thisCtrl.referenceSpaceTreePanel.getInnerHeight();
-	 	if (thisCtrl.spaceTree) {
+		if (thisCtrl.spaceTree) {
 			thisCtrl.spaceTree.clear();
 		}
 		else {
@@ -3466,7 +3502,7 @@ GeoAnnotator.AnnotationInfoPanelCtrl =
 		var thisCtrl = GeoAnnotator.AnnotationInfoPanelCtrl;
 		var top = y - 0.5 * height;
 		var left = x - 0.5 * width;
-		var thread_node = {}
+		var thread_node = {};
 		
 		var box = thisCtrl.spaceTree.rect(left, top, width, height,(role? 0:10)).attr(style["default"]);
 		var label = thisCtrl.spaceTree.text(x, y, threadNodeInfo.userName + ":\n" + threadNodeInfo.excerpt.substring(0, 20)).attr(style["text"]);
@@ -3481,16 +3517,16 @@ GeoAnnotator.AnnotationInfoPanelCtrl =
 		thread_node.box = box;
 		thread_node.label = label;
 		thread_node.blanket = blanket;
-		thread_node.role=threadNodeInfo.role
+		thread_node.role=threadNodeInfo.role;
 		box.thread_node = thread_node;
 		label.thread_node = thread_node;
 		blanket.thread_node = thread_node;
 		blanket.hover(
 			function (event) {
-    			this.thread_node.box.attr(style["hover"]);
+				this.thread_node.box.attr(style["hover"]);
 			}, 
 			function (event) {
-    			this.thread_node.box.attr(style["default"]);
+				this.thread_node.box.attr(style["default"]);
 			}
 		);
 		blanket.click(
@@ -3546,40 +3582,50 @@ GeoAnnotator.AnnotationInfoPanelCtrl =
 	
 	switchThreadOrientation : function (m, pressed){
 		var thisCtrl = GeoAnnotator.AnnotationInfoPanelCtrl;
-        if(!m){ // cycle if not a menu item click
-        	var referenceDisplayMenu = Ext.menu.MenuMgr.get('reference-display-menu');
-            referenceDisplayMenu.render();
-            var items = referenceDisplayMenu.items.items;
-            var f = items[0], b = items[1];
-            if(f.checked){
-                b.setChecked(true);
-            }else if(b.checked){
-                f.setChecked(true);
-            }
-            return;
-        }
-        if(pressed){
+		if(!m){ // cycle if not a menu item click
+			var referenceDisplayMenu = Ext.menu.MenuMgr.get('reference-display-menu');
+			referenceDisplayMenu.render();
+			var items = referenceDisplayMenu.items.items;
+			var f = items[0], b = items[1];
+			if(f.checked){
+				b.setChecked(true);
+			}else if(b.checked){
+				f.setChecked(true);
+			}
+			return;
+		}
+		if(pressed){
 			var btn = thisCtrl.annotationInfoWrapper.getTopToolbar().items.get('reference-display-btn');
-            switch(m.text){
-                case 'References':
+			switch(m.text){
+				case 'References':
 					btn.setIconClass('reference-display-backward');
 					thisCtrl.threadOrientation = 'right';
-                    break;
-                case 'Follow-ups':
-                    btn.setIconClass('reference-display-forward');
+					break;
+				case 'Follow-ups':
+					btn.setIconClass('reference-display-forward');
 					thisCtrl.threadOrientation = 'left';
-                    break;
-            }
+					break;
+			}
 			thisCtrl.update();
-        }
-    },
+		}
+	},
+	
+	onLoadCodeSuccess : function(xhr) {
+		var thisCtrl = GeoAnnotator.AnnotationInfoPanelCtrl;
+		thisCtrl.currCode = Ext.util.JSON.decode(xhr.responseText);
+		if (thisCtrl.currAnnotationInfo != null) {
+			thisCtrl.updatePanelContent();
+		}
+		return;
+	},
 	
 	onLoadAnnotationInfoSuccess : function (xhr) {
 		var thisCtrl = GeoAnnotator.AnnotationInfoPanelCtrl;
 		thisCtrl.currAnnotationInfo = Ext.util.JSON.decode(xhr.responseText);
 		if (thisCtrl.currAnnotationInfo != null) {
 			// update panel
-			thisCtrl.updatePanelContent();	
+			// postponed until code is loaded.
+			// thisCtrl.updatePanelContent();	
 			
 			// add to history
 			var item = {};
@@ -3616,10 +3662,10 @@ GeoAnnotator.AnnotationInfoPanelCtrl =
 		// change status
 		// request the annotation information
 		Ext.Ajax.request({
-   			url: GeoAnnotator.baseUrl + 'Annotation/',
-   			success: thisCtrl.onLoadSTAnnotationInfoSuccess,
-   			failure: thisCtrl.onLoadSTAnnotationInfoFailure,
-   			params: {'annotationId':id, 'userId':GeoAnnotator.currUserId, 'forumId': GeoAnnotator.currForumId}
+			url: GeoAnnotator.baseUrl + 'Annotation/',
+			success: thisCtrl.onLoadSTAnnotationInfoSuccess,
+			failure: thisCtrl.onLoadSTAnnotationInfoFailure,
+			params: {'annotationId':id, 'userId':GeoAnnotator.currUserId, 'forumId': GeoAnnotator.currForumId}
 		});
 	},
 	
@@ -3693,11 +3739,21 @@ GeoAnnotator.AnnotationInfoPanelCtrl =
 	
 	onCodeClick: function(){
 		var thisCtrl = GeoAnnotator.AnnotationInfoPanelCtrl;
+		thisCtrl.codeSchemeStore = new Ext.data.JsonStore({
+			autoDestroy: true,
+			autoLoad: true,
+			root: 'codescheme',
+			url: GeoAnnotator.baseUrl + 'codescheme/',
+			baseParams: {
+				'userId' : GeoAnnotator.currUserId
+			},
+			fields: ['classification', 'description']
+		});
 		if (thisCtrl.codeWindow === null) {
 			thisCtrl.codePanel = new Ext.FormPanel({
 				id: 'code-form',
-    			autoHeight : true,
-    			autoWidth : true,
+				autoHeight : true,
+				autoWidth : true,
 				bodyStyle: 'padding: 0 1 0 1;',
 				items : [
 				{
@@ -3708,113 +3764,171 @@ GeoAnnotator.AnnotationInfoPanelCtrl =
 				},
 				{
 					xtype: 'combo',
-					id : 'codePhase',
-					name : 'codePhase',
+					id : 'codeClassification',
+					name : 'codeClassification',
 					width: 200,
 					editable : false,
-					fieldLabel : 'Phase',
-					store: ['None', 'Phase 1', 'Phase 2', 'Phase 3', 'Phase 4', 'Phase 5'], 
-					displayField:'name',
-		    		typeAhead: true,
-		    		mode: 'local',
+					fieldLabel : 'Classification',
+					store: thisCtrl.codeSchemeStore, 
+					displayField:'classification',
+					typeAhead: true,
+					mode: 'local',
 					triggerAction: 'all',
-		    		value:'None',
-		    		selectOnFocus:true,
+					value:'None',
+					selectOnFocus:true,
+					listeners: {
+						'select' : thisCtrl.onCodeSelect
+					}
 				},
 				{
-					xtype: 'combo',
+					xtype: 'textarea',
+					id : 'codeDescription',
+					name : 'codeDescription',
+					width : 200,
+					height: 100,
+					autoScroll: true,
+					fieldLabel : 'Description',
+				},
+				{
+					xtype: 'textfield',
 					id : 'codeComment',
 					name : 'codeComment',
 					width: 200,
 					fieldLabel : 'Comment (optional)',
-					store: [ 
-						'Opinion or argument w/o reason', 
-						'Question', 
-						'Statement w/o reason', 
-						'Noise', 
-						'New idea',
-						'Clarifying stmt',
-						'Supporting stmt',
-						'Thread maintenance'
-					], 
-					displayField:'name',
-		    		typeAhead: true,
-		    		mode: 'local',
-					triggerAction: 'all',
-		    		value:'',
+					value:'',
 				}],
 
 				buttons: [
 				{
+					text : 'Delete',
+					id : 'codeDeleteBtn',
+					handler: thisCtrl.onCodeDelete,
+					disabled : true
+				},
+				{
 					text : 'Submit',
-					handler: thisCtrl.onPhaseSubmit
+					id : 'codeSubmitBtn',
+					handler: thisCtrl.onCodeSubmit
 				},
 				{
 					text : 'Cancel',
-					handler: thisCtrl.onPhaseCancel
+					handler: thisCtrl.onCodeCancel
 				}]
 			});
 
 			thisCtrl.codeWindow = new Ext.Window({
 						layout      : 'fit',
-         				//width       : 180,
-         				//height      : 300,
-         				closeAction :'hide',
-         				plain       : true,
+						//width       : 180,
+						//height      : 300,
+						closeAction :'hide',
+						plain       : true,
 						modal		: false,
 						items : [thisCtrl.codePanel],
 						title : 'Code view',
 			});
+
+			
 		}
-		else {
-			thisCtrl.updateCodePanel();
-		}
+		
+		thisCtrl.updateCodePanel();
+
 		thisCtrl.codeWindow.show();
 	},
 
-	onPhaseSubmit : function(){
+	// load the 'descsription' when a code is selected from ComboBox
+	onCodeSelect : function() {
 		var thisCtrl = GeoAnnotator.AnnotationInfoPanelCtrl;
+		var classification = thisCtrl.codePanel.getComponent('codeClassification').getValue();
+		var desc = thisCtrl.codeSchemeStore.query('classification', classification).item(0).get('description');
+		if (thisCtrl.codePanel != null) {
+			thisCtrl.codePanel.getComponent('codeDescription').setValue(desc);
+		}
+	},
+
+	onCodeSubmit : function(){
+		var thisCtrl = GeoAnnotator.AnnotationInfoPanelCtrl;
+
+		// get the current content in the form
 		var newCode = {};
 		newCode.id = thisCtrl.codePanel.getForm().findField('codeId').getValue();
 		newCode.annotationId = GeoAnnotator.currAnnotationId;
-		newCode.phase = thisCtrl.codePanel.getForm().findField('codePhase').getValue();
+		newCode.classification = thisCtrl.codePanel.getForm().findField('codeClassification').getValue();
+		newCode.description = thisCtrl.codePanel.getForm().findField('codeDescription').getValue();
 		newCode.comment = thisCtrl.codePanel.getForm().findField('codeComment').getValue();
+
+		if (thisCtrl.currCode.id != undefined) { // if exist, delete the old code first
+			Ext.Ajax.request({
+				url: GeoAnnotator.baseUrl + 'code/',
+				success: function() {
+					thisCtrl.update();
+					thisCtrl.codeWindow.hide();
+				},
+				failure: function() {
+					alert('Failed to modify code!');
+				},
+				params: {
+					'delete' : thisCtrl.currCode.id,
+				}
+			});
+		}
+		// then add the new code
 		Ext.Ajax.request({
 			url: GeoAnnotator.baseUrl + 'code/',
-			success: thisCtrl.onPhaseSubmitSuccess,
-			//failure: alert("failed!"),
+			success: function() {
+				thisCtrl.update();
+				thisCtrl.codeWindow.hide();
+			},
+			failure: function() {
+				alert("failed!");
+			},
 			params: newCode
 		});
 	},
 
-	onPhaseSubmitSuccess: function() {
+	onCodeCancel : function(){
 		var thisCtrl = GeoAnnotator.AnnotationInfoPanelCtrl;
 		thisCtrl.codeWindow.hide();
 	},
 
-	onPhaseCancel : function(){
+	onCodeDelete : function() {
 		var thisCtrl = GeoAnnotator.AnnotationInfoPanelCtrl;
-		thisCtrl.codeWindow.hide();
+		Ext.Msg.confirm('Confirm', 'Do you want to delete this code?', function(btn, text) {
+			if (btn == 'yes') {
+				Ext.Ajax.request({
+					url: GeoAnnotator.baseUrl + 'code/',
+					success: function() {
+						thisCtrl.update();
+						thisCtrl.codeWindow.hide();
+					},
+					failure: function() {
+						alert('Failed to delete code!');
+					},
+					params: {
+						'delete' : thisCtrl.currCode.id,
+					}
+				});
+			}
+		});
 	},
 
-    onAddNewAnnotationSuccess: function(xhr) {
-        var thisCtrl = GeoAnnotator.ContributePanelCtrl;
+	onAddNewAnnotationSuccess: function(xhr) {
+		var thisCtrl = GeoAnnotator.ContributePanelCtrl;
 		var submitState = Ext.util.JSON.decode(xhr.responseText);
 		if (submitState.success == true) {
-            // change the states
-            //alert('successfuly added!');
-            // reset the new footprints array
+			// change the states
+			//alert('successfuly added!');
+			// reset the new footprints array
 			
-            thisCtrl.newFootprints = [];
+			thisCtrl.newFootprints = [];
 			GeoAnnotator.currFootprintId = '0';
 
 			GeoAnnotator.currAnnotationId = submitState.data.id;
 
-            // update controls		
-            GeoAnnotator.TimelinePanelCtrl.update();
-            GeoAnnotator.AnnotationInfoPanelCtrl.update();
+			// update controls		
+			GeoAnnotator.TimelinePanelCtrl.update();
+			GeoAnnotator.AnnotationInfoPanelCtrl.update();
 			GeoAnnotator.ContributePanelCtrl.update();
-			var currParams = {}
+			var currParams = {};
 			if (GeoAnnotator.currUserId != '0'){
 				currParams.userId = GeoAnnotator.currUserId;	
 			}  
@@ -3826,28 +3940,28 @@ GeoAnnotator.AnnotationInfoPanelCtrl =
 			GeoAnnotator.ManageWindowCtrl.update();
 
 			thisCtrl.containerPanel.collapse(false);
-        }
-        else {
-            alert(submitState.errors.message);
-        }
-    },
+		}
+		else {
+			alert(submitState.errors.message);
+		}
+	},
 
 	onThreadClick: function(){
 		var thisCtrl = GeoAnnotator.AnnotationInfoPanelCtrl;
 		if (thisCtrl.referenceSpaceTreeWindow === null) {
 			thisCtrl.referenceSpaceTreePanel = new Ext.Panel({
 				id: 'reference-spaceTree-panel',
-    			//height:300,
+				//height:300,
 				bodyStyle: 'padding:0px;border-left:none;border-right:none;',
 				html : '<div id="' + thisCtrl.spaceTreeContainer + '"></div>'	
 			});
 
 			thisCtrl.referenceSpaceTreeWindow = new Ext.Window({
 						layout      : 'fit',
-         				width       : 600,
-         				height      : 480,
-         				closeAction :'hide',
-         				plain       : true,
+						width       : 600,
+						height      : 480,
+						closeAction :'hide',
+						plain       : true,
 						modal		: false,
 						items : [thisCtrl.referenceSpaceTreePanel],
 						title : 'Thread tree view',
@@ -3872,7 +3986,7 @@ GeoAnnotator.AnnotationInfoPanelCtrl =
 								tooltip: {title:'Display the user\'s nodes'}
 							}
 							]
-						})})
+						})});
 		}
 		else {
 			thisCtrl.updateReferenceSpaceTreePanel();
@@ -3915,142 +4029,142 @@ GeoAnnotator.ManageWindowCtrl = {
 	},
 	
 	createManagePanel: function() {
-    	var thisCtrl = GeoAnnotator.ManageWindowCtrl;
-        // create the Data Store
-        var manageListStore = new Ext.data.JsonStore({
-            root: 'annotations',
-            totalProperty: 'totalCount',
-            idProperty: 'id',
-            fields: [
-            'id', 'userName', 'shareLevel', 'replies',
-            {
-                name: 'timeCreated',
-                type: 'date'
-            },
-            'excerpt', 'type'],
-            proxy: new Ext.data.HttpProxy({
-                url: GeoAnnotator.baseUrl + 'annotations/'
-            }),
-            baseParams: {
-                userId: GeoAnnotator.currUserId,
-                forumId: GeoAnnotator.currForumId,
-                ownerOnly: 'True'
-            }
-        });
-        //var selModel = new Ext.grid.CheckboxSelectionModel();
-        thisCtrl.manageGridPanel = new Ext.grid.GridPanel({
-            //title:'Manage',
-            autoWidth: true,
-            autoScroll: true,
-            autoHeight: true,
-            id: 'manage-grid-panel',
-            //tabTip: 'Manage the annotations in the group',
-            store: manageListStore,
-            loadMask: true,
-            // grid columns
-            columns: [
-            //selModel,
-            {
-                header: 'Share Level',
-                dataIndex: 'shareLevel',
-                //width: 100,
-                renderer: function(value) {
-                    if (parseInt(value) == 3) {
-                        return 'Private';
-                    }
-                    else
-                    return 'Public';
-                },
-                sortable: true
-            },
-            {
-                header: "Type",
-                dataIndex: 'type',
-                //width: 100,
-                //hidden: true,
-                sortable: true
-            },
-            {
-                header: "Replies",
-                dataIndex: 'replies',
-                //width: 100,
-                sortable: true
-            },
-            {
-                header: "Date",
-                dataIndex: 'timeCreated',
-                renderer: Ext.util.Format.dateRenderer('m/d/Y'),
-                //width: 70,
-                //align: 'right',
-                sortable: true
-            }
-            ],
+		var thisCtrl = GeoAnnotator.ManageWindowCtrl;
+		// create the Data Store
+		var manageListStore = new Ext.data.JsonStore({
+			root: 'annotations',
+			totalProperty: 'totalCount',
+			idProperty: 'id',
+			fields: [
+			'id', 'userName', 'shareLevel', 'replies',
+			{
+				name: 'timeCreated',
+				type: 'date'
+			},
+			'excerpt', 'type'],
+			proxy: new Ext.data.HttpProxy({
+				url: GeoAnnotator.baseUrl + 'annotations/'
+			}),
+			baseParams: {
+				userId: GeoAnnotator.currUserId,
+				forumId: GeoAnnotator.currForumId,
+				ownerOnly: 'True'
+			}
+		});
+		//var selModel = new Ext.grid.CheckboxSelectionModel();
+		thisCtrl.manageGridPanel = new Ext.grid.GridPanel({
+			//title:'Manage',
+			autoWidth: true,
+			autoScroll: true,
+			autoHeight: true,
+			id: 'manage-grid-panel',
+			//tabTip: 'Manage the annotations in the group',
+			store: manageListStore,
+			loadMask: true,
+			// grid columns
+			columns: [
+			//selModel,
+			{
+				header: 'Share Level',
+				dataIndex: 'shareLevel',
+				//width: 100,
+				renderer: function(value) {
+					if (parseInt(value) == 3) {
+						return 'Private';
+					}
+					else
+					return 'Public';
+				},
+				sortable: true
+			},
+			{
+				header: "Type",
+				dataIndex: 'type',
+				//width: 100,
+				//hidden: true,
+				sortable: true
+			},
+			{
+				header: "Replies",
+				dataIndex: 'replies',
+				//width: 100,
+				sortable: true
+			},
+			{
+				header: "Date",
+				dataIndex: 'timeCreated',
+				renderer: Ext.util.Format.dateRenderer('m/d/Y'),
+				//width: 70,
+				//align: 'right',
+				sortable: true
+			}
+			],
 
-            // customize view config
-            viewConfig: {
-                forceFit: true,
-                enableRowBody: true,
-                showPreview: true,
-                getRowClass: function(record, rowIndex, p, store) {
-                    if (this.showPreview) {
-                        p.body = '<p><i>' + record.data.excerpt + '</i></p>';
-                        return 'x-grid3-row-expanded';
-                    }
-                    return 'x-grid3-row-collapsed';
-                }
-            },
-            //selModel  : selModel,
-            tbar: new Ext.Toolbar({
-                id: 'manage-grid-tbar',
-                items: [{
-                    pressed: true,
-                    enableToggle: true,
-                    text: 'Show Preview',
-                    //cls: 'x-btn-text-icon details',
-                    toggleHandler: function(btn, pressed) {
-                        var view = thisCtrl.manageGridPanel.getView();
-                        view.showPreview = pressed;
-                        view.refresh();
-                    }
-                },
-                {
-                    xtype: 'tbseparator'
-                },
-                {
-                    text: 'Edit',
-                    id: 'manage-annotation-edit-btn',
+			// customize view config
+			viewConfig: {
+				forceFit: true,
+				enableRowBody: true,
+				showPreview: true,
+				getRowClass: function(record, rowIndex, p, store) {
+					if (this.showPreview) {
+						p.body = '<p><i>' + record.data.excerpt + '</i></p>';
+						return 'x-grid3-row-expanded';
+					}
+					return 'x-grid3-row-collapsed';
+				}
+			},
+			//selModel  : selModel,
+			tbar: new Ext.Toolbar({
+				id: 'manage-grid-tbar',
+				items: [{
+					pressed: true,
+					enableToggle: true,
+					text: 'Show Preview',
+					//cls: 'x-btn-text-icon details',
+					toggleHandler: function(btn, pressed) {
+						var view = thisCtrl.manageGridPanel.getView();
+						view.showPreview = pressed;
+						view.refresh();
+					}
+				},
+				{
+					xtype: 'tbseparator'
+				},
+				{
+					text: 'Edit',
+					id: 'manage-annotation-edit-btn',
 					iconCls: 'annotation-edit-icon',
-                    disabled: true,
-                    handler: thisCtrl.onAnnotationEditClick
-                },
-                {
-                    text: 'Delete',
-                    id: 'manage-annotation-delete-btn',
+					disabled: true,
+					handler: thisCtrl.onAnnotationEditClick
+				},
+				{
+					text: 'Delete',
+					id: 'manage-annotation-delete-btn',
 					iconCls: 'annotation-delete-icon',
-                    disabled: true,
-                    handler: thisCtrl.onAnnotationDeleteClick
-                }]
-            }),
+					disabled: true,
+					handler: thisCtrl.onAnnotationDeleteClick
+				}]
+			}),
 
-            // paging bar on the bottom
-            bbar: new Ext.PagingToolbar({
-                store: manageListStore,
-                pageSize: 10,
-                displayInfo: true,
-                displayMsg: 'Annotations {0} - {1} of {2}',
-                emptyMsg: 'No Annotations to display'
-            })
-        });
+			// paging bar on the bottom
+			bbar: new Ext.PagingToolbar({
+				store: manageListStore,
+				pageSize: 10,
+				displayInfo: true,
+				displayMsg: 'Annotations {0} - {1} of {2}',
+				emptyMsg: 'No Annotations to display'
+			})
+		});
 
-        thisCtrl.manageGridPanel.on('rowclick', thisCtrl.onManageGridPanelRowClick);
+		thisCtrl.manageGridPanel.on('rowclick', thisCtrl.onManageGridPanelRowClick);
 
-        // trigger the data store load
-        manageListStore.load({
-            params: {
-                start: 0,
-                limit: 10
-            }
-        });
+		// trigger the data store load
+		manageListStore.load({
+			params: {
+				start: 0,
+				limit: 10
+			}
+		});
 
 		if (thisCtrl.containerPanel.items) {
 			thisCtrl.containerPanel.removeAll();
@@ -4064,101 +4178,101 @@ GeoAnnotator.ManageWindowCtrl = {
 			}	
 
 		});
-    },
+	},
 
 
-    update: function() {
-        var thisCtrl = GeoAnnotator.ManageWindowCtrl; 
+	update: function() {
+		var thisCtrl = GeoAnnotator.ManageWindowCtrl; 
 		thisCtrl.createManagePanel();
-    },
+	},
 
 
-    onManageGridPanelRowClick: function(grid, index, e) {
-        var thisCtrl = GeoAnnotator.ManageWindowCtrl;
-        var record = grid.getStore().getAt(index);
-        // change the states
+	onManageGridPanelRowClick: function(grid, index, e) {
+		var thisCtrl = GeoAnnotator.ManageWindowCtrl;
+		var record = grid.getStore().getAt(index);
+		// change the states
 		GeoAnnotator.currAnnotationId = record.get('id');
-        GeoAnnotator.currFootprintId = '0';
+		GeoAnnotator.currFootprintId = '0';
 
-        // update controls		
-        //GeoAnnotator.TimelinePanelCtrl.update();
-        GeoAnnotator.AnnotationInfoPanelCtrl.update();
-        //GeoAnnotator.AnnotationHistoryPanelCtrl.update();
-        //GeoAnnotator.MapPanelCtrl.update();
+		// update controls		
+		//GeoAnnotator.TimelinePanelCtrl.update();
+		GeoAnnotator.AnnotationInfoPanelCtrl.update();
+		//GeoAnnotator.AnnotationHistoryPanelCtrl.update();
+		//GeoAnnotator.MapPanelCtrl.update();
 
-        if (parseInt(record.get('shareLevel')) >= 3 || parseInt(record.get('replies')) <= 0) {
-            thisCtrl.manageGridPanel.getTopToolbar().items.get('manage-annotation-edit-btn').setDisabled(false);
-            thisCtrl.manageGridPanel.getTopToolbar().items.get('manage-annotation-delete-btn').setDisabled(false);
-        }
-        else {
-            thisCtrl.manageGridPanel.getTopToolbar().items.get('manage-annotation-edit-btn').setDisabled(true);
-            thisCtrl.manageGridPanel.getTopToolbar().items.get('manage-annotation-delete-btn').setDisabled(true);
-        }
-    },
+		if (parseInt(record.get('shareLevel')) >= 3 || parseInt(record.get('replies')) <= 0) {
+			thisCtrl.manageGridPanel.getTopToolbar().items.get('manage-annotation-edit-btn').setDisabled(false);
+			thisCtrl.manageGridPanel.getTopToolbar().items.get('manage-annotation-delete-btn').setDisabled(false);
+		}
+		else {
+			thisCtrl.manageGridPanel.getTopToolbar().items.get('manage-annotation-edit-btn').setDisabled(true);
+			thisCtrl.manageGridPanel.getTopToolbar().items.get('manage-annotation-delete-btn').setDisabled(true);
+		}
+	},
 
-    onAnnotationEditClick: function() {
-        var thisCtrl = GeoAnnotator.ManageWindowCtrl;
-        var contributeFormPanel = GeoAnnotator.ContributePanelCtrl.contributeFormPanel;
+	onAnnotationEditClick: function() {
+		var thisCtrl = GeoAnnotator.ManageWindowCtrl;
+		var contributeFormPanel = GeoAnnotator.ContributePanelCtrl.contributeFormPanel;
 		contributePanel.expand(false);
 		
-        var currAnnotationInfo = GeoAnnotator.AnnotationInfoPanelCtrl.currAnnotationInfo;
-        // 0. id
-        contributeFormPanel.getForm().findField('newAnnotationId').setValue(currAnnotationInfo.id);
-        // 1. content
-        contributeFormPanel.getForm().findField('newAnnotationContent').setValue(currAnnotationInfo.content);
-        // 2. shareLevel
-        var shareLevelGroup = contributeFormPanel.getForm().findField('shareLevelGroup').items;
-        for (var i = 0; i < shareLevelGroup.items.length; i++) {
-            if (shareLevelGroup.items[i].inputValue == currAnnotationInfo.shareLevel) {
-                shareLevelGroup.items[i].setValue(true);
-            }
-            else {
-                shareLevelGroup.items[i].setValue(false);
-            }
-        };
+		var currAnnotationInfo = GeoAnnotator.AnnotationInfoPanelCtrl.currAnnotationInfo;
+		// 0. id
+		contributeFormPanel.getForm().findField('newAnnotationId').setValue(currAnnotationInfo.id);
+		// 1. content
+		contributeFormPanel.getForm().findField('newAnnotationContent').setValue(currAnnotationInfo.content);
+		// 2. shareLevel
+		var shareLevelGroup = contributeFormPanel.getForm().findField('shareLevelGroup').items;
+		for (var i = 0; i < shareLevelGroup.items.length; i++) {
+			if (shareLevelGroup.items[i].inputValue == currAnnotationInfo.shareLevel) {
+				shareLevelGroup.items[i].setValue(true);
+			}
+			else {
+				shareLevelGroup.items[i].setValue(false);
+			}
+		};
 
 
-        contributeFormPanel.get('newAnnotationContent').focus();
-    },
+		contributeFormPanel.get('newAnnotationContent').focus();
+	},
 
-    onAnnotationDeleteClick: function() {
-        Ext.Msg.confirm('Delete the annotation?', 'Are you sure that you want to delete the current annotation?',
-        function(btn, text) {
-            if (btn == 'yes') {
-                var thisCtrl = GeoAnnotator.ManageWindowCtrl;
-                // request the deletion
-                Ext.Ajax.request({
-                    url: GeoAnnotator.baseUrl + 'annotation/',
-                    success: thisCtrl.onDeleteAnnotationSuccess,
-                    failure: thisCtrl.onDeleteAnnotationFailure,
-                    params: {
-                        'delete': GeoAnnotator.AnnotationInfoPanelCtrl.currAnnotationInfo.id,
-                        'userId': GeoAnnotator.currUserId,
-                        'forumId': GeoAnnotator.currForumId
-                    }
-                });
-            }
-        }
-        );
-    },
+	onAnnotationDeleteClick: function() {
+		Ext.Msg.confirm('Delete the annotation?', 'Are you sure that you want to delete the current annotation?',
+		function(btn, text) {
+			if (btn == 'yes') {
+				var thisCtrl = GeoAnnotator.ManageWindowCtrl;
+				// request the deletion
+				Ext.Ajax.request({
+					url: GeoAnnotator.baseUrl + 'annotation/',
+					success: thisCtrl.onDeleteAnnotationSuccess,
+					failure: thisCtrl.onDeleteAnnotationFailure,
+					params: {
+						'delete': GeoAnnotator.AnnotationInfoPanelCtrl.currAnnotationInfo.id,
+						'userId': GeoAnnotator.currUserId,
+						'forumId': GeoAnnotator.currForumId
+					}
+				});
+			}
+		}
+		);
+	},
 
-    onDeleteAnnotationSuccess: function(xhr) {
-        var thisCtrl = GeoAnnotator.ManageWindowCtrl;
+	onDeleteAnnotationSuccess: function(xhr) {
+		var thisCtrl = GeoAnnotator.ManageWindowCtrl;
 
-        GeoAnnotator.currAnnotationId = '0';
-        GeoAnnotator.currFootprintId = '0';
+		GeoAnnotator.currAnnotationId = '0';
+		GeoAnnotator.currFootprintId = '0';
 
-        // initialize controls
-        GeoAnnotator.AnnotationInfoPanelCtrl.init();
+		// initialize controls
+		GeoAnnotator.AnnotationInfoPanelCtrl.init();
 
-        // update controls		
-        GeoAnnotator.ContributePanelCtrl.update();
+		// update controls		
+		GeoAnnotator.ContributePanelCtrl.update();
 		thisCtrl.update();
-        GeoAnnotator.TimelinePanelCtrl.update();
-        GeoAnnotator.MapPanelCtrl.update();
-    },
+		GeoAnnotator.TimelinePanelCtrl.update();
+		GeoAnnotator.MapPanelCtrl.update();
+	},
 
-    onDeleteAnnotationFailoure: function () {
+	onDeleteAnnotationFailoure: function () {
 		alert('failed to delete annotation');	
 	}
 
@@ -4181,29 +4295,29 @@ GeoAnnotator.AnnotationHistoryWindowCtrl = {
 		var thisCtrl = GeoAnnotator.AnnotationHistoryWindowCtrl; 
 		thisCtrl.historyLength = 20;
 		var historyTpl = new Ext.XTemplate(
-        	'<tpl for=".">',
-        	'<div class="list-item">',
-            '<h3><span>{timeCreated:date("M d, Y")}</span>',
-            '{userName} says:</h3>',
-            '<p>{excerpt}</p>',
-        	'</div></tpl>'
-    	);
+			'<tpl for=".">',
+			'<div class="list-item">',
+			'<h3><span>{timeCreated:date("M d, Y")}</span>',
+			'{userName} says:</h3>',
+			'<p>{excerpt}</p>',
+			'</div></tpl>'
+		);
 		
 		// the data store of references
 		thisCtrl.historyStore = new Ext.data.SimpleStore({
-  			fields: ['id', 'type', 'userName', {name: 'timeCreated', type: 'date'}, 'excerpt'],
-  			data : []
+			fields: ['id', 'type', 'userName', {name: 'timeCreated', type: 'date'}, 'excerpt'],
+			data : []
 		});
 		// the data list of references
 		thisCtrl.historyList = new Ext.DataView({
-            tpl: historyTpl,
-        	store: thisCtrl.historyStore,
-        	itemSelector: 'div.list-item',
+			tpl: historyTpl,
+			store: thisCtrl.historyStore,
+			itemSelector: 'div.list-item',
 			multiSelect: true,
 			selectedClass: 'list-item-selected', 
 			overClass:'list-item-over',
 			emptyText : 'No History'
-    	});
+		});
 	
 		thisCtrl.historyList.on('click', thisCtrl.onHistoryItemClick);
 		thisCtrl.historyList.on('contextmenu', thisCtrl.onHistoryContextMenu);
@@ -4244,24 +4358,24 @@ GeoAnnotator.AnnotationHistoryWindowCtrl = {
 		thisCtrl.ctxArguments = arguments;
 		thisCtrl.ctxNodeIndex = index;
 		if(!thisCtrl.contextMenu){ // create context menu on first right click
-            thisCtrl.contextMenu = new Ext.menu.Menu({
-                id:'history-ctx',
-                items: [{
-                    id:'quick-reply',
-                    iconCls:'quick-reply-icon',
-                    text:'Quick Reply',
-                    scope: thisCtrl,
-                    handler:function(){
+			thisCtrl.contextMenu = new Ext.menu.Menu({
+				id:'history-ctx',
+				items: [{
+					id:'quick-reply',
+					iconCls:'quick-reply-icon',
+					text:'Quick Reply',
+					scope: thisCtrl,
+					handler:function(){
 						var thisCtrl = GeoAnnotator.AnnotationHistoryWindowCtrl;
 						// show as the current annotation
 						thisCtrl.ctxArguments[0].fireEvent('click', thisCtrl.ctxArguments[0], thisCtrl.ctxArguments[1], thisCtrl.ctxArguments[2], thisCtrl.ctxArguments[3]);
 						// pop up the quick reply window
 						GeoAnnotator.AnnotationHistoryWindowCtrl.onCommentClick();
-                    }
-                },{
-                    iconCls:'add-reference-icon',
-                    text:'Add to References',
-                    scope: thisCtrl,
+					}
+				},{
+					iconCls:'add-reference-icon',
+					text:'Add to References',
+					scope: thisCtrl,
 					handler:function(){
 						/*
 							TODO change to new contribute panel
@@ -4279,22 +4393,22 @@ GeoAnnotator.AnnotationHistoryWindowCtrl = {
 						}
 						groupCtrl.referenceStore.insert(0,record);
 						*/
-                    }
-                },'-',{
-                    text:'Remove',
-                    iconCls:'remove-icon',
-                    scope: thisCtrl,
-                    handler:function(){
+					}
+				},'-',{
+					text:'Remove',
+					iconCls:'remove-icon',
+					scope: thisCtrl,
+					handler:function(){
 						GeoAnnotator.AnnotationHistoryWindowCtrl.historyStore.removeAt(thisCtrl.ctxNodeIndex);
-                    }
-                }]
-            });
-        }
-        
-        //this.ctxNode.ui.addClass('x-node-ctx');
+					}
+				}]
+			});
+		}
+		
+		//this.ctxNode.ui.addClass('x-node-ctx');
 		e.preventDefault();
-        thisCtrl.contextMenu.showAt(e.getXY());
-        	
+		thisCtrl.contextMenu.showAt(e.getXY());
+			
 	},
 	
 	add : function (item) {
@@ -4332,29 +4446,29 @@ GeoAnnotator.AnnotationBookmarkWindowCtrl = {
 	init : function () {
 		var thisCtrl = GeoAnnotator.AnnotationBookmarkWindowCtrl; 
 		var bookmarkTpl = new Ext.XTemplate(
-        	'<tpl for=".">',
-        	'<div class="list-item">',
-            '<h3><span>{timeCreated:date("M d, Y")}</span>',
-            '{userName} says:</h3>',
-            '<p>{excerpt}</p>',
-        	'</div></tpl>'
-    	);
+			'<tpl for=".">',
+			'<div class="list-item">',
+			'<h3><span>{timeCreated:date("M d, Y")}</span>',
+			'{userName} says:</h3>',
+			'<p>{excerpt}</p>',
+			'</div></tpl>'
+		);
 		
 		// the data store of references
 		thisCtrl.bookmarkStore = new Ext.data.SimpleStore({
-  			fields: ['id', 'type', 'userName', {name: 'timeCreated', type: 'date'}, 'excerpt'],
-  			data : []
+			fields: ['id', 'type', 'userName', {name: 'timeCreated', type: 'date'}, 'excerpt'],
+			data : []
 		});
 		// the data list of references
 		thisCtrl.bookmarkList = new Ext.DataView({
-            tpl: bookmarkTpl,
-        	store: thisCtrl.bookmarkStore,
-        	itemSelector: 'div.list-item',
+			tpl: bookmarkTpl,
+			store: thisCtrl.bookmarkStore,
+			itemSelector: 'div.list-item',
 			multiSelect: true,
 			selectedClass: 'list-item-selected', 
 			overClass:'list-item-over',
 			emptyText : 'No Bookmarks'
-    	});
+		});
 		thisCtrl.bookmarkList.on('click', thisCtrl.onBookmarkItemClick);
 		thisCtrl.bookmarkList.on('contextmenu', thisCtrl.onBookmarkContextMenu);
 		
@@ -4388,24 +4502,24 @@ GeoAnnotator.AnnotationBookmarkWindowCtrl = {
 		thisCtrl.ctxArguments = arguments;
 		thisCtrl.ctxNodeIndex = index;
 		if(!thisCtrl.contextMenu){ // create context menu on first right click
-            thisCtrl.contextMenu = new Ext.menu.Menu({
-                id:'bookmark-ctx',
-                items: [{
-                    id:'quick-reply',
-                    iconCls:'quick-reply-icon',
-                    text:'Quick Reply',
-                    scope: thisCtrl,
-                    handler:function(){
+			thisCtrl.contextMenu = new Ext.menu.Menu({
+				id:'bookmark-ctx',
+				items: [{
+					id:'quick-reply',
+					iconCls:'quick-reply-icon',
+					text:'Quick Reply',
+					scope: thisCtrl,
+					handler:function(){
 						// show as the current annotation
 						var thisCtrl = GeoAnnotator.AnnotationBookmarkWindowCtrl;
 						thisCtrl.ctxArguments[0].fireEvent('click', thisCtrl.ctxArguments[0], thisCtrl.ctxArguments[1], thisCtrl.ctxArguments[2], thisCtrl.ctxArguments[3]);
 						// pop up the quick reply window
 						GeoAnnotator.AnnotationInfoPanelCtrl.onCommentClick();
-                    }
-                },{
-                    iconCls:'add-reference-icon',
-                    text:'Add to References',
-                    scope: thisCtrl,
+					}
+				},{
+					iconCls:'add-reference-icon',
+					text:'Add to References',
+					scope: thisCtrl,
 					handler:function(){
 						/*
 							TODO change to new contribute panel
@@ -4423,22 +4537,22 @@ GeoAnnotator.AnnotationBookmarkWindowCtrl = {
 						}
 						groupCtrl.referenceStore.insert(0,record);
 						*/
-                    }
-                },'-',{
-                    text:'Remove',
-                    iconCls:'remove-icon',
-                    scope: thisCtrl,
-                    handler:function(){
+					}
+				},'-',{
+					text:'Remove',
+					iconCls:'remove-icon',
+					scope: thisCtrl,
+					handler:function(){
 						GeoAnnotator.AnnotationBookmarkWindowCtrl.bookmarkStore.removeAt(thisCtrl.ctxNodeIndex);
-                    }
-                }]
-            });
-        }
-        
-        //this.ctxNode.ui.addClass('x-node-ctx');
+					}
+				}]
+			});
+		}
+		
+		//this.ctxNode.ui.addClass('x-node-ctx');
 		e.preventDefault();
-        thisCtrl.contextMenu.showAt(e.getXY());
-        	
+		thisCtrl.contextMenu.showAt(e.getXY());
+			
 	},
 	
 	add : function (item) {
@@ -4469,9 +4583,9 @@ GeoAnnotator.AnnotationBookmarkWindowCtrl = {
 
 GeoAnnotator.Util = {
 	/**
- 	* Parse the XML document contained in the string argument and return 
- 	* a Document object that represents it.
- 	*/
+	* Parse the XML document contained in the string argument and return 
+	* a Document object that represents it.
+	*/
 	parseXML: function(text){
 		
 		  
