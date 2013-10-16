@@ -13,6 +13,7 @@ import json
 
 def api_dash_board(request):
     response = {}
+    print "dashboard"
     return render(request, 'dashboard.html', response)
 
 
@@ -20,6 +21,7 @@ def api_dash_board(request):
 def api_maintenance(request):
     #print "api_maintenance"
     response = {}
+    print "maintenanace"
     if 'forumId' in request.POST:
 
         #print request.POST       

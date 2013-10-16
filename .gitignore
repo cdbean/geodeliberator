@@ -24,3 +24,5 @@ Thumbs.db
 logs/
 
 urls.py
+
+api/migrations/
