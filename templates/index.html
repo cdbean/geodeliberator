@@ -1,4 +1,5 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+{% load staticfiles %}
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -7,14 +8,14 @@
 		<script src="http://code.jquery.com/jquery-migrate-1.1.1.min.js"></script> 
 		<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
 		<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
-		<link rel="stylesheet" type="text/css" href=".{{ STATIC_URL }}lib/ext-3.2.1/resources/css/ext-all.css">
-		<link rel="stylesheet" type="text/css" href=".{{ STATIC_URL }}lib/ext-3.2.1/resources/css/xtheme-gray.css">
-		<script type="text/javascript" src=".{{ STATIC_URL }}lib/ext-3.2.1/adapter/ext/ext-base.js"></script>
-		<script type="text/javascript" src=".{{ STATIC_URL }}lib/ext-3.2.1/ext-all.js"></script>
+		<link rel="stylesheet" type="text/css" href="{% static 'lib/ext-3.2.1/resources/css/ext-all.css' %}">
+		<link rel="stylesheet" type="text/css" href="{% static 'lib/ext-3.2.1/resources/css/xtheme-gray.css' %}">
+		<script type="text/javascript" src="{% static 'lib/ext-3.2.1/adapter/ext/ext-base.js' %}"></script>
+		<script type="text/javascript" src="{% static 'lib/ext-3.2.1/ext-all.js' %}"></script>
 <!--	<script type="text/javascript" src="lib/ext/data-view-plugins.js"></script>-->
 <!--    <script type="text/javascript" src="lib/OpenLayers/lib/OpenLayers.js"></script>-->
 <!--	<script type="text/javascript" src="OpenLayers/OpenLayers.js"></script>-->
-		<script type="text/javascript" src="http://openlayers.org/api/OpenLayers.js"></script>
+<script type="text/javascript" src="{% static 'lib/Openlayers-2.13.1/OpenLayers.js' %}"></script>
 <!--	<script type="text/javascript">
         Timeline_ajax_url='lib/timeline/timeline_ajax/simile-ajax-api.js';
         Timeline_urlPrefix='lib/timeline/timeline_js/';       
@@ -24,19 +25,20 @@
 -->
 		
 <!--	<script type="text/javascript" src="lib/JIT/Spacetree.js"></script>-->
-		<script type="text/javascript" src=".{{ STATIC_URL }}lib/raphael-min.js"></script>
+<script type="text/javascript" src="{% static 'lib/raphael-min.js' %}"></script>
 <!--		
 		<script type="text/javascript" src="lib/MooTools/mootools-1.2.1-core-nc.js"></script>
 		<script type="text/javascript" src="lib/MooTools/mootools-1.2-more.js"></script>
 		<script type="text/javascript" src="lib/JIT/Treemap.js"></script>
 -->		
 		<!-- custom includes -->
-    	<link rel="stylesheet" type="text/css" href=".{{ STATIC_URL }}styles/ext_main.css">
-		<script type="text/javascript" src=".{{ STATIC_URL }}lib/XMLWriter.js"></script>
+		<link rel="stylesheet" type="text/css" href="{% static 'styles/ext_main.css' %}">
+	<script type="text/javascript" src="{% static 'lib/XMLWriter.js' %}"></script>
 <!--	<script type="text/javascript" src="js/GeoAnnotator.min.js"></script>-->	     
-        <script src="http://maps.google.com/maps?file=api&amp;v=2&amp;sensor=true&amp;key=AIzaSyCPWMaP2464g2fgX0hyKJm39BiYmIu-hwo" type="text/javascript"></script>
-        <script type="text/javascript" src=".{{ STATIC_URL }}js/GeoAnnotator.js"></script>
-	    <script type="text/javascript" src=".{{ STATIC_URL }}js/ext_layout.js"></script>
+	<script src="http://maps.google.com/maps/api/js?v=3&amp;sensor=false"></script>
+<!--        <script src="http://maps.google.com/maps?file=api&amp;v=2&amp;sensor=true&amp;key=AIzaSyCPWMaP2464g2fgX0hyKJm39BiYmIu-hwo" type="text/javascript"></script> -->
+	<script type="text/javascript" src="{% static 'js/GeoAnnotator.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/ext_layout.js' %}"></script>
 	</head>
 	<body>
 		<!-- header-->

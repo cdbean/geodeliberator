@@ -15,6 +15,9 @@ framework.
 """
 import os
 import sys
+
+activate_this = '/var/www/geodeliberator/GEOENV/bin/activate_this.py'
+execfile(activate_this, dict(__file__=activate_this))
 sys.path = ['/var/www/geodeliberator'] + sys.path
 
 # We defer to a DJANGO_SETTINGS_MODULE already in the environment. This breaks

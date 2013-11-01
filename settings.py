@@ -1,4 +1,6 @@
 import os
+# mount on sub-url
+# FORCE_SCRIPT_NAME = "/geodeliberator"
 # Django settings for geodeliberator project.
 PROJECT_PATH = os.path.abspath(os.path.dirname(__file__))
 
@@ -27,7 +29,7 @@ DATABASES = {
 # although not all choices may be available on all operating systems.
 # If running in a Windows environment this must be set to the same as your
 # system time zone.
-TIME_ZONE = 'America/Chicago'
+TIME_ZONE = 'America/New_York'
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
@@ -111,3 +113,10 @@ INSTALLED_APPS = (
     'api',
     'users',
 )
+
+# Compress js and css file
+# to install it, run 'pip install django_compressor'
+COMPRESS_JS_FILTERS = [
+    'compressor.filters.template.TemplateFilter',
+]
+COMPRESS_ENABLED = True

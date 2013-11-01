@@ -26,3 +26,4 @@ logs/
 urls.py
 
 api/migrations/
+GEOENV/
