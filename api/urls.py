@@ -30,6 +30,9 @@ urlpatterns = patterns('',
     # below is the maintenance functions
     url(r'^/maintenance$', api_maintenance, name = 'api_dash_board'),
     url(r'^/$', api_maintenance, name = 'api_dash_board'),
+
+    url(r'^claims/$', api_claims, name='api_claims'),   
+    url(r'^claim/$', api_claim, name='api_claim'),
     
 )
 

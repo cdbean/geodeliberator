@@ -6,7 +6,7 @@ var GeoAnnotator = {
 	currUserId : '0',
 	currForumId : '0',
 	currAnnotationId : '0',
-	currFootprintId : '0',
+	currPlanId : '0',
 	isAdmin : false,
 	isOwner	: false,
 	isResearchModeOn : false,
@@ -18,12 +18,12 @@ var GeoAnnotator = {
 		this.currUserId = $('#userId').val();
 		this.currForumId = '0';
 		this.currAnnotationId = '0';
-		this.currFootprintId = '0';
+		this.currPlanId = '0';
 						
 		GeoAnnotator.ContainerTBCtrl.init();
 		
 		GeoAnnotator.MapPanelCtrl.init();
-		GeoAnnotator.TimelinePanelCtrl.init();
+		// GeoAnnotator.TimelinePanelCtrl.init();
 	
 		GeoAnnotator.AnnotationInfoPanelCtrl.init();
 		GeoAnnotator.ContributePanelCtrl.init();
@@ -48,7 +48,7 @@ var GeoAnnotator = {
 			if (this.currAnnotationId !== '0') {
 				GeoAnnotator.AnnotationInfoPanelCtrl.update();	
 			};
-			GeoAnnotator.TimelinePanelCtrl.update();
+			// GeoAnnotator.TimelinePanelCtrl.update();
 			GeoAnnotator.MapPanelCtrl.update();
 			GeoAnnotator.ManageWindowCtrl.update();
 		};	
@@ -165,26 +165,26 @@ GeoAnnotator.ContainerTBCtrl = {
 	
 		thisCtrl.containerTB.add(' ');
 		// 2. toggle History and bookmark windows
-		thisCtrl.containerTB.add({
-			id: 'timeline-btn',
-			iconCls: 'timeline-icon',
-			disabled : true,
-			pressed: false,
-			enableToggle: true,
-			toggleHandler: function(button, pressed){
-				if(pressed){
-					GeoAnnotator.TimelinePanelCtrl.containerPanel.expand(false);
-				}
-				else{
-					GeoAnnotator.TimelinePanelCtrl.containerPanel.collapse(false);
-				}
-			},
-			text: 'Timeline',
-			tooltip: {
-				title: 'Timeline',
-				text: 'Show the timeline'
-			}
-		});
+		// thisCtrl.containerTB.add({
+		// 	id: 'timeline-btn',
+		// 	iconCls: 'timeline-icon',
+		// 	disabled : true,
+		// 	pressed: false,
+		// 	enableToggle: true,
+		// 	toggleHandler: function(button, pressed){
+		// 		if(pressed){
+		// 			// GeoAnnotator.TimelinePanelCtrl.containerPanel.expand(false);
+		// 		}
+		// 		else{
+		// 			// GeoAnnotator.TimelinePanelCtrl.containerPanel.collapse(false);
+		// 		}
+		// 	},
+		// 	text: 'Timeline',
+		// 	tooltip: {
+		// 		title: 'Timeline',
+		// 		text: 'Show the timeline'
+		// 	}
+		// });
 		thisCtrl.containerTB.add({
 			id: 'annotation-history-btn',
 			iconCls: 'annotation-history-tab',
@@ -300,11 +300,11 @@ GeoAnnotator.ContainerTBCtrl = {
 								//Ext.Msg.alert('Status', obj.data.userId);
 								GeoAnnotator.currForumId = '0';
 								GeoAnnotator.currAnnotationId = '0';
-								GeoAnnotator.currFootprintId = '0';
+								GeoAnnotator.currPlanId = '0';
 		
 								GeoAnnotator.ContainerTBCtrl.init();
 								GeoAnnotator.MapPanelCtrl.init();
-								GeoAnnotator.TimelinePanelCtrl.init();
+								// GeoAnnotator.TimelinePanelCtrl.init();
 			
 								GeoAnnotator.AnnotationInfoPanelCtrl.init();
 								GeoAnnotator.ContributePanelCtrl.init();
@@ -417,7 +417,7 @@ GeoAnnotator.ContainerTBCtrl = {
 		}
 		var thisCtrl = GeoAnnotator.ContainerTBCtrl;
 		if (id && GeoAnnotator.currForumId != id) {
-			// reset the new footprints array
+			// reset the new plans array
 			GeoAnnotator.currForumId = id;
 			thisCtrl.containerTB.getComponent('forum-id-btn').enable();
 			thisCtrl.containerTB.getComponent('forum-edit-btn').setVisible(false);
@@ -426,7 +426,7 @@ GeoAnnotator.ContainerTBCtrl = {
 				thisCtrl.containerTB.getComponent('forum-edit-btn').enable();
 				thisCtrl.containerTB.getComponent('forum-edit-btn').setVisible(true);
 			}
-			thisCtrl.containerTB.getComponent('timeline-btn').enable();
+			//thisCtrl.containerTB.getComponent('timeline-btn').enable();
 			thisCtrl.containerTB.getComponent('annotation-history-btn').enable();
 			thisCtrl.containerTB.getComponent('annotation-bookmark-btn').enable();
 			if(GeoAnnotator.isAdmin)	thisCtrl.containerTB.getComponent('forum-user-select').enable();
@@ -442,7 +442,7 @@ GeoAnnotator.ContainerTBCtrl = {
 			//alert("current forum id has changed to: "+GeoAnnotator.currForumId);
 		}
 		GeoAnnotator.MapPanelCtrl.update(currParams);
-		GeoAnnotator.TimelinePanelCtrl.update();
+		//GeoAnnotator.TimelinePanelCtrl.update();
 		GeoAnnotator.ManageWindowCtrl.update();
 		
 		//GeoAnnotator.ContainerTBCtrl.admin_user_list.store.baseParams.forumId=GeoAnnotator.currForumId;
@@ -457,11 +457,11 @@ GeoAnnotator.ContainerTBCtrl = {
 		//alert(GeoAnnotator.currUserId);
 		var thisCtrl = GeoAnnotator.ContainerTBCtrl;
 		if (id && GeoAnnotator.currForumId != id) {
-			// reset the new footprints array
+			// reset the new plans array
 			//GeoAnnotator.currForumId = id;
 			thisCtrl.containerTB.getComponent('forum-id-btn').enable();
 			thisCtrl.containerTB.getComponent('forum-edit-btn').enable();// this need to be modified.
-			thisCtrl.containerTB.getComponent('timeline-btn').enable();
+			//thisCtrl.containerTB.getComponent('timeline-btn').enable();
 			thisCtrl.containerTB.getComponent('annotation-history-btn').enable();
 			thisCtrl.containerTB.getComponent('annotation-bookmark-btn').enable();
 		}		
@@ -474,7 +474,7 @@ GeoAnnotator.ContainerTBCtrl = {
 			currParams.forumId = GeoAnnotator.currForumId;
 		}
 		GeoAnnotator.MapPanelCtrl.update(currParams);
-		GeoAnnotator.TimelinePanelCtrl.update();
+		// GeoAnnotator.TimelinePanelCtrl.update();
 		GeoAnnotator.ManageWindowCtrl.update();
 	},
 
@@ -670,8 +670,8 @@ GeoAnnotator.ContainerTBCtrl = {
 GeoAnnotator.ContributePanelCtrl = {
 	containerPanel: null,
 	contributeFormPanel: null,
-	// new created footprints array
-	newFootprints : [],
+	// new created plans array
+	newPlans : [],
 
 	register: function(containerPanel) {
 		GeoAnnotator.ContributePanelCtrl.containerPanel = containerPanel;
@@ -679,7 +679,7 @@ GeoAnnotator.ContributePanelCtrl = {
 
 	init: function() {
 		var thisCtrl = GeoAnnotator.ContributePanelCtrl;
-		thisCtrl.newFootprints = [];
+		thisCtrl.newPlans = [];
 
 		if (!thisCtrl.contributeFormPanel) {
 			thisCtrl.createContributePanel();
@@ -724,24 +724,21 @@ GeoAnnotator.ContributePanelCtrl = {
 				anchor : 0,
 					value : new Date(),
 					allowBlank : false
-					},
-					{
-					//adde by FZ 0529
-					xtype: 'timefield',
-					//format : 'Y-m-d',
-					fieldLabel : 'Then define a Time', 
-					id : 'newAnnotationTime',
-					//submitFormat: 'Y-m-d H:i:s',
-					name : 'newAnnotationTime',
-					//value: new Date()
-					anchor : 0,
-					allowBlank : false,
-					increment: 1,
-					format     : 'H:i'
-					
-					},
-					//ƒ/ above
-					
+			},
+			{
+				//adde by FZ 0529
+				xtype: 'timefield',
+				//format : 'Y-m-d',
+				fieldLabel : 'Then define a Time', 
+				id : 'newAnnotationTime',
+				//submitFormat: 'Y-m-d H:i:s',
+				name : 'newAnnotationTime',
+				//value: new Date()
+				anchor : 0,
+				allowBlank : false,
+				increment: 1,
+				format     : 'H:i'
+			},
 			{
 				xtype: 'htmleditor',
 				id: 'newAnnotationContent',
@@ -982,22 +979,22 @@ GeoAnnotator.ContributePanelCtrl = {
 		return xw.flush();
 	},
 
-	addFootprintToReference: function(fpId, name) {
+	addPlanToReference: function(fpId, name) {
 		var thisCtrl = GeoAnnotator.ContributePanelCtrl;
 		var htmleditor = thisCtrl.contributeFormPanel.getForm().findField('newAnnotationContent');
 		htmleditor.focus();
 		//htmleditor.insertAtCursor ('[[' + name + '|fp' + id + ']]');
 		//htmleditor.setValue(htmleditor.getValue() + '[[' + name + '|fp' + id + ']]');
-		var link_html = '<a href="#" class="ref-link" id="ref-fp' + fpId + '">' + name + '</a>';
+		var link_html = '<a href="#" class="ref-link" id="ref-PLAN' + fpId + '">' + name + '</a>';
 		htmleditor.setValue(htmleditor.getValue() + link_html);
 	},
 	
-	removeFootprintFromReference: function(fpId){
+	removePlanFromReference: function(fpId){
 		var thisCtrl = GeoAnnotator.ContributePanelCtrl;
 		var htmleditor = thisCtrl.contributeFormPanel.getForm().findField('newAnnotationContent');
 		var content = htmleditor.getValue();
 		
-		var regex = /<a href=\"#\" class=\"ref-link\" id=\"ref-([fp,an]+-?[0-9]+)\">([a-z,0-9,_,\s,\-,\[,\]]+)<\/a>/gi; 
+		var regex = /<a href=\"#\" class=\"ref-link\" id=\"ref-([POST,PLAN]+-?[0-9]+)\">([a-z,0-9,_,\s,\-,\[,\]]+)<\/a>/gi; 
 		var input = content;
 		if(regex.test(input)) {
 			regex.lastIndex = 0;
@@ -1027,7 +1024,7 @@ GeoAnnotator.ContributePanelCtrl = {
 		var thisCtrl = GeoAnnotator.ContributePanelCtrl;
 		var htmleditor = thisCtrl.contributeFormPanel.getForm().findField('newAnnotationContent');
 		htmleditor.focus();
-		var link_html = '<a href="#" class="ref-link" id="ref-an' + anId + '">' + name + '</a>';
+		var link_html = '<a href="#" class="ref-link" id="ref-POST' + anId + '">' + name + '</a>';
 		htmleditor.setValue(htmleditor.getValue() + link_html);		
 	},
 	
@@ -1036,7 +1033,7 @@ GeoAnnotator.ContributePanelCtrl = {
 		var htmleditor = thisCtrl.contributeFormPanel.getForm().findField('newAnnotationContent');
 		var content = htmleditor.getValue();
 		
-		var regex = /<a href=\"#\" class=\"ref-link\" id=\"ref-([fp,an]+-?[0-9]+)\">([a-z,0-9,_,\s,\-,\[,\]]+)<\/a>/gi; 
+		var regex = /<a href=\"#\" class=\"ref-link\" id=\"ref-([PLAN,POST]+-?[0-9]+)\">([a-z,0-9,_,\s,\-,\[,\]]+)<\/a>/gi; 
 		var input = content;
 		if(regex.test(input)) {
 			regex.lastIndex = 0;
@@ -1054,7 +1051,7 @@ GeoAnnotator.ContributePanelCtrl = {
 				var match = matches[i].result;
 				var id = match[1];
 				var name = match[2];
-				if (id === 'an'+fpId) {
+				if (id === 'POST'+fpId) {
 					content = content.replace(match[0], '');
 				};
 			}
@@ -1100,13 +1097,15 @@ GeoAnnotator.ContributePanelCtrl = {
 		
 		
 		// 7. contextMap
-		newAnnotation.contextMap = thisCtrl.getContextMap();
+		// newAnnotation.contextMap = thisCtrl.getContextMap();
 		
-		// 8. references and footprints
-		newAnnotation.footprints = [];
-		newAnnotation.references = [];
-		var regex = /<a href=\"#\" class=\"ref-link\" id=\"ref-([fp,an]+-?[0-9]+)\">([a-z,0-9,_,\s,\-,\[,\]]+)<\/a>/gi; 
-		var input = newAnnotation.conten;
+		// 8. references
+		newAnnotation.planref = [];
+		newAnnotation.issueref = [];
+		newAnnotation.optionref = [];
+		newAnnotation.postref = [];
+		var regex = /<a href=\"#\" class=\"ref-link\" id=\"ref-([PLAN,OPT,ISSUE,POST]+-?[0-9]+)\">([a-z,0-9,_,\s,\-,\[,\]]+)<\/a>/gi; 
+		var input = newAnnotation.content;
 		if(regex.test(input)) {
 			regex.lastIndex = 0;
 			var matches = [];
@@ -1124,61 +1123,61 @@ GeoAnnotator.ContributePanelCtrl = {
 				var id = match[1];
 				var name = match[2];
 				
-				if (id.indexOf('fp') === 0) {
+				if (id.indexOf('PLAN') === 0) {
 					var exists = false;
-					for (var j=0; j < newAnnotation.footprints.length; j++) {
-						if (newAnnotation.footprints[j].id === id.substring(2)) {
+					for (var j=0; j < newAnnotation.planref.length; j++) {
+						if (newAnnotation.planref[j].id === id.substring(4)) {
 							exists = true;
 							break;
 						}
 					};
 					if (!exists) {
-						var footprint = {};
-						footprint.alias = name;
-						footprint.id = id.substring(2);		
-						if (id.indexOf('fp-') === 0) {
-							// new footprint
-							for (var j = 0; j < thisCtrl.newFootprints.length; j++) {
-								var feature = thisCtrl.newFootprints[j];
-								if (footprint.id == feature.attributes.id) {
+						var plan = {};
+						plan.alias = name;
+						plan.id = id.substring(4);		
+						if (id.indexOf('PLAN-') === 0) {
+							// new plan
+							for (var j = 0; j < thisCtrl.newPlans.length; j++) {
+								var feature = thisCtrl.newPlans[j];
+								if (plan.id == feature.attributes.id) {
 									var projWords = GeoAnnotator.MapPanelCtrl.map.projection.getCode().split(":");
-									footprint.srid = projWords[projWords.length - 1];
-									footprint.shape = new OpenLayers.Format.WKT().write(feature);
-									newAnnotation.footprints.push(footprint);
+									plan.srid = projWords[projWords.length - 1];
+									plan.shape = new OpenLayers.Format.WKT().write(feature);
+									newAnnotation.planref.push(plan);
 									break;
 								}
 							}
 						}
 						else {
-							// existing footprint
+							// existing plan
 							// allow annotation from other group/manuscript
-							newAnnotation.footprints.push(footprint);
+							newAnnotation.planref.push(plan);
 						}
 					}
 				}
-				else if (id.indexOf('an') === 0) {
+				else if (id.indexOf('POST') === 0) {
 					// reference
 					var exists = false;
-					for (var j=0; j < newAnnotation.references.length; j++) {
-						if (newAnnotation.references[j] === id.substring(2)) {
+					for (var j=0; j < newAnnotation.postref.length; j++) {
+						if (newAnnotation.postref[j] === id.substring(4)) {
 							exists = true;
 							break;
 						}
 					};
 					if (!exists) {				
-						newAnnotation.references.push(id.substring(2));
+						newAnnotation.postref.push(id.substring(4));
 					// below
 						var currAnnotationInfo = GeoAnnotator.AnnotationInfoPanelCtrl.currAnnotationInfo;
-						for (var k = 0; k < currAnnotationInfo.footprints.length; k++) {
-							var footprint = currAnnotationInfo.footprints[k];
+						for (var k = 0; k < currAnnotationInfo.planref.length; k++) {
+							var plan = currAnnotationInfo.planref[k];
 							var exists = false;
-							for (var j = 0; j < newAnnotation.footprints.length; j++) {
-								if (newAnnotation.footprints[j].id == footprint.id)
+							for (var j = 0; j < newAnnotation.planref.length; j++) {
+								if (newAnnotation.planref[j].id == plan.id)
 								exists = true;
 								break; 
 							}
 							if (!exists) {
-								newAnnotation.footprints.push(footprint);
+								newAnnotation.planref.push(plan);
 							}
 						
 							
@@ -1216,8 +1215,8 @@ GeoAnnotator.ContributePanelCtrl = {
 		// 4. references
 		//thisCtrl.referenceStore.removeAll();
 
-		// 5. footprints
-		//thisCtrl.footprintStore.removeAll();
+		// 5. plans
+		//thisCtrl.planStore.removeAll();
 
 	},
 	
@@ -1243,15 +1242,15 @@ GeoAnnotator.ContributePanelCtrl = {
 		if (submitState.success == true) {
 			// change the states
 			//alert('successfuly added!');
-			// reset the new footprints array
+			// reset the new plans array
 			
-			thisCtrl.newFootprints = [];
-			GeoAnnotator.currFootprintId = '0';
+			thisCtrl.newPlans = [];
+			GeoAnnotator.currPlanId = '0';
 
 			GeoAnnotator.currAnnotationId = submitState.data.id;
 
 			// update controls		
-			GeoAnnotator.TimelinePanelCtrl.update();
+			//GeoAnnotator.TimelinePanelCtrl.update();
 			GeoAnnotator.AnnotationInfoPanelCtrl.update();
 			GeoAnnotator.ContributePanelCtrl.update();
 			var currParams = {};
@@ -1288,22 +1287,33 @@ GeoAnnotator.MapPanelCtrl = {
 	baseLayer : null,
 	currLayers : [],
 	annotationVectors : null,
-	newFootprintVectors : null,
+	newPlanVectors : null,
 	annotationDistVectors : null,
 	// styles
-	footprintStyle : null,
-	newfootprintStyle: null,
+	planStyle : null,
+	newplanStyle: null,
 	// controls
 	navigationControl : null,
-	modifyNewFootprintControl : null,
-	selectFootprintControl: null,
-	drawFootprintControl : null,
+	modifyNewPlanControl : null,
+	selectPlanControl: null,
+	drawPlanControl : null,
 	
 	// feature when hovering
 	hoverFeature : null,
-	// context menu
+	// map context menu
 	contextMenu : null,
-	// annotation list window
+	postContextMenu: null,
+	claimContextMenu: null,
+
+	// annotation-claim window
+	annotationClaimWindows : null,
+	
+	currClaimId: null,
+
+	claimListWindow: null,
+	claimListStore: null,
+	claimListPanel: null,
+
 	annotationListWindow : null,
 	annotationListStore : null,
 	annotationListView : null,
@@ -1344,6 +1354,11 @@ GeoAnnotator.MapPanelCtrl = {
 			thisCtrl.annotationListWindow.close();
 			thisCtrl.annotationListWindow = null;
 		}
+
+		if (thisCtrl.annotationClaimWindows) {
+			thisCtrl.annotationClaimWindows.close();
+			thisCtrl.annotationClaimWindows = null;
+		}
 		thisCtrl.containerPanel.body.update('<div id="' + thisCtrl.mapDiv +'"></div>');	
 		
 		
@@ -1381,8 +1396,8 @@ GeoAnnotator.MapPanelCtrl = {
 					var id = thisCtrl.hoverFeature.attributes.id;
 					if (GeoAnnotator.ContributePanelCtrl.containerPanel.collapsed === false) {
 						thisCtrl.contextMenu.add({
-							id:'add-footprint-ctx',
-							iconCls:'add-footprint-icon',
+							id:'add-plan-ctx',
+							iconCls:'add-plan-icon',
 							text:'Add to reference',
 							scope: thisCtrl,
 							handler:function(){
@@ -1395,8 +1410,8 @@ GeoAnnotator.MapPanelCtrl = {
 					}
 					if (thisCtrl.hoverFeature.attributes.id.indexOf('-') === 0) {
 						thisCtrl.contextMenu.add({
-							id:'delete-footprint-ctx',
-							iconCls:'delete-footprint-icon',
+							id:'delete-plan-ctx',
+							iconCls:'delete-plan-icon',
 							text:'Delete',
 							scope: thisCtrl,
 							handler:function(){
@@ -1409,15 +1424,15 @@ GeoAnnotator.MapPanelCtrl = {
 							}
 						});
 						thisCtrl.contextMenu.add({
-							id:'modify-footprint-ctx',
-							iconCls:'modify-footprint-icon',
+							id:'modify-plan-ctx',
+							iconCls:'modify-plan-icon',
 							text:'Modify',
 							scope: thisCtrl,
 							handler:function(){
 								var thisCtrl = GeoAnnotator.MapPanelCtrl;
 								if (thisCtrl.hoverFeature !== null) {
 									thisCtrl.setModifyMode();
-									thisCtrl.modifyNewFootprintControl.selectControl.select(thisCtrl.hoverFeature);
+									thisCtrl.modifyNewPlanControl.selectControl.select(thisCtrl.hoverFeature);
 								}
 							}
 						});
@@ -1427,7 +1442,7 @@ GeoAnnotator.MapPanelCtrl = {
 				else {
 					thisCtrl.contextMenu.add({
 					id:'draw-polygon-ctx',
-					iconCls:'draw-footprint-icon',
+					iconCls:'draw-plan-icon',
 					text:'Draw polygon',
 					scope: thisCtrl,
 					handler:function(){
@@ -1437,7 +1452,7 @@ GeoAnnotator.MapPanelCtrl = {
 					});
 					thisCtrl.contextMenu.add({
 					id:'draw-line-ctx',
-					iconCls:'draw-footprint-icon',
+					iconCls:'draw-plan-icon',
 					text:'Draw line',
 					scope: thisCtrl,
 					handler:function(){
@@ -1454,7 +1469,7 @@ GeoAnnotator.MapPanelCtrl = {
 
 		});
 		
-		thisCtrl.footprintStyle = new OpenLayers.StyleMap({
+		thisCtrl.planStyle = new OpenLayers.StyleMap({
 			'default': new OpenLayers.Style({
 				strokeColor: "#EE4F44",
 				strokeOpacity: 1,
@@ -1515,7 +1530,7 @@ GeoAnnotator.MapPanelCtrl = {
 		select_style.strokeDashstyle = "dashdot";
 		select_style.cursor = 'pointer';
 		
-		thisCtrl.newfootprintStyle = new OpenLayers.StyleMap({
+		thisCtrl.newplanStyle = new OpenLayers.StyleMap({
 			'default': default_style,
 			'select': select_style,
 			'hover': hover_style
@@ -1533,9 +1548,9 @@ GeoAnnotator.MapPanelCtrl = {
 			if (GeoAnnotator.currUserId != '0'){
 				currParams.userId = GeoAnnotator.currUserId;	
 			} 
-			if (GeoAnnotator.currAnnotationId != '0') {
-				currParams.annotationId = GeoAnnotator.currAnnotationId;
-			}			
+			// if (GeoAnnotator.currAnnotationId != '0') {
+			// 	currParams.annotationId = GeoAnnotator.currAnnotationId;
+			// }			
 			if (GeoAnnotator.currForumId != '0'){
 				currParams.forumId = GeoAnnotator.currForumId;
 			}
@@ -1558,11 +1573,12 @@ GeoAnnotator.MapPanelCtrl = {
 				// load map view
 				thisCtrl.loadMap();
 				// load features
-				thisCtrl.loadFootprints();
+				thisCtrl.loadPlans();
 				thisCtrl.loadControls();
-				if (GeoAnnotator.currAnnotationId != '0') {
-					thisCtrl.update();
-				}
+				thisCtrl.updateMap();
+				//if (GeoAnnotator.currAnnotationId != '0') {
+				//	thisCtrl.update();
+				//}
 			}
 			else {
 				thisCtrl.updateMap();
@@ -1602,20 +1618,20 @@ GeoAnnotator.MapPanelCtrl = {
 		}
 		
 		thisCtrl.setNavigationMode();
-		// highlight footprints
-		if (GeoAnnotator.currFootprintId != '0') {
-			thisCtrl.moveToFeature(GeoAnnotator.currFootprintId);
+		// highlight plans
+		if (GeoAnnotator.currPlanId != '0') {
+			thisCtrl.moveToFeature(GeoAnnotator.currPlanId);
 		}
-		else if (thisCtrl.currMapInfo.footprints != null) {
-			for (var i = 0; i < thisCtrl.currMapInfo.footprints.length; i++) {
-				var footprint = thisCtrl.currMapInfo.footprints[i];
+		else if (thisCtrl.currMapInfo.plans != null) {
+			for (var i = 0; i < thisCtrl.currMapInfo.plans.length; i++) {
+				var plan = thisCtrl.currMapInfo.plans[i];
 				for (var i=0; i < thisCtrl.annotationVectors.features.length; i++) {
 					var feature = thisCtrl.annotationVectors.features[i];
-					if (feature.attributes.id === footprint.id) {
-						thisCtrl.selectFootprintControl.highlight(feature);						
+					if (feature.attributes.id === plan.id) {
+						thisCtrl.selectPlanControl.highlight(feature);						
 					}
 					else {
-						thisCtrl.selectFootprintControl.unhighlight(feature);
+						thisCtrl.selectPlanControl.unhighlight(feature);
 					}
 				};
 			}	
@@ -1794,42 +1810,42 @@ GeoAnnotator.MapPanelCtrl = {
 		}
 	},
 	
-	loadFootprints : function () {
+	loadPlans : function () {
 		var thisCtrl = GeoAnnotator.MapPanelCtrl;
 		//OpenLayers.Feature.Vector.style['default']['strokeWidth'] = '2';
 		var annotationVector = null;
 		var wktParser = new OpenLayers.Format.WKT();
 		
 		thisCtrl.annotationVectors = new OpenLayers.Layer.Vector(
-			'Annotation Footprints', {styleMap: thisCtrl.footprintStyle, displayInLayerSwitcher: true}
+			'Annotation Plans', {styleMap: thisCtrl.planStyle, displayInLayerSwitcher: true}
 		);		
 		thisCtrl.map.addLayer(this.annotationVectors);
 		
-		// load footprints
-		if (thisCtrl.currMapInfo.footprints != null) {
-			for (var i = 0; i < thisCtrl.currMapInfo.footprints.length; i++) {
-				var footprint = thisCtrl.currMapInfo.footprints[i];
+		// load plans
+		if (thisCtrl.currMapInfo.plans != null) {
+			for (var i = 0; i < thisCtrl.currMapInfo.plans.length; i++) {
+				var plan = thisCtrl.currMapInfo.plans[i];
 				
-				var feature = wktParser.read(footprint.shape);
-				origin_prj = new OpenLayers.Projection("EPSG:" + footprint.srid);
+				var feature = wktParser.read(plan.shape);
+				origin_prj = new OpenLayers.Projection("EPSG:" + plan.srid);
 				feature.geometry.transform(origin_prj, thisCtrl.map.projection);
 				feature.attributes = {};
-				feature.attributes.id = footprint.id;
-				if (footprint.refCount != null) {
-					feature.attributes.pointRadius = footprint.refCount * 5;
-					feature.attributes.refCount = footprint.refCount;
+				feature.attributes.id = plan.id;
+				if (plan.refCount != null) {
+					feature.attributes.pointRadius = plan.refCount * 5;
+					feature.attributes.refCount = plan.refCount;
 				}
-				if (footprint.alias != null) {
-					feature.attributes.alias = footprint.alias;
+				if (plan.alias != null) {
+					feature.attributes.alias = plan.alias;
 				}
 				thisCtrl.annotationVectors.addFeatures([feature]);
 			}	
 		}
 		
 		
-		thisCtrl.newFootprintVectors = new OpenLayers.Layer.Vector('New Footprints', {styleMap: thisCtrl.newfootprintStyle, displayInLayerSwitcher: false});
-		thisCtrl.newFootprintVectors.addFeatures(GeoAnnotator.ContributePanelCtrl.newFootprints);
-		thisCtrl.map.addLayer (this.newFootprintVectors);
+		thisCtrl.newPlanVectors = new OpenLayers.Layer.Vector('New Plans', {styleMap: thisCtrl.newplanStyle, displayInLayerSwitcher: false});
+		thisCtrl.newPlanVectors.addFeatures(GeoAnnotator.ContributePanelCtrl.newPlans);
+		thisCtrl.map.addLayer (this.newPlanVectors);
 		
 		
 	},
@@ -1843,8 +1859,8 @@ GeoAnnotator.MapPanelCtrl = {
 		thisCtrl.navigationControl = new OpenLayers.Control.Navigation();
 		thisCtrl.map.addControl(thisCtrl.navigationControl);
 
-		thisCtrl.selectFootprintControl = new OpenLayers.Control.SelectFeature(
-			[thisCtrl.annotationVectors,thisCtrl.newFootprintVectors],
+		thisCtrl.selectPlanControl = new OpenLayers.Control.SelectFeature(
+			[thisCtrl.annotationVectors,thisCtrl.newPlanVectors],
 			{
 				clickout: true, toggle: false,
 				multiple: false, hover: false,
@@ -1856,19 +1872,19 @@ GeoAnnotator.MapPanelCtrl = {
 				callbacks: {over: thisCtrl.onOverFeature, out: thisCtrl.onOutFeature, click: thisCtrl.onClickFeature}
 			}
 		);
-		thisCtrl.map.addControl(thisCtrl.selectFootprintControl);
+		thisCtrl.map.addControl(thisCtrl.selectPlanControl);
 		
-		thisCtrl.modifyNewFootprintControl = new OpenLayers.Control.ModifyFeature(thisCtrl.newFootprintVectors);
-		thisCtrl.newFootprintVectors.events.register("afterfeaturemodified", 
-			thisCtrl.newFootprintVectors, 
+		thisCtrl.modifyNewPlanControl = new OpenLayers.Control.ModifyFeature(thisCtrl.newPlanVectors);
+		thisCtrl.newPlanVectors.events.register("afterfeaturemodified", 
+			thisCtrl.newPlanVectors, 
 			thisCtrl.onModificationEnd
 		);
-		//thisCtrl.modifyNewFootprintControl.onDeletingStart = thisCtrl.onFeatureDeleted;
-		thisCtrl.map.addControl(thisCtrl.modifyNewFootprintControl);
+		//thisCtrl.modifyNewPlanControl.onDeletingStart = thisCtrl.onFeatureDeleted;
+		thisCtrl.map.addControl(thisCtrl.modifyNewPlanControl);
 				
-		thisCtrl.drawFootprintControl = {
+		thisCtrl.drawPlanControl = {
 			polygon: new OpenLayers.Control.DrawFeature(
-			thisCtrl.newFootprintVectors, 
+			thisCtrl.newPlanVectors, 
 			OpenLayers.Handler.Polygon, 
 			{
 				featureAdded:function(feature) { 
@@ -1878,7 +1894,7 @@ GeoAnnotator.MapPanelCtrl = {
 			}
 			),
 			line: new OpenLayers.Control.DrawFeature(
-			thisCtrl.newFootprintVectors, 
+			thisCtrl.newPlanVectors, 
 			OpenLayers.Handler.Path, 
 			{
 				featureAdded:function(feature) { 
@@ -1888,8 +1904,8 @@ GeoAnnotator.MapPanelCtrl = {
 			}
 			)
 		};
-		for (var key in thisCtrl.drawFootprintControl) {
-			thisCtrl.map.addControl(thisCtrl.drawFootprintControl[key]);    	
+		for (var key in thisCtrl.drawPlanControl) {
+			thisCtrl.map.addControl(thisCtrl.drawPlanControl[key]);    	
 		}
 		
 
@@ -2003,16 +2019,16 @@ GeoAnnotator.MapPanelCtrl = {
 		if (thisCtrl.navigationControl) {
 			thisCtrl.navigationControl.activate();	
 		}
-		if (thisCtrl.selectFootprintControl) {
-			thisCtrl.selectFootprintControl.activate();
+		if (thisCtrl.selectPlanControl) {
+			thisCtrl.selectPlanControl.activate();
 		}
-		if (thisCtrl.drawFootprintControl) {
-			for (var key in thisCtrl.drawFootprintControl) {
-			thisCtrl.drawFootprintControl[key].deactivate();
+		if (thisCtrl.drawPlanControl) {
+			for (var key in thisCtrl.drawPlanControl) {
+			thisCtrl.drawPlanControl[key].deactivate();
 			}
 		}
-		if (thisCtrl.modifyNewFootprintControl) {
-			thisCtrl.modifyNewFootprintControl.deactivate();					
+		if (thisCtrl.modifyNewPlanControl) {
+			thisCtrl.modifyNewPlanControl.deactivate();					
 		}
 	},
 
@@ -2021,18 +2037,18 @@ GeoAnnotator.MapPanelCtrl = {
 		if (thisCtrl.navigationControl) {
 			thisCtrl.navigationControl.deactivate();	
 		}
-		if (thisCtrl.selectFootprintControl) {
-			thisCtrl.selectFootprintControl.deactivate();
+		if (thisCtrl.selectPlanControl) {
+			thisCtrl.selectPlanControl.deactivate();
 		}
-		if (thisCtrl.drawFootprintControl) {
-			for (var key in thisCtrl.drawFootprintControl) {
+		if (thisCtrl.drawPlanControl) {
+			for (var key in thisCtrl.drawPlanControl) {
 			if (mode == key) {
-				thisCtrl.drawFootprintControl[key].activate();
+				thisCtrl.drawPlanControl[key].activate();
 			}
 			}
 		}
-		if (thisCtrl.modifyNewFootprintControl) {
-			thisCtrl.modifyNewFootprintControl.deactivate();					
+		if (thisCtrl.modifyNewPlanControl) {
+			thisCtrl.modifyNewPlanControl.deactivate();					
 		}		
 	},
 	
@@ -2041,16 +2057,16 @@ GeoAnnotator.MapPanelCtrl = {
 		if (thisCtrl.navigationControl) {
 			thisCtrl.navigationControl.activate();	
 		}
-		if (thisCtrl.selectFootprintControl) {
-			thisCtrl.selectFootprintControl.deactivate();
+		if (thisCtrl.selectPlanControl) {
+			thisCtrl.selectPlanControl.deactivate();
 		}
-		if (thisCtrl.drawFootprintControl) {
-			for (var key in thisCtrl.drawFootprintControl) {
-			thisCtrl.drawFootprintControl[key].deactivate();
+		if (thisCtrl.drawPlanControl) {
+			for (var key in thisCtrl.drawPlanControl) {
+			thisCtrl.drawPlanControl[key].deactivate();
 			}
 		}
-		if (thisCtrl.modifyNewFootprintControl) {
-			thisCtrl.modifyNewFootprintControl.activate();					
+		if (thisCtrl.modifyNewPlanControl) {
+			thisCtrl.modifyNewPlanControl.activate();					
 		}
 	},
 
@@ -2071,37 +2087,37 @@ GeoAnnotator.MapPanelCtrl = {
 			name = feature.attributes.alias;
 		}
 		*/
-		var name = '[FP' + feature.attributes.id + ']';
+		var name = '[PLAN' + feature.attributes.id + ']';
 		var id = feature.attributes.id;		
-		GeoAnnotator.ContributePanelCtrl.addFootprintToReference(id, name);
+		GeoAnnotator.ContributePanelCtrl.addPlanToReference(id, name);
 				
 		/*
-		var records = GeoAnnotator.ContributePanelCtrl.footprintStore.query('id',id);
+		var records = GeoAnnotator.ContributePanelCtrl.planStore.query('id',id);
 		for (var i = 0; i < records.length; i++){
-			GeoAnnotator.ContributePanelCtrl.footprintStore.remove(records.get(i));
+			GeoAnnotator.ContributePanelCtrl.planStore.remove(records.get(i));
 		}
 	
-		GeoAnnotator.ContributePanelCtrl.footprintStore.insert(0,new Ext.data.Record({id: id, type: type, name: name}));
+		GeoAnnotator.ContributePanelCtrl.planStore.insert(0,new Ext.data.Record({id: id, type: type, name: name}));
 		*/
 	},
 	
 	removeFeatureFromReference : function(feature) {
 		/*
-		var records = GeoAnnotator.ContributePanelCtrl.footprintStore.query('id',feature.attributes.id);
+		var records = GeoAnnotator.ContributePanelCtrl.planStore.query('id',feature.attributes.id);
 		for (var i = 0; i < records.length; i++){
-			GeoAnnotator.ContributePanelCtrl.footprintStore.remove(records.get(i));
+			GeoAnnotator.ContributePanelCtrl.planStore.remove(records.get(i));
 		}
 		*/
-		GeoAnnotator.ContributePanelCtrl.removeFootprintFromReference(feature.attributes.id);
+		GeoAnnotator.ContributePanelCtrl.removePlanFromReference(feature.attributes.id);
 	},
 	
 	deleteFeature : function (feature){
 		var thisCtrl = GeoAnnotator.MapPanelCtrl;
-		for (var i = 0; i < GeoAnnotator.ContributePanelCtrl.newFootprints.length; i++){
-			if (GeoAnnotator.ContributePanelCtrl.newFootprints[i].attributes.id == feature.attributes.id){
-				GeoAnnotator.ContributePanelCtrl.removeFootprintFromReference(feature.attributes.id);
-				GeoAnnotator.ContributePanelCtrl.newFootprints.splice(i,1);
-				thisCtrl.newFootprintVectors.destroyFeatures([feature], {silent: true});
+		for (var i = 0; i < GeoAnnotator.ContributePanelCtrl.newPlans.length; i++){
+			if (GeoAnnotator.ContributePanelCtrl.newPlans[i].attributes.id == feature.attributes.id){
+				GeoAnnotator.ContributePanelCtrl.removePlanFromReference(feature.attributes.id);
+				GeoAnnotator.ContributePanelCtrl.newPlans.splice(i,1);
+				thisCtrl.newPlanVectors.destroyFeatures([feature], {silent: true});
 				thisCtrl.hoverFeature = null;
 				return;
 			}
@@ -2127,31 +2143,28 @@ GeoAnnotator.MapPanelCtrl = {
 		var thisCtrl = GeoAnnotator.MapPanelCtrl;
 		// change status
 		// create the annotation list window if not open
-		if (!thisCtrl.annotationListWindow){
+		if (!thisCtrl.annotationClaimWindows){
 			thisCtrl.annotationListStore = new Ext.data.JsonStore({
 				root: 'annotations',
 				totalProperty: 'totalCount',
 				idProperty: 'id',
 				fields: [
-				'id', 'userName', 
-				{name: 'timeCreated', type: 'date'},
+				'id', 'userName', 'timeCreated',
 				'excerpt'],
 				proxy: new Ext.data.HttpProxy ({
 					url: GeoAnnotator.baseUrl + 'annotations/'
 				}),
 				baseParams: {userId: GeoAnnotator.currUserId, forumId: GeoAnnotator.currForumId, start:0, limit:10}
 			});
-			// create the template
-			var annotationListTpl = new Ext.XTemplate(
-				'<tpl for=".">',
-				'<div class="list-item">',
-				'<h3><span>{timeCreated:date("M d, Y")}</span>',
-				'{userName} says:</h3>',
-				'<p>{excerpt}</p>',
-				'</div></tpl>'
-			);
+
 			thisCtrl.annotationListDataView =  new Ext.DataView({
-				tpl: annotationListTpl,
+				tpl: new Ext.XTemplate(
+					'<tpl for=".">',
+					'<div class="list-item">',
+					'<b>Post {id}</b>: {excerpt}<br>',
+					'by <b>{userName}</b> on {timeCreated:date("m/d/Y")} at {timeCreated:date("g:i:s A")}',
+					'</div></tpl>'
+				),
 				store: thisCtrl.annotationListStore,
 				itemSelector: 'div.list-item',
 				multiSelect: true,
@@ -2161,28 +2174,241 @@ GeoAnnotator.MapPanelCtrl = {
 				//plugins: new Ext.DataView.DragSelector({dragSafe:false})
 			});
 			thisCtrl.annotationListDataView.on('click',thisCtrl.onAnnotationListItemClick);
-			
-			thisCtrl.annotationListWindow = new Ext.Window({
-					layout      : 'fit',
-					width       : 450,
-					autoHeight	: true,
-					//height      : 450,
-					closeAction :'hide',
-					plain       : true,
-					title		: 'Annotation List',
-					autoScroll  : true,
-					items : [thisCtrl.annotationListDataView],
-					tbar: new Ext.PagingToolbar({
-						store: thisCtrl.annotationListStore,
-						pageSize: 10,
-						displayInfo: true,
-						displayMsg: 'Annotations {0} - {1} of {2}',
-						emptyMsg: "No annotations to display"
-					})		
+			thisCtrl.annotationListDataView.on('contextmenu', thisCtrl.onAnnotationListContextMenu);
+
+			thisCtrl.claimListStore = new Ext.data.JsonStore({
+				root: 'claims',
+				totalProperty: 'totalCount',
+				idProperty: 'id',
+				fields: [
+				'id', 'userName', 'excerpt',
+				{name: 'timeCreated', type: 'date'},
+				'content'],
+				proxy: new Ext.data.HttpProxy ({
+					url: GeoAnnotator.baseUrl + 'claims/'
+				}),
+				baseParams: {userId: GeoAnnotator.currUserId, forumId: GeoAnnotator.currForumId}
 			});
-			//thisCtrl.annotationListWindow.on('hide', function(){btn.toggle(false);})
+
+			thisCtrl.claimListPanel = new Ext.Panel({
+				id: 'claim-list-panel',
+        		//autoHeight : true,
+        		//autoWidth: true,
+        		bodyStyle: 'padding: 0 1 0 1;',
+        		//autoScroll : true,
+        		layout : 'accordion',
+        		layoutConfig : {
+			        titleCollapse: true,
+			        //autoScroll: true,
+			        animate: false,
+			        fill : false,
+			        //autoWidth: true,
+			        hideCollapseTool: true,
+			    },
+        	});
+
+			var claimPanelToolBar = new Ext.Toolbar({
+				id: 'claim-panel-toolbar',
+	        	items: [{
+	        		text: 'New Claim',
+	        		id: 'new-claim-btn',
+	        		handler: thisCtrl.onNewClaimClick
+	        	},{
+	        		text: 'Refresh',
+	        		id: 'refresh-claim-btn',
+	        		handler: function() {
+	    				thisCtrl.claimListPanel.removeAll();
+						thisCtrl.claimListStore.load({params:{userId: GeoAnnotator.currUserId, forumId: GeoAnnotator.currForumId}, callback: thisCtrl.onClaimLoadSuccess});
+						thisCtrl.annotationClaimWindows.getComponent('claim-panel').getComponent('claim-panel-toolbar').getComponent('new-claim-btn').enable();
+	        		}
+	        	}]
+			});
+
+			thisCtrl.annotationClaimWindows = new Ext.Window({
+			    renderTo: document.body,
+			    width: 700,
+			    height: 500,
+			    title: 'Posts and Claims',
+			    layout: 'column',
+			    // autoScroll: true,
+			    closeAction : 'hide',
+			    items: [{
+			        // xtype: 'panel' implied by default
+			        columnWidth: .5,
+			        id: 'post-panel',
+			        items : [new Ext.PagingToolbar({
+							store: thisCtrl.annotationListStore,
+							pageSize: 10,
+							displayInfo: true,
+							displayMsg: 'Posts {0} - {1} of {2}',
+							emptyMsg: "No posts to display"
+						}),
+						thisCtrl.annotationListDataView
+					],
+			        unstyled : true
+			    },{
+			        columnWidth: .5,
+			        id: 'claim-panel',
+			        unstyled : false,
+			        autoScroll: true,
+			        items : [claimPanelToolBar, thisCtrl.claimListPanel]
+			    }]
+			});
 		}
-		thisCtrl.annotationListWindow.show();	
+		thisCtrl.annotationClaimWindows.getComponent('claim-panel').getComponent('claim-panel-toolbar').getComponent('new-claim-btn').enable();
+		thisCtrl.annotationClaimWindows.show();	
+	},
+
+	onNewClaimClick : function() {
+		var thisCtrl = GeoAnnotator.MapPanelCtrl;
+		// temporarily disable the 'new claim' button
+		thisCtrl.annotationClaimWindows.getComponent('claim-panel').getComponent('claim-panel-toolbar').getComponent('new-claim-btn').disable();
+		// get the post references through the dataview list selection
+		var selectedAnnotations = thisCtrl.annotationListDataView.getSelectedRecords();
+		var postref = '&nbsp;';
+		for (var i = 0; i < selectedAnnotations.length; i++) {
+			postref += '[POST' + selectedAnnotations[i].id + ']'
+		}
+		var newClaimPanel = new Ext.FormPanel({
+			labelAlign: 'top',
+			border: false,
+			autoScroll: true,
+			autoHeight: true,
+			id: 'new-claim-panel',
+			items : [{
+    			xtype: 'htmleditor',
+    			id : 'newClaimContent',
+    			name: 'newClaimContent',
+    			enableFont: false,
+    			enableLists: false,
+    			enableAlignments: false,
+    			height: 150,
+    			autoWidth: true,
+    			anchor: '100%',
+    			value: postref
+    		}],
+    		buttons: [
+    		{
+    			text : 'Discard',
+    			id: 'new-claim-delete-btn',
+    			handler: function() {
+    				Ext.Msg.confirm('Confirm', 'Do you want to discard the new claim?', function (btn, text) {
+    					if (btn == 'yes') {
+		    				// re-enable the 'new claim' button
+		    				var thisCtrl = GeoAnnotator.MapPanelCtrl;
+		    				thisCtrl.annotationClaimWindows.getComponent('claim-panel').getComponent('claim-panel-toolbar').getComponent('new-claim-btn').enable();
+		    				// refresh claim panel
+		    				thisCtrl.claimListPanel.removeAll();
+							thisCtrl.claimListStore.load({params:{userId: GeoAnnotator.currUserId, forumId: GeoAnnotator.currForumId}, callback: thisCtrl.onClaimLoadSuccess});
+    					}
+    				});
+    			}
+    		},{
+    			text : 'Submit',
+    			id: 'new-claim-save-btn',
+    			handler: thisCtrl.onClaimSubmit
+    		}]
+		});
+		thisCtrl.claimListPanel.add({
+			title: '<b>New Claim</b>',
+			id: 'new-claim',
+			items: [newClaimPanel]
+		});
+		thisCtrl.claimListPanel.doLayout();
+		thisCtrl.claimListPanel.getComponent('new-claim').expand();
+		// thisCtrl.claimListPanel.getComponent('new-claim').getComponent('new-claim-panel').getComponent('newClaimContent').focus();
+	},
+
+	onClaimSubmit : function() {
+		var thisCtrl = GeoAnnotator.MapPanelCtrl;
+		var newClaimPanel = thisCtrl.annotationClaimWindows.getComponent('claim-panel').getComponent('claim-list-panel').getComponent('new-claim').getComponent('new-claim-panel');
+		// add a new claim
+		var newClaim = {};
+		newClaim.id = -1;
+		newClaim.content = newClaimPanel.getForm().findField('newClaimContent').getValue();
+		if (newClaim.content.length == 0) {
+			Ext.Msg.alert('Error', 'The content of the claim cannot be empty');
+			return;
+		}
+		newClaim.userId = GeoAnnotator.currUserId;
+		newClaim.forumId = GeoAnnotator.currForumId;
+		newClaim.timeCreated = new Date().toGMTString();
+		// newClaim.value = ?
+		newClaim.postref = [];
+		newClaim.claimref = [];
+		newClaim.planref = [];
+		newClaim.optionref = [];
+		newClaim.issueref = [];
+
+		// parse all the references
+		var regex = /\[([POST,CLAIM,PLAN,OPTION,ISSUE]+)([0-9]+)\]/gi; 
+		var input = newClaim.content;
+		if(regex.test(input)) {
+			regex.lastIndex = 0;
+			var matches = [];
+			var match;
+			while((match = regex.exec(input)) !== null) {
+				if(match[0] === "") { 
+					regex.lastIndex += 1 ;
+				}
+				else {
+					matches.push({result: match, lastIndex: regex.lastIndex});
+				}
+			}
+			for (var i=0; i < matches.length; i++) {
+				var type = matches[i].result[1];
+				var itemId = matches[i].result[2];
+				switch (type) {
+					case 'POST':
+						newClaim.postref.push(itemId);
+						break;
+					case 'CLAIM':
+						newClaim.claimref.push(itemId);
+						break;
+					case 'PLAN':
+						newClaim.planref.push(itemId);
+						break;
+					case 'OPTION':
+						newClaim.optionref.push(itemId);
+						break;
+					case 'ISSUE':
+						newClaim.issueref.push(itemId);
+						break;
+					default:
+						alert('failed to add claim: invalid reference type: ' + type);
+						return;
+				}
+			}
+			// retain unique values
+			newClaim.postref = GeoAnnotator.Util.unique(newClaim.postref);
+			newClaim.claimref = GeoAnnotator.Util.unique(newClaim.claimref);
+			newClaim.planref = GeoAnnotator.Util.unique(newClaim.planref);
+			newClaim.optionref = GeoAnnotator.Util.unique(newClaim.optionref);
+			newClaim.issueref = GeoAnnotator.Util.unique(newClaim.issueref);
+		}
+
+		Ext.Ajax.request({
+			url: GeoAnnotator.baseUrl + 'claim/',
+			success: function() {
+				// refresh the claim panel
+			    thisCtrl.claimListPanel.removeAll();
+				thisCtrl.claimListStore.load({params:{userId: GeoAnnotator.currUserId, forumId: GeoAnnotator.currForumId}, callback: function() {
+						thisCtrl.onClaimLoadSuccess();
+						// expand the claim just added
+						var currClaimCnt = thisCtrl.claimListStore.getCount();
+						thisCtrl.claimListPanel.getComponent(currClaimCnt - 1).expand();
+						// re-enable the new claim button
+						thisCtrl.annotationClaimWindows.getComponent('claim-panel').getComponent('claim-panel-toolbar').getComponent('new-claim-btn').enable();
+					}
+				});
+				// expand the last one
+				//thisCtrl.claimListPanel.getComponent('new-claim').expand();
+			},
+			failure: function() {
+				alert('Failed to add new claim!');
+			},
+			params: newClaim
+		});
 	},
 
 	moveToFeature : function (featureId) {
@@ -2193,8 +2419,8 @@ GeoAnnotator.MapPanelCtrl = {
 				var lon = feature.geometry.getCentroid().x;
 				var lat = feature.geometry.getCentroid().y;
 				thisCtrl.map.panTo(new OpenLayers.LonLat(lon, lat));
-				thisCtrl.selectFootprintControl.unselectAll();
-				thisCtrl.selectFootprintControl.select(feature);
+				thisCtrl.selectPlanControl.unselectAll();
+				thisCtrl.selectPlanControl.select(feature);
 				return;
 			};
 		};
@@ -2202,16 +2428,16 @@ GeoAnnotator.MapPanelCtrl = {
 	
 	onFeatureAdded : function (feature){
 		var thisCtrl = GeoAnnotator.MapPanelCtrl;
-		// use minus to distinguish new footprints with existing ones
-		feature.attributes.id = '-'+GeoAnnotator.ContributePanelCtrl.newFootprints.length;
-		feature.attributes.alias = 'new footprint';
-		GeoAnnotator.ContributePanelCtrl.newFootprints.push(feature);
+		// use minus to distinguish new plans with existing ones
+		feature.attributes.id = '-'+GeoAnnotator.ContributePanelCtrl.newPlans.length;
+		feature.attributes.alias = 'new plan';
+		GeoAnnotator.ContributePanelCtrl.newPlans.push(feature);
 		if (GeoAnnotator.ContributePanelCtrl.containerPanel.collapsed === false) {
 			thisCtrl.addFeatureToReference(feature);
 		}
 		/*
 		var tbar = GeoAnnotator.ContributePanelCtrl.containerPanel.getTopToolbar();
-		tbar.items.get('contribute-toolbox-group').items.get('drawFootprint-btn').toggle(false);
+		tbar.items.get('contribute-toolbox-group').items.get('drawPlan-btn').toggle(false);
 		*/
 		thisCtrl.setNavigationMode();		
 	},
@@ -2219,17 +2445,17 @@ GeoAnnotator.MapPanelCtrl = {
 	onClickFeature : function (feature){
 		if (feature){
 			var thisCtrl = GeoAnnotator.MapPanelCtrl;
-			// get the annotatios based on the footprint id
+			// get the annotatios based on the plan id
 			if (feature.attributes.id.indexOf('-') === 0) {
 				return;
 			}; 
-			GeoAnnotator.currFootprintId = feature.attributes.id;
+			GeoAnnotator.currPlanId = feature.attributes.id;
 			
 			if (parseInt(feature.attributes.refCount) === 1) {
 				Ext.Ajax.request({
 					url: GeoAnnotator.baseUrl + 'annotations/',
 					//method: 'GET',
-					params: { userId: GeoAnnotator.currUserId, forumId: GeoAnnotator.currForumId, footprintId: GeoAnnotator.currFootprintId, start:0, limit:1},
+					params: { userId: GeoAnnotator.currUserId, forumId: GeoAnnotator.currForumId, planId: GeoAnnotator.currPlanId, start:0, limit:1},
 					success: function(xhr) {
 						var currAnnotation = Ext.util.JSON.decode(xhr.responseText);
 						// change the states
@@ -2255,12 +2481,190 @@ GeoAnnotator.MapPanelCtrl = {
 				thisCtrl.showAnnotationListWindow();
 			
 				thisCtrl.annotationListStore.removeAll();
-				//thisCtrl.annotationListStore.baseParams = {userId: GeoAnnotator.currUserId, forumId: GeoAnnotator.currForumId, footprintId: GeoAnnotator.currFootprintId};
-				thisCtrl.annotationListStore.load({params:{userId: GeoAnnotator.currUserId, forumId: GeoAnnotator.currForumId, footprintId: GeoAnnotator.currFootprintId, start:0, limit:10}});
-				//thisCtrl.annotationListStore.load({params:{footprintId: GeoAnnotator.currFootprintId}});
-				thisCtrl.selectFootprintControl.clickFeature(feature);
+				//thisCtrl.annotationListStore.baseParams = {userId: GeoAnnotator.currUserId, forumId: GeoAnnotator.currForumId, planId: GeoAnnotator.currPlanId};
+				thisCtrl.annotationListStore.load({params:{userId: GeoAnnotator.currUserId, forumId: GeoAnnotator.currForumId, planId: GeoAnnotator.currPlanId, start:0, limit:10}});
+				//thisCtrl.annotationListStore.load({params:{planId: GeoAnnotator.currPlanId}});
+				//thisCtrl.selectPlanControl.clickFeature(feature);
+				thisCtrl.claimListStore.removeAll();
+				thisCtrl.claimListPanel.removeAll();
+				thisCtrl.claimListStore.load({params:{userId: GeoAnnotator.currUserId, forumId: GeoAnnotator.currForumId}, callback: thisCtrl.onClaimLoadSuccess});
 			}
 		}
+	},
+
+	onClaimLoadSuccess : function() {
+		var thisCtrl = GeoAnnotator.MapPanelCtrl;
+		for (var i = 0; i < thisCtrl.claimListStore.getTotalCount(); i++) {
+			var data = thisCtrl.claimListStore.getAt(i);
+			var content = data.get('content');
+			var claimId = data.get('id');
+			var excerpt = data.get('excerpt');
+			var timeCreated = data.get('timeCreated');
+			var userName = data.get('userName');
+			var currFormPanel = new Ext.FormPanel({
+				labelAlign: 'top',
+				border: false,
+				autoScroll: true,
+				autoHeight: true,
+				id: 'claimPanel' + claimId,
+				items : [{
+        			xtype: 'htmleditor',
+        			id : 'claimContent' + claimId,
+        			name: 'claimContent' + claimId,
+        			enableFont: false,
+        			enableLists: false,
+        			enableAlignments: false,
+        			height: 150,
+        			autoWidth: true,
+        			anchor: '100%',
+        			value : content
+        		}],
+        		buttons: [
+        		{
+        			text : 'Delete',
+	    			id: 'claim' + claimId + '-delete-btn',
+	    			handler: function() {
+	    				var me = this;
+	    				Ext.Msg.confirm('Confirm', 'Do you want to delete this claim?', function (btn, text) {
+	    					if (btn == 'yes') {
+			    				var buttonId = me.id;
+			    				var claimId;
+			    				var regex = /^claim([0-9]+)-delete-btn$/;
+			    				if (regex.test(buttonId)) {
+			    					claimId = regex.exec(buttonId)[1];
+			    				}
+	    						Ext.Ajax.request({
+									url: GeoAnnotator.baseUrl + 'claim/',
+									success: function() {
+					    				// refresh claim panel
+					    				thisCtrl = GeoAnnotator.MapPanelCtrl;
+					    				thisCtrl.claimListPanel.removeAll();
+										thisCtrl.claimListStore.load({params:{userId: GeoAnnotator.currUserId, forumId: GeoAnnotator.currForumId}, callback: thisCtrl.onClaimLoadSuccess});
+									},
+									failure: function() {
+										alert('fail to delete claim!');
+									},
+									params: {
+										'id': claimId,
+										'content': ''
+									}
+								});
+	    					}
+	    				});
+	    			}
+        		},{
+        			text : 'Save',
+        			id: 'claim' + claimId + '-save-btn',
+        			handler: thisCtrl.onClaimEdit
+        		}]
+			})
+			// add this panel to the accordion
+			thisCtrl.claimListPanel.add({
+				title: '<b>Claim ' + claimId + ':</b> ' + excerpt + '<br>' + 'by <b>' + userName + '</b> on ' + Ext.util.Format.date(timeCreated) + ' at ' + Ext.util.Format.date(timeCreated, 'g:i:s A'),
+				items: [currFormPanel]
+			});
+		}
+		thisCtrl.claimListPanel.doLayout();
+	},
+
+	onClaimEdit: function() {
+		var thisCtrl = GeoAnnotator.MapPanelCtrl;
+		// edit a claim
+		var buttonId = this.id;
+		var claimId;
+		var regex = /^claim([0-9]+)-save-btn$/;
+		if (regex.test(buttonId)) {
+			claimId = regex.exec(buttonId)[1];
+		}
+		var currFormPanel = thisCtrl.claimListPanel.find('id', 'claimPanel' + claimId)[0];
+		var content = currFormPanel.getForm().findField('claimContent' + claimId).getValue();
+
+		var newClaim = {};
+		newClaim.id = claimId;
+		newClaim.content = content;
+		if (newClaim.content.length == 0) {
+			Ext.Msg.alert('Error', 'The content of the claim cannot be empty');
+			return;
+		}
+		newClaim.userId = GeoAnnotator.currUserId;
+		newClaim.forumId = GeoAnnotator.currForumId;
+		newClaim.timeCreated = new Date().toGMTString();
+		// newClaim.value = ?
+		newClaim.postref = [];
+		newClaim.claimref = [];
+		newClaim.planref = [];
+		newClaim.optionref = [];
+		newClaim.issueref = [];
+
+		// parse all the references
+		var regex = /\[([POST,CLAIM,PLAN,OPTION,ISSUE]+)([0-9]+)\]/gi; 
+		var input = newClaim.content;
+		if(regex.test(input)) {
+			regex.lastIndex = 0;
+			var matches = [];
+			var match;
+			while((match = regex.exec(input)) !== null) {
+				if(match[0] === "") { 
+					regex.lastIndex += 1 ;
+				}
+				else {
+					matches.push({result: match, lastIndex: regex.lastIndex});
+				}
+			}
+			for (var i=0; i < matches.length; i++) {
+				var type = matches[i].result[1];
+				var itemId = matches[i].result[2];
+				switch (type) {
+					case 'POST':
+						newClaim.postref.push(itemId);
+						break;
+					case 'CLAIM':
+						newClaim.claimref.push(itemId);
+						break;
+					case 'PLAN':
+						newClaim.planref.push(itemId);
+						break;
+					case 'OPTION':
+						newClaim.optionref.push(itemId);
+						break;
+					case 'ISSUE':
+						newClaim.issueref.push(itemId);
+						break;
+					default:
+						alert('failed to add claim: invalid reference type: ' + type);
+						return;
+				}
+			}
+			// retain unique values
+			newClaim.postref = GeoAnnotator.Util.unique(newClaim.postref);
+			newClaim.claimref = GeoAnnotator.Util.unique(newClaim.claimref);
+			newClaim.planref = GeoAnnotator.Util.unique(newClaim.planref);
+			newClaim.optionref = GeoAnnotator.Util.unique(newClaim.optionref);
+			newClaim.issueref = GeoAnnotator.Util.unique(newClaim.issueref);
+		}
+
+		Ext.Ajax.request({
+			url: GeoAnnotator.baseUrl + 'claim/',
+			success: function() {
+				// refresh the claim panel
+			    thisCtrl.claimListPanel.removeAll();
+				thisCtrl.claimListStore.load({params:{userId: GeoAnnotator.currUserId, forumId: GeoAnnotator.currForumId}, callback: function() {
+						thisCtrl.onClaimLoadSuccess();
+						// expand the claim just added
+						//var currClaimCnt = thisCtrl.claimListStore.getCount();
+						//thisCtrl.claimListPanel.getComponent(currClaimCnt - 1).expand();
+						// re-enable the new claim button
+						//thisCtrl.annotationClaimWindows.getComponent('claim-panel').getComponent('claim-panel-toolbar').getComponent('new-claim-btn').enable();
+					}
+				});
+				// expand the last one
+				//thisCtrl.claimListPanel.getComponent('new-claim').expand();
+			},
+			failure: function() {
+				alert('Failed to edit claim!');
+			},
+			params: newClaim
+		});
 	},
 
 	onOverFeature : function(feature) {
@@ -2294,614 +2698,25 @@ GeoAnnotator.MapPanelCtrl = {
 		// update controls		
 		//GeoAnnotator.TimelinePanelCtrl.update();
 		GeoAnnotator.AnnotationInfoPanelCtrl.update();
-		
 		//GeoAnnotator.MapPanelCtrl.update();
+	},
+
+	onAnnotationListContextMenu: function(dataView, index, node, e) {
+		var thisCtrl = GeoAnnotator.MapPanelCtrl;
+		if (!thisCtrl.postContextMenu) {
+			thisCtrl.postContextMenu = new Ext.menu.Menu({
+				id: 'post-list-ctx',
+				items: [{
+					id: 'post-list-add-reference',
+					text: 'Add to reference',
+					handler: function() {
+						var thisCtrl = GeoAnnotator.MapPanelCtrl;
+					}
+				}]
+			});
+		}
 	}
 };
-
-GeoAnnotator.TimelinePanelCtrl = {
-	containerPanel: null,
-	timelineData : {},
-	startDate : null,
-	endDate : null,
-	earliestDate : null,
-	latestDate : null,
-	totalCount : 0,
-	mode : 'month',
-	unit : 'day',
-	timelinePanel : null,
-	annotationListWindow : null,
-	annotationListStore : null,
-	register : function (containerPanel) {
-		this.containerPanel = containerPanel;
-	},
-	
-	init : function() {
-		thisCtrl = GeoAnnotator.TimelinePanelCtrl;
-		
-		thisCtrl.timelineData = new Ext.data.ArrayStore({
-			fields: ['date', 'count', 'label']
-		});
-		
-		thisCtrl.timelinePanel = new Ext.Panel({
-			//layout: 'fit',
-			tbar: [
-			{
-				//text: 'Earliest',
-				id: 'timeline-earliest-btn',
-				iconCls: 'timeline-earliest-icon',
-				//iconAlign: 'left', 
-				handler: thisCtrl.moveToEarliest
-			},
-			'-',
-			{
-				//text: 'Previous',
-				id : 'timeline-previous-btn',
-				iconCls: 'timeline-previous-icon',
-				//iconAlign: 'left', 
-				handler: thisCtrl.moveToPrev
-			},
-			'-',
-			{
-				text: 'Day',
-				id : 'timeline-day-btn',
-				enableToggle: true,
-				pressed: false, 
-				toggleGroup: 'timeline-mode',
-				handler: function(button, evt){
-					thisCtrl = GeoAnnotator.TimelinePanelCtrl;
-					thisCtrl.mode = 'day';
-					thisCtrl.moveToNow();
-					button.toggle(true);
-				}
-			},
-			'-',
-			{
-				text: 'Week',
-				id : 'timeline-week-btn',
-				enableToggle: true,
-				pressed: false, 
-				toggleGroup: 'timeline-mode',
-				handler: function(button, evt){
-					thisCtrl = GeoAnnotator.TimelinePanelCtrl;
-					thisCtrl.mode = 'week';
-					thisCtrl.moveToNow();
-					button.toggle(true);
-				}
-			},
-			'-',
-			{
-				text: 'Month',
-				id : 'timeline-month-btn',
-				enableToggle: true,
-				pressed: true, 
-				toggleGroup: 'timeline-mode',
-				handler: function(button, evt){
-					thisCtrl = GeoAnnotator.TimelinePanelCtrl;
-					thisCtrl.mode = 'month';
-					thisCtrl.moveToNow();
-					button.toggle(true);
-				}
-			},
-			'-',
-			{
-				text: 'Year',
-				id : 'timeline-year-btn',
-				enableToggle: true,
-				pressed: false, 
-				toggleGroup: 'timeline-mode',
-				handler: function(button, evt){
-					thisCtrl = GeoAnnotator.TimelinePanelCtrl;
-					thisCtrl.mode = 'year';
-					thisCtrl.moveToNow();
-					button.toggle(true);
-				}
-			},
-			'-',
-			{
-				//text: 'Next',
-				id : 'timeline-next-btn',
-				iconCls: 'timeline-next-icon',
-				//iconAlign: 'right', 
-				handler: thisCtrl.moveToNext
-			},
-			'-',
-			{
-				//text: 'Latest',
-				id : 'timeline-latest-btn',
-				iconCls: 'timeline-latest-icon',
-				//iconAlign: 'right', 
-				handler: thisCtrl.moveToLatest
-			},
-			'->',
-			{
-				text: 'Now',
-				id : 'timeline-now-btn',
-				iconCls: 'timeline-now-icon',
-				handler : thisCtrl.moveToNow
-			}
-			],
-			items: {
-				xtype: 'columnchart',
-				store: thisCtrl.timelineData,
-				yField: 'count',
-				url: './static/lib/ext-3.2.1/resources/charts.swf',
-				xField: 'label',
-				xAxis: new Ext.chart.CategoryAxis({
-					title: 'Time'
-				}),
-				yAxis: new Ext.chart.NumericAxis({
-					title: 'Count'
-				}),
-				tipRenderer : function(chart, record, index, series){
-					return record.data.count + ' annotations';
-				},
-				extraStyle: {
-					xAxis: {
-						//labelRotation: -90
-					}
-				},
-				listeners: {
-					itemclick: thisCtrl.onTimelineItemClick
-				}
-			}   
-		});
-		thisCtrl.containerPanel.add(thisCtrl.timelinePanel);
-		thisCtrl.containerPanel.doLayout();
-		thisCtrl.containerPanel.on('collapse', function() {
-			GeoAnnotator.MapPanelCtrl.map.updateSize();
-			GeoAnnotator.ContainerTBCtrl.containerTB.get('timeline-btn').toggle(false);
-		});
-		thisCtrl.containerPanel.on('expand', function() {
-			GeoAnnotator.MapPanelCtrl.map.updateSize();
-			GeoAnnotator.ContainerTBCtrl.containerTB.get('timeline-btn').toggle(true);
-		});
-		thisCtrl.containerPanel.collapse(false);
-	},
-	
-	loadTimelineData : function(timeline) {
-		var thisCtrl = GeoAnnotator.TimelinePanelCtrl;
-		var data = [];
-		switch (thisCtrl.mode) {
-		case 'year':
-			data = thisCtrl.generateYearData(timeline);
-			break;
-		case 'month':
-			data = thisCtrl.generateMonthData(timeline);
-			break;
-		case 'week':
-			data = thisCtrl.generateWeekData(timeline);
-			break;
-		case 'day':
-			data = thisCtrl.generateDayData(timeline);
-			break;
-		default:
-			alert('not supported display mode!');
-		}
-		thisCtrl.timelineData.loadData(data);
-	},
-	
-	generateYearData : function(timeline) {
-		var thisCtrl = GeoAnnotator.TimelinePanelCtrl;
-		var data = [];
-		var m_names = new Array("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec");
-		if (thisCtrl.startDate) {
-			var cursorDate = new Date(thisCtrl.startDate.getFullYear(), thisCtrl.startDate.getMonth());
-			for (var i=0; i < 12; i++) {
-				cursorDate.setMonth(cursorDate.getMonth()+1);
-				var month = cursorDate.getMonth();
-				var year = cursorDate.getFullYear();
-				var label = m_names[month] + ' ' + year;
-				var dataitem = [cursorDate.toGMTString(), 0, label];
-				for (var j=0; j < timeline.length; j++) {
-					var timelineDate = new Date(timeline[j].month);
-					if (cursorDate.toGMTString() === timelineDate.toGMTString()) {
-						dataitem[1] = parseInt(timeline[j].count);
-						break;
-					}
-				}
-				data.push(dataitem);
-			}
-		}
-		return data;
-	},
-
-	generateMonthData : function(timeline) {
-		var thisCtrl = GeoAnnotator.TimelinePanelCtrl;
-		var data = [];
-		var m_names = new Array("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec");
-		if (thisCtrl.startDate) {
-			var cursorDate = new Date(thisCtrl.startDate.getFullYear(), thisCtrl.startDate.getMonth(), thisCtrl.startDate.getDate());
-			for (var i=0; i < 30; i++) {
-				cursorDate.setDate(cursorDate.getDate()+1);
-				//alert('cursorDate:' + cursorDate);
-				var month = cursorDate.getMonth();
-				var day = cursorDate.getDate();
-				var sup = "";
-				if (day == 1 || day == 21 || day ==31){
-				   sup = "st";
-				}
-				else if (day == 2 || day == 22){
-				   sup = "nd";
-				}
-				else if (day == 3 || day == 23){
-				   sup = "rd";
-				}
-				else{
-				   sup = "th";
-				}
-				var label = "";
-				if (day == 1) {
-					label = m_names[month] + ' ' + day;
-				}
-				else {
-					label = day;
-				}
-				//var label = (month+1) + '/' + day;// + sup; 
-				var dataitem = [cursorDate.toGMTString(), 0, label];
-				for (var j=0; j < timeline.length; j++) {
-					var timelineDate = new Date(timeline[j].day);
-					if (cursorDate.toGMTString() == timelineDate.toGMTString()) {
-						dataitem[1] = parseInt(timeline[j].count);
-						break;
-					}
-				}
-				data.push(dataitem);
-			}
-		}
-		return data;
-	},
-	
-	generateWeekData : function(timeline) {
-		var thisCtrl = GeoAnnotator.TimelinePanelCtrl;
-		var data = [];
-		var m_names = new Array("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec");
-		if (thisCtrl.startDate) {
-			var cursorDate = new Date(thisCtrl.startDate.getFullYear(), thisCtrl.startDate.getMonth(), thisCtrl.startDate.getDate());
-			for (var i=0; i < 7; i++) {
-				cursorDate.setDate(cursorDate.getDate()+1);
-				var month = cursorDate.getMonth();
-				var day = cursorDate.getDate();
-				var sup = "";
-				if (day == 1 || day == 21 || day ==31){
-				   sup = "st";
-				}
-				else if (day == 2 || day == 22){
-				   sup = "nd";
-				}
-				else if (day == 3 || day == 23){
-				   sup = "rd";
-				}
-				else{
-				   sup = "th";
-				}
-				var label = m_names[month] + ' ' + day + sup; 
-				var dataitem = [cursorDate.toGMTString(), 0, label];
-				for (var j=0; j < timeline.length; j++) {
-					var timelineDate = new Date(timeline[j].day);
-					if (cursorDate.toGMTString() === timelineDate.toGMTString()) {
-						dataitem[1] = parseInt(timeline[j].count);
-						break;
-					}
-				}
-				data.push(dataitem);
-			}
-		}
-		return data;
-	},
-	
-	generateDayData : function(timeline) {
-		var thisCtrl = GeoAnnotator.TimelinePanelCtrl;
-		var data = [];
-		if (thisCtrl.startDate) {
-			var cursorDate = new Date(thisCtrl.startDate.getFullYear(), thisCtrl.startDate.getMonth(), thisCtrl.startDate.getDate(), thisCtrl.startDate.getHours());
-			for (var i=0; i < 24; i++) {
-				cursorDate.setHours(cursorDate.getHours()+1);
-				var month = cursorDate.getMonth();
-				var day = cursorDate.getDate();
-				var hour = cursorDate.getHours();
-				var day_sup = "";
-				if (day == 1 || day == 21 || day ==31){
-				   day_sup = "st";
-				}
-				else if (day == 2 || day == 22){
-				   day_sup = "nd";
-				}
-				else if (day == 3 || day == 23){
-				   day_sup = "rd";
-				}
-				else{
-				   day_sup = "th";
-				}
-				var hour_sup = "";
-				if (hour == 0) {
-					hour = 12;
-					hour_sup = "AM";
-				}
-				else if (hour > 0 && hour < 12) {
-					hour_sup = "AM";
-				}
-				else if (hour == 12) {
-					hour_sup = "PM";
-				}
-				else {
-					hour = hour - 12;
-					hour_sup = "PM";
-				}
-				var label = "";
-				if (i == 0 || (hour == 12 && hour_sup == "AM")) {
-					label = (month+1) + '/' + day + ' ' + hour + ' ' + hour_sup; 
-				}
-				else {
-					label = hour + ' ' + hour_sup; 
-				}
-				//var label = (month+1) + '/' + day + ' ' + hour + ' ' + hour_sup; 
-				var dataitem = [cursorDate.toGMTString(), 0, label];
-				for (var j=0; j < timeline.length; j++) {
-					var timelineDate = new Date(timeline[j].hour);
-					if (cursorDate.toGMTString() === timelineDate.toGMTString()) {
-						dataitem[1] = parseInt(timeline[j].count);
-						break;
-					}
-				}
-				data.push(dataitem);
-			}
-		}
-		return data;
-	},
-	
-
-	moveToEarliest : function() {
-		var thisCtrl = GeoAnnotator.TimelinePanelCtrl;
-		if (thisCtrl.earliestDate !== null) {
-			thisCtrl.startDate = new Date(thisCtrl.earliestDate);
-			thisCtrl.calcEndDate();	
-			thisCtrl.update();
-		}
-		thisCtrl.update();		
-	},
-	
-	moveToPrev : function() {
-		var thisCtrl = GeoAnnotator.TimelinePanelCtrl;
-		thisCtrl.endDate = new Date(thisCtrl.startDate);
-		thisCtrl.calcStartDate();
-		thisCtrl.update();		
-	},
-	
-	moveToNext : function() {
-		var thisCtrl = GeoAnnotator.TimelinePanelCtrl;
-		thisCtrl.startDate = new Date(thisCtrl.endDate);
-		thisCtrl.calcEndDate();
-		thisCtrl.update();
-	},
-	
-	moveToLatest : function() {
-		var thisCtrl = GeoAnnotator.TimelinePanelCtrl;
-		if (thisCtrl.latestDate !== null) {
-			thisCtrl.endDate = new Date(thisCtrl.latestDate);
-			thisCtrl.calcStartDate();
-			thisCtrl.update();
-		}
-	},
-	
-	moveToNow : function() {
-		var thisCtrl = GeoAnnotator.TimelinePanelCtrl;
-		thisCtrl.endDate = new Date();
-		thisCtrl.calcStartDate();	
-		thisCtrl.update();
-	},
-	
-	calcStartDate : function() {
-		var thisCtrl = GeoAnnotator.TimelinePanelCtrl;
-		if (thisCtrl.endDate !== null) {
-			thisCtrl.startDate = new Date(thisCtrl.endDate);
-			switch (thisCtrl.mode) {
-			case 'year':
-				thisCtrl.unit = 'month';
-				thisCtrl.startDate.setFullYear(thisCtrl.endDate.getFullYear()-1);
-				break;
-			case 'month':
-				thisCtrl.unit = 'day';
-				thisCtrl.startDate.setMonth(thisCtrl.endDate.getMonth()-1);
-				break;
-			case 'week':
-				thisCtrl.unit = 'day';
-				thisCtrl.startDate.setDate(thisCtrl.endDate.getDate()-7);
-				break;
-			case 'day':
-				thisCtrl.unit = 'hour';
-				thisCtrl.startDate.setDate(thisCtrl.endDate.getDate()-1);
-				break;
-			default:
-				alert('not supported display mode!');
-			}
-			
-		}
-	},
-
-	calcEndDate : function() {
-		var thisCtrl = GeoAnnotator.TimelinePanelCtrl;
-		if (thisCtrl.startDate !== null) {
-			thisCtrl.endDate = new Date(thisCtrl.startDate);
-			switch (thisCtrl.mode) {
-			case 'year':
-				thisCtrl.unit = 'month';
-				thisCtrl.endDate.setFullYear(thisCtrl.startDate.getFullYear()+1);
-				//thisCtrl.endDate.setMonth(thisCtrl.startDate.getMonth()+1);
-				break;
-			case 'month':
-				thisCtrl.unit = 'day';
-				thisCtrl.endDate.setMonth(thisCtrl.startDate.getMonth()+1);
-				//thisCtrl.endDate.setDate(thisCtrl.startDate.getDate()+1);
-				break;
-			case 'week':
-				thisCtrl.unit = 'day';
-				thisCtrl.endDate.setDate(thisCtrl.startDate.getDate()+7);
-				break;
-			case 'day':
-				thisCtrl.unit = 'hour';
-				thisCtrl.endDate.setDate(thisCtrl.startDate.getDate()+1);
-				//thisCtrl.endDate.setHours(thisCtrl.startDate.getHours()+1);
-				break;
-			default:
-				alert('not supported display mode!');
-			}
-			
-		}
-	},
-	
-	update : function() {
-		var thisCtrl = GeoAnnotator.TimelinePanelCtrl;
-		if (GeoAnnotator.currForumId === '0') {
-			return;
-		}
-		if (thisCtrl.startDate === null || thisCtrl.endDate === null) {
-			thisCtrl.moveToNow();
-		}
-		else {
-			Ext.Ajax.request({
-				url: GeoAnnotator.baseUrl + 'timeline/',
-				success: thisCtrl.onLoadTimelineInfoSuccess,
-				failure: function() {
-					alert('failed to load timeline info!');
-				},
-				params: {'userId':GeoAnnotator.currUserId, 'forumId': GeoAnnotator.currForumId, 'unit': thisCtrl.unit, 'startDate': thisCtrl.startDate.toGMTString(), 'endDate': thisCtrl.endDate.toGMTString()}
-			});
-		}		
-	},
-	
-	onLoadTimelineInfoSuccess : function(xhr) {
-		var thisCtrl = GeoAnnotator.TimelinePanelCtrl;
-		var timelineInfo = Ext.util.JSON.decode(xhr.responseText);
-		// load the meta data
-		if (timelineInfo.earliestDate) {
-			thisCtrl.earliestDate = new Date(timelineInfo.earliestDate);
-		}
-		if (timelineInfo.latestDate) {
-			thisCtrl.latestDate = new Date(timelineInfo.latestDate);
-		}
-		if (timelineInfo.totalCount) {
-			thisCtrl.totalCount = parseInt(timelineInfo.totalCount);
-		}
-		// load the timeline data
-		if (timelineInfo.timeline) {
-			thisCtrl.loadTimelineData(timelineInfo.timeline);
-		}
-		// set the button status
-		var tbar = thisCtrl.timelinePanel.getTopToolbar();
-		if (thisCtrl.startDate && thisCtrl.earliestDate && thisCtrl.startDate > thisCtrl.earliestDate) {
-			tbar.items.get('timeline-earliest-btn').enable();
-			tbar.items.get('timeline-previous-btn').enable();
-		}
-		else {
-			tbar.items.get('timeline-earliest-btn').disable();
-			tbar.items.get('timeline-previous-btn').disable();
-		}
-		if (thisCtrl.endDate && thisCtrl.latestDate && thisCtrl.endDate < thisCtrl.latestDate) {
-			tbar.items.get('timeline-latest-btn').enable();
-			tbar.items.get('timeline-next-btn').enable();
-		}
-		else {
-			tbar.items.get('timeline-latest-btn').disable();
-			tbar.items.get('timeline-next-btn').disable();
-		}
-	},
-	
-	showAnnotationListWindow : function () {
-		var thisCtrl = GeoAnnotator.TimelinePanelCtrl;
-		// change status
-		// create the annotation list window if not open
-		if (!thisCtrl.annotationListWindow){
-			thisCtrl.annotationListStore = new Ext.data.JsonStore({
-				root: 'annotations',
-				totalProperty: 'totalCount',
-				idProperty: 'id',
-				fields: [
-				'id', 'userName', 
-				{name: 'timeCreated', type: 'date'},
-				'excerpt'],
-				proxy: new Ext.data.HttpProxy ({
-					url: GeoAnnotator.baseUrl + 'Annotations/'
-				}),
-				baseParams: {userId: GeoAnnotator.currUserId, forumId: GeoAnnotator.currForumId, start:0, limit:10}
-			});
-			// create the template
-			var annotationListTpl = new Ext.XTemplate(
-				'<tpl for=".">',
-				'<div class="list-item">',
-				'<h3><span>{timeCreated:date("M d, Y")}</span>',
-				'{userName} says:</h3>',
-				'<p>{excerpt}</p>',
-				'</div></tpl>'
-			);
-			thisCtrl.annotationListDataView =  new Ext.DataView({
-				tpl: annotationListTpl,
-				store: thisCtrl.annotationListStore,
-				itemSelector: 'div.list-item',
-				multiSelect: true,
-				selectedClass: 'list-item-selected', 
-				overClass:'list-item-over',
-				emptyText : 'No Annotations'
-				//plugins: new Ext.DataView.DragSelector({dragSafe:false})
-			});
-			thisCtrl.annotationListDataView.on('click',thisCtrl.onAnnotationListItemClick);
-			
-			thisCtrl.annotationListWindow = new Ext.Window({
-					layout      : 'fit',
-					width       : 450,
-					autoHeight	: true,
-					//height      : 450,
-					closeAction :'hide',
-					plain       : true,
-					title		: 'Annotation List',
-					autoScroll  : true,
-					items : [thisCtrl.annotationListDataView],
-					tbar: new Ext.PagingToolbar({
-						store: thisCtrl.annotationListStore,
-						pageSize: 10,
-						displayInfo: true,
-						displayMsg: 'Annotations {0} - {1} of {2}',
-						emptyMsg: "No annotations to display"
-					})		
-			});
-			//thisCtrl.annotationListWindow.on('hide', function(){btn.toggle(false);})
-		}
-		thisCtrl.annotationListWindow.show();	
-	},
-	
-	onAnnotationListItemClick : function (dataView, index, node, e) {
-		// change the states
-		var id = dataView.getRecord(node).get('id');
-		var type = dataView.getRecord(node).get('type');
-		
-		GeoAnnotator.currAnnotationId = id;
-		GeoAnnotator.AnnotationInfoPanelCtrl.update();		
-		//GeoAnnotator.MapPanelCtrl.update();
-	},
-	
-	onTimelineItemClick : function(o) {
-		// create the annotation list window if not open
-		var thisCtrl = GeoAnnotator.TimelinePanelCtrl;				
-		thisCtrl.showAnnotationListWindow();
-		var record = thisCtrl.timelineData.getAt(o.index);
-		var start_date = new Date(record.get('date'));
-		var end_date = new Date(start_date);
-		
-		if (thisCtrl.unit === 'day') {
-			end_date.setDate(start_date.getDate()+1);
-		}
-		else if (thisCtrl.unit === 'month') {
-			end_date.setMonth(start_date.getMonth()+1);
-		}
-		else if (thisCtrl.unit === 'hour') {
-			end_date.setHours(start_date.getHours()+1);
-		}
-
-		thisCtrl.annotationListStore.removeAll();
-		thisCtrl.annotationListStore.baseParams = {userId: GeoAnnotator.currUserId, forumId: GeoAnnotator.currForumId, startDate: start_date.toGMTString(), endDate: end_date.toGMTString()};
-		thisCtrl.annotationListStore.load({params:{start:0, limit:10}});
-	}
-},
 
 GeoAnnotator.AnnotationInfoPanelCtrl = 
 {
@@ -3284,15 +3099,15 @@ GeoAnnotator.AnnotationInfoPanelCtrl =
 		ref_links = Ext.query('.ref-link');
 		for (var i=0; i < ref_links.length; i++) {
 			var ele = Ext.get(ref_links[i]);
-			if (ele.id.indexOf('ref-fp') === 0) {
+			if (ele.id.indexOf('ref-PLAN') === 0) {
 				ele.on('click', function(evt, target) {
 					var thisCtrl = GeoAnnotator.AnnotationInfoPanelCtrl;
-					var featureId = target.id.substring(6);
-					for (var i=0; i < thisCtrl.currAnnotationInfo.footprints.length; i++) {
-						var footprint = thisCtrl.currAnnotationInfo.footprints[i];
-						if (footprint.id == featureId) {
+					var featureId = target.id.substring(8);
+					for (var i=0; i < thisCtrl.currAnnotationInfo.plans.length; i++) {
+						var plan = thisCtrl.currAnnotationInfo.plans[i];
+						if (plan.id == featureId) {
 							
-							GeoAnnotator.currFootprintId = footprint.id;
+							GeoAnnotator.currPlanId = plan.id;
 							GeoAnnotator.MapPanelCtrl.moveToFeature(featureId);
 							
 							return;
@@ -3300,11 +3115,11 @@ GeoAnnotator.AnnotationInfoPanelCtrl =
 					};
 				});
 			}
-			else if (ele.id.indexOf('ref-an') === 0) {
-				var annotationId = ele.id.substring(6);
+			else if (ele.id.indexOf('ref-POST') === 0) {
+				var annotationId = ele.id.substring(8);
 				thisCtrl.addAnnotationTip(annotationId, ele);
 				ele.on('click', function(evt, target) {
-					var annotationId = target.id.substring(6);
+					var annotationId = target.id.substring(8);
 					GeoAnnotator.AnnotationInfoPanelCtrl.loadAnnotationInfo(annotationId);
 				});
 			}
@@ -3636,7 +3451,7 @@ GeoAnnotator.AnnotationInfoPanelCtrl =
 			item.excerpt = thisCtrl.currAnnotationInfo.excerpt;
 			GeoAnnotator.AnnotationHistoryWindowCtrl.add(item);
 			
-			GeoAnnotator.currFootprintId = '0';				
+			GeoAnnotator.currPlanId = '0';				
 			if (thisCtrl.currAnnotationInfo.forumId != GeoAnnotator.currForumId) {
 				GeoAnnotator.currForumId = thisCtrl.currAnnotationInfo.forumId;
 				var idx = GeoAnnotator.ContainerTBCtrl.forumList.getStore().find('id', GeoAnnotator.currForumId);
@@ -3647,7 +3462,7 @@ GeoAnnotator.AnnotationInfoPanelCtrl =
 				}
 			}
 			else {
-				GeoAnnotator.MapPanelCtrl.update();
+				// GeoAnnotator.MapPanelCtrl.update();
 			}
 		}
 	},
@@ -3675,7 +3490,7 @@ GeoAnnotator.AnnotationInfoPanelCtrl =
 		if (thisCtrl.currAnnotationInfo != null) {
 			// change the states
 			GeoAnnotator.currAnnotationId = thisCtrl.currAnnotationInfo.id;			
-			GeoAnnotator.currFootprintId = '0';
+			GeoAnnotator.currPlanId = '0';
 			
 			// update controls	
 			if (thisCtrl.currAnnotationInfo.forumId != GeoAnnotator.currForumId) {
@@ -3917,15 +3732,15 @@ GeoAnnotator.AnnotationInfoPanelCtrl =
 		if (submitState.success == true) {
 			// change the states
 			//alert('successfuly added!');
-			// reset the new footprints array
+			// reset the new plans array
 			
-			thisCtrl.newFootprints = [];
-			GeoAnnotator.currFootprintId = '0';
+			thisCtrl.newPlans = [];
+			GeoAnnotator.currPlanId = '0';
 
 			GeoAnnotator.currAnnotationId = submitState.data.id;
 
 			// update controls		
-			GeoAnnotator.TimelinePanelCtrl.update();
+			// GeoAnnotator.TimelinePanelCtrl.update();
 			GeoAnnotator.AnnotationInfoPanelCtrl.update();
 			GeoAnnotator.ContributePanelCtrl.update();
 			var currParams = {};
@@ -4006,7 +3821,7 @@ GeoAnnotator.AnnotationInfoPanelCtrl =
 	addAnnotationToReference: function(){
 		var thisCtrl = GeoAnnotator.AnnotationInfoPanelCtrl;
 		if (thisCtrl.currAnnotationInfo && thisCtrl.currAnnotationInfo.id) {
-			var name = '[AN' + thisCtrl.currAnnotationInfo.id + ']';
+			var name = '[POST' + thisCtrl.currAnnotationInfo.id + ']';
 			GeoAnnotator.ContributePanelCtrl.addAnnotationToReference(thisCtrl.currAnnotationInfo.id, name);
 		}
 	}
@@ -4192,7 +4007,7 @@ GeoAnnotator.ManageWindowCtrl = {
 		var record = grid.getStore().getAt(index);
 		// change the states
 		GeoAnnotator.currAnnotationId = record.get('id');
-		GeoAnnotator.currFootprintId = '0';
+		GeoAnnotator.currPlanId = '0';
 
 		// update controls		
 		//GeoAnnotator.TimelinePanelCtrl.update();
@@ -4260,7 +4075,7 @@ GeoAnnotator.ManageWindowCtrl = {
 		var thisCtrl = GeoAnnotator.ManageWindowCtrl;
 
 		GeoAnnotator.currAnnotationId = '0';
-		GeoAnnotator.currFootprintId = '0';
+		GeoAnnotator.currPlanId = '0';
 
 		// initialize controls
 		GeoAnnotator.AnnotationInfoPanelCtrl.init();
@@ -4268,11 +4083,11 @@ GeoAnnotator.ManageWindowCtrl = {
 		// update controls		
 		GeoAnnotator.ContributePanelCtrl.update();
 		thisCtrl.update();
-		GeoAnnotator.TimelinePanelCtrl.update();
+		// GeoAnnotator.TimelinePanelCtrl.update();
 		GeoAnnotator.MapPanelCtrl.update();
 	},
 
-	onDeleteAnnotationFailoure: function () {
+	onDeleteAnnotationFailure: function () {
 		alert('failed to delete annotation');	
 	}
 
@@ -4337,7 +4152,7 @@ GeoAnnotator.AnnotationHistoryWindowCtrl = {
 		var type = dataView.getRecord(node).get('type');
 		
 		GeoAnnotator.currAnnotationId = id;
-		GeoAnnotator.currFootprintId = '0';
+		GeoAnnotator.currPlanId = '0';
 			
 		// do nothing
 		// GeoAnnotator.UserInfoPanelCtrl;
@@ -4383,7 +4198,7 @@ GeoAnnotator.AnnotationHistoryWindowCtrl = {
 						
 						var record = thisCtrl.historyStore.getAt(thisCtrl.ctxNodeIndex);
 						var id = record.get('id');
-						var name = '[AN' + id + ']';
+						var name = '[POST' + id + ']';
 						GeoAnnotator.ContributePanelCtrl.addAnnotationToReference(id, name);
 						/*
 						var groupCtrl = GeoAnnotator.ContributePanelCtrl; 
@@ -4486,7 +4301,7 @@ GeoAnnotator.AnnotationBookmarkWindowCtrl = {
 		var type = dataView.getRecord(node).get('type');
 		
 		GeoAnnotator.currAnnotationId = id;
-		GeoAnnotator.currFootprintId = '0';
+		GeoAnnotator.currPlanId = '0';
 			
 			
 		// update controls		
@@ -4526,7 +4341,7 @@ GeoAnnotator.AnnotationBookmarkWindowCtrl = {
 						*/
 						var record = thisCtrl.bookmarkStore.getAt(thisCtrl.ctxNodeIndex);
 						var id = record.get('id');
-						var name = '[AN' + id + ']';
+						var name = '[POST' + id + ']';
 						GeoAnnotator.ContributePanelCtrl.addAnnotationToReference(id, name);
 						
 						/*
@@ -4611,6 +4426,13 @@ GeoAnnotator.Util = {
 				request.send(null);
 				return request.responseXML;
 			}
+	},
+
+	unique: function(myArray) {
+		uniqueArray = myArray.filter(function(elem, pos) {
+		    return myArray.indexOf(elem) == pos;
+		})
+		return uniqueArray;
 	}
 };
 

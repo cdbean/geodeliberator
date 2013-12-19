@@ -303,36 +303,36 @@ a:hover {
     background-image: url(../images/navigation.png) !important;
 }
 
-.drawfootprint-btn-icon {
-    background-image: url(../images/drawfootprint.png) !important;
+.drawplan-btn-icon {
+    background-image: url(../images/drawplan.png) !important;
 }
 
 .pageinfo-btn-icon {
     background-image: url(../images/pageinfo.png) !important;
 }
 
-.modifyfootprint-btn-icon {
+.modifyplan-btn-icon {
     background-image: url(../images/modify.png) !important;
 }
 
-.remove-footprint-icon {
+.remove-plan-icon {
     background-image: url(../images/remove.png) !important;
 }
 
-.add-footprint-icon {
+.add-plan-icon {
     background-image: url(../images/add.png) !important;
 }
 
-.delete-footprint-icon {
+.delete-plan-icon {
     background-image: url(../images/delete.png) !important;
 }
 
-.modify-footprint-icon {
+.modify-plan-icon {
     background-image: url(../images/modify.png) !important;
 }
 
-.draw-footprint-icon {
-    background-image: url(../images/drawfootprint.png) !important;    
+.draw-plan-icon {
+    background-image: url(../images/drawplan.png) !important;    
 }
 
 .annotation-edit-icon {

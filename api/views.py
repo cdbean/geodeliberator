@@ -107,10 +107,11 @@ def api_forum(request):
             response["scope"] = forum.scope
             response["contextmap"] = forum.contextmap
         except Forum.DoesNotExist:
-            pass
+            print "Forum does not exist", request.REQUEST
     return HttpResponse(json.dumps(response), mimetype='application/json')
 
 def api_forums(request):
+# adaptation done
     response = {}
     userId = int(request.REQUEST.get('userId', '0'))
     if userId > 0:
@@ -126,16 +127,15 @@ def api_forums(request):
                 forum_info["role"] = role.role
                 response["participating"].append(forum_info)
         except User.DoesNotExist:
-            pass
-    # public forums        
+            print "User not exist", request.REQUEST
+    # now we assume everyone participate in all forums    
     response["public"] = []    
-    
-    for forum in Forum.objects.filter(scope='public'):
+    for forum in Forum.objects.all():
         forum_info = {}
         forum_info["id"] = str(forum.id)
         forum_info["name"] = forum.name
         if userId <= 0 or userId not in forum.members.values_list('id', flat=True):
-            response["public"].append(forum_info)    
+            response["public"].append(forum_info)  
     return HttpResponse(json.dumps(response), mimetype='application/json')
 
 def api_userlist(request):
@@ -191,31 +191,31 @@ def api_annotations(request):
     forumId = int(request.REQUEST.get('forumId', '0')) or int(request.REQUEST.get('groupId', '0'))
     start = int(request.REQUEST.get('start', '0'))
     limit = int(request.REQUEST.get('limit', '-1'))
-    footprintId = int(request.REQUEST.get('footprintId', '0'))
-    ownerOnly = str(request.REQUEST.get('ownerOnly', 'false')).lower()
-    startDate = str(request.REQUEST.get('startDate', ''))
-    endDate = str(request.REQUEST.get('endDate', ''))
-    bbox = str(request.REQUEST.get('bbox', ''))
-
+    footprintId = int(request.REQUEST.get('planId', '0'))
+    # ownerOnly = str(request.REQUEST.get('ownerOnly', 'false')).lower()
+    # startDate = str(request.REQUEST.get('startDate', ''))
+    # endDate = str(request.REQUEST.get('endDate', ''))
+    # bbox = str(request.REQUEST.get('bbox', ''))
     if footprintId > 0:
-        annotations = Footprint.objects.get(id=footprintId).referred_annotations
-    elif len(bbox) > 0:
-        bbox_poly = Polygon.from_bbox(bbox.split(','))
-        footprints = Footprint.objects.filter(Q(shape__within=bbox_poly) | Q(shape__overlaps=bbox_poly))
-        inner_q = GeoReference.objects.filter(footprint__in=footprints).values('annotation').query
-        annotations = Annotation.objects.filter(id__in=inner_q)
+        annotations_q = PostReferPlan.objects.filter(plan=footprintId).values('post').query
+        annotations = Post.objects.filter(id__in=annotations_q)
+    #    annotations = Plan.objects.get(id=footprintId).referred_annotations
+    # elif len(bbox) > 0:
+    #     bbox_poly = Polygon.from_bbox(bbox.split(','))
+    #     footprints = Footprint.objects.filter(Q(shape__within=bbox_poly) | Q(shape__overlaps=bbox_poly))
+    #     inner_q = GeoReference.objects.filter(footprint__in=footprints).values('annotation').query
+    #     annotations = Annotation.objects.filter(id__in=inner_q)
     else:
-        annotations = Annotation.objects.all()
-         
+        annotations = Post.objects.all()
+
     if forumId > 0:
         annotations = annotations.filter(forum=forumId)
-    if ownerOnly == 'true' and userId > 0:
-        annotations = annotations.filter(author=userId)
-    if len(startDate) > 0:
-        annotations = annotations.filter(created_at__gte=parser.parse(startDate))
-    if len(endDate) > 0:
-        annotations = annotations.exclude(created_at__gte=parser.parse(endDate))
-    
+    # if ownerOnly == 'true' and userId > 0:
+    #     annotations = annotations.filter(author=userId)
+    # if len(startDate) > 0:
+    #     annotations = annotations.filter(created_at__gte=parser.parse(startDate))
+    # if len(endDate) > 0:
+    #     annotations = annotations.exclude(created_at__gte=parser.parse(endDate))
     annotations = annotations.order_by('-created_at')
     response['totalCount'] = annotations.count()
     
@@ -225,17 +225,186 @@ def api_annotations(request):
     for annotation in annotations:
         annotation_info = {}
         annotation_info['id'] = str(annotation.id)
-        annotation_info['type'] = annotation.content_type
+        annotation_info['rating'] = annotation.rating
         annotation_info['forumId'] = str(annotation.forum.id)
         annotation_info['userId'] = str(annotation.author.id)
         annotation_info['userName'] = annotation.author.username
-        annotation_info['shareLevel'] = annotation.sharelevel
+        annotation_info['subject'] = annotation.subject
+        annotation_info['clicktime'] = annotation.clicktime
+        annotation_info['timeLastReplied'] = annotation.lastreplied_at
         annotation_info['timeCreated'] = annotation.created_at.ctime()
         annotation_info['timeUpdated'] = annotation.updated_at.ctime()
         annotation_info['excerpt'] = annotation.get_excerpt(10)
         annotation_info['content'] = annotation.content        
         response['annotations'].append(annotation_info)
     return HttpResponse(json.dumps(response), mimetype='application/json')
+
+def api_claim(request):
+    response = {}
+    claimId = request.REQUEST.get('id')
+    content = request.REQUEST.get('content')
+    if int(claimId) <= 0:
+        # a new claim is to be added to the databse
+        response = add_claim(True, request)
+    if int(claimId) > 0:
+        if len(content) == 0:
+            # delete a claim
+            try:
+                claim = Claim.objects.get(id=claimId)
+                claim.delete();
+                response['success'] = True
+            except Exception as e:
+                print e
+                response['success'] = False
+                response['errors'] = {'reason', e}
+            return HttpResponse(json.dumps(response), mimetype='application/json')
+        else:
+            # edit an existing claim
+            response = add_claim(False, request)
+    return HttpResponse(json.dumps(response), mimetype='application/json')
+
+
+def add_claim(new, request):
+    response = {}
+    content = request.REQUEST.get('content')
+    claimId = request.REQUEST.get('id')
+    userId = request.REQUEST.get('userId')
+    forumId = request.REQUEST.get('forumId')
+    timeCreated = request.REQUEST.get('timeCreated')
+    postref = request.POST.getlist('postref')
+    claimref = request.POST.getlist('claimref')
+    planref = request.POST.getlist('planref')
+    optionref = request.POST.getlist('optionref')
+    issueref = request.POST.getlist('issueref')
+
+    author = User.objects.get(id=int(userId))
+    forum = Forum.objects.get(id=int(forumId))
+
+    try:
+        if new:
+            newClaim = Claim(content=content, author=author, forum=forum, created_at=parser.parse(timeCreated))
+            newClaim.save()
+        else:
+            claim = Claim.objects.get(id=claimId)
+            claim.delete();
+            newClaim = Claim(id=claimId, content=content, author=author, forum=forum, created_at=parser.parse(timeCreated))
+            newClaim.save()
+        # deal with references
+        for postref_id in postref:
+            if postref_id == '':
+                break
+            source = Post.objects.get(id=int(postref_id))
+            PostExpressClaim.objects.create(post=source, claim=newClaim)
+        for claimref_id in claimref:
+            if claimref_id == '':
+                break
+            source = Claim.objects.get(id=int(claimref_id))
+            ClaimReferClaim.objects.create(source=source, target=newClaim)
+        for planref_id in planref:
+            if planref_id == '':
+                break
+            source = Plan.objects.get(id=int(planref_id))
+            ClaimReferPlan.objects.create(plan=source, claim=newClaim)
+        for optionref_id in optionref:
+            if optionref_id == '':
+                break
+            source = Option.objects.get(id=int(optionref_id))
+            ClaimReferOption.objects.create(option=source, claim=newClaim)
+        for issueref_id in issueref:
+            if issueref_id == '':
+                break
+            source = Issue.objects.get(id=int(issueref_id))
+            ClaimReferIssue.objects.create(issue=source, claim=newClaim)
+        response['success'] = True
+        return response
+    except Exception as e:
+        print e
+        response['success'] = False
+        response['errors'] = {'reason', e}
+    return response
+
+
+def api_claims(request):
+    response = {}
+    userId = int(request.REQUEST.get('userId', '0'))
+    forumId = int(request.REQUEST.get('forumId', '0')) or int(request.REQUEST.get('groupId', '0'))
+
+    # start = int(request.REQUEST.get('start', '0'))
+    # limit = int(request.REQUEST.get('limit', '-1'))
+    # footprintId = int(request.REQUEST.get('planId', '0'))
+    # ownerOnly = str(request.REQUEST.get('ownerOnly', 'false')).lower()
+    # startDate = str(request.REQUEST.get('startDate', ''))
+    # endDate = str(request.REQUEST.get('endDate', ''))
+    # bbox = str(request.REQUEST.get('bbox', ''))
+    # if footprintId > 0:
+    #     annotations_q = PostReferPlan.objects.filter(plan=footprintId).values('post').query
+    #     annotations = Post.objects.filter(id__in=annotations_q)
+    #    annotations = Plan.objects.get(id=footprintId).referred_annotations
+    # elif len(bbox) > 0:
+    #     bbox_poly = Polygon.from_bbox(bbox.split(','))
+    #     footprints = Footprint.objects.filter(Q(shape__within=bbox_poly) | Q(shape__overlaps=bbox_poly))
+    #     inner_q = GeoReference.objects.filter(footprint__in=footprints).values('annotation').query
+    #     annotations = Annotation.objects.filter(id__in=inner_q)
+    # else:
+    claims = Claim.objects.all()
+
+    if forumId > 0:
+        claims = claims.filter(forum=forumId)
+    # if ownerOnly == 'true' and userId > 0:
+    #     annotations = annotations.filter(author=userId)
+    # if len(startDate) > 0:
+    #     annotations = annotations.filter(created_at__gte=parser.parse(startDate))
+    # if len(endDate) > 0:
+    #     annotations = annotations.exclude(created_at__gte=parser.parse(endDate))
+    # annotations = annotations.order_by('-created_at')
+    response['totalCount'] = claims.count()
+    
+    # if limit > -1:
+    #     annotations = annotations[start:start+limit]
+    response['claims'] = []
+    for claim in claims:
+        claim_info = {}
+        claim_info['id'] = str(claim.id)
+        claim_info['forumId'] = str(claim.forum.id)
+        claim_info['userId'] = str(claim.author.id)
+        claim_info['userName'] = claim.author.username
+        claim_info['content'] = claim.content
+        claim_info['timeCreated'] = claim.created_at.ctime()
+        claim_info['content'] = claim.content
+        claim_info['excerpt'] = claim.get_excerpt(10)
+
+        # get the posts that express it
+        claim_info['postref'] = []
+        postrefs = PostExpressClaim.objects.filter(claim=claim.id)
+        for postref in postrefs:   
+            claim_info['postref'].append(postref.post.id)
+
+        # get the claims, issues, options, plans that it refers to
+        # "claimRef" is all the posts that I cited
+        # "source" is cited by "target". "source id" is smaller than "target id"
+        claim_info['claimref'] = []
+        claimrefs = ClaimReferClaim.objects.filter(target=claim.id)
+        for claimref in claimrefs:   
+            response['claimref'].append(claimref.source.id)
+
+        claim_info['issueref'] = []
+        issuerefs = ClaimReferIssue.objects.filter(claim=claim.id)
+        for issueref in issuerefs:   
+            claim_info['issueref'].append(issueref.issue.id)
+
+        claim_info['optionref'] = []
+        optionrefs = ClaimReferOption.objects.filter(claim=claim.id)
+        for optionref in optionrefs:   
+            claim_info['optionref'].append(optionref.option.id)
+
+        claim_info['planref'] = []
+        planrefs = ClaimReferPlan.objects.filter(claim=claim.id)
+        for planref in planrefs:   
+            claim_info['planref'].append(planref.plan.id)
+
+        response['claims'].append(claim_info)
+    return HttpResponse(json.dumps(response), mimetype='application/json')
+
 
 def api_code(request):
     response = {}
@@ -311,7 +480,6 @@ def api_annotation(request):
             annotation_info = json.loads(new)
             response = add_annotation(annotation_info)
         except Exception, e:
-            print e.message
             raise e
     elif deleteId > 0:
         response = delete_annotation(deleteId)
@@ -323,29 +491,30 @@ def add_annotation(annotation_info):
     response = {}
     if int(annotation_info['id']) <= 0:
         # new annotation
+        # print annotation_info
         author = User.objects.get(id=int(annotation_info['userId']))
         forum = Forum.objects.get(id=int(annotation_info['forumId']))
-        
-        annotation = Annotation(content=annotation_info["content"], author=author, forum=forum, sharelevel=annotation_info["shareLevel"], created_at=parser.parse(annotation_info["timeCreated"]), updated_at=parser.parse(annotation_info["timeCreated"]), contextmap=annotation_info["contextMap"])
+        annotation = Post(content=annotation_info["content"], clicktime=0, author=author, forum=forum, created_at=parser.parse(annotation_info["timeCreated"]), updated_at=parser.parse(annotation_info["timeCreated"]))
         annotation.save()
-    
         content = annotation.content;
-        for reference_id in annotation_info["references"]:
-            source = Annotation.objects.get(id=int(reference_id))
-            ThemeReference.objects.create(source=source, target=annotation)
-        for footprint_info in annotation_info["footprints"]:
-            if int(footprint_info["id"]) > 0:
-                footprint = Footprint.objects.get(id=int(footprint_info["id"]))
-                GeoReference.objects.create(footprint=footprint, annotation=annotation)
-            elif len(footprint_info["shape"]) > 0:
-                footprint = Footprint.objects.create(created_at=parser.parse(annotation_info["timeCreated"]), shape=GEOSGeometry('SRID=%s;%s' % (footprint_info["srid"], footprint_info["shape"])) )
-                GeoReference.objects.create(footprint=footprint, annotation=annotation)
-                # replace temporary footprint ids
-                content = content.replace("fp-"+str(-int(footprint_info["id"])), "fp"+str(footprint.id))
-                content = content.replace("FP-"+str(-int(footprint_info["id"])), "fp"+str(footprint.id))
-                content = content.replace("Fp-"+str(-int(footprint_info["id"])), "fp"+str(footprint.id))
-        annotation.content = content;
-        annotation.save()
+        #for issueref_id in annotation_info["issueref"]:
+        for postref_id in annotation_info["postref"]:
+            source = Post.objects.get(id=int(postref_id))
+            PostReferPost.objects.create(source=source, target=annotation)
+        for planref_info in annotation_info["planref"]:
+            if int(planref_info["id"]) > 0: # old plan is referred
+                plan = Plan.objects.get(id=int(planref_info["id"]))
+                PostReferPlan.objects.create(plan=plan, post=annotation)
+            elif len(planref_info["shape"]) > 0: # new plan is created
+                plan = Plan(is_active=True, created_at=parser.parse(annotation_info["timeCreated"]), shape=GEOSGeometry('SRID=%s;%s' % (planref_info["srid"], planref_info["shape"])))
+                plan.save()
+                PostReferPlan.objects.create(plan=plan, post=annotation)
+                # replace temporary plan ids
+                content = content.replace("PLAN-"+str(-int(planref_info["id"])), "PLAN"+str(plan.id))
+                #content = content.replace("FP-"+str(-int(planref_info["id"])), "fp"+str(plan.id))
+                #content = content.replace("Fp-"+str(-int(planref_info["id"])), "fp"+str(plan.id))
+                annotation.content = content;
+                annotation.save()
     else:
         # edit existing annotation
         annotation = Annotation.objects.get(id=int(annotation_info['id']))
@@ -392,62 +561,78 @@ def delete_annotation(annotation_id):
     return response
         
 
-def get_annotation(annotation_id):
-    annotation_info = {}
+def get_annotation(postid):
+# adaptation done
+    postinfo = {}
     try:
-        annotation = Annotation.objects.get(id=annotation_id)
-        annotation_info['id'] = str(annotation.id)
-        annotation_info['type'] = annotation.content_type
-        annotation_info['forumId'] = str(annotation.forum.id)
-        annotation_info['userId'] = str(annotation.author.id)
-        annotation_info['userName'] = annotation.author.username
-        annotation_info['shareLevel'] = annotation.sharelevel
-        annotation_info['timeCreated'] = annotation.created_at.ctime()
-        annotation_info['timeUpdated'] = annotation.updated_at.ctime()
-        annotation_info['excerpt'] = annotation.get_excerpt(10)
-        annotation_info['content'] = annotation.content 
-        annotation_info['contextmap'] = annotation.contextmap 
-        annotation_info['replies'] = ThemeReference.objects.filter(source=annotation_id).count()  
+        post = Post.objects.get(id=postid)
+        postinfo['id'] = str(post.id)
+        postinfo['rating'] = post.rating
+        postinfo['subject'] = post.subject
+        postinfo['clicktime'] = post.clicktime
+        postinfo['forumId'] = str(post.forum.id)
+        postinfo['userId'] = str(post.author.id)
+        postinfo['userName'] = post.author.username
+        postinfo['timeCreated'] = post.created_at.ctime()
+        postinfo['timeUpdated'] = post.updated_at.ctime()
+        postinfo['excerpt'] = post.get_excerpt(10)
+        postinfo['content'] = post.content 
+        postinfo['replies'] = PostReferPost.objects.filter(source=postid).count()  
         # get references
-        theme_references = ThemeReference.objects.filter(target=annotation_id)
-        annotation_info['references'] = []
-        for reference in theme_references:
+        postref = PostReferPost.objects.filter(target=postid)
+        # postref_q = PostReferPost.objects.filter(target=postid).values('source').query
+        # postref = Post.objects.filter(id__in=postref_q)
+
+        # "postref" is all the posts that I cited
+        # "source" is cited by "target". "source id" is smaller than "target id"
+        postinfo['postref'] = []
+        for reference in postref:
             reference_info = {}
             reference_info['id'] = str(reference.source.id)
-            reference_info['type'] = reference.source.content_type
+            reference_info['rating'] = reference.source.rating
+            reference_info['subject'] = reference.source.subject
+            reference_info['clicktime'] = reference.source.clicktime
             reference_info['forumId'] = str(reference.source.forum.id)
             reference_info['userId'] = str(reference.source.author.id)
             reference_info['userName'] = reference.source.author.username
-            reference_info['shareLevel'] = reference.source.sharelevel
             reference_info['timeCreated'] = reference.source.created_at.ctime()
             reference_info['timeUpdated'] = reference.source.updated_at.ctime()
             reference_info['excerpt'] = reference.source.get_excerpt(10)
-            reference_info['alias'] = reference.alias
-            reference_info['relation'] = reference.relation
-            annotation_info['references'].append(reference_info)
-        # get footprints
-        geo_refenreces = GeoReference.objects.filter(annotation=annotation_id)
-        annotation_info['footprints'] = []      
-        for reference in geo_refenreces:
+            reference_info['content'] = reference.source.content 
+            postinfo['postref'].append(reference_info)
+        # get plans
+        planref = PostReferPlan.objects.filter(post=postid)
+        # planref_q = PostReferPlan.objects.filter(post=postid).values('plan')
+        # planref = Plan.objects.filter(id__in=planref_q)
+        postinfo['planref'] = []      
+        for reference in planref:
             reference_info = {}
-            reference_info['id'] = str(reference.footprint.id)
-            reference_info['name'] = str(reference.footprint.name)
-            reference_info['timeCreated'] = reference.footprint.created_at.ctime()
-            reference_info['shape'] = reference.footprint.shape.wkt
-            reference_info['srid'] = reference.footprint.shape.srid
-            reference_info['type'] = reference.footprint.shape.geom_type
-            reference_info['refCount'] = reference.footprint.referred_annotations.count()
-            reference_info['alias'] = reference.alias
-            annotation_info['footprints'].append(reference_info)
-    except Annotation.DoesNotExist:
+            reference_info['id'] = str(reference.plan.id)
+            reference_info['name'] = str(reference.plan.name)
+            reference_info['description'] = str(reference.plan.description)
+            reference_info['is_active'] = str(reference.plan.is_active)
+            reference_info['option'] = str(reference.plan.option)
+            reference_info['proposer'] = str(reference.plan.proposer)
+            reference_info['timeCreated'] = reference.plan.created_at.ctime()
+            reference_info['shape'] = reference.plan.shape.wkt
+            reference_info['srid'] = reference.plan.shape.srid
+            reference_info['type'] = reference.plan.shape.geom_type
+            reference_info['refCount'] = reference.plan.post_refer_plan.count()
+            postinfo['planref'].append(reference_info)
+    except Post.DoesNotExist:
         pass
-    return annotation_info
+    return postinfo
+
+
 
 def api_map(request):
+# adaptation done
     response = {}
+    # print request.REQUEST
     userId = int(request.REQUEST.get('userId', '0'))
     forumId = int(request.REQUEST.get('forumId', '0')) or int(request.REQUEST.get('groupId', '0'))
     annotationId = int(request.REQUEST.get('annotationId', '0')) or int(request.REQUEST.get('issueId', '0')) or int(request.REQUEST.get('commentId', '0'))
+    # print userId, forumId, annotationId
     if annotationId > 0:
         try:
             annotation = Annotation.objects.get(id=annotationId)
@@ -473,23 +658,24 @@ def api_map(request):
             response["mapString"] = forum.contextmap
             response["type"] = 'group'
             response["forumId"] = str(forum.id)
-            response["footprints"] = []
-            annotations_q = forum.annotation_set.values('id').query
-            footprints_q = GeoReference.objects.filter(annotation__in=annotations_q).values('footprint').distinct()
-            footprints = Footprint.objects.filter(id__in=footprints_q)
-            for footprint in footprints:
-                footprint_info = {}
-                footprint_info['id'] = str(footprint.id)
-                footprint_info['name'] = str(footprint.name)
-                footprint_info['timeCreated'] = footprint.created_at.ctime()
-                footprint_info['shape'] = footprint.shape.wkt
-                footprint_info['srid'] = footprint.shape.srid
-                footprint_info['type'] = footprint.shape.geom_type
-                footprint_info['refCount'] = footprint.referred_annotations.count()
-                response['footprints'].append(footprint_info)            
+            response["plans"] = []
+            # annotations_q = forum.annotation_set.values('id').query
+            # plans_q = PostReferPlan.objects.filter(annotation__in=annotations_q).values('footprint').distinct()
+            # footprints = Plan.objects.filter(id__in=plans_q)
+            # FIX ME!!!
+            plans = Plan.objects.all()
+            for plan in plans:
+                plan_info = {}
+                plan_info['id'] = str(plan.id)
+                plan_info['name'] = str(plan.name)
+                plan_info['timeCreated'] = plan.created_at.ctime()
+                plan_info['shape'] = plan.shape.wkt
+                plan_info['srid'] = plan.shape.srid
+                plan_info['type'] = plan.shape.geom_type
+                # plan_info['refCount'] = plan.referred_annotations.count()
+                response['plans'].append(plan_info)
         except Forum.DoesNotExist:
-            pass
-        
+            print "Forum not exist"
     return HttpResponse(json.dumps(response), mimetype='application/json')
 
 def api_timeline(request):

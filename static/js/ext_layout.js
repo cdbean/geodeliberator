@@ -37,17 +37,17 @@ var mapPanel = new Ext.Panel({
 	//contentEl: 'default-map-panel'  // pull existing content from the page
 });
 
-var timelinePanel = new Ext.Panel({
-	id: 'timeline-panel',
-	title: 'Timeline',
-	region: 'south',
-	bodyStyle: 'padding:0px',
-	height: 200,
-	collapsible: true
-	//minSize: 200,
-	//maxSize: 400
-	//contentEl: 'default-annotation-view-panel'  // pull existing content from the page
-});
+// var timelinePanel = new Ext.Panel({
+// 	id: 'timeline-panel',
+// 	title: 'Timeline',
+// 	region: 'south',
+// 	bodyStyle: 'padding:0px',
+// 	height: 200,
+// 	collapsible: true
+// 	//minSize: 200,
+// 	//maxSize: 400
+// 	//contentEl: 'default-annotation-view-panel'  // pull existing content from the page
+// });
 
 // center panel container	
 var centerPanels = new Ext.Panel({
@@ -65,7 +65,7 @@ var centerPanels = new Ext.Panel({
     	//bodyStyle: 'padding:15px'
 	},
 
-	items: [mapPanel, timelinePanel]
+	items: [mapPanel] //, timelinePanel]
 });
 /*******End Centre Panels Definitions******/
 	
@@ -213,7 +213,7 @@ function registerComponents () {
 	//GeoAnnotator.GroupInfoPanelCtrl.register(groupInfoPanel);
 	GeoAnnotator.ContainerTBCtrl.register(containerTB);
 	GeoAnnotator.MapPanelCtrl.register(mapPanel);
-	GeoAnnotator.TimelinePanelCtrl.register(timelinePanel);
+	//GeoAnnotator.TimelinePanelCtrl.register(timelinePanel);
 	GeoAnnotator.AnnotationInfoPanelCtrl.register(annotationInfoPanel);
 	GeoAnnotator.AnnotationHistoryWindowCtrl.register(annotationHistoryWindow);
 	GeoAnnotator.AnnotationBookmarkWindowCtrl.register(annotationBookmarkWindow);
