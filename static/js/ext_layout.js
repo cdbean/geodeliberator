@@ -150,6 +150,24 @@ var annotationHistoryWindow = new Ext.Window({
 	items		: [annotationHistoryPanel]
 });
 
+var postClaimWindow = new Ext.Window({
+	width: 700,
+    height: 500,
+    title: 'Posts and Claims',
+    layout: 'column',
+    closeAction : 'hide',
+    items: [{
+        columnWidth: .5,
+        id: 'post-panel',
+        unstyled : true,
+    },{
+        columnWidth: .5,
+        id: 'claim-panel',
+        unstyled : true,
+        autoScroll: true,
+    }]
+});
+
 var managePanel = new Ext.Panel({
 	id: 'manage-panel',
 	title: 'Management',
@@ -219,4 +237,5 @@ function registerComponents () {
 	GeoAnnotator.AnnotationBookmarkWindowCtrl.register(annotationBookmarkWindow);
 	GeoAnnotator.ContributePanelCtrl.register(contributePanel);
 	GeoAnnotator.ManageWindowCtrl.register(manageWindow);
+	//GeoAnnotator.PostClaimWindowCtrl.register(postClaimWindow);
 };

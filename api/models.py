@@ -82,7 +82,7 @@ class Plan(models.Model):
 
 class Claim(models.Model):
     content = models.TextField()
-    value = models.ForeignKey('Value', null = True)
+    value = models.ForeignKey('Value', null = True) # change to n-to-n relation!
     created_at = models.DateTimeField(verbose_name='date created')
     author = models.ForeignKey(User)
     forum = models.ForeignKey(Forum)
