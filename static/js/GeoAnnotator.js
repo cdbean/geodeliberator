@@ -242,8 +242,8 @@ GeoAnnotator.ContainerTBCtrl = {
 				xtype: 'box',
 				autoEl: {
 				tag: 'a',
-				href: '/geodeliberator/user/logout',
-				html: 'Log out'
+				href: "{% url 'users.views.logout_user' %}",
+				html: 'Log out hahah   '
 				}
 			});
 		}
@@ -1983,21 +1983,44 @@ GeoAnnotator.MapPanelCtrl = {
 	getGMapType : function(type) {
 		var newGMapType;
 		switch(type){
+//		case 'G_NORMAL_MAP':
+//			newGMapType = G_NORMAL_MAP;
+//			newGMapType.toString = function () {return 'G_NORMAL_MAP';};
+//			break;
+//		case 'G_SATELLITE_MAP':
+//			newGMapType = G_SATELLITE_MAP;
+//			newGMapType.toString = function () {return 'G_SATELLITE_MAP';};
+//			break;
+//		case 'G_HYBRID_MAP':
+//			newGMapType = G_HYBRID_MAP;
+//			newGMapType.toString = function () {return 'G_HYBRID_MAP';};
+//			break;
+//		case 'G_PHYSICAL_MAP':
+//			newGMapType = G_PHYSICAL_MAP;
+//			newGMapType.toString = function () {return 'G_PHYSICAL_MAP';};
+//			break;
+//		case 'G_CUSTOM_CENTREIMAGERY_MAP':
+//			var tileCentreImagery= new GTileLayer(new GCopyrightCollection(""),0,19, {
+//				tileUrlTemplate: 'http://www.apps.geovista.psu.edu/tilecache/tilecache.py/1.0.0/centreimageryjpeg/{Z}/{X}/{Y}.jpg?type=google',
+//				isPng:false});
+//			newGMapType = new GMapType([tileCentreImagery,G_HYBRID_MAP.getTileLayers()[1]], new GMercatorProjection(20), "Centre Imagery with Google Labels", {shortName:"CIL"});
+//			newGMapType.toString = function () {return 'G_CUSTOM_CENTREIMAGERY_MAP';};
+//			break;
+//		default:
+//			newGMapType = G_NORMAL_MAP;
+//			newGMapType.toString = function () {return 'G_NORMAL_MAP';};
+//			break;
 		case 'G_NORMAL_MAP':
-			newGMapType = G_NORMAL_MAP;
-			newGMapType.toString = function () {return 'G_NORMAL_MAP';};
+			newGMapType = google.maps.MapTypeId.ROADMAP;
 			break;
 		case 'G_SATELLITE_MAP':
-			newGMapType = G_SATELLITE_MAP;
-			newGMapType.toString = function () {return 'G_SATELLITE_MAP';};
+			newGMapType = google.maps.MapTypeId.SATELLITE;
 			break;
 		case 'G_HYBRID_MAP':
-			newGMapType = G_HYBRID_MAP;
-			newGMapType.toString = function () {return 'G_HYBRID_MAP';};
+			newGMapType = google.maps.MapTypeId.HYBRID;
 			break;
 		case 'G_PHYSICAL_MAP':
-			newGMapType = G_PHYSICAL_MAP;
-			newGMapType.toString = function () {return 'G_PHYSICAL_MAP';};
+			newGMapType = google.maps.MapTypeId.TERRAIN;
 			break;
 		case 'G_CUSTOM_CENTREIMAGERY_MAP':
 			var tileCentreImagery= new GTileLayer(new GCopyrightCollection(""),0,19, {

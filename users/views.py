@@ -6,6 +6,7 @@ from django.contrib.auth import authenticate, login, logout
 
 from api.models import Forum, Membership
 import json
+from django.core.urlresolvers import reverse
 
 def login_user(request):
     response	= {}
@@ -26,7 +27,7 @@ def login_user(request):
 	    response["error"] = "Username and password don't match!"
 	    print response
 	    return render(request, 'login.html', response)
-	return redirect('/geodeliberator')
+	return redirect(reverse('views.index'))
 
 #below is the user's register page.
 def register(request):
@@ -63,7 +64,7 @@ def register(request):
 		    login(request, user)
 		    print "user logged in"
                     print response
-		    return redirect('/')
+		    return redirect(reverse('views.index'))
 		else:
 		    response['success'] = False
 		    response['error'] = 'User authentication failed!'
@@ -82,9 +83,10 @@ def register(request):
 def logout_user(request):
     try:
 	logout(request)
-	print 'log out user'
+	print 'log out user '
+	print reverse('users.views.login_user')
     except Exception as e:
 	print e
-    return redirect('/user/login')
+    return redirect(reverse('users.views.login_user'))
 
 

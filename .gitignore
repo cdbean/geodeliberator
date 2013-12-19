@@ -1,4 +1,4 @@
-*.settings.py
+# settings.py
 
 # Compiled source #
 *.pyc
@@ -24,3 +24,6 @@ Thumbs.db
 logs/
 
 urls.py
+
+api/migrations/
+GEOENV/

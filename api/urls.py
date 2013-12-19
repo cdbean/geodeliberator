@@ -28,7 +28,7 @@ urlpatterns = patterns('',
     url(r'^Timeline/$', api_timeline, name='api_timeline'),
     url(r'^Threads/$', api_threads, name='api_threads'),
     # below is the maintenance functions
-    url(r'^/maintenance$', api_maintenance, name = 'api_dash_board'),
+    url(r'^maintenance$', api_maintenance, name = 'api_dash_board'),
     url(r'^/$', api_maintenance, name = 'api_dash_board'),
 
     url(r'^claims/$', api_claims, name='api_claims'),   
