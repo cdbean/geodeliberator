@@ -2243,19 +2243,28 @@ GeoAnnotator.MapPanelCtrl = {
 
 GeoAnnotator.PostClaimWindowCtrl = 
 {
+	// UI elements
 	postClaimWindow: null,
-	annotationListStore: null,
-	annotationListDataView: null,
 	claimListPanel: null,
-	claimListStore: null,
 	claimPanelToolBar: null,
 	newClaimPanel: null,
+	postContextMenu: null,
 
-	// register : function (postClaimWindow) {
-	// 	this.postClaimWindow = postClaimWindow;
-	// 	this.postListPanel = this.postClaimWindow.get('post-panel');
-	// 	this.claimListPanel = this.postClaimWindow.get('claim-panel');
-	// },
+	// data stores
+	annotationListStore: null,
+	annotationListDataView: null,
+	claimListStore: null,
+
+	// context menu references
+	//ctxArguments: null,
+	//ctxNodeIndes: null,
+
+	// current expanded claim panel
+	currClaimPanel: null,
+	// new claim editing flag
+	// claimEditingFlag: false,
+
+
 	init: function() {
 		var thisCtrl = GeoAnnotator.PostClaimWindowCtrl;
 		// create the annotation list window if not open
@@ -2307,8 +2316,10 @@ GeoAnnotator.PostClaimWindowCtrl =
 
 		thisCtrl.claimListPanel = new Ext.Panel({
 			id: 'claim-list-panel',
-    		bodyStyle: 'padding: 0 1 0 1;',
     		layout : 'accordion',
+    		autoHeight: true,
+    		//split: true,
+    		autoScroll: true,
     		layoutConfig : {
 		        titleCollapse: true,
 		        animate: false,
@@ -2340,10 +2351,8 @@ GeoAnnotator.PostClaimWindowCtrl =
 		    height: 500,
 		    title: 'Posts and Claims',
 		    layout: 'column',
-		    // autoScroll: true,
 		    closeAction : 'hide',
 		    items: [{
-		        // xtype: 'panel' implied by default
 		        columnWidth: .5,
 		        id: 'post-panel',
 		        items : [new Ext.PagingToolbar({
@@ -2391,7 +2400,7 @@ GeoAnnotator.PostClaimWindowCtrl =
 				labelAlign: 'top',
 				border: false,
 				autoScroll: true,
-				autoHeight: true,
+				layout: 'fit',
 				id: 'claimPanel' + claimId,
 				items : [{
         			xtype: 'htmleditor',
@@ -2405,58 +2414,47 @@ GeoAnnotator.PostClaimWindowCtrl =
         			anchor: '100%',
         			value : content
         		}],
-        		buttons: [
-        		{
+        		buttons: [{
         			text : 'Delete',
 	    			id: 'claim' + claimId + '-delete-btn',
-	    			handler: function() {
-	    				var me = this;
-	    				Ext.Msg.confirm('Confirm', 'Do you want to delete this claim?', function (btn, text) {
-	    					if (btn == 'yes') {
-			    				var buttonId = me.id;
-			    				var claimId;
-			    				var regex = /^claim([0-9]+)-delete-btn$/;
-			    				if (regex.test(buttonId)) {
-			    					claimId = regex.exec(buttonId)[1];
-			    				}
-	    						Ext.Ajax.request({
-									url: GeoAnnotator.baseUrl + 'claim/',
-									success: function() {
-					    				// refresh claim panel
-					    				thisCtrl = GeoAnnotator.PostClaimWindowCtrl;
-					    				thisCtrl.claimListPanel.removeAll();
-										thisCtrl.claimListStore.load({params:{userId: GeoAnnotator.currUserId, forumId: GeoAnnotator.currForumId}, callback: thisCtrl.onClaimLoadSuccess});
-									},
-									failure: function() {
-										alert('fail to delete claim!');
-									},
-									params: {
-										'id': claimId,
-										'content': ''
-									}
-								});
-	    					}
-	    				});
-	    			}
+	    			handler: thisCtrl.onClaimDelete
         		},{
         			text : 'Save',
         			id: 'claim' + claimId + '-save-btn',
         			handler: thisCtrl.onClaimEdit
-        		}]
+        		}],
 			})
 			// add this panel to the accordion
-			thisCtrl.claimListPanel.add({
+			var currFormPanelWrapper = new Ext.Panel({
 				title: '<b>Claim ' + claimId + ':</b> ' + excerpt + '<br>' + 'by <b>' + userName + '</b> on ' + Ext.util.Format.date(timeCreated) + ' at ' + Ext.util.Format.date(timeCreated, 'g:i:s A'),
+        		collapsed: true,
+        		// draggable: true, // wow!
+        		listeners: {
+        			expand: function() {
+        				thisCtrl = GeoAnnotator.PostClaimWindowCtrl;
+        				thisCtrl.currClaimPanel = this.getComponent(0);
+        				var htmleditor = thisCtrl.currClaimPanel.getComponent(0);
+        				htmleditor.focus();
+        			},
+        			collapse: function() {
+        				thisCtrl = GeoAnnotator.PostClaimWindowCtrl;
+        				thisCtrl.currClaimPanel = null;
+        			}
+        		},
 				items: [currFormPanel]
 			});
+			currFormPanelWrapper.on('contextmenu', thisCtrl.onClaimListContextMenu);
+			thisCtrl.claimListPanel.add(currFormPanelWrapper);
 		}
 		thisCtrl.claimListPanel.doLayout();
+		thisCtrl.claimPanelToolBar.getComponent('new-claim-btn').enable();
 	},
 
 	onNewClaimClick : function() {
 		var thisCtrl = GeoAnnotator.PostClaimWindowCtrl;
 		// temporarily disable the 'new claim' button
 		thisCtrl.claimPanelToolBar.getComponent('new-claim-btn').disable();
+
 		// get the post references through the dataview list selection
 		var selectedAnnotations = thisCtrl.annotationListDataView.getSelectedRecords();
 		var postref = '&nbsp;';
@@ -2507,11 +2505,26 @@ GeoAnnotator.PostClaimWindowCtrl =
 		thisCtrl.claimListPanel.add({
 			title: '<b>New Claim</b>',
 			id: 'new-claim',
+    		listeners: {
+    			expand: function() {
+    				thisCtrl = GeoAnnotator.PostClaimWindowCtrl;
+    				thisCtrl.currClaimPanel = thisCtrl.newClaimPanel;
+    				var htmleditor = thisCtrl.currClaimPanel.getComponent(0);
+    				htmleditor.focus();
+    			},
+    			collapse: function() {
+    				thisCtrl = GeoAnnotator.PostClaimWindowCtrl;
+    				thisCtrl.currClaimPanel = null;
+    			}
+    		},
 			items: [thisCtrl.newClaimPanel]
 		});
+
 		thisCtrl.claimListPanel.doLayout();
 		thisCtrl.claimListPanel.getComponent('new-claim').expand();
-		// thisCtrl.claimListPanel.getComponent('new-claim').getComponent('new-claim-panel').getComponent('newClaimContent').focus();
+		thisCtrl.currClaimPanel = thisCtrl.newClaimPanel;
+		var htmleditor = thisCtrl.newClaimPanel.getComponent(0);
+		htmleditor.focus();
 	},
 
 	onClaimSubmit : function() {
@@ -2588,9 +2601,6 @@ GeoAnnotator.PostClaimWindowCtrl =
 			    thisCtrl.claimListPanel.removeAll();
 				thisCtrl.claimListStore.load({params:{userId: GeoAnnotator.currUserId, forumId: GeoAnnotator.currForumId}, callback: function() {
 						thisCtrl.onClaimLoadSuccess();
-						// expand the claim just added
-						var currClaimCnt = thisCtrl.claimListStore.getCount();
-						thisCtrl.claimListPanel.getComponent(currClaimCnt - 1).expand();
 						// re-enable the new claim button
 						thisCtrl.claimPanelToolBar.enable();
 					}
@@ -2705,6 +2715,36 @@ GeoAnnotator.PostClaimWindowCtrl =
 		});
 	},
 
+	onClaimDelete: function() {
+		var me = this;
+		Ext.Msg.confirm('Confirm', 'Do you want to delete this claim?', function (btn, text) {
+			if (btn == 'yes') {
+				var buttonId = me.id;
+				var claimId;
+				var regex = /^claim([0-9]+)-delete-btn$/;
+				if (regex.test(buttonId)) {
+					claimId = regex.exec(buttonId)[1];
+				}
+				Ext.Ajax.request({
+					url: GeoAnnotator.baseUrl + 'claim/',
+					success: function() {
+	    				// refresh claim panel
+	    				thisCtrl = GeoAnnotator.PostClaimWindowCtrl;
+	    				thisCtrl.claimListPanel.removeAll();
+						thisCtrl.claimListStore.load({params:{userId: GeoAnnotator.currUserId, forumId: GeoAnnotator.currForumId}, callback: thisCtrl.onClaimLoadSuccess});
+					},
+					failure: function() {
+						alert('fail to delete claim!');
+					},
+					params: {
+						'id': claimId,
+						'content': ''
+					}
+				});
+			}
+		});
+	},
+
 	onAnnotationListItemClick : function (dataView, index, node, e) {
 		// change the states
 		var id = dataView.getRecord(node).get('id');
@@ -2720,6 +2760,7 @@ GeoAnnotator.PostClaimWindowCtrl =
 
 	onAnnotationListContextMenu: function(dataView, index, node, e) {
 		var thisCtrl = GeoAnnotator.PostClaimWindowCtrl;
+		thisCtrl.nodeIndex = index;
 		if (!thisCtrl.postContextMenu) {
 			thisCtrl.postContextMenu = new Ext.menu.Menu({
 				id: 'post-list-ctx',
@@ -2728,11 +2769,28 @@ GeoAnnotator.PostClaimWindowCtrl =
 					text: 'Add to reference',
 					handler: function() {
 						var thisCtrl = GeoAnnotator.PostClaimWindowCtrl;
+						if (thisCtrl.currClaimPanel === null) {
+							alert ('expand some claim and then try again.');
+							return;
+						}
+						var record = thisCtrl.annotationListStore.getAt(thisCtrl.nodeIndex);
+						var id = record.get('id');
+						var name = '[POST' + id + ']';
+						var htmleditor = thisCtrl.currClaimPanel.getComponent(0);
+						htmleditor.focus();
+						htmleditor.setValue(htmleditor.getValue() + name);
 					}
 				}]
 			});
 		}
+		e.preventDefault();
+		thisCtrl.postContextMenu.showAt(e.getXY());
+	},
+
+	onClaimListContextMenu: function() {
+		alert('ha');
 	}
+
 };
 
 GeoAnnotator.AnnotationInfoPanelCtrl = 
