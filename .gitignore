@@ -17,3 +17,5 @@ geodeliberator_client/lib/
 ehthumbs.db
 Icon?
 Thumbs.db
+settings.py
+logs/
