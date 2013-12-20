@@ -1341,10 +1341,6 @@ GeoAnnotator.MapPanelCtrl = {
 			thisCtrl.annotationListWindow = null;
 		}
 
-		if (thisCtrl.postClaimWindow) {
-			thisCtrl.postClaimWindow.close();
-			thisCtrl.postClaimWindow = null;
-		}
 		thisCtrl.containerPanel.body.update('<div id="' + thisCtrl.mapDiv +'"></div>');	
 		
 		
@@ -2317,7 +2313,7 @@ GeoAnnotator.PostClaimWindowCtrl =
 		thisCtrl.claimListPanel = new Ext.Panel({
 			id: 'claim-list-panel',
     		layout : 'accordion',
-    		autoHeight: true,
+    		height: 440,
     		//split: true,
     		autoScroll: true,
     		layoutConfig : {
@@ -2352,6 +2348,7 @@ GeoAnnotator.PostClaimWindowCtrl =
 		    title: 'Posts and Claims',
 		    layout: 'column',
 		    closeAction : 'hide',
+		    resizable: false,
 		    items: [{
 		        columnWidth: .5,
 		        id: 'post-panel',
@@ -2373,7 +2370,6 @@ GeoAnnotator.PostClaimWindowCtrl =
 		        items : [thisCtrl.claimPanelToolBar, thisCtrl.claimListPanel]
 		    }]
 		});
-
 		thisCtrl.claimPanelToolBar.getComponent('new-claim-btn').enable();
 	},
 
