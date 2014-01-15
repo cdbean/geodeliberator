@@ -33,6 +33,6 @@ urlpatterns = patterns('',
 
     url(r'^claims/$', api_claims, name='api_claims'),   
     url(r'^claim/$', api_claim, name='api_claim'),
-    
+    url(r'^values/$', api_values, name='api_values'),
 )
 

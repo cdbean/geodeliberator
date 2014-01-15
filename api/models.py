@@ -1,6 +1,6 @@
 # models.py
 # databaase scheme definition
-# yt revised on 12/4/2013
+# yt revised on 12/20/2013
 
 from django.contrib.gis.db import models
 from django.contrib.auth.models import User
@@ -80,10 +80,15 @@ class Plan(models.Model):
     def __unicode__(self):
         return str(self.id)
 
+class Value(models.Model):
+    content = models.TextField()
+    class Meta:
+        db_table = 'geoannotator_value'
+
 class Claim(models.Model):
     content = models.TextField()
-    value = models.ForeignKey('Value', null = True) # change to n-to-n relation!
     created_at = models.DateTimeField(verbose_name='date created')
+    updated_at = models.DateTimeField(verbose_name='date updated')
     author = models.ForeignKey(User)
     forum = models.ForeignKey(Forum)
 
@@ -91,6 +96,7 @@ class Claim(models.Model):
     option = models.ManyToManyField(Option, related_name='claim_refer_option', through='ClaimReferOption')
     plans = models.ManyToManyField(Plan, related_name='claim_refer_plan', through='ClaimReferPlan')
     reference = models.ManyToManyField("self", symmetrical=False, related_name='claim_refer_claim', through='ClaimReferClaim')
+    value = models.ManyToManyField(Value, related_name='claim_express_value', through='ClaimExpressValue')
 
     class Meta:
         db_table = 'geoannotator_claim'
@@ -139,11 +145,6 @@ class Code(models.Model):
     author = models.ForeignKey(User)
     class Meta:
         db_table = 'geoannotator_code'
-
-class Value(models.Model):
-    content = models.TextField()
-    class Meta:
-        db_table = 'geoannotator_value'
         
 class Data(models.Model):
     DATATYPE_CHOICES = (
@@ -174,6 +175,13 @@ class PostExpressClaim(models.Model):
 
     class Meta:
         db_table = 'geoannotator_postexpressclaim'
+
+class ClaimExpressValue(models.Model):
+    claim = models.ForeignKey(Claim)
+    value = models.ForeignKey(Value)
+
+    class Meta:
+        db_table = 'geoannotator_claimexpressvalue'
 
 class PostReferPost(models.Model):
     source = models.ForeignKey(Post, related_name='source_postreferpost')

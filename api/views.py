@@ -1,3 +1,5 @@
+# revised 1/7/2014
+
 from django.http import HttpResponse
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
@@ -106,7 +108,6 @@ def api_forum(request):
             response["id"] = str(forum.id)
             response["name"] = str(forum.name)
             response["description"] = forum.description
-            response["scope"] = forum.scope
             response["contextmap"] = forum.contextmap
         except Forum.DoesNotExist:
             print "Forum does not exist", request.REQUEST
@@ -273,25 +274,27 @@ def add_claim(new, request):
     userId = request.REQUEST.get('userId')
     forumId = request.REQUEST.get('forumId')
     timeCreated = request.REQUEST.get('timeCreated')
+    timeUpdated = request.REQUEST.get('timeUpdated')
     postref = request.POST.getlist('postref')
     claimref = request.POST.getlist('claimref')
     planref = request.POST.getlist('planref')
     optionref = request.POST.getlist('optionref')
     issueref = request.POST.getlist('issueref')
+    valueref = request.POST.getlist('valueref')
 
     author = User.objects.get(id=int(userId))
     forum = Forum.objects.get(id=int(forumId))
-
+    newClaim = None
     try:
         if new:
-            newClaim = Claim(content=content, author=author, forum=forum, created_at=parser.parse(timeCreated))
+            newClaim = Claim(content=content, author=author, forum=forum, created_at=parser.parse(timeCreated), updated_at=parser.parse(timeUpdated))
             newClaim.save()
         else:
             claim = Claim.objects.get(id=claimId)
+            timeCreated = claim.created_at
             claim.delete();
-            newClaim = Claim(id=claimId, content=content, author=author, forum=forum, created_at=parser.parse(timeCreated))
-            newClaim.save()
-        # deal with references
+            newClaim = Claim(id=claimId, content=content, author=author, forum=forum, created_at=timeCreated, updated_at=parser.parse(timeUpdated))
+        # deal with references first
         for postref_id in postref:
             if postref_id == '':
                 break
@@ -317,10 +320,18 @@ def add_claim(new, request):
                 break
             source = Issue.objects.get(id=int(issueref_id))
             ClaimReferIssue.objects.create(issue=source, claim=newClaim)
+        for valueref_id in valueref:
+            if valueref_id == '':
+                break
+            source = Value.objects.get(id=int(valueref_id))
+            ClaimExpressValue.objects.create(value=source, claim=newClaim)
+        # add the new claim
+        newClaim.save()
         response['success'] = True
         return response
     except Exception as e:
-        print e
+        # rollback the claim adding
+        newClaim.delete();
         response['success'] = False
         response['errors'] = {'reason', e}
     return response
@@ -331,38 +342,11 @@ def api_claims(request):
     userId = int(request.REQUEST.get('userId', '0'))
     forumId = int(request.REQUEST.get('forumId', '0')) or int(request.REQUEST.get('groupId', '0'))
 
-    # start = int(request.REQUEST.get('start', '0'))
-    # limit = int(request.REQUEST.get('limit', '-1'))
-    # footprintId = int(request.REQUEST.get('planId', '0'))
-    # ownerOnly = str(request.REQUEST.get('ownerOnly', 'false')).lower()
-    # startDate = str(request.REQUEST.get('startDate', ''))
-    # endDate = str(request.REQUEST.get('endDate', ''))
-    # bbox = str(request.REQUEST.get('bbox', ''))
-    # if footprintId > 0:
-    #     annotations_q = PostReferPlan.objects.filter(plan=footprintId).values('post').query
-    #     annotations = Post.objects.filter(id__in=annotations_q)
-    #    annotations = Plan.objects.get(id=footprintId).referred_annotations
-    # elif len(bbox) > 0:
-    #     bbox_poly = Polygon.from_bbox(bbox.split(','))
-    #     footprints = Footprint.objects.filter(Q(shape__within=bbox_poly) | Q(shape__overlaps=bbox_poly))
-    #     inner_q = GeoReference.objects.filter(footprint__in=footprints).values('annotation').query
-    #     annotations = Annotation.objects.filter(id__in=inner_q)
-    # else:
     claims = Claim.objects.all()
 
     if forumId > 0:
         claims = claims.filter(forum=forumId)
-    # if ownerOnly == 'true' and userId > 0:
-    #     annotations = annotations.filter(author=userId)
-    # if len(startDate) > 0:
-    #     annotations = annotations.filter(created_at__gte=parser.parse(startDate))
-    # if len(endDate) > 0:
-    #     annotations = annotations.exclude(created_at__gte=parser.parse(endDate))
-    # annotations = annotations.order_by('-created_at')
     response['totalCount'] = claims.count()
-    
-    # if limit > -1:
-    #     annotations = annotations[start:start+limit]
     response['claims'] = []
     for claim in claims:
         claim_info = {}
@@ -372,6 +356,7 @@ def api_claims(request):
         claim_info['userName'] = claim.author.username
         claim_info['content'] = claim.content
         claim_info['timeCreated'] = claim.created_at.ctime()
+        claim_info['timeUpdated'] = claim.updated_at.ctime()
         claim_info['content'] = claim.content
         claim_info['excerpt'] = claim.get_excerpt(10)
 
@@ -404,9 +389,26 @@ def api_claims(request):
         for planref in planrefs:   
             claim_info['planref'].append(planref.plan.id)
 
+        claim_info['valueref'] = []
+        valuerefs = ClaimExpressValue.objects.filter(claim=claim.id)
+        for valueref in valuerefs:
+            claim_info['valueref'].append(valueref.value.id)
+
         response['claims'].append(claim_info)
     return HttpResponse(json.dumps(response), mimetype='application/json')
 
+def api_values(request):
+    response = {}
+    values = Value.objects.all()
+
+    response['totalCount'] = values.count()
+    response['values'] = []
+    for value in values:
+        value_info = {}
+        value_info['id'] = str(value.id)
+        value_info['content'] = value.content
+        response['values'].append(value_info)
+    return HttpResponse(json.dumps(response), mimetype='application/json')
 
 def api_code(request):
     response = {}
@@ -661,11 +663,10 @@ def api_map(request):
             response["type"] = 'group'
             response["forumId"] = str(forum.id)
             response["plans"] = []
-            # annotations_q = forum.annotation_set.values('id').query
-            # plans_q = PostReferPlan.objects.filter(annotation__in=annotations_q).values('footprint').distinct()
-            # footprints = Plan.objects.filter(id__in=plans_q)
-            # FIX ME!!!
-            plans = Plan.objects.all()
+            posts_q = forum.post_set.values('id').query
+            plans_q = PostReferPlan.objects.filter(post__in=posts_q).values('plan').distinct()
+            plans = Plan.objects.filter(id__in=plans_q)
+
             for plan in plans:
                 plan_info = {}
                 plan_info['id'] = str(plan.id)
