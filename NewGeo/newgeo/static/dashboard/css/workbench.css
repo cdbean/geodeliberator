@@ -1,0 +1,41 @@
+#workbench {
+    padding: 0 0 0 0; !important
+}
+
+.jqte {
+    margin: 0em 0em;
+    border: 0px;
+    height: 100%;
+    overflow: scroll;
+}
+.jqte_editor {
+    height: 250px;
+
+}
+#pir-list .panel-body {
+    padding: 0;
+    margin: 0;
+}
+
+#contextmenu {
+    z-index:999;
+    display:none;
+}
+
+.question {
+    background: rgba(255, 144, 55, .5);
+}
+.claim {
+    background: rgba(102, 163, 180, .5);
+    margin-left: 4em; !important
+}
+.evidence {
+    background: rgba(255, 253, 115, .5);
+    margin-left: 8em; !important
+}
+.conclusion {
+    background: rgba(138, 120, 215, .5);
+}
+.inner-center .ui-layout-center .ui-layout-pane {
+    padding:0px; !important
+}

@@ -23,7 +23,7 @@ def login_user(request):
 	    login(request, user)
 	else:
 	    response["success"] = False
-	    response["error"] = "Username and password don't match!"
+	    response["error"] = "Username or Password doesn't match or exist!"
 	    print response
 	    return render(request, 'login.html', response)
 	return redirect('/geodeliberator')

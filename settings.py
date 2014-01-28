@@ -109,4 +109,5 @@ INSTALLED_APPS = (
     'django.contrib.gis',
     'api',
     'users',
+    'posts',
 )

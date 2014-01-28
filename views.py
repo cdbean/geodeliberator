@@ -7,3 +7,7 @@ def index(request):
 	return render(request, 'index.html', response)
     return redirect('/geodeliberator/user/login')
 
+def posts(request):
+    response = {}
+    return render(request, 'posts.html', response)
+    

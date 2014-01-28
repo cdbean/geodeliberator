@@ -10,32 +10,46 @@ from django.shortcuts import render, redirect
 from api.models import *
 import re
 import json
+from HTMLParser import HTMLParser
 
+class MLStripper(HTMLParser):
+    def __init__(self):
+        self.reset()
+        self.fed = []
+    def handle_data(self, d):
+        self.fed.append(d)
+    def get_data(self):
+        return ''.join(self.fed)
+
+def strip_tags(html):
+    s = MLStripper()
+    s.feed(html)
+    return s.get_data()
 def api_dash_board(request):
     response = {}
     return render(request, 'dashboard.html', response)
 
 def api_maintenance(request):
-    #print "api_maintenance"
+    print "api_maintenance"
     response = {}
     if 'forumId' in request.POST:
 
-        #print request.POST       
+        print request.POST       
         search_forum = int(13)   #later to be changed of getting information for request
         annotations = Annotation.objects.filter(forum=search_forum) # note this is not very true, we need apply the forum object but not the id.
         #however this works for now so we will leave it here till next revision.
         detailed_info= False
         print request.POST       
-        search_forum = int(1)   #later to be changed of getting information for request
+        #search_forum = int(1)   #later to be changed of getting information for request
         annotations = Annotation.objects.filter(forum=search_forum)
         detailed_info= True
-        #print len(annotations)
-        #print "apply regular expression"
+        print len(annotations)
+        print "apply regular expression"
         for annotation in annotations:
             m = re.findall("id=\"ref-an(\d+)",annotation.content)
             #note above line, initially I used search but only the first match returned. then I switch to findall.
             if m:
-                #print len(m)
+                print len(m)
                 information = 'Current Annotation Id is: '
                 information +=str(annotation.id)
                 information +='. '
@@ -63,9 +77,9 @@ def api_maintenance(request):
                                     print "Retieve failed, annotation not exist"
 
                         #ThemeReference(source =n, target = annotation).save
-                        #print "The missing relationship has been added to the database."
+                        print "The missing relationship has been added to the database."
         
-        #print "Operation is Done."
+        print "Operation is Done."
         response["message"] = "Success!" # add more information for the message label.
         return render(request,'dashboard.html',response)
     else :
@@ -182,7 +196,6 @@ def api_foruminfo(request):
             pass
     return HttpResponse(json.dumps(response), mimetype='application/json')
         
-
 def api_annotations(request):
     response = {}
     userId = int(request.REQUEST.get('userId', '0'))
@@ -346,6 +359,23 @@ def get_annotation(annotation_id):
         # get references
         theme_references = ThemeReference.objects.filter(target=annotation_id)
         annotation_info['references'] = []
+        
+        # in this section we find all the parents and children annotations of the currents annotation
+        l=[]
+        post_theme_references = {}
+        post_theme_references = ThemeReference.objects.filter(target=annotation.id) #find the parent of the current source
+        if post_theme_references:    #if theme ref exist
+            #print "post_theme_references"
+            if post_theme_references[0].source:  #find the parent of the current annotation
+                #print "post_theme_references[0].source:"
+                l.append({"test1":"test2"})
+                l.append({"postid":post_theme_references[0].source.id,"FolderName":strip_tags(post_theme_references[0].source.content),
+                          "ParentFolderID":-1,'PostAuthor':post_theme_references[0].source.author.username})
+                print "found the parent of the current annotation"
+                
+        #annotation_info['postlist'] = l
+        #
+        
         for reference in theme_references:
             reference_info = {}
             reference_info['id'] = str(reference.source.id)
@@ -380,6 +410,7 @@ def get_annotation(annotation_id):
 
 def api_map(request):
     response = {}
+    #print forumId
     userId = int(request.REQUEST.get('userId', '0'))
     forumId = int(request.REQUEST.get('forumId', '0')) or int(request.REQUEST.get('groupId', '0'))
     annotationId = int(request.REQUEST.get('annotationId', '0')) or int(request.REQUEST.get('issueId', '0')) or int(request.REQUEST.get('commentId', '0'))

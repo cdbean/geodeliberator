@@ -1,0 +1,11 @@
+body {
+  min-height: 2000px;
+  padding-top: 70px;
+}
+#left_nav {
+float: left;
+height: 100%;
+position: fixed;
+width: 100px;
+}
+

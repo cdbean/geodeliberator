@@ -571,8 +571,8 @@ GeoAnnotator.ContainerTBCtrl = {
 		else {
 			thisCtrl.forumInfoWindow.body.update(html);
 		}
-		thisCtrl.forumInfoWindow.show();
-		thisCtrl.forumInfoWindow.alignTo(thisCtrl.containerTB.getComponent('forum-id-btn').el, 'tl-tl');
+		thisCtrl.forumInfoWindow.show();	// show the forum info panel
+		thisCtrl.forumInfoWindow.alignTo(thisCtrl.containerTB.getComponent('forum-id-btn').el, 'tl-tl');	//align to the forum info button
 	},
 	editForumInfo : function() {
 		var thisCtrl = GeoAnnotator.ContainerTBCtrl;
@@ -908,13 +908,13 @@ GeoAnnotator.ContributePanelCtrl = {
                         //params
                     }
                     break;
-                case "OpenLayers.Layer.GML":
+                /*case "OpenLayers.Layer.GML":
                     xw.writeAttributeString('type', "GML");
                     //write url
                     if (currLayers[i].url != undefined && currLayers[i].url != null) {
                         xw.writeElementString('url', currLayers[i].url);
                     }
-                    break;
+                    break;*/
                 default:
                     break;
                 }
@@ -1323,8 +1323,7 @@ GeoAnnotator.MapPanelCtrl = {
 		thisCtrl.contextMenu = null;
 		thisCtrl.annotationListStore = null;
 		thisCtrl.annotationListView = null;
-		
-		
+				
 		// stop event listening before map destroy
 		if (thisCtrl.navigationControl && thisCtrl.navigationControl.events){
 			thisCtrl.navigationControl.events.un({
@@ -1378,7 +1377,8 @@ GeoAnnotator.MapPanelCtrl = {
 			thisCtrl.contextMenu.removeAll();
 			
 			if (GeoAnnotator.currUserId !== '0' && GeoAnnotator.currForumId !== '0') {
-				if (thisCtrl.hoverFeature !== null) {
+				if (thisCtrl.hoverFeature !== null) 
+				{
 					var id = thisCtrl.hoverFeature.attributes.id;
 					if (GeoAnnotator.ContributePanelCtrl.containerPanel.collapsed === false) {
 						thisCtrl.contextMenu.add({
@@ -1491,7 +1491,7 @@ GeoAnnotator.MapPanelCtrl = {
 			    //pointRadius: 6
 			})
 		});
-
+		{
 		var default_style = OpenLayers.Util.extend({}, OpenLayers.Feature.Vector.style['default']);
 		default_style.strokeColor = "#00FF00";
         default_style.strokeOpacity = 1;
@@ -1515,7 +1515,7 @@ GeoAnnotator.MapPanelCtrl = {
         select_style.fillOpacity = 0.5;
 		select_style.strokeDashstyle = "dashdot";
 		select_style.cursor = 'pointer';
-		
+		}
 		thisCtrl.newfootprintStyle = new OpenLayers.StyleMap({
 			'default': default_style,
 			'select': select_style,
@@ -1579,6 +1579,7 @@ GeoAnnotator.MapPanelCtrl = {
 	
 	// update the map from context map string
 	updateMap : function() {
+		alert("updatemap");
 		var thisCtrl = GeoAnnotator.MapPanelCtrl;
 		if (thisCtrl.currMapInfo.mapString && thisCtrl.currMapInfo.mapString != "") {
 			var xmldoc = GeoAnnotator.Util.parseXML(thisCtrl.currMapInfo.mapString);
@@ -1805,12 +1806,10 @@ GeoAnnotator.MapPanelCtrl = {
     		'Annotation Footprints', {styleMap: thisCtrl.footprintStyle, displayInLayerSwitcher: true}
     	);		
 		thisCtrl.map.addLayer(this.annotationVectors);
-		
 		// load footprints
 		if (thisCtrl.currMapInfo.footprints != null) {
 			for (var i = 0; i < thisCtrl.currMapInfo.footprints.length; i++) {
 	    		var footprint = thisCtrl.currMapInfo.footprints[i];
-				
 				var feature = wktParser.read(footprint.shape);
 				origin_prj = new OpenLayers.Projection("EPSG:" + footprint.srid);
 				feature.geometry.transform(origin_prj, thisCtrl.map.projection);
@@ -1826,7 +1825,6 @@ GeoAnnotator.MapPanelCtrl = {
 				thisCtrl.annotationVectors.addFeatures([feature]);
     		}	
 		}
-		
 		
 		thisCtrl.newFootprintVectors = new OpenLayers.Layer.Vector('New Footprints', {styleMap: thisCtrl.newfootprintStyle, displayInLayerSwitcher: false});
 		thisCtrl.newFootprintVectors.addFeatures(GeoAnnotator.ContributePanelCtrl.newFootprints);
@@ -2905,8 +2903,7 @@ GeoAnnotator.TimelinePanelCtrl = {
 	}
 }
 
-GeoAnnotator.AnnotationInfoPanelCtrl = 
-{
+GeoAnnotator.AnnotationInfoPanelCtrl = {
 	//containerPanel
 	containerPanel: null,
 	annotationInfoDisplayPanel : null,
@@ -3140,7 +3137,7 @@ GeoAnnotator.AnnotationInfoPanelCtrl =
 		
 		thisCtrl.annotationInfoWrapper = new Ext.Panel({
 			id: 'annotationInfo-wrapper-panel',
-			bodyStyle: 'padding:0px; border: 0px',
+			bodyStyle: 'padding:0px; border: 5px',
 			//autoWidth: true,
 			//autoHeight: true,
 			layout: 'border',
@@ -3370,12 +3367,7 @@ GeoAnnotator.AnnotationInfoPanelCtrl =
    			params: {'annotationId':thisCtrl.currAnnotationInfo.id, 'userId':GeoAnnotator.currUserId, 'forumId': GeoAnnotator.currForumId}
 		});
 	},
-	/*
-	  params: {
-                'userId': GeoAnnotator.currUserId,
-                'forumId': GeoAnnotator.currForumId
-            }
-	*/
+	
 	onLoadThreadsInfoSuccess : function(xhr) {
 		var threadsInfo = Ext.util.JSON.decode(xhr.responseText);
 		var thisCtrl = GeoAnnotator.AnnotationInfoPanelCtrl;
@@ -4317,7 +4309,6 @@ GeoAnnotator.Util = {
  	* a Document object that represents it.
  	*/
 	parseXML: function(text){
-		
 		  
 		 if (typeof DOMParser != "ftp://ftp.") {
 			// Mozilla, Firefox, and related browsers

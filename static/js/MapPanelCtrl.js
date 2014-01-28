@@ -298,6 +298,7 @@ GeoAnnotator.MapPanelCtrl = {
 	
 	// update the map from context map string
 	updateMap : function() {
+	
 		var thisCtrl = GeoAnnotator.MapPanelCtrl;
 		if (thisCtrl.currMapInfo.mapString && thisCtrl.currMapInfo.mapString != "") {
 			var xmldoc = GeoAnnotator.Util.parseXML(thisCtrl.currMapInfo.mapString);

@@ -1,0 +1,116 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+    <head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    	<link rel="stylesheet" type="text/css" href="/geodeliberator/static/styles/ext_main.css">
+    	<link rel="stylesheet" type="text/css" href="/geodeliberator/static/styles/login.css">
+	<title>Hierarchical Comment Test</title>
+    <!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
+  <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+  <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+  
+<script>
+	
+	var posts_data;
+	$(document).ready(function(){
+		
+		
+		var posts_data;
+		$("#btn").submit(function(event) {
+		/* Stop form from submitting normally, must have, cannot delete */
+		event.preventDefault();
+		
+		/* Clear result div*/
+		$("#posts_list").html('');
+
+		/* Get some values from elements on the page: */
+		var values = $(this).serialize();
+
+		/* Send the data using post and put the results in a div */
+		$.ajax({
+			url: "posts_fetch",
+			type: "post",
+			data:  {forumid : '13'},
+			success: function(data){
+				//alert("success");
+				populatedata(data);
+				//$("#posts_list").html('Submitted successfully');
+					$('.accordion').parent().next().hide();
+				  $('.accordion').click(function() {
+					  $(this).parent().next().toggle('normal');
+					  return false;
+				  }).next().hide();
+			},
+			error:function(){
+				alert("failure");
+				$("#posts_list").html('There is error while submit');
+			}
+		});
+	});
+});
+
+	var list = $("<ul>");
+	function populatedata(data) 
+	{
+		var list = $("<ul>");
+	
+		posts_data = data;
+		//alert(posts_data);
+		 $.each(posts_data.postlist, function (i, folder) {                
+			if (folder.ParentFolderID == -1) {
+				//alert("ParentFolderID is -1");
+				//alert(folder.FolderName);
+				var list_content =''
+				list_content = '<h3><a href="#">'+folder.PostAuthor+'</a>'+' says: ' + '<a class = "accordion" href="#">'+folder.FolderName.substr(0,50) +'</a></h3>';
+				list_content+='<p >'+folder.FolderName+'</p>';
+				var item = $("<li>").html(list_content);
+				list.append(item);
+				var children = $('<ul>');
+				item.append(children);
+				checkChild(folder.postid, children);                    
+			}
+		});
+		$('#posts_list').append(list);
+	}
+	function checkChild(parentid, parent) {
+		//recursively find all children for partent;
+		$.each(posts_data.postlist, function (i, folder) {
+			if (folder.ParentFolderID == parentid) {
+				list_content = '<h3><a href="#">'+folder.PostAuthor+'</a>'+' says: ' + '<a class = "accordion" href="#">'+folder.FolderName.substr(0,50) +'</a></h3>';
+				list_content+='<p ">'+folder.FolderName+'</p>';
+				var item = $("<li>").html(list_content);
+				var children = $('<ul>');
+				parent.append(item);
+				item.append(children);
+				checkChild(folder.postid, children);                    
+			}
+			else {
+				return ;
+			}
+		});
+	
+}
+</script>	
+	</head>
+    
+	<body>
+	<div id="header">
+			<h1>Posts</h1>
+		</div>
+		<div class='separator'></div>
+		<div class='posts'>
+			
+		</div>
+		<div class='separator'></div>
+		<form id = "btn" action='login' method='POST'>
+			<input  type="submit" value="Fetch"/>
+		  
+		</form>
+		<div class ='accordion' id='posts_list'></div>
+		<div id="footer">© 2013 The Pennsylvania State University.</div>
+		</body>
+		
+</html>
